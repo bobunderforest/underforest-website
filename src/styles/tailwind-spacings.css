@@ -1,0 +1,49 @@
+:root {
+  --content-width: 1500px;
+  --content-padding: 40px;
+  --footer-height: 200px;
+  --section-padding: 150px;
+  --intersection-padding: 75px;
+  --magazine-padding: 245px;
+  --grid-gap-regular: 50px;
+
+  --content-outer: calc((100vw - var(--content-width)) / 2);
+  --content-outer-padded: calc(var(--content-outer) + var(--content-padding));
+
+  @media (max-width: 1580px) {
+    --content-width: 1420px;
+    --content-padding: 30px;
+  }
+
+  @media (max-width: 1420px) {
+    --content-width: 920px;
+    --content-padding: 20px;
+    --section-padding: 100px;
+    --intersection-padding: 50px;
+    --grid-gap-regular: 30px;
+    --magazine-padding: 0px;
+  }
+
+  @media (max-width: 920px) {
+    --content-width: 420px;
+    --section-padding: 60px;
+    --intersection-padding: 30px;
+    --grid-gap-regular: 20px;
+  }
+
+  @media (max-width: 420px) {
+    --content-width: 100%;
+  }
+}
+
+@theme inline {
+  --spacing-content-width: var(--content-width);
+  --spacing-content-padding: var(--content-padding);
+  --spacing-section-padding: var(--section-padding);
+  --spacing-intersection-padding: var(--intersection-padding);
+  --spacing-footer-height: var(--footer-height);
+  --spacing-magazine-padding: var(--magazine-padding);
+  --spacing-grid-gap-regular: var(--grid-gap-regular);
+  --spacing-content-outer: var(--content-outer);
+  --spacing-content-outer-padded: var(--content-outer-padded);
+}

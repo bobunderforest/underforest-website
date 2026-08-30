@@ -1,0 +1,9 @@
+@import './tailwind-animate.css';
+@import './tailwind-colors.css';
+@import './tailwind-fonts.css';
+@import './tailwind-breakpoints.css';
+@import './tailwind-spacings.css';
+
+:root {
+  --viewport-height: 0px;
+}

@@ -1,0 +1,12 @@
+---
+import { PageHome } from 'ui/pages/PageHome'
+import Layout from 'ui/layout/Layout.astro'
+
+import { getPageDataMain } from 'modules/page-data/page-data-main'
+
+const pageDataMain = await getPageDataMain()
+---
+
+<Layout>
+  <PageHome client:load pageData={pageDataMain} />
+</Layout>

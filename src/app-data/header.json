@@ -1,0 +1,14 @@
+{
+  "controls": [
+    {
+      "label": "Home",
+      "url": "home",
+      "primary": false
+    },
+    {
+      "label": "Contact",
+      "url": "contact",
+      "primary": true
+    }
+  ]
+}

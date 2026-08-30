@@ -1,0 +1,43 @@
+<script is:inline>
+  document.addEventListener('click', (event) => {
+    const anchor = event.target.closest('a')
+    if (anchor && anchor.hash) {
+      if (anchor.hash !== window.location.hash) {
+        setTimeout(() => {
+          window.dispatchEvent(new HashChangeEvent('hashchange'))
+        }, 0)
+      }
+    }
+  })
+</script>
+
+<script>
+  const PREFIX = 'scrollpos:'
+
+  document.addEventListener('astro:before-preparation', (event: any) => {
+    try {
+      const from = event.from?.pathname ?? location.pathname
+      sessionStorage.setItem(PREFIX + from, String(window.scrollY))
+    } catch {}
+  })
+
+  document.addEventListener('astro:page-load', () => {
+    let saved: string | null = null
+    try {
+      saved = sessionStorage.getItem(PREFIX + location.pathname)
+    } catch {}
+    if (saved == null) return
+
+    try {
+      sessionStorage.removeItem(PREFIX + location.pathname)
+    } catch {}
+
+    const top = parseInt(saved, 10) || 0
+    const apply = () => window.scrollTo(0, top)
+    apply()
+    requestAnimationFrame(() => {
+      apply()
+      requestAnimationFrame(apply)
+    })
+  })
+</script>

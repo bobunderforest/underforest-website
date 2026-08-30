@@ -1,0 +1,15 @@
+:root {
+  --breakpoint-desktop-m: 1720px;
+  --breakpoint-desktop-s: 1420px;
+  --breakpoint-tablet-s: 1260px;
+  --breakpoint-mobile-m: 740px;
+}
+
+@theme {
+  --breakpoint-*: initial;
+}
+
+@custom-variant desktop-m (@media (max-width: 1720px));
+@custom-variant desktop-s (@media (max-width: 1430px));
+@custom-variant tablet-s (@media (max-width: 1260px));
+@custom-variant mobile-m (@media (max-width: 740px));

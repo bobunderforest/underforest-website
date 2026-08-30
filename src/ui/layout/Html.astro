@@ -1,0 +1,71 @@
+---
+import { ClientRouter } from 'astro:transitions'
+import type { MetaData } from 'utils/types/data'
+
+type Props = MetaData & {
+  metaUrl: string
+  metaFavicon?: string
+  metaFaviconType?: string
+}
+
+const {
+  metaTitle,
+  metaDescription,
+  metaUrl,
+  metaImage,
+  metaFavicon,
+  metaFaviconType,
+} = Astro.props
+
+const metaImageAbsolute =
+  metaImage && Astro.site ? new URL(metaImage, Astro.site).href : metaImage
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, interactive-widget=resizes-content"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <meta name="theme-color" content="#000" />
+
+    <!-- Fonts: JetBrains Mono (body/data) + Space Mono (display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    />
+
+    <!-- General Meta Tags -->
+    <title>{metaTitle}</title>
+    <link rel="icon" type={metaFaviconType} href={metaFavicon} />
+    <meta name="description" content={metaDescription} />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={metaImageAbsolute} />
+    <meta property="og:url" content={metaUrl} />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={metaImageAbsolute} />
+
+    <ClientRouter />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

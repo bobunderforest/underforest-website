@@ -1,0 +1,17 @@
+:root {
+  --color-background: #fff;
+
+  --color-white: #fff;
+  --color-black: #000;
+}
+
+@theme {
+  --color-*: initial;
+}
+
+@theme inline {
+  --color-background: var(--color-background);
+
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+}

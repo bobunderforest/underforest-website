@@ -1,0 +1,12 @@
+allowBuilds:
+  core-js: true
+  esbuild: true
+  sharp: true
+
+minimumReleaseAgeExclude:
+  - nanostores@1.5.1
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - core-js

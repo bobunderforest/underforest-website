@@ -1,0 +1,77 @@
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-ligatures: common-ligatures contextual;
+    font-kerning: normal;
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  input,
+  textarea,
+  button,
+  select {
+    border: 0;
+    outline: none;
+    font: inherit;
+    appearance: none;
+    -webkit-font-smoothing: inherit;
+  }
+
+  input,
+  textarea,
+  button,
+  select,
+  label,
+  a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  img,
+  embed,
+  iframe,
+  object,
+  audio,
+  video {
+    max-width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  svg,
+  img {
+    display: block;
+  }
+}
+
+@utility glow-chroma {
+  filter: drop-shadow(0 0 8px var(--color-chroma));
+  transition: filter 350ms var(--ease-out-cubic);
+
+  &:hover {
+    filter: drop-shadow(0 0 12px var(--color-chroma));
+  }
+}
+
+@utility glow-chroma-text {
+  text-shadow: 0 0 0 #000;
+  transition: all 150ms var(--ease-out-cubic);
+
+  .group:hover & {
+    text-shadow: 0 0 8px var(--color-chroma);
+  }
+}

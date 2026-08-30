@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+@import './fonts.css';
+@import './tailwind-theme.css';
+
+@import './global-defaults.css';
+@import './scroll-util.css';
+
+@layer base {
+  .body--slides {
+    height: var(--viewport-height);
+    overflow: hidden;
+  }
+
+  body {
+    color: var(--color-egg-shell);
+    font-size: var(--font-regular);
+    line-height: var(--font-leading-regular);
+    font-family: var(--font-face-regular);
+    line-height: 1.6;
+    background-color: var(--color-background);
+    overflow-x: hidden;
+  }
+}

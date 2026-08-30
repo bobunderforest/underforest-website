@@ -1,0 +1,37 @@
+---
+import 'styles/global.css'
+
+import Html from 'ui/layout/Html.astro'
+import HeadScripts from './HeadScripts.astro'
+import { Header } from 'ui/layout/Header'
+import { ModalRenderer } from 'modules/modal/ModalRenderer'
+
+import type { MetaData } from 'utils/types/data'
+
+import metaTagsBase from 'app-data/meta-tags.json'
+
+type Props = {
+  meta?: MetaData
+  useHeader?: boolean
+  isHeaderContrast?: boolean
+}
+
+const { meta, useHeader = true, isHeaderContrast } = Astro.props
+
+const metaData = {
+  metaUrl: metaTagsBase.url,
+  ...metaTagsBase.meta,
+  ...meta,
+}
+---
+
+<Html {...metaData}>
+  <HeadScripts slot="head" />
+  {
+    useHeader && (
+      <Header isContrast={isHeaderContrast} client:load transition:persist />
+    )
+  }
+  <slot />
+  <ModalRenderer client:load />
+</Html>

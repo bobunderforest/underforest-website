@@ -1,0 +1,10 @@
+{
+  "hashIds": {
+    "home": "home",
+    "about": "about",
+    "contact": "contact"
+  },
+  "home": "/#home",
+  "about": "/#about",
+  "contact": "/#contact"
+}

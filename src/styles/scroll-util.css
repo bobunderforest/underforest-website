@@ -1,0 +1,17 @@
+@layer base {
+  html.html-scroll-lock {
+    overflow-y: scroll;
+  }
+
+  body.body-scroll-lock {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+@layer components {
+  .scroll-stage > * {
+    pointer-events: auto;
+  }
+}
