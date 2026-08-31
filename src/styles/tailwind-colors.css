@@ -1,5 +1,13 @@
 :root {
-  --color-background: #fff;
+  --color-base: #0a0a0c;
+  --color-surface: #131418;
+  --color-edge: #272b32;
+  --color-text: #fff;
+  --color-muted: #71767e;
+  --color-accent: #ff6a1f;
+  --color-system: #34e39b;
+
+  --color-background: var(--color-base);
 
   --color-white: #fff;
   --color-black: #000;
@@ -10,6 +18,14 @@
 }
 
 @theme inline {
+  --color-base: var(--color-base);
+  --color-surface: var(--color-surface);
+  --color-edge: var(--color-edge);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent);
+  --color-system: var(--color-system);
+
   --color-background: var(--color-background);
 
   --color-white: var(--color-white);

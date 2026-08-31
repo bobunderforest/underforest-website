@@ -58,20 +58,33 @@
   }
 }
 
-@utility glow-chroma {
-  filter: drop-shadow(0 0 8px var(--color-chroma));
-  transition: filter 350ms var(--ease-out-cubic);
+@utility link-dash {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color 150ms var(--ease-out-cubic);
 
   &:hover {
-    filter: drop-shadow(0 0 12px var(--color-chroma));
+    text-decoration-color: currentColor;
   }
 }
 
-@utility glow-chroma-text {
+@utility glow-accent {
+  filter: drop-shadow(0 0 8px var(--color-accent));
+  transition: filter 350ms var(--ease-out-cubic);
+
+  &:hover {
+    filter: drop-shadow(0 0 12px var(--color-accent));
+  }
+}
+
+@utility glow-accent-text {
   text-shadow: 0 0 0 #000;
   transition: all 150ms var(--ease-out-cubic);
 
   .group:hover & {
-    text-shadow: 0 0 8px var(--color-chroma);
+    text-shadow: 0 0 8px var(--color-accent);
   }
 }

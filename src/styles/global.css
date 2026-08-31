@@ -13,7 +13,7 @@
   }
 
   body {
-    color: var(--color-egg-shell);
+    color: var(--color-text);
     font-size: var(--font-regular);
     line-height: var(--font-leading-regular);
     font-family: var(--font-face-regular);

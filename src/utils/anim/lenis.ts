@@ -2,6 +2,7 @@ import Lenis from 'lenis'
 import { getScrollPosition } from 'utils/browser/scroll-util'
 
 let instance: Lenis | null = null
+let pauseCount = 0
 
 export const createLenis = () => {
   instance = new Lenis({
@@ -14,6 +15,7 @@ export const createLenis = () => {
     // syncTouchLerp: 0.01,
     smoothWheel: true,
   })
+  if (pauseCount > 0) instance.stop()
   return instance
 }
 
@@ -22,9 +24,19 @@ export const destroyLenis = () => {
   instance = null
 }
 
-export const pauseLenis = () => instance?.stop()
+export const pauseLenis = () => {
+  pauseCount += 1
+  if (pauseCount === 1) instance?.stop()
+}
 
-export const resumeLenis = () => instance?.start()
+export const resumeLenis = () => {
+  if (pauseCount === 0) return
+  pauseCount -= 1
+  if (pauseCount === 0) {
+    instance?.resize()
+    instance?.start()
+  }
+}
 
 export type ScrollLenisTarget = string | HTMLElement | number
 

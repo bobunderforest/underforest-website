@@ -2,7 +2,7 @@ import { cns } from 'utils/formatters/classnames'
 import { italicizeBold, typograf } from 'utils/formatters/typography'
 
 type Props = React.BaseProps & {
-  tag?: 'div' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  tag?: 'div' | 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   ref?: React.Ref<HTMLElement>
   emphasis?: boolean
 }
@@ -19,7 +19,7 @@ export const Text = ({
   const Tag = tag as React.ElementType
 
   const finalClass = cns(
-    'whitespace-pre-wrap text-pretty [&_a]:text-chroma',
+    'whitespace-pre-wrap text-pretty [&_a]:link-dash [&_a]:text-accent',
     className,
   )
 

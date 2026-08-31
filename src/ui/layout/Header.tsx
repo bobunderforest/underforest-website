@@ -55,14 +55,14 @@ const HeaderControl = ({
 
         !primary &&
           !isContrast &&
-          'border-bone/60 hover:border-bone hover:bg-bone bg-black/35 text-white hover:text-black',
+          'border-text/60 hover:border-text hover:bg-text bg-base/35 text-text hover:text-base',
 
         !primary &&
           isContrast &&
-          'border-black/40 text-black hover:bg-black hover:text-white',
+          'border-base/40 text-base hover:bg-base hover:text-text',
 
         primary &&
-          'border-bone bg-brand hover:text-brand text-white shadow-[3px_3px_0_0_var(--color-bone)] hover:bg-white',
+          'border-text bg-accent hover:text-accent text-base shadow-[3px_3px_0_0_var(--color-text)] hover:bg-text',
 
         className,
       )}

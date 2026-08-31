@@ -1,0 +1,59 @@
+:root {
+  --font-face-title: 'Space Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
+  --font-face-regular: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
+
+  --font-leading-title-1: 1;
+  --font-leading-title-2: 0.9;
+  --font-leading-title-3: 1;
+  --font-leading-caption: 1;
+  --font-leading-regular: 1.5;
+
+  --font-title-1: 86px;
+  --font-title-2: 54px;
+  --font-title-3: 32px;
+  --font-caption: 20px;
+  --font-regular: 16px;
+
+  @media (max-width: 1720px) {
+    --font-title-1: 64px;
+    --font-title-2: 44px;
+    --font-title-3: 24px;
+    --font-caption: 16px;
+    --font-regular: 14px;
+  }
+
+  @media (max-width: 740px) {
+    --font-title-1: 38px;
+    --font-title-2: 32px;
+    --font-title-3: 20px;
+    --font-caption: 14px;
+  }
+}
+
+@theme {
+  --font-face-title: 'Space Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
+  --font-face-regular: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
+
+  --text-*: initial;
+  --leading-*: initial;
+}
+
+@theme inline {
+  --text-title-1: var(--font-title-1);
+  --text-title-2: var(--font-title-2);
+  --text-title-3: var(--font-title-3);
+  --text-title-4: var(--font-title-4);
+
+  --text-regular: var(--font-regular);
+  --text-caption: var(--font-caption);
+
+  --leading-title-1: var(--font-leading-title-1);
+  --leading-title-2: var(--font-leading-title-2);
+  --leading-title-3: var(--font-leading-title-3);
+  --leading-title-4: var(--font-leading-title-4);
+
+  --leading-regular: var(--font-regular);
+  --leading-caption: var(--font-caption);
+}

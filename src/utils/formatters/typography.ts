@@ -10,5 +10,5 @@ export const typograf = (text: string | null | undefined): string => {
 
 export const italicizeBold = (
   text: string,
-  className = 'italic text-egg-shell',
+  className = 'italic text-text',
 ): string => text.replace(/\*\*(.+?)\*\*/g, `<em class="${className}">$1</em>`)

@@ -45,7 +45,9 @@ export const lockScroll = () => {
 
 // Scroll Unlocker
 export const unlockScroll = () => {
-  if (!isBrowser || --lockersStack > 0) return
+  if (!isBrowser || lockersStack === 0) return
+  lockersStack -= 1
+  if (lockersStack > 0) return
   html.classList.remove(HTML_LOCK_CLASS)
   body.classList.remove(BODY_LOCK_CLASS)
   body.style.top = ''
