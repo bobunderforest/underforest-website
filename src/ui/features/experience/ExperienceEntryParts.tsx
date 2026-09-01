@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'ui/common/typography/Link'
+import { Text } from 'ui/common/typography/Text'
 import { EXPERIENCE_STATUS_LABEL } from 'ui/features/experience-data/experience-data'
 import type {
   ExperienceEntry,
@@ -53,14 +54,17 @@ export const ExperienceTag = ({
   children: ReactNode
   className: string
 }) => (
-  <span
+  <Text
+    tag={'span'}
+    size={'hint'}
+    uppercase
     className={cns(
-      'inline-flex items-center gap-[6px] border px-[6px] py-[1px] font-face-regular text-hint tracking-[0.14em] uppercase',
+      'inline-flex items-center gap-[6px] border px-[6px] py-[1px]',
       className,
     )}
   >
     {children}
-  </span>
+  </Text>
 )
 
 export const ExperienceReclassifiedTag = () => (
@@ -94,19 +98,23 @@ export const ExperienceStatusNote = ({
   status: ExperienceStatus
 }) =>
   status.note ? (
-    <p
-      className={
-        'hidden max-w-[62ch] font-face-regular text-hint leading-[1.5] text-muted italic desktop-s:block'
-      }
+    <Text
+      tag={'p'}
+      size={'hint'}
+      tone={'secondary'}
+      className={'hidden max-w-[62ch] italic desktop-s:block'}
     >
       {status.note}
-    </p>
+    </Text>
   ) : null
 
 export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => (
-  <div
+  <Text
+    size={'hint'}
+    tone={'secondary'}
+    uppercase
     className={cns(
-      'font-face-regular text-hint text-muted uppercase transition-colors duration-300 group-data-[active=true]:text-text',
+      'transition-colors duration-300 group-data-[active=true]:text-text',
       entry.links && entry.links.length > 0 ? 'mb-1.5' : 'mb-3',
     )}
   >
@@ -115,7 +123,7 @@ export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => (
     </span>
     {entry.role && <> · {entry.role}</>}
     {entry.employment && <> · {entry.employment}</>}
-  </div>
+  </Text>
 )
 
 export const ExperienceSummary = ({
@@ -125,9 +133,11 @@ export const ExperienceSummary = ({
   lines: string[]
   hasStatusNote: boolean
 }) => (
-  <ul
+  <Text
+    tag={'ul'}
+    tone={'secondary'}
     className={cns(
-      'max-w-[62ch] font-face-regular text-regular text-muted transition-colors duration-300 group-data-[active=true]:text-text',
+      'max-w-[62ch] transition-colors duration-300 group-data-[active=true]:text-text',
       hasStatusNote && 'desktop-s:mb-3',
     )}
   >
@@ -144,22 +154,18 @@ export const ExperienceSummary = ({
         {line}
       </li>
     ))}
-  </ul>
+  </Text>
 )
 
 export const ExperienceLinkRow = ({ entry }: { entry: ExperienceEntry }) =>
   entry.links && entry.links.length > 0 ? (
-    <div
-      className={
-        'mb-3 flex flex-wrap gap-x-4 gap-y-1 font-face-regular text-regular tracking-[0.06em]'
-      }
-    >
+    <Text className={'mb-3 flex flex-wrap gap-x-4 gap-y-1'}>
       {entry.links.map((link) => (
         <ExperienceInnerLink key={link.label} href={link.href}>
           {link.label}
         </ExperienceInnerLink>
       ))}
-    </div>
+    </Text>
   ) : null
 
 export const ExperienceBreakNode = ({
@@ -172,19 +178,15 @@ export const ExperienceBreakNode = ({
   <ExperienceTrackNode dimmed={dimmed}>
     <ExperienceAnchor className={'mb-1.5'}>
       <ExperienceMarker entry={entry} />
-      <div
-        className={
-          'font-face-regular text-hint tracking-[0.08em] text-muted/70 uppercase'
-        }
-      >
+      <Text size={'hint'} tone={'dimmed'} uppercase>
         <span className={'tabular-nums'}>
           {formatDateRange(entry.from, entry.to, 'short')}
         </span>{' '}
         · signal gap
-      </div>
+      </Text>
     </ExperienceAnchor>
-    <p className={'text-[14px] text-muted/70 italic'}>
+    <Text tag={'p'} tone={'dimmed'} className={'text-[14px] italic'}>
       {entry.summary.join(' ')}
-    </p>
+    </Text>
   </ExperienceTrackNode>
 )

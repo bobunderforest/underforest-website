@@ -11,19 +11,18 @@ export const SectionSplash = () => {
       stage={'Identity'}
       readout={'landmarks 4/4'}
     >
-      <div
-        className={
-          'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1 font-face-regular text-regular tracking-[0.12em] uppercase'
-        }
+      <Text
+        uppercase
+        className={'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1'}
       >
-        <span className={'text-text'}>
+        <Text tag={'span'} tone={'primary'}>
           Frontend / Full-stack Developer
-          <span className={'text-accent'}>
+          <Text tag={'span'} tone={'accent'}>
             {' → '}
             Game Developer
-          </span>
-        </span>
-      </div>
+          </Text>
+        </Text>
+      </Text>
 
       <div className={'relative mb-8'}>
         <h1 className={'sr-only'}>Dmitrii Podlesnyi</h1>
@@ -42,16 +41,16 @@ export const SectionSplash = () => {
           className={'aspect-[900/350] w-full'}
         />
       </div>
-      <Text tag={'p'} className={'mb-4 max-w-[62ch] text-text'}>
+      <Text tag={'p'} tone={'primary'} className={'mb-4 max-w-[62ch]'}>
         I am a full-stack web developer with 10+ years of experience and a
         strong focus on front-end. I have contributed to building high-traffic
         platforms, Web3 solutions, and interactive 3D projects.
       </Text>
-      <Text tag={'p'} className={'mb-4 max-w-[62ch] text-text/85'}>
+      <Text tag={'p'} tone={'soft'} className={'mb-4 max-w-[62ch]'}>
         I am excited about contributing to creative, challenging, and
         passion-driven projects.
       </Text>
-      <Text tag={'p'} className={'mb-12 max-w-[62ch] text-text/85'}>
+      <Text tag={'p'} tone={'soft'} className={'mb-12 max-w-[62ch]'}>
         TODO: Write about game dev switch
         <br />
         TODO: Write about teamwork and collaboration processes experience

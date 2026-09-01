@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { Text } from 'ui/common/typography/Text'
+import { TextTitle } from 'ui/common/typography/TextTitle'
 import { cns } from 'utils/formatters/classnames'
 
 type Props = {
@@ -16,24 +18,27 @@ export const StageIndex = ({ index, stage, readout, className }: Props) => {
         className,
       )}
     >
-      <span className={'font-face-title text-hint font-bold text-accent'}>
-        {index}
-      </span>
-      <p
-        className={
-          'leading-title-3 font-face-title text-title-3 font-bold tracking-[0.04em] text-balance uppercase'
-        }
+      <Text
+        tag={'span'}
+        size={'hint'}
+        face={'title'}
+        tone={'accent'}
+        className={'font-bold'}
       >
+        {index}
+      </Text>
+      <TextTitle size={3} uppercase className={'font-bold'}>
         {stage}
-      </p>
+      </TextTitle>
       {readout != null && (
-        <span
-          className={
-            'ml-auto text-hint tracking-[0.08em] text-system tablet-s:ml-0'
-          }
+        <Text
+          tag={'span'}
+          size={'hint'}
+          tone={'system'}
+          className={'ml-auto tablet-s:ml-0'}
         >
           {readout}
-        </span>
+        </Text>
       )}
     </div>
   )

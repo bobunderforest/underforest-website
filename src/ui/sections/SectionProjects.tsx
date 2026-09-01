@@ -9,7 +9,7 @@ export const SectionProjects = () => {
       stage={'Detection'}
       readout={'4 candidates · NMS → 3'}
     >
-      <Text tag={'p'} className={'max-w-[62ch] text-muted'}>
+      <Text tag={'p'} tone={'secondary'} className={'max-w-[62ch]'}>
         Detection-framed project previews land here.
       </Text>
     </Section>

@@ -1,5 +1,6 @@
 import type { Skill } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
+import { Text } from 'ui/common/typography/Text'
 
 export const SkillTag = ({
   skill,
@@ -9,14 +10,15 @@ export const SkillTag = ({
   dimmed: boolean
 }) => {
   return (
-    <li
+    <Text
+      tag={'li'}
+      size={'hint'}
+      tone={'primary'}
+      uppercase
       className={cns(
         'relative inline-flex items-center gap-[8px] border px-[11px] py-[6px]',
-        'font-face-regular text-hint tracking-[0.1em] uppercase',
         'transition-opacity duration-300',
-        skill.primary
-          ? 'border-accent/70 bg-accent/[0.08] text-text'
-          : 'border-muted/55 text-text',
+        skill.primary ? 'border-accent/70 bg-accent/[0.08]' : 'border-muted/55',
         skill.rising && 'border-dashed',
         dimmed && 'opacity-30',
       )}
@@ -30,9 +32,9 @@ export const SkillTag = ({
       />
       {skill.label}
       {skill.rising && (
-        <span aria-hidden className={'text-accent'}>
+        <Text tag={'span'} size={'hint'} tone={'accent'} aria-hidden>
           ↑
-        </span>
+        </Text>
       )}
       {skill.primary && (
         <>
@@ -50,6 +52,6 @@ export const SkillTag = ({
           />
         </>
       )}
-    </li>
+    </Text>
   )
 }

@@ -1,4 +1,5 @@
 import { Link } from 'ui/common/typography/Link'
+import { Text } from 'ui/common/typography/Text'
 import type { Credit } from 'ui/features/experience-data/types'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 
@@ -8,13 +9,15 @@ export const ExperienceDetailsCredits = ({
   credits: Credit[]
 }) => (
   <div className={'border border-edge px-3 py-2'}>
-    <FieldLabel className={'mb-2 text-system'}>credits</FieldLabel>
-    <ul className={'font-face-regular text-regular leading-[1.6]'}>
+    <FieldLabel tone={'system'} className={'mb-2'}>
+      credits
+    </FieldLabel>
+    <Text tag={'ul'}>
       {credits.map((credit) => (
-        <li key={credit.role + credit.name} className={'text-muted'}>
-          <span className={'tracking-[0.08em] text-muted/70 uppercase'}>
+        <Text tag={'li'} tone={'secondary'} key={credit.role + credit.name}>
+          <Text tag={'span'} tone={'dimmed'} uppercase>
             {credit.role}
-          </span>
+          </Text>
           {' — '}
           {credit.href ? (
             <Link
@@ -25,10 +28,12 @@ export const ExperienceDetailsCredits = ({
               {credit.name}
             </Link>
           ) : (
-            <span className={'text-text'}>{credit.name}</span>
+            <Text tag={'span'} tone={'primary'}>
+              {credit.name}
+            </Text>
           )}
-        </li>
+        </Text>
       ))}
-    </ul>
+    </Text>
   </div>
 )

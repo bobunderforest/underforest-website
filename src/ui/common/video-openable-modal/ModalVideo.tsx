@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
 import { useKeyPress } from 'utils/hooks/useKeyPress'
 import { useModalActions } from 'modules/modal/modalStore'
 import { cns } from 'utils/formatters/classnames'
+import { Text } from 'ui/common/typography/Text'
 import { drawVideoFrame } from './frame-grab'
 
 const TIME_MORPH = 300
@@ -91,13 +92,17 @@ const Trackbar = ({
   const progress = duration ? (current / duration) * 100 : 0
 
   return (
-    <div
+    <Text
+      size={'hint'}
+      tone={'secondary'}
       onClick={(e) => e.stopPropagation()}
       className={
-        'pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center gap-4 bg-gradient-to-t from-black/80 to-transparent px-[40px] pt-12 pb-0 font-face-regular text-hint tracking-[0.08em] text-muted tabular-nums mobile-m:gap-3 mobile-m:px-[16px]'
+        'pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center gap-4 bg-gradient-to-t from-black/80 to-transparent px-[40px] pt-12 pb-0 tabular-nums mobile-m:gap-3 mobile-m:px-[16px]'
       }
     >
-      <span className={'text-text'}>{formatClock(current)}</span>
+      <Text tag={'span'} size={'hint'} tone={'primary'}>
+        {formatClock(current)}
+      </Text>
       <div
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId)
@@ -129,7 +134,7 @@ const Trackbar = ({
         </div>
       </div>
       <span>{formatClock(duration)}</span>
-    </div>
+    </Text>
   )
 }
 

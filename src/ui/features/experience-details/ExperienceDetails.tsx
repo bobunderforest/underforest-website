@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CorneredBorder } from 'ui/common/cyber-kit/CorneredBorder'
 import { DataWire } from 'ui/common/cyber-kit/DataWire'
+import { Text } from 'ui/common/typography/Text'
 import type {
   Credit,
   ExperienceDetail,
@@ -43,26 +44,25 @@ export const ExperienceDetails = ({
       >
         <div className={'relative border border-accent/45 bg-base'}>
           <CorneredBorder />
-          <div
+          <Text
+            size={'hint'}
+            tone={'system'}
+            uppercase
             className={
-              'flex items-center justify-between border-b border-accent/25 px-3 py-[6px] font-face-regular text-hint tracking-[0.16em] text-system uppercase'
+              'flex items-center justify-between border-b border-accent/25 px-3 py-[6px]'
             }
           >
             <span>detail feed</span>
             <span aria-hidden>▚</span>
-          </div>
+          </Text>
           <div className={'flex flex-col gap-3 p-3'}>
             {status && <ExperienceDetailsStatus status={status} />}
             {details.map((detail, i) => (
               <div key={i} className={'flex flex-col gap-2'}>
                 {detail.caption && (
-                  <div
-                    className={
-                      'font-face-regular text-hint tracking-[0.12em] text-muted uppercase'
-                    }
-                  >
+                  <Text size={'hint'} tone={'secondary'} uppercase>
                     {detail.caption}
-                  </div>
+                  </Text>
                 )}
                 <ExperienceDetailsBody detail={detail} />
               </div>

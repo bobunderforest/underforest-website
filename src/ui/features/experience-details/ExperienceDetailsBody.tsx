@@ -1,4 +1,5 @@
 import { MediaPreview } from 'ui/common/cyber-kit/MediaPreview'
+import { Text } from 'ui/common/typography/Text'
 import type { ExperienceDetail } from 'ui/features/experience-data/types'
 
 export const ExperienceDetailsBody = ({
@@ -17,8 +18,8 @@ export const ExperienceDetailsBody = ({
   }
 
   return (
-    <p className={'font-face-regular text-regular leading-[1.55] text-text'}>
+    <Text tag={'p'} tone={'primary'}>
       {detail.body}
-    </p>
+    </Text>
   )
 }

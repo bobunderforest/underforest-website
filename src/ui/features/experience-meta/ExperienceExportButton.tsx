@@ -1,11 +1,16 @@
+import { Text } from 'ui/common/typography/Text'
+
 export const ExperienceExportButton = () => (
-  <button
+  <Text
+    tag={'button'}
     type={'button'}
+    tone={'accent'}
+    uppercase
     className={
-      'inline-flex w-max items-center gap-[10px] border border-accent px-[18px] py-[12px] font-face-regular text-regular tracking-[0.16em] text-accent uppercase transition-colors duration-150 hover:bg-accent hover:text-black'
+      'inline-flex w-max items-center gap-[10px] border border-accent px-[18px] py-[12px] transition-colors duration-150 hover:bg-accent hover:text-black'
     }
   >
     <span aria-hidden>▤</span>
     Export dossier — strip aesthetic layer for HR / ML filter
-  </button>
+  </Text>
 )

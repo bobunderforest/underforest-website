@@ -1,11 +1,12 @@
 import { Link } from 'ui/common/typography/Link'
+import { Text } from 'ui/common/typography/Text'
 import { PROJECTS } from 'ui/features/experience-data/experience-data'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 
 export const ExperienceProjectList = () => (
   <div>
     <FieldLabel readout={'unbounded'}>pet projects</FieldLabel>
-    <ul className={'grid gap-2 font-face-regular text-hint'}>
+    <Text tag={'ul'} size={'hint'} className={'grid gap-2'}>
       {PROJECTS.map((project) => (
         <li
           key={project.label}
@@ -18,7 +19,14 @@ export const ExperienceProjectList = () => (
           >
             {project.label} ↗
           </Link>
-          <span className={'text-muted tabular-nums'}>{project.period}</span>
+          <Text
+            tag={'span'}
+            size={'hint'}
+            tone={'secondary'}
+            className={'tabular-nums'}
+          >
+            {project.period}
+          </Text>
           {project.links.map((link) => (
             <Link
               key={link.label}
@@ -31,6 +39,6 @@ export const ExperienceProjectList = () => (
           ))}
         </li>
       ))}
-    </ul>
+    </Text>
   </div>
 )

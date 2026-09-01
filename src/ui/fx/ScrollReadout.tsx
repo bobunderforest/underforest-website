@@ -4,6 +4,7 @@ import {
   ScrollReadoutContext,
   type ScrollReadoutEntry,
 } from 'ui/fx/scroll-readout-context'
+import { Text } from 'ui/common/typography/Text'
 
 const pathKey = (path: string[]) => path.join('\u0000')
 
@@ -38,9 +39,14 @@ const ScrollReadoutRow = ({ path, progress }: ScrollReadoutEntry) => {
       className={'flex justify-between gap-4'}
       style={{ paddingLeft: depth * 12 }}
     >
-      <span className={depth ? 'text-text/60' : undefined}>
+      <Text
+        tag={'span'}
+        size={'inherit'}
+        face={'inherit'}
+        tone={depth ? 'faint' : undefined}
+      >
         {path[depth]}
-      </span>
+      </Text>
       <span>{percent}%</span>
     </div>
   )
@@ -60,15 +66,16 @@ export const ScrollReadoutProvider = ({ children }: React.BaseProps) => {
     <ScrollReadoutContext.Provider value={value}>
       {children}
       {entries.length > 0 && (
-        <div
+        <Text
+          tone={'primary'}
           className={
-            'text-xs pointer-events-none fixed top-3 left-3 z-[9999] flex flex-col gap-1 border border-edge bg-surface/85 px-3 py-2 font-face-regular text-text tabular-nums'
+            'text-xs pointer-events-none fixed top-3 left-3 z-[9999] flex flex-col gap-1 border border-edge bg-surface/85 px-3 py-2 tabular-nums'
           }
         >
           {nest(entries).map((entry) => (
             <ScrollReadoutRow key={entry.id} {...entry} />
           ))}
-        </div>
+        </Text>
       )}
     </ScrollReadoutContext.Provider>
   )

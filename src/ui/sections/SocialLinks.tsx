@@ -1,15 +1,12 @@
 import socials from 'app-data/socials.json'
 import { Link } from 'ui/common/typography/Link'
+import { Text } from 'ui/common/typography/Text'
 import { FieldLabel } from './FieldLabel'
 
 export const SocialLinks = () => (
   <div>
     <FieldLabel>channels</FieldLabel>
-    <div
-      className={
-        'flex flex-wrap gap-x-5 gap-y-2 font-face-regular text-regular tracking-[0.08em]'
-      }
-    >
+    <Text className={'flex flex-wrap gap-x-5 gap-y-2'}>
       {socials.map((social) => (
         <Link
           key={social.label}
@@ -20,6 +17,6 @@ export const SocialLinks = () => (
           {social.label}
         </Link>
       ))}
-    </div>
+    </Text>
   </div>
 )

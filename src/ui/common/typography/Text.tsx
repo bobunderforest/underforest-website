@@ -1,11 +1,57 @@
 import { cns } from 'utils/formatters/classnames'
 import { italicizeBold, typograf } from 'utils/formatters/typography'
 
-type Props = React.BaseProps & {
-  tag?: 'div' | 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  ref?: React.Ref<HTMLElement>
-  emphasis?: boolean
+export type TextTone =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'system'
+  | 'inverse'
+  | 'soft'
+  | 'dimmed'
+  | 'faint'
+
+const TONE_CLASSES: Record<TextTone, string> = {
+  primary: 'text-text',
+  secondary: 'text-muted',
+  accent: 'text-accent',
+  system: 'text-system',
+  inverse: 'text-base',
+  soft: 'text-text/85',
+  dimmed: 'text-muted/70',
+  faint: 'text-text/60',
 }
+
+type Props = React.BaseProps &
+  Omit<
+    React.HTMLAttributes<HTMLElement>,
+    'children' | 'className' | 'style'
+  > & {
+    tag?:
+      | 'div'
+      | 'span'
+      | 'p'
+      | 'h1'
+      | 'h2'
+      | 'h3'
+      | 'h4'
+      | 'h5'
+      | 'h6'
+      | 'ul'
+      | 'ol'
+      | 'li'
+      | 'dl'
+      | 'dt'
+      | 'dd'
+      | 'button'
+    ref?: React.Ref<HTMLElement>
+    emphasis?: boolean
+    size?: 'regular' | 'hint' | 'note' | 'inherit'
+    face?: 'regular' | 'title' | 'inherit'
+    tone?: TextTone
+    uppercase?: boolean
+    type?: 'button' | 'submit' | 'reset'
+  }
 
 export const Text = ({
   tag = 'div',
@@ -14,12 +60,25 @@ export const Text = ({
   children,
   ref,
   emphasis = false,
+  size = 'regular',
+  face = 'regular',
+  tone,
+  uppercase = false,
   ...props
 }: Props) => {
   const Tag = tag as React.ElementType
 
   const finalClass = cns(
-    'whitespace-pre-wrap text-pretty [&_a]:link-dash [&_a]:text-accent',
+    'text-pretty whitespace-pre-wrap [&_a]:text-accent [&_a]:link-dash',
+    face === 'regular' && 'font-face-regular',
+    face === 'title' && 'font-face-title',
+    size === 'regular' && 'text-regular leading-[1.6]',
+    size === 'hint' && 'text-hint leading-[1.5]',
+    size === 'note' && 'text-[11px] leading-none mobile-m:text-[10px]',
+    face === 'title' && 'tracking-[0.12em]',
+    face === 'regular' && uppercase && 'tracking-[0.12em]',
+    uppercase && 'uppercase',
+    tone && TONE_CLASSES[tone],
     className,
   )
 
@@ -40,7 +99,7 @@ export const Text = ({
   }
 
   return (
-    <Tag ref={ref} className={finalClass} style={style}>
+    <Tag ref={ref} className={finalClass} style={style} {...props}>
       {children}
     </Tag>
   )

@@ -1,5 +1,6 @@
 import { EXPERIENCE_STATUS_LABEL } from 'ui/features/experience-data/experience-data'
 import type { ExperienceStatus } from 'ui/features/experience-data/types'
+import { Text } from 'ui/common/typography/Text'
 
 export const ExperienceDetailsStatus = ({
   status,
@@ -7,18 +8,19 @@ export const ExperienceDetailsStatus = ({
   status: ExperienceStatus
 }) => (
   <div className={'border border-accent/50 bg-accent/[0.06] px-3 py-2'}>
-    <div
-      className={
-        'mb-2 flex items-center gap-[6px] font-face-regular text-hint tracking-[0.16em] text-accent uppercase last:mb-0'
-      }
+    <Text
+      size={'hint'}
+      tone={'accent'}
+      uppercase
+      className={'mb-2 flex items-center gap-[6px] last:mb-0'}
     >
       <span aria-hidden>⊘</span>
       {EXPERIENCE_STATUS_LABEL[status.kind]}
-    </div>
+    </Text>
     {status.note && (
-      <p className={'font-face-regular text-regular leading-[1.5] text-text'}>
+      <Text tag={'p'} tone={'primary'}>
         {status.note}
-      </p>
+      </Text>
     )}
   </div>
 )

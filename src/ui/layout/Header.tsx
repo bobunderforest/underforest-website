@@ -1,5 +1,6 @@
 import { createContext, useContext, useRef, useState } from 'react'
 import { Link } from 'ui/common/typography/Link'
+import { Text } from 'ui/common/typography/Text'
 import { headerControls } from 'utils/app/header'
 import { cns } from 'utils/formatters/classnames'
 import { useIsVisible } from 'utils/hooks/useIsVisible'
@@ -51,7 +52,7 @@ const HeaderControl = ({
     <Tag
       href={href}
       className={cns(
-        'ease flex h-[40px] flex-[0_0_auto] cursor-pointer items-center justify-center border-2 px-[18px] font-face-title text-regular tracking-[0.1em] uppercase backdrop-blur-md transition-colors duration-200',
+        'ease flex h-[40px] flex-[0_0_auto] cursor-pointer items-center justify-center border-2 px-[18px] backdrop-blur-md transition-colors duration-200',
 
         !primary &&
           !isContrast &&
@@ -71,7 +72,9 @@ const HeaderControl = ({
         onControlClick?.()
       }}
     >
-      {children}
+      <Text tag={'span'} face={'title'} uppercase>
+        {children}
+      </Text>
     </Tag>
   )
 

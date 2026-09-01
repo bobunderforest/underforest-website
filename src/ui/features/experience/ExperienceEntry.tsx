@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { TextTitle } from 'ui/common/typography/TextTitle'
 import { ExperienceDetails } from '../experience-details/ExperienceDetails'
 import { useExperienceDomainFilter } from 'ui/features/experience-data/experience-data-context'
 import { isDimmed } from 'ui/features/experience-data/experience-data'
@@ -122,11 +123,7 @@ export const ExperienceEntry = ({
         <ExperienceEntryTags entry={entry} />
         <ExperienceAnchor className={'mb-2'}>
           <ExperienceMarker entry={entry} />
-          <h3
-            className={
-              'font-face-title text-title-4 leading-[1.15] font-bold text-text'
-            }
-          >
+          <TextTitle size={4} tag={'h3'} tone={'primary'}>
             {entry.href ? (
               <ExperienceTitleLink href={entry.href}>
                 {entry.place} ↗
@@ -134,7 +131,7 @@ export const ExperienceEntry = ({
             ) : (
               entry.place
             )}
-          </h3>
+          </TextTitle>
         </ExperienceAnchor>
         <ExperienceMeta entry={entry} />
         <ExperienceLinkRow entry={entry} />
