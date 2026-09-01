@@ -1,15 +1,13 @@
 {
   "skills": [
-    { "label": "React", "domains": ["web"], "primary": true },
-    { "label": "TypeScript", "domains": ["web", "game"], "primary": true },
-    { "label": "CSS / Tailwind", "domains": ["web"], "primary": true },
-    {
-      "label": "Three.js",
-      "domains": ["web", "game"],
-      "primary": true
-    },
     {
       "label": "Unreal Engine",
+      "domains": ["game"],
+      "primary": true,
+      "rising": true
+    },
+    {
+      "label": "C++ / Blueprints",
       "domains": ["game"],
       "primary": true,
       "rising": true
@@ -21,16 +19,18 @@
       "rising": true
     },
     {
-      "label": "VR / XR interactions",
+      "label": "VR / XR",
       "domains": ["game"],
       "primary": true,
       "rising": true
     },
+    { "label": "React", "domains": ["web"], "primary": true },
+    { "label": "TypeScript", "domains": ["web", "game"], "primary": true },
+    { "label": "CSS / Tailwind", "domains": ["web"], "primary": true },
     {
-      "label": "C++ / Blueprints",
-      "domains": ["game"],
-      "primary": true,
-      "rising": true
+      "label": "Three.js",
+      "domains": ["web", "game"],
+      "primary": true
     },
     { "label": "GLSL / Shaders", "domains": ["web", "game"] },
     { "label": "Canvas / 2D", "domains": ["web", "game"] },
@@ -40,9 +40,9 @@
     { "label": "Vite / Webpack", "domains": ["web"] },
     { "label": "Node.js / Express", "domains": ["web"] },
     { "label": "Ethers.js / Wagmi", "domains": ["web"] },
+    { "label": "Git", "domains": ["web", "game"] },
     { "label": "Storybook", "domains": ["web"] },
     { "label": "Jest / Testing", "domains": ["web"] },
-    { "label": "Git", "domains": ["web", "game"] },
     { "label": "SQL / MongoDB", "domains": ["web"] },
     { "label": "Docker", "domains": ["web"] }
   ],
@@ -73,7 +73,10 @@
           "label": "Game website",
           "href": "https://gnarlycrawl.bobunderforest.me/"
         },
-        { "label": "Itch page", "href": "https://bobunderforest.itch.io/" }
+        {
+          "label": "Itch page",
+          "href": "https://bobunderforest.itch.io/gnarly-crawl-vr"
+        }
       ],
       "domains": ["game"],
       "details": [
@@ -151,7 +154,7 @@
       "reclassified": true,
       "status": {
         "kind": "suspended",
-        "note": "The project has been suspended indefinitely."
+        "note": "The project development has been suspended indefinitely."
       },
       "credits": [
         {
@@ -169,7 +172,7 @@
         {
           "kind": "text",
           "caption": "sample · classification shift",
-          "body": "A conceptual virtual reality experience.\nFirst full-time gamedev role. Web → gamedev reclassification."
+          "body": "A conceptual virtual reality experience.\nFirst full-time gamedev role\n Web → gamedev reclassification."
         },
         {
           "kind": "video",

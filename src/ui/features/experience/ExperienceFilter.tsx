@@ -32,7 +32,7 @@ export const ExperienceFilter = ({ className }: Props) => {
             aria-pressed={active}
             onClick={() => setDomainFilter(option.value)}
             className={cns(
-              'cursor-pointer px-[14px] py-[8px] transition-colors duration-150',
+              'cursor-pointer px-[25px] py-[10px] uppercase transition-colors duration-150',
               'border-r border-edge last:border-r-0',
               active ? 'bg-system text-black' : 'text-muted hover:text-text',
             )}

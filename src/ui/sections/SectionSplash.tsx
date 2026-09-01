@@ -5,18 +5,13 @@ import { SocialLinks } from './SocialLinks'
 
 export const SectionSplash = () => {
   return (
-    <Section
-      id={'about'}
-      index={'00'}
-      stage={'Identity'}
-      readout={'landmarks 4/4'}
-    >
+    <Section id={'about'} index={'00'} stage={'Identity'}>
       <Text
         uppercase
         className={'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1'}
       >
         <Text tag={'span'} tone={'primary'}>
-          Frontend / Full-stack Developer
+          Frontend Developer
           <Text tag={'span'} tone={'accent'}>
             {' → '}
             Game Developer
@@ -31,14 +26,16 @@ export const SectionSplash = () => {
           enableWaves={true}
           asciiFontSize={8}
           textFontSize={400}
-          ditherNoiseScale={0.2}
-          ditherSpeed={1}
-          ditherDotResolution={4}
+          ditherNoiseScale={0.15}
+          ditherSpeed={2}
+          ditherDotResolution={6}
           waveSpeed={1}
           waveXAmplitude={0.1}
           waveYAmplitude={0.0}
           waveZAmplitude={0.0}
-          className={'aspect-[900/350] w-full'}
+          className={
+            'aspect-[900/320] w-full desktop-m:aspect-[900/280]'
+          }
         />
       </div>
       <Text tag={'p'} tone={'primary'} className={'mb-4 max-w-[62ch]'}>

@@ -13,14 +13,12 @@ const primaryCount = SKILLS.filter((skill) => skill.primary).length
 
 export const SectionExperience = () => {
   return (
-    <Section
-      id={'resume'}
-      index={'01'}
-      stage={'Feature Extraction'}
-      readout={'class labels'}
-    >
+    <Section id={'resume'} index={'01'} stage={'DOSSIER'}>
       <ExperienceDataProvider>
-        <ExperienceFilter className={'mb-15'} />
+        <ExperienceFilter className={'mb-5'} />
+        <div className={'mb-15'}>
+          <ExperienceExportButton />
+        </div>
 
         <div className={'mb-10'}>
           <FieldLabel

@@ -1,3 +1,4 @@
+import { EventEmitter } from 'utils/primitives/event-subscription'
 import { isBrowser } from './is-browser'
 
 // export const SCROLL_STORAGE_PREFIX = 'saved-scroll-'
@@ -7,6 +8,7 @@ export const BODY_LOCK_CLASS = 'body-scroll-lock'
 let lockersStack = 0
 let scrollPosition = 0
 let isScrollLocked = false
+const scrollLockChange = new EventEmitter<boolean>()
 // let preventScrollRestoring = false
 
 let body: any
@@ -41,6 +43,7 @@ export const lockScroll = () => {
   html.classList.add(HTML_LOCK_CLASS)
   body.classList.add(BODY_LOCK_CLASS)
   body.style.top = `-${scroll}px`
+  scrollLockChange.fire(true)
 }
 
 // Scroll Unlocker
@@ -54,7 +57,10 @@ export const unlockScroll = () => {
   const scroll = getScrollPosition()
   window.scrollTo(0, scroll)
   isScrollLocked = false
+  scrollLockChange.fire(false)
 }
+
+export const subscribeScrollLockChange = scrollLockChange.on
 
 // Animate Scroll
 let animateRafId: number | undefined

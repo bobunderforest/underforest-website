@@ -8,7 +8,6 @@ type Props = React.BaseProps & {
   id: string
   index: string
   stage: string
-  readout?: ReactNode
   restOffsetTimeline?: number
   enterOffsetTimeline?: number
 }
@@ -17,7 +16,6 @@ export const Section = ({
   id,
   index,
   stage,
-  readout,
   restOffsetTimeline = 0.28,
   enterOffsetTimeline,
   className,
@@ -33,7 +31,7 @@ export const Section = ({
     >
       <AsciiBorder />
       <SectionContent isPadded className={className}>
-        <StageIndex index={index} stage={stage} readout={readout} />
+        <StageIndex index={index} stage={stage} />
         {children}
       </SectionContent>
     </section>

@@ -130,10 +130,7 @@ export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => {
       size={'regular'}
       tone={'secondary'}
       uppercase
-      className={cns(
-        'transition-colors duration-300',
-        entry.links?.length ? 'mb-1.5' : 'mb-3',
-      )}
+      className={'mb-1.5 transition-colors duration-300'}
     >
       <span className={'tabular-nums'}>
         {formatDateRange(entry.from, entry.to, 'short')}
@@ -179,7 +176,7 @@ export const ExperienceSummary = ({
 
 export const ExperienceLinkRow = ({ entry }: { entry: ExperienceEntry }) =>
   entry.links && entry.links.length > 0 ? (
-    <Text className={'mb-3 flex flex-wrap gap-x-4 gap-y-1'}>
+    <Text className={'mb-2 flex flex-wrap gap-x-4 gap-y-1'}>
       {entry.links.map((link) => (
         <ExperienceInnerLink key={link.label} href={link.href}>
           {link.label}

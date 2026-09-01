@@ -1,8 +1,13 @@
 import Lenis from 'lenis'
 import { getScrollPosition } from 'utils/browser/scroll-util'
+import { clamp } from 'utils/math/clamp'
 
 let instance: Lenis | null = null
 let pauseCount = 0
+const wheelInputLimits = new Map<symbol, number>()
+
+const wheelInputScale = () =>
+  wheelInputLimits.size > 0 ? Math.min(...wheelInputLimits.values()) : 1
 
 export const createLenis = () => {
   instance = new Lenis({
@@ -10,10 +15,17 @@ export const createLenis = () => {
     overscroll: true,
     lerp: 0.2,
     wheelMultiplier: 0.85,
-    duration: 1.4,
+    duration: 1,
     syncTouch: true,
     // syncTouchLerp: 0.01,
     smoothWheel: true,
+    virtualScroll: (data) => {
+      if (!('deltaMode' in data.event)) return true
+      const scale = wheelInputScale()
+      data.deltaX *= scale
+      data.deltaY *= scale
+      return true
+    },
   })
   if (pauseCount > 0) instance.stop()
   return instance
@@ -35,6 +47,14 @@ export const resumeLenis = () => {
   if (pauseCount === 0) {
     instance?.resize()
     instance?.start()
+  }
+}
+
+export const limitLenisWheelInput = (scale: number) => {
+  const token = Symbol()
+  wheelInputLimits.set(token, clamp(scale, 0, 1))
+  return () => {
+    wheelInputLimits.delete(token)
   }
 }
 

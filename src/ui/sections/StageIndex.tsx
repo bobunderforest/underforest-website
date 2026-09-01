@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import { Text } from 'ui/common/typography/Text'
 import { TextTitle } from 'ui/common/typography/TextTitle'
 import { cns } from 'utils/formatters/classnames'
@@ -6,40 +5,30 @@ import { cns } from 'utils/formatters/classnames'
 type Props = {
   index: string
   stage: string
-  readout?: ReactNode
   className?: string
 }
 
-export const StageIndex = ({ index, stage, readout, className }: Props) => {
+export const StageIndex = ({ index, stage, className }: Props) => {
   return (
     <div
-      className={cns(
-        'mb-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 tablet-s:mb-8',
-        className,
-      )}
+      className={cns('relative mb-25 items-baseline tablet-s:mb-15', className)}
     >
       <Text
-        tag={'span'}
-        size={'hint'}
+        tag={'div'}
+        size={'inherit'}
         face={'title'}
         tone={'accent'}
-        className={'font-bold'}
+        className={'text-[40px] leading-[1] font-light italic'}
       >
         {index}
       </Text>
-      <TextTitle size={3} uppercase className={'font-bold'}>
+      <TextTitle
+        size={1}
+        uppercase
+        className={'relative left-[-0.05em] leading-[1] font-bold'}
+      >
         {stage}
       </TextTitle>
-      {readout != null && (
-        <Text
-          tag={'span'}
-          size={'hint'}
-          tone={'system'}
-          className={'ml-auto tablet-s:ml-0'}
-        >
-          {readout}
-        </Text>
-      )}
     </div>
   )
 }

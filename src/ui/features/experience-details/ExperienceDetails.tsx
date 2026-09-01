@@ -1,39 +1,37 @@
-import { useId, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import { createPortal } from 'react-dom'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { DataWire } from 'ui/common/cyber-kit/DataWire'
 import { Text } from 'ui/common/typography/Text'
 import { Button } from 'ui/controls/Button'
-import type {
-  Credit,
-  ExperienceDetail,
-  ExperienceStatus,
-  LinkRef,
-} from 'ui/features/experience-data/types'
+import type { ExperienceEntry } from 'ui/features/experience-data/types'
 import { useStableHeightCollapseScroll } from 'utils/anim/collapsible-scroll'
+import { limitLenisWheelInput } from 'utils/anim/lenis'
+import { ease } from 'utils/anim/easings'
 import { motionEase } from 'utils/anim/motion-ease'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
+import { subscribeScrollLockChange } from 'utils/browser/scroll-util'
 import { cns } from 'utils/formatters/classnames'
+import { useElementSize } from 'utils/hooks/useElementSize'
+import { useMounted } from 'utils/hooks/useMounted'
+import { useResizeObserver } from 'utils/hooks/useResizeObserver'
+import { useWindowSize } from 'utils/hooks/useWindowSize'
 import { ExperienceDetailsBody } from './ExperienceDetailsBody'
 import { ExperienceDetailsCredits } from './ExperienceDetailsCredits'
 import { ExperienceDetailsStatus } from './ExperienceDetailsStatus'
 import { ExperienceDetailsSkills } from './ExperienceDetailsSkills'
 
-type ExperienceDetailsProps = {
-  details: ExperienceDetail[]
-  status?: ExperienceStatus
-  credits?: Credit[]
-  skills?: string[]
-  href?: string
-  links?: LinkRef[]
-}
+const VIEWPORT_PADDING = 24
+const FEED_HEADER_HEIGHT = 29
+const WIRE_GAP = 26
 
 const ExperienceDetailsActions = ({
   href,
   links,
 }: {
-  href?: string
-  links?: LinkRef[]
+  href?: ExperienceEntry['href']
+  links?: ExperienceEntry['links']
 }) =>
   href || links?.length ? (
     <div className={'flex flex-col gap-1'}>
@@ -51,13 +49,10 @@ const ExperienceDetailsActions = ({
   ) : null
 
 const ExperienceDetailsContent = ({
-  details,
-  status,
-  credits,
-  skills,
-  href,
-  links,
-}: ExperienceDetailsProps) => (
+  entry: { details = [], status, credits, skills, href, links },
+}: {
+  entry: ExperienceEntry
+}) => (
   <>
     {skills && skills.length > 0 && <ExperienceDetailsSkills skills={skills} />}
     {details.map((detail, i) => (
@@ -76,6 +71,38 @@ const ExperienceDetailsContent = ({
     {status && <ExperienceDetailsStatus status={status} />}
     <ExperienceDetailsActions href={href} links={links} />
   </>
+)
+
+const ExperienceDetailsContentTransition = ({
+  entry,
+  reduced,
+}: {
+  entry: ExperienceEntry
+  reduced: boolean
+}) => (
+  <AnimatePresence mode={'wait'}>
+    <motion.div
+      key={entry.id}
+      className={'flex flex-col gap-3 px-3 pt-3 pb-4'}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: {
+          duration: reduced ? 0 : 0.18,
+          ease: motionEase.enter,
+        },
+      }}
+      exit={{
+        opacity: 0,
+        transition: {
+          duration: reduced ? 0 : 0.18,
+          ease: motionEase.exit,
+        },
+      }}
+    >
+      <ExperienceDetailsContent entry={entry} />
+    </motion.div>
+  </AnimatePresence>
 )
 
 const ExperienceDetailsToggle = ({
@@ -99,72 +126,209 @@ const ExperienceDetailsToggle = ({
     }
     onClick={onClick}
   >
-    <span>{expanded ? 'hide details' : 'show details'}</span>
-    <span aria-hidden>{expanded ? '−' : '+'}</span>
+    <span className={'flex min-w-0 items-center gap-1.5'}>
+      <span
+        aria-hidden
+        className={
+          'inline-flex w-[3ch] shrink-0 -translate-y-[0.08em] justify-center'
+        }
+      >
+        ::
+      </span>
+      {expanded ? 'hide details' : 'show details'}
+    </span>
+    <span aria-hidden className={'shrink-0 text-right whitespace-nowrap'}>
+      {expanded ? '[ - ]' : '[ + ]'}
+    </span>
   </Text>
 )
 
 export const ExperienceDetails = ({
-  details,
-  status,
-  credits,
-  skills,
-  href,
-  links,
-}: ExperienceDetailsProps) => {
+  entry,
+  entryRef,
+  sourceRef,
+}: {
+  entry: ExperienceEntry
+  entryRef: React.RefObject<HTMLElement | null>
+  sourceRef: React.RefObject<HTMLElement | null>
+}) => {
   const [reduced] = useState(prefersReducedMotion)
+  const portalReady = useMounted()
+  const { width: viewportWidth, height: viewportHeight } = useWindowSize()
+  const { ref: contentRef, height: contentHeight } =
+    useElementSize<HTMLDivElement>()
+  const panelRef = useRef<HTMLElement>(null)
+  const [entryHeight, setEntryHeight] = useState(0)
+  const [sourceRight, setSourceRight] = useState(0)
+  const [sourceDocumentY, setSourceDocumentY] = useState(0)
+  const [lockedSourceY, setLockedSourceY] = useState<number | null>(null)
+  const [panelLeft, setPanelLeft] = useState(0)
+  const { scrollY, scrollYProgress } = useScroll({
+    target: entryRef,
+    offset: ['start center', 'end center'],
+  })
+  const availableContentHeight = Math.max(
+    viewportHeight - VIEWPORT_PADDING * 2 - FEED_HEADER_HEIGHT,
+    0,
+  )
+  const contentOverflow = Math.max(contentHeight - availableContentHeight, 0)
+  const panelHeight =
+    FEED_HEADER_HEIGHT + Math.min(contentHeight, availableContentHeight)
+  const contentY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, -contentOverflow],
+    { ease: ease.easeInOutQuad },
+  )
+  const measureConnection = useCallback(() => {
+    const entry = entryRef.current
+    const source = sourceRef.current
+    if (!entry || !source) return
+    const sourceRect = source.getBoundingClientRect()
+    setEntryHeight(entry.getBoundingClientRect().height)
+    setSourceRight(sourceRect.right)
+    setSourceDocumentY(sourceRect.top + scrollY.get() + sourceRect.height / 2)
+    if (panelRef.current) {
+      setPanelLeft(panelRef.current.offsetLeft)
+    }
+  }, [entryRef, scrollY, sourceRef])
 
-  return (
+  useResizeObserver(entryRef, measureConnection)
+  useResizeObserver(sourceRef, measureConnection, { initCall: false })
+  useResizeObserver(panelRef, measureConnection, { initCall: false })
+
+  useEffect(measureConnection, [measureConnection, portalReady, viewportWidth])
+
+  useEffect(() => {
+    let measurementFrame = 0
+    let stopWaitingForScroll: (() => void) | undefined
+    const unsubscribe = subscribeScrollLockChange((locked) => {
+      cancelAnimationFrame(measurementFrame)
+      stopWaitingForScroll?.()
+      stopWaitingForScroll = undefined
+      measurementFrame = requestAnimationFrame(() => {
+        if (!locked) {
+          const restoredScrollY = window.scrollY
+          const releaseLockedSource = () => {
+            measureConnection()
+            setLockedSourceY(null)
+            stopWaitingForScroll?.()
+            stopWaitingForScroll = undefined
+          }
+
+          if (Math.abs(scrollY.get() - restoredScrollY) <= 0.5) {
+            releaseLockedSource()
+          } else {
+            stopWaitingForScroll = scrollY.on('change', releaseLockedSource)
+          }
+          return
+        }
+
+        const source = sourceRef.current
+        if (!source) return
+        const sourceRect = source.getBoundingClientRect()
+        setLockedSourceY(sourceRect.top + sourceRect.height / 2)
+      })
+    })
+
+    return () => {
+      cancelAnimationFrame(measurementFrame)
+      stopWaitingForScroll?.()
+      unsubscribe()
+    }
+  }, [measureConnection, scrollY, sourceRef])
+
+  useEffect(() => {
+    if (contentOverflow <= 0 || entryHeight <= 0) return
+    return limitLenisWheelInput(Math.min(entryHeight / contentOverflow, 1))
+  }, [contentOverflow, entryHeight])
+
+  if (!portalReady) return null
+
+  return createPortal(
     <>
-      <DataWire reduced={reduced} />
+      <DataWire
+        reduced={reduced}
+        scrollY={scrollY}
+        sourceDocumentY={sourceDocumentY}
+        lockedSourceY={lockedSourceY}
+        sourceX={sourceRight + WIRE_GAP}
+        targetX={panelLeft}
+        targetY={viewportHeight / 2}
+        viewportWidth={viewportWidth}
+        viewportHeight={viewportHeight}
+      />
       <motion.aside
+        ref={panelRef}
         data-inner
         onClick={(e) => e.stopPropagation()}
         className={cns(
-          'pointer-events-auto absolute top-1/2 left-full z-[2] cursor-default',
-          'ml-[80px] w-[clamp(360px,39vw,600px)]',
-          'desktop-s:ml-[40px] tablet-s:hidden',
+          'pointer-events-auto fixed top-1/2 right-content-outer-padded z-[51]',
+          'w-[clamp(360px,39vw,600px)] cursor-default tablet-s:hidden',
         )}
-        initial={{ opacity: 0, x: reduced ? 0 : -16, y: '-50%' }}
+        initial={{ opacity: 1, x: 0, y: '-50%' }}
         animate={{ opacity: 1, x: 0, y: '-50%' }}
-        exit={{ opacity: 0, x: reduced ? 0 : -16, y: '-50%' }}
+        exit={{
+          opacity: 0,
+          x: 0,
+          y: '-50%',
+          transition: {
+            duration: reduced ? 0 : 0.1,
+            delay: reduced ? 0 : 0.22,
+            ease: motionEase.exit,
+          },
+        }}
         transition={{ duration: 0.32, ease: motionEase.enter }}
       >
-        <div className={'relative border border-accent/45 bg-base'}>
+        <motion.div
+          className={'relative border border-accent/45 bg-base'}
+          initial={{ height: 0 }}
+          animate={{ height: panelHeight }}
+          exit={{ height: 0 }}
+          transition={{
+            duration: reduced ? 0 : 0.22,
+            ease: motionEase.travel,
+          }}
+        >
           <DataCaptureBorder />
-          <Text
-            size={'hint'}
-            tone={'system'}
-            uppercase
-            className={
-              'flex items-center justify-between border-b border-accent/25 px-3 py-[6px]'
-            }
-          >
-            <span>detail feed</span>
-            <span aria-hidden>▚</span>
-          </Text>
-          <div className={'flex flex-col gap-3 p-3'}>
-            <ExperienceDetailsContent
-              details={details}
-              status={status}
-              credits={credits}
-              skills={skills}
-              href={href}
-              links={links}
-            />
+          <div className={'h-full overflow-hidden'}>
+            <Text
+              size={'hint'}
+              tone={'system'}
+              uppercase
+              className={
+                'flex shrink-0 items-center justify-between border-b border-accent/25 px-3 py-[6px]'
+              }
+            >
+              <span>detail feed</span>
+              <span aria-hidden>▚</span>
+            </Text>
+            <div
+              className={'overflow-hidden'}
+              style={{ maxHeight: availableContentHeight }}
+            >
+              <motion.div ref={contentRef} style={{ y: contentY }}>
+                <ExperienceDetailsContentTransition
+                  entry={entry}
+                  reduced={reduced}
+                />
+              </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </motion.aside>
-    </>
+    </>,
+    document.body,
   )
 }
 
 export const ExperienceDetailsDisclosure = ({
+  entry,
   expanded,
   onExpandedChange,
   onCollapseComplete,
-  ...props
-}: ExperienceDetailsProps & {
+}: {
+  entry: ExperienceEntry
   expanded: boolean
   onExpandedChange: (expanded: boolean) => void
   onCollapseComplete: () => void
@@ -216,7 +380,7 @@ export const ExperienceDetailsDisclosure = ({
             }}
           >
             <div className={'flex flex-col gap-3 pt-3'}>
-              <ExperienceDetailsContent {...props} />
+              <ExperienceDetailsContent entry={entry} />
               <ExperienceDetailsToggle
                 expanded
                 panelId={panelId}

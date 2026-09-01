@@ -1,11 +1,31 @@
-import { useCallback, useRef, useState } from 'react'
-import { EXPERIENCE } from 'ui/features/experience-data/experience-data'
+import { createRef, useCallback, useMemo, useRef, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import {
+  EXPERIENCE,
+  hasExperienceDetails,
+} from 'ui/features/experience-data/experience-data'
+import { ExperienceDetails } from 'ui/features/experience-details/ExperienceDetails'
 import { scrollElementToViewportCenter } from 'utils/anim/collapsible-scroll'
+import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
 import { ExperienceEntry } from './ExperienceEntry'
 
 const ENTRY_SCROLL_DURATION = 0.7
 
 export const ExperienceTrack = () => {
+  const trackRef = useRef<HTMLOListElement>(null)
+  const entryNodeRefs = useMemo(
+    () =>
+      new Map(
+        EXPERIENCE.map((entry) => [
+          entry.id,
+          {
+            entry: createRef<HTMLLIElement>(),
+            body: createRef<HTMLDivElement>(),
+          },
+        ]),
+      ),
+    [],
+  )
   const inViewIds = useRef(new Set<string>())
   const activeIdRef = useRef<string | null>(null)
   const expandedIdRef = useRef<string | null>(null)
@@ -14,6 +34,19 @@ export const ExperienceTrack = () => {
   const pendingExpandedNodeRef = useRef<HTMLElement | null>(null)
   const [activeId, setActiveId] = useState<string | null>(null)
   const [expandedId, setExpandedId] = useState<string | null>(null)
+  const activeEntry = EXPERIENCE.find((entry) => entry.id === activeId)
+  const activeRefs = activeId ? entryNodeRefs.get(activeId) : undefined
+  const showDetailFeed = Boolean(
+    activeEntry && activeRefs && hasExperienceDetails(activeEntry),
+  )
+  const handleTrackInView = useCallback((inView: boolean) => {
+    if (inView) return
+    inViewIds.current.clear()
+    activeIdRef.current = null
+    setActiveId(null)
+  }, [])
+
+  useCenterActivationObserver(trackRef, handleTrackInView)
 
   const scrollPendingEntryToActivation = useCallback(() => {
     const node = pendingExpandedNodeRef.current
@@ -95,18 +128,32 @@ export const ExperienceTrack = () => {
   )
 
   return (
-    <ol className={'grid max-w-[880px]'}>
-      {EXPERIENCE.map((entry) => (
-        <ExperienceEntry
-          key={entry.id}
-          entry={entry}
-          active={entry.id === activeId}
-          detailsExpanded={entry.id === expandedId}
-          onInViewChange={handleInViewChange}
-          onDetailsExpandedChange={handleDetailsExpandedChange}
-          onDetailsCollapseComplete={handleDetailsCollapseComplete}
-        />
-      ))}
-    </ol>
+    <>
+      <ol ref={trackRef} className={'grid max-w-[880px]'}>
+        {EXPERIENCE.map((entry) => (
+          <ExperienceEntry
+            key={entry.id}
+            entry={entry}
+            entryRef={entryNodeRefs.get(entry.id)!.entry}
+            bodyRef={entryNodeRefs.get(entry.id)!.body}
+            active={entry.id === activeId}
+            detailsExpanded={entry.id === expandedId}
+            onInViewChange={handleInViewChange}
+            onDetailsExpandedChange={handleDetailsExpandedChange}
+            onDetailsCollapseComplete={handleDetailsCollapseComplete}
+          />
+        ))}
+      </ol>
+      <AnimatePresence>
+        {activeEntry && activeRefs && showDetailFeed && (
+          <ExperienceDetails
+            key={'desktop-detail-feed'}
+            entry={activeEntry}
+            entryRef={activeRefs.entry}
+            sourceRef={activeRefs.body}
+          />
+        )}
+      </AnimatePresence>
+    </>
   )
 }

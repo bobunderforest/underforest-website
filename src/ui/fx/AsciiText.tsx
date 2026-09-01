@@ -51,31 +51,6 @@ function noiseHash(x: number, y: number, z: number) {
   return value - Math.floor(value)
 }
 
-function smoothNoise(x: number, y: number, z: number) {
-  const x0 = Math.floor(x)
-  const y0 = Math.floor(y)
-  const z0 = Math.floor(z)
-  const xMix = THREE.MathUtils.smoothstep(x - x0, 0, 1)
-  const yMix = THREE.MathUtils.smoothstep(y - y0, 0, 1)
-  const zMix = THREE.MathUtils.smoothstep(z - z0, 0, 1)
-
-  const samplePlane = (sampleZ: number) => {
-    const top = THREE.MathUtils.lerp(
-      noiseHash(x0, y0, sampleZ),
-      noiseHash(x0 + 1, y0, sampleZ),
-      xMix,
-    )
-    const bottom = THREE.MathUtils.lerp(
-      noiseHash(x0, y0 + 1, sampleZ),
-      noiseHash(x0 + 1, y0 + 1, sampleZ),
-      xMix,
-    )
-    return THREE.MathUtils.lerp(top, bottom, yMix)
-  }
-
-  return THREE.MathUtils.lerp(samplePlane(z0), samplePlane(z0 + 1), zMix)
-}
-
 interface PixelDitherOptions {
   pixelSize: number
   amount: number
@@ -181,20 +156,28 @@ class PixelDitherPass {
     const blockColumns = Math.ceil(width / this.options.dotResolution)
     const blockRows = Math.ceil(height / this.options.dotResolution)
     const strengths = new Float32Array(blockColumns * blockRows)
-    const threshold = 1 - this.options.amount
+    const areaRows = Math.max(2, Math.round(1 / this.options.noiseScale))
+    const areaColumns = Math.round(areaRows / 0.6)
+    const cycleTime = time * this.options.speed * 0.25
 
     for (let blockY = 0; blockY < blockRows; blockY++) {
       for (let blockX = 0; blockX < blockColumns; blockX++) {
-        const noise = smoothNoise(
-          blockX * this.options.noiseScale,
-          blockY * this.options.noiseScale,
-          time * this.options.speed,
-        )
-        strengths[blockX + blockY * blockColumns] = THREE.MathUtils.smoothstep(
-          noise,
-          threshold - 0.1,
-          threshold + 0.1,
-        )
+        const areaX = Math.floor(blockX / areaColumns)
+        const areaY = Math.floor(blockY / areaRows)
+        const phaseOffset = noiseHash(areaX, areaY, 0)
+        const areaTime = cycleTime + phaseOffset
+        const cycle = Math.floor(areaTime)
+        const phase = areaTime - cycle
+        const isActive =
+          noiseHash(areaX, areaY, cycle + 1) < this.options.amount
+        const localX = (blockX % areaColumns + 0.5) / areaColumns
+        const revealedUntil = THREE.MathUtils.clamp(phase / 0.3, 0, 1)
+        const hiddenUntil = THREE.MathUtils.clamp((phase - 0.55) / 0.3, 0, 1)
+        const isRevealed = localX <= revealedUntil
+        const isNotHidden = localX >= hiddenUntil
+
+        strengths[blockX + blockY * blockColumns] =
+          isActive && isRevealed && isNotHidden ? 1 : 0
       }
     }
 
