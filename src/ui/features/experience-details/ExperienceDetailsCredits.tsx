@@ -9,12 +9,12 @@ export const ExperienceDetailsCredits = ({
   <div className={'border border-edge px-3 py-2'}>
     <div
       className={
-        'font-face-regular text-[10px] tracking-[0.16em] text-system uppercase'
+        'mb-2 font-face-regular text-[10px] tracking-[0.16em] text-system uppercase'
       }
     >
       // credits
     </div>
-    <ul className={'mt-2 font-face-regular text-[13px] leading-[1.6]'}>
+    <ul className={'font-face-regular text-[13px] leading-[1.6]'}>
       {credits.map((credit) => (
         <li key={credit.role + credit.name} className={'text-muted'}>
           <span className={'tracking-[0.08em] text-muted/70 uppercase'}>

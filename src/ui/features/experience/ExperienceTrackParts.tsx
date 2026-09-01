@@ -48,11 +48,18 @@ export const ExperienceDetectionFrame = () => (
   </span>
 )
 
-export const ExperienceAnchor = ({ children }: { children: ReactNode }) => (
+export const ExperienceAnchor = ({
+  children,
+  className,
+}: {
+  children: ReactNode
+  className?: string
+}) => (
   <div
-    className={
-      'relative before:absolute before:top-[10px] before:left-[-64px] before:h-px before:w-[58px] before:bg-edge'
-    }
+    className={cns(
+      'relative before:absolute before:top-[10px] before:left-[-64px] before:h-px before:w-[58px] before:bg-edge',
+      className,
+    )}
   >
     {children}
   </div>

@@ -19,7 +19,7 @@ export const ExperienceTrack = () => {
   }, [])
 
   return (
-    <ol className={'mt-4 grid max-w-[880px]'}>
+    <ol className={'grid max-w-[880px]'}>
       {EXPERIENCE.map((entry) => (
         <ExperienceEntry
           key={entry.id}

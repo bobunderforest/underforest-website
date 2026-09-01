@@ -64,5 +64,3 @@ export type EducationEntry = {
   from: string
   to: string
 }
-
-export type SocialLink = { label: string; href: string }

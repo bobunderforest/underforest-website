@@ -8,14 +8,21 @@ const OPTIONS: { value: ExperienceDomainFilter; label: string }[] = [
   { value: 'game', label: 'gamedev' },
 ]
 
-export const ExperienceFilter = () => {
+type Props = {
+  className?: string
+}
+
+export const ExperienceFilter = ({ className }: Props) => {
   const { domainFilter, setDomainFilter } = useExperienceDomainFilter()
 
   return (
     <div
       role={'group'}
       aria-label={'Experience domain filter'}
-      className={'inline-flex border border-edge font-face-regular text-[13px]'}
+      className={cns(
+        'inline-flex border border-edge font-face-regular text-[13px]',
+        className,
+      )}
     >
       {OPTIONS.map((option) => {
         const active = option.value === domainFilter

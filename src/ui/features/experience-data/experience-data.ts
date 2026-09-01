@@ -1,4 +1,4 @@
-import resume from 'app-data/resume.json'
+import experience from 'app-data/experience.json'
 import type {
   Domain,
   EducationEntry,
@@ -8,15 +8,13 @@ import type {
   MetaLine,
   ProjectRef,
   Skill,
-  SocialLink,
 } from './types'
 
-export const SKILLS = resume.skills as Skill[]
-export const EXPERIENCE = resume.experience as ExperienceEntry[]
-export const PROJECTS = resume.projects as ProjectRef[]
-export const LANGUAGES = resume.languages as MetaLine[]
-export const EDUCATION = resume.education as EducationEntry[]
-export const SOCIALS = resume.socials as SocialLink[]
+export const SKILLS = experience.skills as Skill[]
+export const EXPERIENCE = experience.experience as ExperienceEntry[]
+export const PROJECTS = experience.projects as ProjectRef[]
+export const LANGUAGES = experience.languages as MetaLine[]
+export const EDUCATION = experience.education as EducationEntry[]
 
 export const isDimmed = (
   domainFilter: ExperienceDomainFilter,

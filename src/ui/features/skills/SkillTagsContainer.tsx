@@ -10,7 +10,7 @@ export const SkillTagsContainer = () => {
   const { domainFilter } = useExperienceDomainFilter()
 
   return (
-    <ul className={'mt-4 flex max-w-[760px] flex-wrap gap-[8px]'}>
+    <ul className={'flex max-w-[760px] flex-wrap gap-[8px]'}>
       {ordered.map((skill) => (
         <SkillTag
           key={skill.label}

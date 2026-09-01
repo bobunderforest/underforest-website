@@ -120,7 +120,7 @@ export const ExperienceEntry = ({
           />
         )}
         <ExperienceEntryTags entry={entry} />
-        <ExperienceAnchor>
+        <ExperienceAnchor className={'mb-2'}>
           <ExperienceMarker entry={entry} />
           <h3
             className={
@@ -138,7 +138,10 @@ export const ExperienceEntry = ({
         </ExperienceAnchor>
         <ExperienceMeta entry={entry} />
         <ExperienceLinkRow entry={entry} />
-        <ExperienceSummary lines={entry.summary} />
+        <ExperienceSummary
+          lines={entry.summary}
+          hasStatusNote={Boolean(entry.status?.note)}
+        />
         {entry.status && <ExperienceStatusNote status={entry.status} />}
         <AnimatePresence>
           {active &&

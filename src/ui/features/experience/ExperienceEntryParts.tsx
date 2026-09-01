@@ -1,8 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'ui/common/typography/Link'
-import {
-  EXPERIENCE_STATUS_LABEL,
-} from 'ui/features/experience-data/experience-data'
+import { EXPERIENCE_STATUS_LABEL } from 'ui/features/experience-data/experience-data'
 import type {
   ExperienceEntry,
   ExperienceStatus,
@@ -98,7 +96,7 @@ export const ExperienceStatusNote = ({
   status.note ? (
     <p
       className={
-        'mt-3 hidden max-w-[62ch] font-face-regular text-[13px] leading-[1.5] text-muted italic desktop-s:block'
+        'hidden max-w-[62ch] font-face-regular text-[13px] leading-[1.5] text-muted italic desktop-s:block'
       }
     >
       {status.note}
@@ -107,9 +105,10 @@ export const ExperienceStatusNote = ({
 
 export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => (
   <div
-    className={
-      'mt-1 font-face-regular text-[12px] tracking-[0.08em] text-muted uppercase transition-colors duration-300 group-data-[active=true]:text-text'
-    }
+    className={cns(
+      'font-face-regular text-[12px] tracking-[0.08em] text-muted uppercase transition-colors duration-300 group-data-[active=true]:text-text',
+      entry.links && entry.links.length > 0 ? 'mb-1.5' : 'mb-3',
+    )}
   >
     <span className={'tabular-nums'}>
       {formatDateRange(entry.from, entry.to, 'short')}
@@ -119,11 +118,18 @@ export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => (
   </div>
 )
 
-export const ExperienceSummary = ({ lines }: { lines: string[] }) => (
+export const ExperienceSummary = ({
+  lines,
+  hasStatusNote,
+}: {
+  lines: string[]
+  hasStatusNote: boolean
+}) => (
   <ul
-    className={
-      'mt-3 max-w-[62ch] font-face-regular text-[14px] text-muted transition-colors duration-300 group-data-[active=true]:text-text'
-    }
+    className={cns(
+      'max-w-[62ch] font-face-regular text-[14px] text-muted transition-colors duration-300 group-data-[active=true]:text-text',
+      hasStatusNote && 'desktop-s:mb-3',
+    )}
   >
     {lines.map((line) => (
       <li
@@ -145,7 +151,7 @@ export const ExperienceLinkRow = ({ entry }: { entry: ExperienceEntry }) =>
   entry.links && entry.links.length > 0 ? (
     <div
       className={
-        'mt-1.5 flex flex-wrap gap-x-4 gap-y-1 font-face-regular text-[12px] tracking-[0.06em]'
+        'mb-3 flex flex-wrap gap-x-4 gap-y-1 font-face-regular text-[12px] tracking-[0.06em]'
       }
     >
       {entry.links.map((link) => (
@@ -164,7 +170,7 @@ export const ExperienceBreakNode = ({
   dimmed: boolean
 }) => (
   <ExperienceTrackNode dimmed={dimmed}>
-    <ExperienceAnchor>
+    <ExperienceAnchor className={'mb-1.5'}>
       <ExperienceMarker entry={entry} />
       <div
         className={
@@ -177,7 +183,7 @@ export const ExperienceBreakNode = ({
         · signal gap
       </div>
     </ExperienceAnchor>
-    <p className={'mt-1.5 text-[14px] text-muted/70 italic'}>
+    <p className={'text-[14px] text-muted/70 italic'}>
       {entry.summary.join(' ')}
     </p>
   </ExperienceTrackNode>

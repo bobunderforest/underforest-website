@@ -146,7 +146,7 @@
       "to": "2025-04",
       "role": "Front-end",
       "employment": "Contract | Arcanum Works",
-      "place": "In2Into — Web AR",
+      "place": "In2Into",
       "href": "https://arcanumworks.com/projects/interactive-intoniilo-ssex/",
       "summary": [
         "Interactive showcase for a contemporary jewelry brand with Arcanum Works, presented at the exhibition “Secret, Sacred and Scattered”.",
@@ -198,8 +198,8 @@
       "id": "arcanum-works",
       "from": "2025-01",
       "to": "2025-04",
-      "role": "Full-stack",
-      "employment": "Full-time",
+      "role": "Front-end",
+      "employment": "Contract",
       "place": "Arcanum Works",
       "href": "https://arcanumworks.com/",
       "summary": [
@@ -478,7 +478,7 @@
     }
   ],
   "languages": [
-    { "term": "English", "value": "C1 · fluent" },
+    { "term": "English", "value": "" },
     { "term": "Russian", "value": "native" }
   ],
   "education": [
@@ -498,15 +498,5 @@
       "from": "2010",
       "to": "2014"
     }
-  ],
-  "socials": [
-    { "label": "telegram", "href": "https://t.me/bobunderforest" },
-    { "label": "github", "href": "https://github.com/bobunderforest" },
-    {
-      "label": "linkedin",
-      "href": "https://www.linkedin.com/in/dmitrypodlesny"
-    },
-    { "label": "email", "href": "mailto:rezed93@gmail.com" },
-    { "label": "instagram", "href": "https://instagram.com/under.forest" }
   ]
 }

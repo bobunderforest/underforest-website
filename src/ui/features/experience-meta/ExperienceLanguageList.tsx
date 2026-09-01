@@ -1,14 +1,14 @@
 import { FieldLabel } from 'ui/sections/FieldLabel'
 import type { MetaLine } from 'ui/features/experience-data/types'
+import { LANGUAGES } from 'ui/features/experience-data/experience-data'
 
-export const ExperienceLanguageList = ({ lines }: { lines: MetaLine[] }) => (
+export const ExperienceLanguageList = () => (
   <div>
     <FieldLabel>languages</FieldLabel>
-    <dl className={'mt-2 grid gap-1 font-face-regular text-[13px]'}>
-      {lines.map((line) => (
+    <dl className={'grid gap-1 font-face-regular text-[13px]'}>
+      {LANGUAGES.map((line) => (
         <div key={line.term} className={'flex justify-between gap-4'}>
-          <dt className={'text-text'}>{line.term}</dt>
-          <dd className={'text-muted tabular-nums'}>{line.value}</dd>
+          {line.term}
         </div>
       ))}
     </dl>

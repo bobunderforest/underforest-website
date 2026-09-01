@@ -1,6 +1,7 @@
 import { Section } from './Section'
 import { Text } from 'ui/common/typography/Text'
 import { ASCIIText } from 'ui/fx/AsciiText'
+import { SocialLinks } from './SocialLinks'
 
 export const SectionSplash = () => {
   return (
@@ -24,7 +25,7 @@ export const SectionSplash = () => {
         </span>
       </div>
 
-      <div className={'relative mt-5'}>
+      <div className={'relative mb-8'}>
         <h1 className={'sr-only'}>Dmitrii Podlesnyi</h1>
         <ASCIIText
           text={'DMITRII\nPODLESNYI'}
@@ -41,15 +42,25 @@ export const SectionSplash = () => {
           className={'aspect-[900/350] w-full'}
         />
       </div>
-      <Text tag={'p'} className={'mt-8 max-w-[62ch] text-text'}>
+      <Text tag={'p'} className={'mb-4 max-w-[62ch] text-text'}>
         I am a full-stack web developer with 10+ years of experience and a
         strong focus on front-end. I have contributed to building high-traffic
         platforms, Web3 solutions, and interactive 3D projects.
       </Text>
-      <Text tag={'p'} className={'mt-4 max-w-[62ch] text-text/85'}>
+      <Text tag={'p'} className={'mb-4 max-w-[62ch] text-text/85'}>
         I am excited about contributing to creative, challenging, and
         passion-driven projects.
       </Text>
+      <Text tag={'p'} className={'mb-12 max-w-[62ch] text-text/85'}>
+        TODO: Write about game dev switch
+        <br />
+        TODO: Write about teamwork and collaboration processes experience
+        <br />
+        TODO: Write about AI
+      </Text>
+      <div>
+        <SocialLinks />
+      </div>
     </Section>
   )
 }

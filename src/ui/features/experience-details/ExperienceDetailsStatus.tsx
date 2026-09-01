@@ -9,7 +9,7 @@ export const ExperienceDetailsStatus = ({
   <div className={'border border-accent/50 bg-accent/[0.06] px-3 py-2'}>
     <div
       className={
-        'flex items-center gap-[6px] font-face-regular text-[10px] tracking-[0.16em] text-accent uppercase'
+        'mb-2 flex items-center gap-[6px] font-face-regular text-[10px] tracking-[0.16em] text-accent uppercase last:mb-0'
       }
     >
       <span aria-hidden>⊘</span>
@@ -17,7 +17,7 @@ export const ExperienceDetailsStatus = ({
     </div>
     {status.note && (
       <p
-        className={'mt-2 font-face-regular text-[13px] leading-[1.5] text-text'}
+        className={'font-face-regular text-[13px] leading-[1.5] text-text'}
       >
         {status.note}
       </p>
