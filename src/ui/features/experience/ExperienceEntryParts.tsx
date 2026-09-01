@@ -7,7 +7,7 @@ import type {
   ExperienceStatus,
 } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
-import { formatDateRange } from 'utils/formatters/dates'
+import { formatDateDuration, formatDateRange } from 'utils/formatters/dates'
 import {
   ExperienceAnchor,
   ExperienceMarker,
@@ -29,6 +29,20 @@ export const ExperienceTitleLink = ({
     {children}
   </Link>
 )
+
+export const ExperienceTitleRole = ({ role }: { role?: string }) =>
+  role ? (
+    <Text
+      tag={'span'}
+      size={'regular'}
+      tone={'secondary'}
+      weight={'normal'}
+      className={'whitespace-nowrap'}
+    >
+      <span aria-hidden>· </span>
+      {role}
+    </Text>
+  ) : null
 
 export const ExperienceInnerLink = ({
   children,
@@ -102,29 +116,35 @@ export const ExperienceStatusNote = ({
       tag={'p'}
       size={'hint'}
       tone={'secondary'}
-      className={'hidden max-w-[62ch] italic desktop-s:block'}
+      className={'hidden max-w-[62ch] italic tablet-s:block'}
     >
       {status.note}
     </Text>
   ) : null
 
-export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => (
-  <Text
-    size={'hint'}
-    tone={'secondary'}
-    uppercase
-    className={cns(
-      'transition-colors duration-300 group-data-[active=true]:text-text',
-      entry.links && entry.links.length > 0 ? 'mb-1.5' : 'mb-3',
-    )}
-  >
-    <span className={'tabular-nums'}>
-      {formatDateRange(entry.from, entry.to, 'short')}
-    </span>
-    {entry.role && <> · {entry.role}</>}
-    {entry.employment && <> · {entry.employment}</>}
-  </Text>
-)
+export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => {
+  const duration = formatDateDuration(entry.from, entry.to)
+
+  return (
+    <Text
+      size={'regular'}
+      tone={'secondary'}
+      uppercase
+      className={cns(
+        'transition-colors duration-300',
+        entry.links?.length ? 'mb-1.5' : 'mb-3',
+      )}
+    >
+      <span className={'tabular-nums'}>
+        {formatDateRange(entry.from, entry.to, 'short')}
+        {duration && (
+          <span className={'text-muted/70 normal-case'}> ({duration})</span>
+        )}
+      </span>
+      {entry.employment && <> · {entry.employment}</>}
+    </Text>
+  )
+}
 
 export const ExperienceSummary = ({
   lines,
@@ -138,7 +158,7 @@ export const ExperienceSummary = ({
     tone={'secondary'}
     className={cns(
       'max-w-[62ch] transition-colors duration-300 group-data-[active=true]:text-text',
-      hasStatusNote && 'desktop-s:mb-3',
+      hasStatusNote && 'tablet-s:mb-3',
     )}
   >
     {lines.map((line) => (

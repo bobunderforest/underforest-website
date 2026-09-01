@@ -48,6 +48,7 @@ type Props = React.BaseProps &
     emphasis?: boolean
     size?: 'regular' | 'hint' | 'note' | 'inherit'
     face?: 'regular' | 'title' | 'inherit'
+    weight?: 'normal' | 'medium' | 'semibold' | 'bold'
     tone?: TextTone
     uppercase?: boolean
     type?: 'button' | 'submit' | 'reset'
@@ -62,6 +63,7 @@ export const Text = ({
   emphasis = false,
   size = 'regular',
   face = 'regular',
+  weight,
   tone,
   uppercase = false,
   ...props
@@ -72,6 +74,10 @@ export const Text = ({
     'text-pretty whitespace-pre-wrap [&_a]:text-accent [&_a]:link-dash',
     face === 'regular' && 'font-face-regular',
     face === 'title' && 'font-face-title',
+    weight === 'normal' && 'font-normal',
+    weight === 'medium' && 'font-medium',
+    weight === 'semibold' && 'font-semibold',
+    weight === 'bold' && 'font-bold',
     size === 'regular' && 'text-regular leading-[1.6]',
     size === 'hint' && 'text-hint leading-[1.5]',
     size === 'note' && 'text-[11px] leading-none mobile-m:text-[10px]',

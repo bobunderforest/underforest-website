@@ -18,7 +18,7 @@ export const ExperienceDetailsBody = ({
   }
 
   return (
-    <Text tag={'p'} tone={'primary'}>
+    <Text tag={'p'} tone={'primary'} className={'whitespace-pre-line'}>
       {detail.body}
     </Text>
   )

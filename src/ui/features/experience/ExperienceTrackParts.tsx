@@ -1,5 +1,5 @@
 import { forwardRef, type ReactNode } from 'react'
-import { CorneredBorder } from 'ui/common/cyber-kit/CorneredBorder'
+import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { cns } from 'utils/formatters/classnames'
 import type { ExperienceEntry } from 'ui/features/experience-data/types'
 
@@ -40,7 +40,7 @@ export const ExperienceDetectionFrame = () => (
         'group-data-[lit=true]:border-accent/65 group-data-[lit=true]:bg-accent/[0.09]',
       )}
     />
-    <CorneredBorder
+    <DataCaptureBorder
       className={
         'opacity-0 transition-opacity duration-300 group-data-[active=true]:opacity-100'
       }

@@ -11,8 +11,8 @@ export const DataWire = ({ reduced }: { reduced: boolean }) => {
       aria-hidden
       className={cns(
         'pointer-events-none absolute top-1/2 left-full z-[3] -translate-y-1/2',
-        'ml-[26px] block h-[7px] w-[54px]',
-        'desktop-s:hidden',
+        'ml-[26px] block h-[7px] w-[54px] desktop-s:w-[14px]',
+        'tablet-s:hidden',
       )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

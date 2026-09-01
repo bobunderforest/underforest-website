@@ -36,6 +36,7 @@ export type ExperienceEntry = {
   role?: string
   employment?: string
   place?: string
+  skills?: string[]
   href?: string
   summary: string[]
   links?: LinkRef[]
@@ -48,13 +49,14 @@ export type ExperienceEntry = {
 }
 
 export type ProjectRef = {
-  label: string
   id: string
   from: string
   to: string
   role?: string
   employment?: string
   place?: string
+  label?: string
+  skills?: string[]
   href?: string
   summary: string[]
   links?: LinkRef[]

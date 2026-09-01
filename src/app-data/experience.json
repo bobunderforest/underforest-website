@@ -52,7 +52,7 @@
       "from": "2026-04",
       "to": "2026-08",
       "role": "Game Developer",
-      "employment": "Self-employed",
+      "employment": "Personal project",
       "place": "Gnarly Crawl",
       "label": "VR Game",
       "href": "https://gnarlycrawl.bobunderforest.me/",
@@ -78,6 +78,11 @@
       "domains": ["game"],
       "details": [
         {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Dungeon synth aesthetic VR game about escaping an interdemensional magical stronghold."
+        },
+        {
           "kind": "video",
           "caption": "trailer · gameplay capture",
           "src": "/videos/gnarlycrawl-trailer.mp4"
@@ -89,7 +94,7 @@
       "from": "2026-01",
       "to": "2026-01",
       "role": "Front-end",
-      "employment": "Freelance",
+      "employment": "Contract",
       "place": "Syntaxart",
       "label": "",
       "href": "https://syntaxart.space/",
@@ -100,9 +105,21 @@
       "domains": ["web"],
       "credits": [
         {
+          "role": "Art Direction",
+          "name": "Pavel Seldemirov",
+          "href": "https://seldemirov.com/"
+        },
+        {
           "role": "Design",
           "name": "Anastasiia Vetushko",
           "href": "https://www.behance.net/fairymymyu"
+        }
+      ],
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "A course teaching semiotics to understand and compose contemparary art."
         }
       ]
     },
@@ -111,12 +128,11 @@
       "from": "2025-05",
       "to": "2026-03",
       "role": "Game Developer",
-      "employment": "Full-time | Arcanum Works",
+      "employment": "Full-time",
       "place": "Ocean Threshold",
-      "label": "Virtual Reality Experience",
       "href": "https://arcanumworks.com/projects/previs-oceanthreshold/",
       "summary": [
-        "A conceptual virtual reality experience.",
+        "Virtual Reality Experience development.",
         "Gameplay and VR interactions programming."
       ],
       "skills": [
@@ -139,16 +155,21 @@
       },
       "credits": [
         {
-          "role": "Art Direction & Concept",
+          "role": "Art Direction",
           "name": "Arden Vald",
           "href": "https://ardenvald.com"
+        },
+        {
+          "role": "Team",
+          "name": "Arcanum Works",
+          "href": "https://arcanum.works/"
         }
       ],
       "details": [
         {
           "kind": "text",
           "caption": "sample · classification shift",
-          "body": "First full-time gamedev role. Web → gamedev reclassification."
+          "body": "A conceptual virtual reality experience.\nFirst full-time gamedev role. Web → gamedev reclassification."
         },
         {
           "kind": "video",
@@ -158,17 +179,53 @@
       ]
     },
     {
+      "id": "arcanum-works",
+      "from": "2025-03",
+      "to": "2025-04",
+      "role": "Front-end",
+      "employment": "Contract",
+      "place": "Arcanum Works",
+      "href": "https://arcanumworks.com/",
+      "summary": [
+        "Portfolio website development.",
+        "WebGL effects and interactive animated UI."
+      ],
+      "skills": ["Astro", "React", "CSS / Tailwind", "GLSL / Shaders"],
+      "domains": ["web"],
+      "credits": [
+        {
+          "role": "Design",
+          "name": "Anastasiia Vetushko",
+          "href": "https://www.behance.net/fairymymyu"
+        },
+        {
+          "role": "Project owner",
+          "name": "Arden Vald",
+          "href": "https://ardenvald.com"
+        }
+      ],
+      "details": [
+        {
+          "kind": "text",
+          "body": "Portfolio website development for a previs production agency."
+        },
+        {
+          "kind": "video",
+          "caption": "capture · arcanum works",
+          "src": "/videos/arcanum.mp4"
+        }
+      ]
+    },
+    {
       "id": "in2into",
       "from": "2025-01",
       "to": "2025-04",
       "role": "Front-end",
-      "employment": "Contract | Arcanum Works",
+      "employment": "Contract",
       "place": "In2Into",
-      "label": "In-browser AR Showcase",
       "href": "https://arcanumworks.com/projects/interactive-intoniilo-ssex/",
       "summary": [
-        "Interactive showcase for a contemporary jewelry brand with Arcanum Works, presented at the exhibition “Secret, Sacred and Scattered”.",
-        "Built a mobile-friendly AR experience using Three.js.",
+        "Built a mobile-friendly Augmented Reality showcase.",
         "Integrated 3D models for immersive product visualization."
       ],
       "skills": ["Three.js"],
@@ -207,44 +264,14 @@
       ],
       "details": [
         {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Interactive showcase for a contemporary jewelry brand.\nPresented at the exhibition “Secret, Sacred and Scattered”."
+        },
+        {
           "kind": "video",
           "caption": "capture · arcanum works",
           "src": "/videos/in2into-web-ar.mp4"
-        }
-      ]
-    },
-    {
-      "id": "arcanum-works",
-      "from": "2025-01",
-      "to": "2025-04",
-      "role": "Front-end",
-      "employment": "Contract",
-      "place": "Arcanum Works",
-      "label": "Studio Portfolio Webpage",
-      "href": "https://arcanumworks.com/",
-      "summary": [
-        "Full-stack development of a portfolio website for a video production agency.",
-        "Focused on WebGL effects and interactive animated UI."
-      ],
-      "skills": ["Astro", "React", "CSS / Tailwind", "GLSL / Shaders"],
-      "domains": ["web"],
-      "credits": [
-        {
-          "role": "Design",
-          "name": "Anastasiia Vetushko",
-          "href": "https://www.behance.net/fairymymyu"
-        },
-        {
-          "role": "Project owner",
-          "name": "Arden Vald",
-          "href": "https://ardenvald.com"
-        }
-      ],
-      "details": [
-        {
-          "kind": "video",
-          "caption": "capture · arcanum works",
-          "src": "/videos/arcanum.mp4"
         }
       ]
     },
@@ -255,10 +282,16 @@
       "role": "Front-end",
       "employment": "Full-time",
       "place": "Triark",
-      "label": "Studio Portfolio Webpage",
       "summary": [
-        "Portfolio website for a video production agency, built under a short-term contract.",
-        "Focused on clean design and smooth animations."
+        "Portfolio website development.",
+        "Clean design and smooth animations."
+      ],
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Portfolio website development for a video production agency, built under a short-term contract."
+        }
       ],
       "skills": ["Astro", "React", "CSS / Tailwind"],
       "domains": ["web"],
@@ -274,9 +307,8 @@
       "role": "Web3 Front-end",
       "employment": "Full-time",
       "place": "Lido.fi",
-      "label": "Web3 Contribution",
       "summary": [
-        "Full-stack development for the Web3 liquid-staking platform.",
+        "Contributed to Web3 liquid-staking platform",
         "Integrated UI with blockchain smart contracts via ABI.",
         "Built wallet-connection flows using Ethers.js and Wagmi."
       ],
@@ -289,7 +321,14 @@
         "Storybook",
         "Styled Components"
       ],
-      "domains": ["web"]
+      "domains": ["web"],
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Web3 liquid-staking platform."
+        }
+      ]
     },
     {
       "id": "roci",
@@ -298,18 +337,24 @@
       "role": "Web3 Front-end",
       "employment": "Part-time",
       "place": "Roci.fi",
-      "label": "Web3 Contribution",
       "summary": [
-        "Part-time collaboration with a decentralized credit-scoring platform.",
+        "Contributed to a decentralized credit-scoring platform.",
         "Integrated smart contracts into frontend flows via ABI.",
-        "Focused on Web3 integrations, interactive UI, and user experience."
+        "Focused on Web3 integrations, clean UI and user experience."
       ],
       "skills": ["React", "TypeScript", "Ethers.js / Wagmi"],
       "domains": ["web"],
       "status": {
         "kind": "unavailable",
         "note": "The site is no longer online."
-      }
+      },
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "A decentralized credit-scoring Web3 platform."
+        }
+      ]
     },
     {
       "id": "ego-jobs",
@@ -318,14 +363,20 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "Ego.Jobs",
-      "label": "Web app",
       "href": "https://ego.jobs/en",
       "summary": [
-        "Built a UI component library for a job-matching platform.",
-        "Implemented new UX flows to improve the candidate and employer experience."
+        "Built a UI component library.",
+        "Implemented new UX flows improving the candidate and employer experience."
       ],
       "skills": ["React", "TypeScript", "Next.js", "Styled Components"],
-      "domains": ["web"]
+      "domains": ["web"],
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "A job-matching platform."
+        }
+      ]
     },
     {
       "id": "xyz-school",
@@ -334,14 +385,20 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "XYZ School",
-      "label": "Component System",
       "summary": [
-        "Contract-based development contribution.",
-        "Created a reusable UI component system following design guidelines.",
-        "Integrated components into Storybook for team adoption."
+        "Created a UI component system.",
+        "Integrated components into Storybook for team adoption.",
+        "Collaborated with a remote team."
       ],
       "skills": ["React", "Storybook", "TypeScript", "Styled Components"],
-      "domains": ["web"]
+      "domains": ["web"],
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "An educational platform."
+        }
+      ]
     },
     {
       "id": "matter-streaming",
@@ -350,13 +407,13 @@
       "role": "Front-end",
       "employment": "Full-time",
       "place": "Matter Streaming",
-      "label": "Music straming social platform",
       "summary": [
-        "Full-stack development for a music-streaming startup — a platform “by musicians for musicians”.",
+        "Collaborated in development of a music-streaming startup.",
         "Participated in architectural decision-making.",
-        "Created and maintained the component library; collaborated on UX flow design."
+        "Created and maintained a component library.",
+        "Collaborated on UX flow design."
       ],
-      "skills": ["Vue", "React", "TypeScript"],
+      "skills": ["Vue.js", "React", "TypeScript"],
       "status": {
         "kind": "discontinued",
         "note": "The startup is closed, the site is no longer online. A screencast demo and the designer’s Behance page remain as a record."
@@ -374,6 +431,11 @@
       "domains": ["web"],
       "details": [
         {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "A music straming social platform, made “by musicians for musicians”.\n"
+        },
+        {
           "kind": "video",
           "caption": "screencast · product demo",
           "src": "/videos/matter-streaming-demo.mp4"
@@ -388,10 +450,7 @@
       "employment": "Pet project",
       "place": "Kowloon City Guide",
       "href": "https://kwcguide.bobunderforest.me/",
-      "summary": [
-        "Enthusiast-driven pet project and contest entry, made with two friends.",
-        "Immersive visual design, atmospheric animations, and interactive storytelling."
-      ],
+      "summary": ["An enthusiastic project, made with friends for a contest."],
       "links": [
         {
           "label": "GitHub",
@@ -404,6 +463,11 @@
         { "role": "Frontend", "name": "Giyos Abbaskhanov" }
       ],
       "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "An immersive visual storytelling about one of the densely populated places on Earth."
+        },
         {
           "kind": "video",
           "caption": "screen capture",
@@ -428,9 +492,10 @@
       "place": "Harbour.Space",
       "href": "https://harbour.space/",
       "summary": [
-        "Remote team collaboration.",
-        "Developed a dynamic, animated UI for an educational platform."
+        "Developed an animated UI for an educational platform.",
+        "Collaborated with a remote team."
       ],
+      "skills": ["React"],
       "domains": ["web"]
     },
     {
@@ -440,7 +505,8 @@
       "role": "Full-stack",
       "employment": "Freelance",
       "place": "Freelance projects",
-      "summary": ["Multiple small-scale client projects."],
+      "summary": ["Worked on multiple small-scale freelance projects."],
+      "skills": ["React", "TypeScript", "Webpack", "Express", "MongoDB"],
       "domains": ["web"]
     },
     {
@@ -452,10 +518,11 @@
       "place": "TradingView",
       "href": "https://www.tradingview.com/",
       "summary": [
-        "Part of a large team maintaining and enhancing a social trading platform.",
-        "Contributed to a global rebranding and a UI component library.",
-        "Participated in migrating the codebase to TypeScript."
+        "Participated in maintaining a social trading platform.",
+        "Collaborated on a rebranding a UI component library.",
+        "Contributed in migrating the codebase to TypeScript."
       ],
+      "skills": ["React", "TypeScript", "Webpack", "Canvas / 2D"],
       "domains": ["web"]
     },
     {
@@ -466,8 +533,9 @@
       "employment": "Full-time",
       "place": "Oleg Chulakov Studio",
       "summary": [
-        "Fast-paced studio environment, delivering projects for diverse clients.",
-        "Worked closely with designers on high-quality UI interactions and interface animations."
+        "Worked at fast-paced studio environment",
+        "Focused on delivering brand-marked quality projects.",
+        "Worked closely with UX/UI-team on animations and interactions."
       ],
       "domains": ["web"]
     }

@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { TextTitle } from 'ui/common/typography/TextTitle'
-import { ExperienceDetails } from '../experience-details/ExperienceDetails'
+import {
+  ExperienceDetails,
+  ExperienceDetailsDisclosure,
+} from '../experience-details/ExperienceDetails'
 import { useExperienceDomainFilter } from 'ui/features/experience-data/experience-data-context'
 import { isDimmed } from 'ui/features/experience-data/experience-data'
 import type { ExperienceEntry as ExperienceEntryData } from 'ui/features/experience-data/types'
 import { openExternal } from 'utils/browser/open-external'
 import { cns } from 'utils/formatters/classnames'
+import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
 import {
   ExperienceAnchor,
   ExperienceDetectionFrame,
@@ -20,27 +24,52 @@ import {
   ExperienceMeta,
   ExperienceStatusNote,
   ExperienceSummary,
+  ExperienceTitleRole,
   ExperienceTitleLink,
 } from './ExperienceEntryParts'
 
 type ExperienceEntryProps = {
   entry: ExperienceEntryData
   active: boolean
+  detailsExpanded: boolean
   onInViewChange: (id: string, inView: boolean) => void
+  onDetailsExpandedChange: (
+    id: string,
+    expanded: boolean,
+    node: HTMLElement | null,
+  ) => void
+  onDetailsCollapseComplete: (id: string) => void
+}
+
+const fullEntryClick = {
+  desktop: true,
+  'tablet-s': false,
 }
 
 export const ExperienceEntry = ({
   entry,
   active,
+  detailsExpanded,
   onInViewChange,
+  onDetailsExpandedChange,
+  onDetailsCollapseComplete,
 }: ExperienceEntryProps) => {
   const { domainFilter } = useExperienceDomainFilter()
   const dimmed = isDimmed(domainFilter, entry.domains)
   const ref = useRef<HTMLLIElement>(null)
   const [hovered, setHovered] = useState(false)
   const [innerHovered, setInnerHovered] = useState(false)
+  const fullEntryClickEnabled = useResponsiveValue(fullEntryClick)
+  const hasDetails = Boolean(
+    entry.details?.length ||
+    entry.status ||
+    entry.credits?.length ||
+    entry.skills?.length ||
+    entry.href ||
+    entry.links?.length,
+  )
 
-  const clickable = Boolean(entry.href) && active
+  const clickable = Boolean(entry.href) && active && fullEntryClickEnabled
   const lit = clickable && hovered && !innerHovered
 
   useEffect(() => {
@@ -89,7 +118,7 @@ export const ExperienceEntry = ({
         data-active={active}
         data-lit={lit}
         className={cns(
-          'group relative isolate w-fit max-w-full',
+          'group relative isolate w-[600px] tablet-s:w-full',
           clickable && 'cursor-pointer',
         )}
         onMouseEnter={() => setHovered(true)}
@@ -123,7 +152,12 @@ export const ExperienceEntry = ({
         <ExperienceEntryTags entry={entry} />
         <ExperienceAnchor className={'mb-2'}>
           <ExperienceMarker entry={entry} />
-          <TextTitle size={4} tag={'h3'} tone={'primary'}>
+          <TextTitle
+            size={4}
+            tag={'h3'}
+            tone={'primary'}
+            className={'flex flex-wrap items-baseline gap-x-2.5 gap-y-1'}
+          >
             {entry.href ? (
               <ExperienceTitleLink href={entry.href}>
                 {entry.place} ↗
@@ -131,6 +165,7 @@ export const ExperienceEntry = ({
             ) : (
               entry.place
             )}
+            <ExperienceTitleRole role={entry.role} />
           </TextTitle>
         </ExperienceAnchor>
         <ExperienceMeta entry={entry} />
@@ -140,18 +175,33 @@ export const ExperienceEntry = ({
           hasStatusNote={Boolean(entry.status?.note)}
         />
         {entry.status && <ExperienceStatusNote status={entry.status} />}
+        {hasDetails && (
+          <ExperienceDetailsDisclosure
+            expanded={detailsExpanded}
+            onExpandedChange={(expanded) =>
+              onDetailsExpandedChange(entry.id, expanded, ref.current)
+            }
+            onCollapseComplete={() => onDetailsCollapseComplete(entry.id)}
+            details={entry.details ?? []}
+            status={entry.status}
+            credits={entry.credits}
+            skills={entry.skills}
+            href={entry.href}
+            links={entry.links}
+          />
+        )}
         <AnimatePresence>
-          {active &&
-            (entry.details?.length ||
-              entry.status ||
-              entry.credits?.length) && (
-              <ExperienceDetails
-                key={'detail'}
-                details={entry.details ?? []}
-                status={entry.status}
-                credits={entry.credits}
-              />
-            )}
+          {active && hasDetails && (
+            <ExperienceDetails
+              key={'detail'}
+              details={entry.details ?? []}
+              status={entry.status}
+              credits={entry.credits}
+              skills={entry.skills}
+              href={entry.href}
+              links={entry.links}
+            />
+          )}
         </AnimatePresence>
       </div>
     </ExperienceTrackNode>

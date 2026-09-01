@@ -1,5 +1,6 @@
 import type { Skill } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
+import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { Text } from 'ui/common/typography/Text'
 
 export const SkillTag = ({
@@ -19,7 +20,7 @@ export const SkillTag = ({
         'relative inline-flex items-center gap-[8px] border px-[11px] py-[6px]',
         'transition-opacity duration-300',
         skill.primary ? 'border-accent/70 bg-accent/[0.08]' : 'border-muted/55',
-        skill.rising && 'border-dashed',
+        skill.rising && 'border-transparent',
         dimmed && 'opacity-30',
       )}
     >
@@ -36,22 +37,11 @@ export const SkillTag = ({
           ↑
         </Text>
       )}
-      {skill.primary && (
-        <>
-          <span
-            aria-hidden
-            className={
-              'absolute -top-px -left-px size-[5px] border-t-2 border-l-2 border-accent'
-            }
-          />
-          <span
-            aria-hidden
-            className={
-              'absolute -right-px -bottom-px size-[5px] border-r-2 border-b-2 border-accent'
-            }
-          />
-        </>
-      )}
+      <DataCaptureBorder
+        diagonal
+        dashed={skill.rising}
+        muted={!skill.primary}
+      />
     </Text>
   )
 }

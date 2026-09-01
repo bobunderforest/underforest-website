@@ -11,11 +11,11 @@
   --content-outer-padded: calc(var(--content-outer) + var(--content-padding));
 
   @media (max-width: 1580px) {
-    --content-width: 1420px;
+    --content-width: 100%;
     --content-padding: 30px;
   }
 
-  @media (max-width: 1420px) {
+  @media (max-width: 1260px) {
     --content-width: 920px;
     --content-padding: 20px;
     --section-padding: 100px;

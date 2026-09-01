@@ -1,6 +1,6 @@
 export const breakpointMaxWidths = {
   'desktop-m': 1720,
-  'desktop-s': 1430,
+  'desktop-s': 1420,
   'tablet-s': 1260,
   'mobile-m': 740,
 } as const

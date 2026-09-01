@@ -10,6 +10,6 @@
 }
 
 @custom-variant desktop-m (@media (max-width: 1720px));
-@custom-variant desktop-s (@media (max-width: 1430px));
+@custom-variant desktop-s (@media (max-width: 1420px));
 @custom-variant tablet-s (@media (max-width: 1260px));
 @custom-variant mobile-m (@media (max-width: 740px));
