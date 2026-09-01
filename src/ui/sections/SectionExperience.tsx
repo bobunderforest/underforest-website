@@ -1,11 +1,11 @@
 import { Section } from './Section'
 import { FieldLabel } from './FieldLabel'
-import { ResumeProvider } from 'ui/features/resume/ResumeProvider'
-import { ModelSelect } from 'ui/features/resume/ModelSelect'
-import { SkillVector } from 'ui/features/resume/SkillTag'
-import { ExperienceTrack } from 'ui/features/resume/ExperienceTrack'
-import { ResumeMeta } from 'ui/features/resume/ResumeMeta'
-import { SKILLS } from 'ui/features/resume/resume-data'
+import { ExperienceDataProvider } from 'ui/features/experience-data/ExperienceDataProvider'
+import { ExperienceFilter } from 'ui/features/experience/ExperienceFilter'
+import { SkillTagsContainer } from 'ui/features/skills/SkillTagsContainer'
+import { ExperienceTrack } from 'ui/features/experience/ExperienceTrack'
+import { ExperienceMeta } from 'ui/features/experience-meta/ExperienceMeta'
+import { SKILLS } from 'ui/features/experience-data/experience-data'
 
 const primaryCount = SKILLS.filter((skill) => skill.primary).length
 
@@ -17,8 +17,8 @@ export const SectionExperience = () => {
       stage={'Feature Extraction'}
       readout={'class labels'}
     >
-      <ResumeProvider>
-        <ModelSelect />
+      <ExperienceDataProvider>
+        <ExperienceFilter />
 
         <div className={'mt-10'}>
           <FieldLabel
@@ -26,7 +26,7 @@ export const SectionExperience = () => {
           >
             skills
           </FieldLabel>
-          <SkillVector />
+          <SkillTagsContainer />
         </div>
 
         <div className={'mt-14'}>
@@ -36,8 +36,8 @@ export const SectionExperience = () => {
           <ExperienceTrack />
         </div>
 
-        <ResumeMeta />
-      </ResumeProvider>
+        <ExperienceMeta />
+      </ExperienceDataProvider>
     </Section>
   )
 }

@@ -1,36 +1,34 @@
-import { useResumeModel } from './resume-context'
-import type { Model } from './resume-data'
+import { useExperienceDomainFilter } from 'ui/features/experience-data/experience-data-context'
+import type { ExperienceDomainFilter } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
 
-const OPTIONS: { value: Model; label: string }[] = [
+const OPTIONS: { value: ExperienceDomainFilter; label: string }[] = [
   { value: 'web', label: 'web' },
   { value: 'unified', label: 'unified' },
   { value: 'game', label: 'gamedev' },
 ]
 
-export const ModelSelect = () => {
-  const { model, setModel } = useResumeModel()
+export const ExperienceFilter = () => {
+  const { domainFilter, setDomainFilter } = useExperienceDomainFilter()
 
   return (
     <div
       role={'group'}
-      aria-label={'Model select'}
+      aria-label={'Experience domain filter'}
       className={'inline-flex border border-edge font-face-regular text-[13px]'}
     >
       {OPTIONS.map((option) => {
-        const active = option.value === model
+        const active = option.value === domainFilter
         return (
           <button
             key={option.value}
             type={'button'}
             aria-pressed={active}
-            onClick={() => setModel(option.value)}
+            onClick={() => setDomainFilter(option.value)}
             className={cns(
               'cursor-pointer px-[14px] py-[8px] tracking-[0.12em] uppercase transition-colors duration-150',
               'border-r border-edge last:border-r-0',
-              active
-                ? 'bg-system text-black'
-                : 'text-muted hover:text-text',
+              active ? 'bg-system text-black' : 'text-muted hover:text-text',
             )}
           >
             {option.label}

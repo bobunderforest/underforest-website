@@ -1,8 +1,6 @@
-import resume from 'app-data/resume.json'
-
 export type Domain = 'web' | 'game'
 
-export type Model = Domain | 'unified'
+export type ExperienceDomainFilter = Domain | 'unified'
 
 export type LinkRef = { label: string; href: string }
 
@@ -68,19 +66,3 @@ export type EducationEntry = {
 }
 
 export type SocialLink = { label: string; href: string }
-
-export const SKILLS = resume.skills as Skill[]
-export const EXPERIENCE = resume.experience as ExperienceEntry[]
-export const PROJECTS = resume.projects as ProjectRef[]
-export const LANGUAGES = resume.languages as MetaLine[]
-export const EDUCATION = resume.education as EducationEntry[]
-export const SOCIALS = resume.socials as SocialLink[]
-
-export const isDimmed = (model: Model, domains: Domain[]) =>
-  model !== 'unified' && !domains.includes(model)
-
-export const EXPERIENCE_STATUS_LABEL: Record<ExperienceStatusKind, string> = {
-  discontinued: 'Discontinued',
-  unavailable: 'Unavailable',
-  suspended: 'Suspended',
-}

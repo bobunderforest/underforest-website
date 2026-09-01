@@ -1,12 +1,13 @@
-import { useResumeModel } from './resume-context'
-import { SKILLS, isDimmed, type Skill } from './resume-data'
+import type { Skill } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
 
-const ordered = [...SKILLS].sort(
-  (a, b) => Number(Boolean(b.primary)) - Number(Boolean(a.primary)),
-)
-
-const SkillTag = ({ skill, dimmed }: { skill: Skill; dimmed: boolean }) => {
+export const SkillTag = ({
+  skill,
+  dimmed,
+}: {
+  skill: Skill
+  dimmed: boolean
+}) => {
   return (
     <li
       className={cns(
@@ -50,21 +51,5 @@ const SkillTag = ({ skill, dimmed }: { skill: Skill; dimmed: boolean }) => {
         </>
       )}
     </li>
-  )
-}
-
-export const SkillVector = () => {
-  const { model } = useResumeModel()
-
-  return (
-    <ul className={'mt-4 flex max-w-[760px] flex-wrap gap-[8px]'}>
-      {ordered.map((skill) => (
-        <SkillTag
-          key={skill.label}
-          skill={skill}
-          dimmed={isDimmed(model, skill.domains)}
-        />
-      ))}
-    </ul>
   )
 }
