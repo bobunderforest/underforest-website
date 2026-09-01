@@ -14,6 +14,9 @@ const ROMAN_UNITS: readonly [number, string][] = [
   [1, 'I'],
 ]
 
+export const padCount = (index: number): string =>
+  String(index + 1).padStart(2, '0')
+
 export const toRoman = (value: number): string => {
   let remaining = value
   let result = ''

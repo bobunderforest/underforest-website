@@ -1,6 +1,6 @@
 import { Link } from 'ui/common/typography/Link'
 import { Text } from 'ui/common/typography/Text'
-import { PROJECTS } from 'ui/features/experience-data/experience-data'
+import { PROJECTS } from 'ui/features/projects/projects-data'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 
 export const ExperienceProjectList = () => (
@@ -9,7 +9,7 @@ export const ExperienceProjectList = () => (
     <Text tag={'ul'} size={'hint'} className={'grid gap-2'}>
       {PROJECTS.map((project) => (
         <li
-          key={project.label}
+          key={project.id}
           className={'flex flex-wrap items-baseline gap-x-3 gap-y-1'}
         >
           <Link
@@ -17,7 +17,7 @@ export const ExperienceProjectList = () => (
             isExternal
             className={'text-text link-dash'}
           >
-            {project.label} ↗
+            {project.title} ↗
           </Link>
           <Text
             tag={'span'}
@@ -25,9 +25,9 @@ export const ExperienceProjectList = () => (
             tone={'secondary'}
             className={'tabular-nums'}
           >
-            {project.period}
+            {project.periodLabel}
           </Text>
-          {project.links.map((link) => (
+          {project.links?.map((link) => (
             <Link
               key={link.label}
               href={link.href}

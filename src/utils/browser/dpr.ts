@@ -1,2 +1,2 @@
-export const getDpr = () =>
-  window.devicePixelRatio ? Math.max(Number(window.devicePixelRatio), 1) : 1
+export const getDpr = (max = Infinity) =>
+  Math.min(Math.max(Number(window.devicePixelRatio) || 1, 1), max)

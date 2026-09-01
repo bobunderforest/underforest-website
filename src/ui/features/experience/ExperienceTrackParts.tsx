@@ -19,7 +19,7 @@ export const ExperienceTrackNode = forwardRef<
       'relative py-8 pl-16 transition-opacity duration-300',
       '[--track-anchor-top:calc(32px+var(--font-regular)*1.6+6px)]',
       'before:absolute before:top-0 before:bottom-0 before:left-0 before:w-px before:bg-edge',
-      'first:before:top-[var(--track-anchor-top)]',
+      'first:before:top-[calc(var(--track-anchor-top)-50px)]',
       'last:before:bottom-auto last:before:h-[calc(var(--track-anchor-top)+10px)]',
       dimmed && 'opacity-30',
       active && 'z-[1]',

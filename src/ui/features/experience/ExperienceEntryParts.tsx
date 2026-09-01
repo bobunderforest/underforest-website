@@ -98,7 +98,11 @@ export const ExperienceStatusTag = ({
   </ExperienceTag>
 )
 
-export const ExperienceEntryTags = ({ entry }: { entry: ExperienceEntry }) =>
+export const ExperienceEntryTags = ({
+  entry,
+}: {
+  entry: Pick<ExperienceEntry, 'reclassified' | 'status'>
+}) =>
   entry.reclassified || entry.status ? (
     <div className={'mb-2 flex flex-wrap gap-2'}>
       {entry.reclassified && <ExperienceReclassifiedTag />}

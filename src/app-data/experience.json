@@ -54,7 +54,6 @@
       "role": "Game Developer",
       "employment": "Personal project",
       "place": "Gnarly Crawl",
-      "label": "VR Game",
       "href": "https://gnarlycrawl.bobunderforest.me/",
       "summary": [
         "Solo development of a small-sized virtual reality game.",
@@ -99,7 +98,6 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "Syntaxart",
-      "label": "",
       "href": "https://syntaxart.space/",
       "summary": [
         "A small yet visually pleasant landing page for a contemporary art course."

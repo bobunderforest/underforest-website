@@ -46,7 +46,7 @@ type Props = React.BaseProps &
       | 'button'
     ref?: React.Ref<HTMLElement>
     emphasis?: boolean
-    size?: 'regular' | 'hint' | 'note' | 'inherit'
+    size?: 'lead' | 'regular' | 'hint' | 'note' | 'inherit'
     face?: 'regular' | 'title' | 'inherit'
     weight?: 'normal' | 'medium' | 'semibold' | 'bold'
     tone?: TextTone
@@ -78,6 +78,7 @@ export const Text = ({
     weight === 'medium' && 'font-medium',
     weight === 'semibold' && 'font-semibold',
     weight === 'bold' && 'font-bold',
+    size === 'lead' && 'text-lead leading-[1.5]',
     size === 'regular' && 'text-regular leading-[1.6]',
     size === 'hint' && 'text-hint leading-[1.5]',
     size === 'note' && 'text-[11px] leading-none mobile-m:text-[10px]',

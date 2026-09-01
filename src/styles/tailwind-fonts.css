@@ -4,10 +4,12 @@
   --font-face-regular: 'JetBrains Mono', ui-monospace, Menlo, monospace;
   --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
 
+  --font-display: 100px;
   --font-title-1: 86px;
   --font-title-2: 54px;
   --font-title-3: 32px;
   --font-title-4: 21px;
+  --font-lead: 24px;
   --font-caption: 20px;
   --font-regular: 15px;
   --font-hint: 13px;
@@ -24,11 +26,13 @@
 }
 
 @theme inline {
+  --text-display: var(--font-display);
   --text-title-1: var(--font-title-1);
   --text-title-2: var(--font-title-2);
   --text-title-3: var(--font-title-3);
   --text-title-4: var(--font-title-4);
 
+  --text-lead: var(--font-lead);
   --text-caption: var(--font-caption);
   --text-regular: var(--font-regular);
   --text-hint: var(--font-hint);

@@ -2,6 +2,7 @@ import { Link } from 'ui/common/typography/Link'
 import { Text } from 'ui/common/typography/Text'
 import type { Credit } from 'ui/features/experience-data/types'
 import { FieldLabel } from 'ui/sections/FieldLabel'
+import { cns } from 'utils/formatters/classnames'
 
 const ExperienceCreditName = ({ credit }: { credit: Credit }) =>
   credit.href ? (
@@ -20,14 +21,16 @@ const ExperienceCreditName = ({ credit }: { credit: Credit }) =>
 
 export const ExperienceDetailsCredits = ({
   credits,
+  className,
 }: {
   credits: Credit[]
+  className?: string
 }) => (
-  <div className={'border border-edge px-3 py-2'}>
+  <div className={cns('border border-edge px-3 py-2', className)}>
     <FieldLabel tone={'system'} className={'mb-2'}>
       credits
     </FieldLabel>
-    <Text tag={'ul'}>
+    <Text tag={'ul'} className={'flex flex-col gap-1'}>
       {credits.map((credit) => (
         <Text
           tag={'li'}

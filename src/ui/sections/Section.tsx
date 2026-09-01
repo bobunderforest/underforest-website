@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { SectionContent } from 'ui/common/SectionContent'
 import { StageIndex } from 'ui/sections/StageIndex'
-import { AsciiBorder } from 'ui/fx/AsciiBorder'
+import { TelemetryBorder } from 'ui/fx/TelemetryBorder'
 import { useSectionAnchor } from 'utils/hooks/useSectionAnchor'
 
 type Props = React.BaseProps & {
@@ -27,9 +27,9 @@ export const Section = ({
     <section
       id={id}
       data-stage={stage}
-      className={'relative border-t border-edge first:border-t-0'}
+      className={'relative'}
     >
-      <AsciiBorder />
+      <TelemetryBorder />
       <SectionContent isPadded className={className}>
         <StageIndex index={index} stage={stage} />
         {children}

@@ -17,6 +17,16 @@ export const ExperienceDetailsBody = ({
     )
   }
 
+  if (detail.kind === 'embed') {
+    return (
+      <MediaPreview
+        kind={'embed'}
+        provider={detail.provider}
+        embedId={detail.embedId}
+      />
+    )
+  }
+
   return (
     <Text tag={'p'} tone={'primary'} className={'whitespace-pre-line'}>
       {detail.body}

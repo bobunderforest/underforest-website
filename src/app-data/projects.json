@@ -1,10 +1,90 @@
 {
   "projects": [
     {
+      "id": "gamedev-solo",
+      "dataFromExperience": true,
+      "cover": { "kind": "psy-sky" },
+      "story": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Dungeon synth aesthetic VR game about escaping an interdemensional magical stronghold. Solo development — gameplay, VR interactions, Quest 3 standalone build optimization, and the promo site."
+        },
+        {
+          "kind": "video",
+          "caption": "trailer · gameplay capture",
+          "src": "/videos/gnarlycrawl-trailer.mp4"
+        },
+        {
+          "kind": "link",
+          "caption": "external",
+          "href": "https://bobunderforest.itch.io/gnarly-crawl-vr",
+          "label": "Itch page"
+        }
+      ]
+    },
+    {
+      "id": "ocean-threshold",
+      "dataFromExperience": true,
+      "label": "Ocean\nThreshold",
+      "cover": { "kind": "video", "src": "/videos/ocean-threshold-previs.mp4" },
+      "story": [
+        {
+          "kind": "text",
+          "caption": "sample · classification shift",
+          "body": "A conceptual virtual reality experience. First full-time gamedev role — the web → gamedev reclassification point."
+        },
+        {
+          "kind": "video",
+          "caption": "previs · arcanum works",
+          "src": "/videos/ocean-threshold-previs.mp4"
+        }
+      ]
+    },
+    {
+      "id": "in2into",
+      "dataFromExperience": true,
+      "cover": { "kind": "video", "src": "/videos/in2into-web-ar.mp4" },
+      "story": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Interactive mobile AR showcase for a contemporary jewelry brand. Presented at the exhibition “Secret, Sacred and Scattered”."
+        },
+        {
+          "kind": "video",
+          "caption": "capture · arcanum works",
+          "src": "/videos/in2into-web-ar.mp4"
+        }
+      ]
+    },
+    {
+      "id": "kowloon-city-guide",
+      "dataFromExperience": true,
+      "label": "Kowloon\nCity Guide",
+      "cover": { "kind": "video", "src": "/videos/kowloon-short-preview.mp4" },
+      "story": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "An immersive visual storytelling piece about one of the most densely populated places on Earth. Built with friends for a contest."
+        },
+        {
+          "kind": "video",
+          "caption": "screen capture",
+          "src": "/videos/kwc-screencast.mp4"
+        }
+      ]
+    },
+    {
       "id": "physics-programming-practice",
-      "label": "Physics programming practice",
+      "label": "Physics\nProgramming\nPractice",
       "href": "https://bobunderforest.github.io/coding-train-practice/",
       "period": "2018 — present",
+      "domains": ["web"],
+      "summary": [
+        "An ongoing sketchbook of creative-coding and physics simulation experiments."
+      ],
       "links": [
         {
           "label": "GitHub",
@@ -13,14 +93,12 @@
       ]
     },
     {
-      "id": "kowloon-city-guide",
-      "dataFromExperience": true
-    },
-    {
       "id": "kaleidoscope",
-      "label": "Kaleidoscope Visual",
+      "label": "Kaleidoscope\nVisual",
       "href": "https://bobunderforest.github.io/kaleidoscope/",
       "period": "2018",
+      "domains": ["web"],
+      "summary": ["A real-time generative kaleidoscope visual."],
       "links": [
         {
           "label": "GitHub",
@@ -30,9 +108,13 @@
     },
     {
       "id": "space-invaders",
-      "label": "Small Space Invaders Game",
+      "label": "Space\nInvaders",
       "href": "https://bobunderforest.github.io/spaceinvaders/",
       "period": "2015",
+      "domains": ["web"],
+      "summary": [
+        "A compact Space Invaders clone, an early JavaScript exercise."
+      ],
       "links": [
         {
           "label": "GitHub",
