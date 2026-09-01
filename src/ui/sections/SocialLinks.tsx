@@ -7,7 +7,7 @@ export const SocialLinks = () => (
     <FieldLabel>channels</FieldLabel>
     <div
       className={
-        'flex flex-wrap gap-x-5 gap-y-2 font-face-regular text-[12px] tracking-[0.08em]'
+        'flex flex-wrap gap-x-5 gap-y-2 font-face-regular text-regular tracking-[0.08em]'
       }
     >
       {socials.map((social) => (

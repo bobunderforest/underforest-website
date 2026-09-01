@@ -1,9 +1,9 @@
 :root {
   --color-base: #0a0a0c;
   --color-surface: #131418;
-  --color-edge: #505050;
+  --color-edge: rgb(83, 76, 76);
   --color-text: #fff;
-  --color-muted: #71767e;
+  --color-muted: #8b8484;
   --color-accent: #ff6a1f;
   --color-system: #34e39b;
 

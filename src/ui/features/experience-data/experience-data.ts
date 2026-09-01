@@ -12,7 +12,6 @@ import type {
 
 export const SKILLS = experience.skills as Skill[]
 export const EXPERIENCE = experience.experience as ExperienceEntry[]
-export const PROJECTS = experience.projects as ProjectRef[]
 export const LANGUAGES = experience.languages as MetaLine[]
 export const EDUCATION = experience.education as EducationEntry[]
 

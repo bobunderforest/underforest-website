@@ -94,7 +94,7 @@ const Trackbar = ({
     <div
       onClick={(e) => e.stopPropagation()}
       className={
-        'pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center gap-4 bg-gradient-to-t from-black/80 to-transparent px-[40px] pt-12 pb-0 font-face-regular text-[11px] tracking-[0.08em] text-muted tabular-nums mobile-m:gap-3 mobile-m:px-[16px]'
+        'pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center gap-4 bg-gradient-to-t from-black/80 to-transparent px-[40px] pt-12 pb-0 font-face-regular text-hint tracking-[0.08em] text-muted tabular-nums mobile-m:gap-3 mobile-m:px-[16px]'
       }
     >
       <span className={'text-text'}>{formatClock(current)}</span>
@@ -115,7 +115,9 @@ const Trackbar = ({
             }
           />
           <div
-            className={'absolute top-1/2 left-0 h-px -translate-y-1/2 bg-accent'}
+            className={
+              'absolute top-1/2 left-0 h-px -translate-y-1/2 bg-accent'
+            }
             style={{ width: `${progress}%` }}
           />
           <div

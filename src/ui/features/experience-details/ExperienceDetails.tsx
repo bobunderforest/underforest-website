@@ -45,7 +45,7 @@ export const ExperienceDetails = ({
           <CorneredBorder />
           <div
             className={
-              'flex items-center justify-between border-b border-accent/25 px-3 py-[6px] font-face-regular text-[10px] tracking-[0.16em] text-system uppercase'
+              'flex items-center justify-between border-b border-accent/25 px-3 py-[6px] font-face-regular text-hint tracking-[0.16em] text-system uppercase'
             }
           >
             <span>detail feed</span>
@@ -58,7 +58,7 @@ export const ExperienceDetails = ({
                 {detail.caption && (
                   <div
                     className={
-                      'font-face-regular text-[10px] tracking-[0.12em] text-muted uppercase'
+                      'font-face-regular text-hint tracking-[0.12em] text-muted uppercase'
                     }
                   >
                     {detail.caption}

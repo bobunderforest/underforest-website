@@ -49,9 +49,21 @@ export type ExperienceEntry = {
 
 export type ProjectRef = {
   label: string
-  href: string
-  period: string
-  links: LinkRef[]
+  id: string
+  from: string
+  to: string
+  role?: string
+  employment?: string
+  place?: string
+  href?: string
+  summary: string[]
+  links?: LinkRef[]
+  domains: Domain[]
+  reclassified?: boolean
+  break?: boolean
+  details?: ExperienceDetail[]
+  status?: ExperienceStatus
+  credits?: Credit[]
 }
 
 export type MetaLine = { term: string; value: string }

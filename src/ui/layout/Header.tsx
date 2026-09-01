@@ -51,18 +51,18 @@ const HeaderControl = ({
     <Tag
       href={href}
       className={cns(
-        'ease flex h-[40px] flex-[0_0_auto] cursor-pointer items-center justify-center border-2 px-[18px] font-face-title text-[14px] tracking-[0.1em] uppercase backdrop-blur-md transition-colors duration-200',
+        'ease flex h-[40px] flex-[0_0_auto] cursor-pointer items-center justify-center border-2 px-[18px] font-face-title text-regular tracking-[0.1em] uppercase backdrop-blur-md transition-colors duration-200',
 
         !primary &&
           !isContrast &&
-          'border-text/60 hover:border-text hover:bg-text bg-base/35 text-text hover:text-base',
+          'border-text/60 bg-base/35 text-text hover:border-text hover:bg-text hover:text-base',
 
         !primary &&
           isContrast &&
           'border-base/40 text-base hover:bg-base hover:text-text',
 
         primary &&
-          'border-text bg-accent hover:text-accent text-base shadow-[3px_3px_0_0_var(--color-text)] hover:bg-text',
+          'border-text bg-accent text-base shadow-[3px_3px_0_0_var(--color-text)] hover:bg-text hover:text-accent',
 
         className,
       )}

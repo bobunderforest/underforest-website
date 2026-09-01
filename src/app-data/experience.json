@@ -32,15 +32,16 @@
       "primary": true,
       "rising": true
     },
-    { "label": "GLSL / shaders", "domains": ["web", "game"] },
+    { "label": "GLSL / Shaders", "domains": ["web", "game"] },
     { "label": "Canvas / 2D", "domains": ["web", "game"] },
     { "label": "Styled Components", "domains": ["web"] },
     { "label": "Astro / Next.js", "domains": ["web"] },
+    { "label": "Vue.js", "domains": ["web"] },
     { "label": "Vite / Webpack", "domains": ["web"] },
     { "label": "Node.js / Express", "domains": ["web"] },
     { "label": "Ethers.js / Wagmi", "domains": ["web"] },
     { "label": "Storybook", "domains": ["web"] },
-    { "label": "Jest / testing", "domains": ["web"] },
+    { "label": "Jest / Testing", "domains": ["web"] },
     { "label": "Git", "domains": ["web", "game"] },
     { "label": "SQL / MongoDB", "domains": ["web"] },
     { "label": "Docker", "domains": ["web"] }
@@ -52,13 +53,20 @@
       "to": "2026-08",
       "role": "Game Developer",
       "employment": "Self-employed",
-      "place": "Gnarly Crawl — VR Game",
+      "place": "Gnarly Crawl",
+      "label": "VR Game",
       "href": "https://gnarlycrawl.bobunderforest.me/",
       "summary": [
         "Solo development of a small-sized virtual reality game.",
         "Gameplay and VR interactions programming.",
         "Quest 3 standalone build optimizations.",
         "Promo website development."
+      ],
+      "skills": [
+        "Unreal Engine",
+        "Gameplay programming",
+        "VR / XR interactions",
+        "C++ / Blueprints"
       ],
       "links": [
         {
@@ -83,10 +91,12 @@
       "role": "Front-end",
       "employment": "Freelance",
       "place": "Syntaxart",
+      "label": "",
       "href": "https://syntaxart.space/",
       "summary": [
         "A small yet visually pleasant landing page for a contemporary art course."
       ],
+      "skills": ["Astro", "React", "CSS / Tailwind"],
       "domains": ["web"],
       "credits": [
         {
@@ -103,10 +113,17 @@
       "role": "Game Developer",
       "employment": "Full-time | Arcanum Works",
       "place": "Ocean Threshold",
+      "label": "Virtual Reality Experience",
       "href": "https://arcanumworks.com/projects/previs-oceanthreshold/",
       "summary": [
         "A conceptual virtual reality experience.",
         "Gameplay and VR interactions programming."
+      ],
+      "skills": [
+        "Unreal Engine",
+        "Gameplay programming",
+        "VR / XR interactions",
+        "C++ / Blueprints"
       ],
       "links": [
         {
@@ -147,12 +164,14 @@
       "role": "Front-end",
       "employment": "Contract | Arcanum Works",
       "place": "In2Into",
+      "label": "In-browser AR Showcase",
       "href": "https://arcanumworks.com/projects/interactive-intoniilo-ssex/",
       "summary": [
         "Interactive showcase for a contemporary jewelry brand with Arcanum Works, presented at the exhibition “Secret, Sacred and Scattered”.",
         "Built a mobile-friendly AR experience using Three.js.",
         "Integrated 3D models for immersive product visualization."
       ],
+      "skills": ["Three.js"],
       "links": [
         {
           "label": "GitHub",
@@ -201,11 +220,13 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "Arcanum Works",
+      "label": "Studio Portfolio Webpage",
       "href": "https://arcanumworks.com/",
       "summary": [
         "Full-stack development of a portfolio website for a video production agency.",
         "Focused on WebGL effects and interactive animated UI."
       ],
+      "skills": ["Astro", "React", "CSS / Tailwind", "GLSL / Shaders"],
       "domains": ["web"],
       "credits": [
         {
@@ -234,10 +255,12 @@
       "role": "Front-end",
       "employment": "Full-time",
       "place": "Triark",
+      "label": "Studio Portfolio Webpage",
       "summary": [
         "Portfolio website for a video production agency, built under a short-term contract.",
         "Focused on clean design and smooth animations."
       ],
+      "skills": ["Astro", "React", "CSS / Tailwind"],
       "domains": ["web"],
       "status": {
         "kind": "unavailable",
@@ -251,10 +274,20 @@
       "role": "Web3 Front-end",
       "employment": "Full-time",
       "place": "Lido.fi",
+      "label": "Web3 Contribution",
       "summary": [
         "Full-stack development for the Web3 liquid-staking platform.",
         "Integrated UI with blockchain smart contracts via ABI.",
         "Built wallet-connection flows using Ethers.js and Wagmi."
+      ],
+      "skills": [
+        "React",
+        "TypeScript",
+        "Ethers.js / Wagmi",
+        "Jest",
+        "Next.js",
+        "Storybook",
+        "Styled Components"
       ],
       "domains": ["web"]
     },
@@ -265,11 +298,13 @@
       "role": "Web3 Front-end",
       "employment": "Part-time",
       "place": "Roci.fi",
+      "label": "Web3 Contribution",
       "summary": [
         "Part-time collaboration with a decentralized credit-scoring platform.",
         "Integrated smart contracts into frontend flows via ABI.",
         "Focused on Web3 integrations, interactive UI, and user experience."
       ],
+      "skills": ["React", "TypeScript", "Ethers.js / Wagmi"],
       "domains": ["web"],
       "status": {
         "kind": "unavailable",
@@ -283,11 +318,13 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "Ego.Jobs",
+      "label": "Web app",
       "href": "https://ego.jobs/en",
       "summary": [
         "Built a UI component library for a job-matching platform.",
         "Implemented new UX flows to improve the candidate and employer experience."
       ],
+      "skills": ["React", "TypeScript", "Next.js", "Styled Components"],
       "domains": ["web"]
     },
     {
@@ -297,11 +334,13 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "XYZ School",
+      "label": "Component System",
       "summary": [
         "Contract-based development contribution.",
         "Created a reusable UI component system following design guidelines.",
         "Integrated components into Storybook for team adoption."
       ],
+      "skills": ["React", "Storybook", "TypeScript", "Styled Components"],
       "domains": ["web"]
     },
     {
@@ -311,11 +350,13 @@
       "role": "Front-end",
       "employment": "Full-time",
       "place": "Matter Streaming",
+      "label": "Music straming social platform",
       "summary": [
         "Full-stack development for a music-streaming startup — a platform “by musicians for musicians”.",
         "Participated in architectural decision-making.",
         "Created and maintained the component library; collaborated on UX flow design."
       ],
+      "skills": ["Vue", "React", "TypeScript"],
       "status": {
         "kind": "discontinued",
         "note": "The startup is closed, the site is no longer online. A screencast demo and the designer’s Behance page remain as a record."
@@ -429,52 +470,6 @@
         "Worked closely with designers on high-quality UI interactions and interface animations."
       ],
       "domains": ["web"]
-    }
-  ],
-  "projects": [
-    {
-      "label": "Physics programming practice",
-      "href": "https://bobunderforest.github.io/coding-train-practice/",
-      "period": "2018 — present",
-      "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/bobunderforest/coding-train-practice"
-        }
-      ]
-    },
-    {
-      "label": "Kowloon Walled City Guide",
-      "href": "https://kwcguide.bobunderforest.me/",
-      "period": "2018",
-      "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/bobunderforest/city-of-darkness"
-        }
-      ]
-    },
-    {
-      "label": "Kaleidoscope Visual",
-      "href": "https://bobunderforest.github.io/kaleidoscope/",
-      "period": "2018",
-      "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/bobunderforest/kaleidoscope"
-        }
-      ]
-    },
-    {
-      "label": "Small Space Invaders Game",
-      "href": "https://bobunderforest.github.io/spaceinvaders/",
-      "period": "2015",
-      "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/bobunderforest/spaceinvaders"
-        }
-      ]
     }
   ],
   "languages": [

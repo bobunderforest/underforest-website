@@ -55,7 +55,7 @@ export const ExperienceTag = ({
 }) => (
   <span
     className={cns(
-      'inline-flex items-center gap-[6px] border px-[6px] py-[1px] font-face-regular text-[11px] tracking-[0.14em] uppercase',
+      'inline-flex items-center gap-[6px] border px-[6px] py-[1px] font-face-regular text-hint tracking-[0.14em] uppercase',
       className,
     )}
   >
@@ -96,7 +96,7 @@ export const ExperienceStatusNote = ({
   status.note ? (
     <p
       className={
-        'hidden max-w-[62ch] font-face-regular text-[13px] leading-[1.5] text-muted italic desktop-s:block'
+        'hidden max-w-[62ch] font-face-regular text-hint leading-[1.5] text-muted italic desktop-s:block'
       }
     >
       {status.note}
@@ -106,7 +106,7 @@ export const ExperienceStatusNote = ({
 export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => (
   <div
     className={cns(
-      'font-face-regular text-[12px] tracking-[0.08em] text-muted uppercase transition-colors duration-300 group-data-[active=true]:text-text',
+      'font-face-regular text-hint text-muted uppercase transition-colors duration-300 group-data-[active=true]:text-text',
       entry.links && entry.links.length > 0 ? 'mb-1.5' : 'mb-3',
     )}
   >
@@ -127,7 +127,7 @@ export const ExperienceSummary = ({
 }) => (
   <ul
     className={cns(
-      'max-w-[62ch] font-face-regular text-[14px] text-muted transition-colors duration-300 group-data-[active=true]:text-text',
+      'max-w-[62ch] font-face-regular text-regular text-muted transition-colors duration-300 group-data-[active=true]:text-text',
       hasStatusNote && 'desktop-s:mb-3',
     )}
   >
@@ -151,7 +151,7 @@ export const ExperienceLinkRow = ({ entry }: { entry: ExperienceEntry }) =>
   entry.links && entry.links.length > 0 ? (
     <div
       className={
-        'mb-3 flex flex-wrap gap-x-4 gap-y-1 font-face-regular text-[12px] tracking-[0.06em]'
+        'mb-3 flex flex-wrap gap-x-4 gap-y-1 font-face-regular text-regular tracking-[0.06em]'
       }
     >
       {entry.links.map((link) => (
@@ -174,7 +174,7 @@ export const ExperienceBreakNode = ({
       <ExperienceMarker entry={entry} />
       <div
         className={
-          'font-face-regular text-[12px] tracking-[0.08em] text-muted/70 uppercase'
+          'font-face-regular text-hint tracking-[0.08em] text-muted/70 uppercase'
         }
       >
         <span className={'tabular-nums'}>

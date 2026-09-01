@@ -21,6 +21,7 @@ const twMerge = extendTailwindMerge({
           text: [
             'regular',
             'control',
+            'hint',
             'title-1',
             'title-2',
             'title-3',
@@ -34,6 +35,7 @@ const twMerge = extendTailwindMerge({
           leading: [
             'regular',
             'control',
+            'hint',
             'title-1',
             'title-2',
             'title-3',

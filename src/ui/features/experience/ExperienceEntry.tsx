@@ -124,7 +124,7 @@ export const ExperienceEntry = ({
           <ExperienceMarker entry={entry} />
           <h3
             className={
-              'font-face-title text-[18px] leading-[1.15] font-bold text-text'
+              'font-face-title text-title-4 leading-[1.15] font-bold text-text'
             }
           >
             {entry.href ? (

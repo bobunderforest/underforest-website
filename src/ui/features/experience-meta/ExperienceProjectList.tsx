@@ -5,7 +5,7 @@ import { FieldLabel } from 'ui/sections/FieldLabel'
 export const ExperienceProjectList = () => (
   <div>
     <FieldLabel readout={'unbounded'}>pet projects</FieldLabel>
-    <ul className={'grid gap-2 font-face-regular text-[13px]'}>
+    <ul className={'grid gap-2 font-face-regular text-hint'}>
       {PROJECTS.map((project) => (
         <li
           key={project.label}
@@ -14,7 +14,7 @@ export const ExperienceProjectList = () => (
           <Link
             href={project.href}
             isExternal
-            className={'link-dash text-text'}
+            className={'text-text link-dash'}
           >
             {project.label} ↗
           </Link>
@@ -24,7 +24,7 @@ export const ExperienceProjectList = () => (
               key={link.label}
               href={link.href}
               isExternal
-              className={'link-dash text-accent'}
+              className={'text-accent link-dash'}
             >
               {link.label}
             </Link>

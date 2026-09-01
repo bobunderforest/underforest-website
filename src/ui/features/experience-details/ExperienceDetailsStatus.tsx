@@ -9,16 +9,14 @@ export const ExperienceDetailsStatus = ({
   <div className={'border border-accent/50 bg-accent/[0.06] px-3 py-2'}>
     <div
       className={
-        'mb-2 flex items-center gap-[6px] font-face-regular text-[10px] tracking-[0.16em] text-accent uppercase last:mb-0'
+        'mb-2 flex items-center gap-[6px] font-face-regular text-hint tracking-[0.16em] text-accent uppercase last:mb-0'
       }
     >
       <span aria-hidden>⊘</span>
       {EXPERIENCE_STATUS_LABEL[status.kind]}
     </div>
     {status.note && (
-      <p
-        className={'font-face-regular text-[13px] leading-[1.5] text-text'}
-      >
+      <p className={'font-face-regular text-regular leading-[1.5] text-text'}>
         {status.note}
       </p>
     )}

@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "id": "physics-programming-practice",
+      "label": "Physics programming practice",
+      "href": "https://bobunderforest.github.io/coding-train-practice/",
+      "period": "2018 — present",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/coding-train-practice"
+        }
+      ]
+    },
+    {
+      "id": "kowloon-city-guide",
+      "dataFromExperience": true
+    },
+    {
+      "id": "kaleidoscope",
+      "label": "Kaleidoscope Visual",
+      "href": "https://bobunderforest.github.io/kaleidoscope/",
+      "period": "2018",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/kaleidoscope"
+        }
+      ]
+    },
+    {
+      "id": "space-invaders",
+      "label": "Small Space Invaders Game",
+      "href": "https://bobunderforest.github.io/spaceinvaders/",
+      "period": "2015",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/spaceinvaders"
+        }
+      ]
+    }
+  ]
+}

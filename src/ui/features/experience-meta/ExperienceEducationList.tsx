@@ -4,7 +4,7 @@ import { FieldLabel } from 'ui/sections/FieldLabel'
 export const ExperienceEducationList = () => (
   <div>
     <FieldLabel>education</FieldLabel>
-    <ul className={'grid gap-4 font-face-regular text-[13px]'}>
+    <ul className={'grid gap-4 font-face-regular text-regular'}>
       {EDUCATION.map((entry) => (
         <li key={entry.degree}>
           <div className={'text-muted tabular-nums'}>

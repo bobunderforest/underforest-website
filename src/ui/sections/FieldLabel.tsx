@@ -11,7 +11,7 @@ export const FieldLabel = ({ children, readout, className }: Props) => {
   return (
     <div
       className={cns(
-        'mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-face-regular text-[13px] tracking-[0.12em] text-muted lowercase',
+        'mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-face-regular text-hint tracking-[0.12em] text-muted uppercase',
         className,
       )}
     >

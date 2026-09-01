@@ -17,7 +17,7 @@ export const ExperienceDetailsBody = ({
   }
 
   return (
-    <p className={'font-face-regular text-[14px] leading-[1.55] text-text'}>
+    <p className={'font-face-regular text-regular leading-[1.55] text-text'}>
       {detail.body}
     </p>
   )

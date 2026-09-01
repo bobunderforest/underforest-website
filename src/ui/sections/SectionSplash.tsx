@@ -13,7 +13,7 @@ export const SectionSplash = () => {
     >
       <div
         className={
-          'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1 font-face-regular text-[16px] tracking-[0.12em] uppercase'
+          'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1 font-face-regular text-regular tracking-[0.12em] uppercase'
         }
       >
         <span className={'text-text'}>
@@ -55,6 +55,8 @@ export const SectionSplash = () => {
         TODO: Write about game dev switch
         <br />
         TODO: Write about teamwork and collaboration processes experience
+        <br />
+        TODO: Write about scroll animations
         <br />
         TODO: Write about AI
       </Text>

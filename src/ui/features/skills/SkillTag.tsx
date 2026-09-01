@@ -12,7 +12,7 @@ export const SkillTag = ({
     <li
       className={cns(
         'relative inline-flex items-center gap-[8px] border px-[11px] py-[6px]',
-        'font-face-regular text-[12px] tracking-[0.1em] uppercase',
+        'font-face-regular text-hint tracking-[0.1em] uppercase',
         'transition-opacity duration-300',
         skill.primary
           ? 'border-accent/70 bg-accent/[0.08] text-text'

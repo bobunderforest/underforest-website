@@ -20,7 +20,7 @@ export const ExperienceFilter = ({ className }: Props) => {
       role={'group'}
       aria-label={'Experience domain filter'}
       className={cns(
-        'inline-flex border border-edge font-face-regular text-[13px]',
+        'inline-flex border border-edge font-face-regular text-regular',
         className,
       )}
     >
