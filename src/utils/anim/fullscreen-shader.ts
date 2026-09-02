@@ -4,6 +4,10 @@ import { compileShader, createProgram } from 'utils/anim/webgl-utils'
 import { whenPageSettled } from 'utils/browser/idle'
 import { getDpr } from 'utils/browser/dpr'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
+import {
+  createActivityRamp,
+  stepActivityRamp,
+} from 'utils/anim/activity-ramp'
 
 const VERTEX_SHADER = `
 attribute vec2 position;
@@ -40,6 +44,7 @@ export const useFullscreenShader = (
   const resolutionRef = useRef<WebGLUniformLocation | null>(null)
   const timeRef = useRef<WebGLUniformLocation | null>(null)
   const elapsedRef = useRef(0)
+  const activityRef = useRef(createActivityRamp())
   const [ready, setReady] = useState(false)
   const [settled, setSettled] = useState(false)
   const inView = useInView(canvasRef)
@@ -104,7 +109,6 @@ export const useFullscreenShader = (
       timeRef.current = null
       gl.deleteBuffer(buffer)
       gl.deleteProgram(program)
-      gl.getExtension('WEBGL_lose_context')?.loseContext()
     }
   }, [canvasRef, enabled, extension, fragment, inView, measure, settled])
 
@@ -119,18 +123,23 @@ export const useFullscreenShader = (
     }
 
     draw()
-    if (!animate) return
 
     let frame = 0
-    let previous = 0
+    let previous: number | null = null
     const render = (now: number) => {
       if (document.visibilityState === 'visible') {
         const delta =
-          previous === 0
+          previous === null
             ? 0
             : Math.min((now - previous) / 1000, DELTA_CEILING_S)
-        elapsedRef.current += delta
+        const activity = stepActivityRamp(
+          activityRef.current,
+          animate,
+          delta * 1000,
+        )
+        elapsedRef.current += delta * activity
         draw()
+        if (!animate && activity === 0) return
       }
       previous = now
       frame = requestAnimationFrame(render)

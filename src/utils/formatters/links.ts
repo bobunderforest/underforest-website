@@ -1,4 +1,5 @@
 const CHANNEL_TAG: [test: RegExp, tag: string][] = [
+  [/linkedin\.com/, 'in'],
   [/github\.com/, 'src'],
   [/(youtube\.com|youtu\.be)/, 'vid'],
   [/instagram\.com/, 'ig'],

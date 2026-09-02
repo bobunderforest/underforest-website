@@ -2,6 +2,7 @@ import { MediaPreview } from 'ui/common/cyber-kit/MediaPreview'
 import { Text } from 'ui/common/typography/Text'
 import { Link } from 'ui/common/typography/Link'
 import type { ProjectStoryBlock } from 'ui/features/experience-data/types'
+import { ProjectStoryGallery } from './ProjectStoryGallery'
 
 export const ProjectStoryBeat = ({ block }: { block: ProjectStoryBlock }) => {
   switch (block.kind) {
@@ -10,6 +11,7 @@ export const ProjectStoryBeat = ({ block }: { block: ProjectStoryBlock }) => {
         <Text
           tag={'p'}
           tone={'primary'}
+          size={'lead'}
           className={'max-w-[62ch] whitespace-pre-line'}
         >
           {block.body}
@@ -18,7 +20,7 @@ export const ProjectStoryBeat = ({ block }: { block: ProjectStoryBlock }) => {
     case 'image':
       return (
         <div className={'max-w-[750px]'}>
-          <MediaPreview kind={'image'} src={block.src} />
+          <MediaPreview kind={'image'} src={block.src} alt={block.alt} />
         </div>
       )
     case 'video':
@@ -36,13 +38,7 @@ export const ProjectStoryBeat = ({ block }: { block: ProjectStoryBlock }) => {
         />
       )
     case 'gallery':
-      return (
-        <div className={'grid grid-cols-2 gap-2 tablet-s:grid-cols-1'}>
-          {block.items.map((item) => (
-            <MediaPreview key={item.src} kind={'image'} src={item.src} />
-          ))}
-        </div>
-      )
+      return <ProjectStoryGallery items={block.items} />
     case 'link':
       return (
         <Link

@@ -1,4 +1,5 @@
 import { Text } from 'ui/common/typography/Text'
+import { FieldLabel } from 'ui/sections/FieldLabel'
 import { formatDateDuration } from 'utils/formatters/dates'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
 
@@ -39,22 +40,27 @@ export const ProjectMetaReadout = ({ entry }: { entry: ProjectEntry }) => {
   return (
     <div
       className={
-        'flex flex-col gap-1 border border-edge bg-base/50 px-3 py-2.5 backdrop-blur-md'
+        'border border-edge bg-base/50 px-3 py-2.5 backdrop-blur-md'
       }
     >
-      {entry.periodLabel && (
-        <Row
-          term={'period'}
-          value={
-            duration ? `${entry.periodLabel} · ${duration}` : entry.periodLabel
-          }
-        />
-      )}
-      {entry.role && <Row term={'role'} value={entry.role} />}
-      {entry.employment && <Row term={'employ'} value={entry.employment} />}
-      {entry.domains && entry.domains.length > 0 && (
-        <Row term={'domain'} value={entry.domains.join(' · ')} />
-      )}
+      <FieldLabel tone={'system'} className={'mb-2'}>
+        info
+      </FieldLabel>
+      <div className={'flex flex-col gap-1'}>
+        {entry.periodLabel && (
+          <Row
+            term={'period'}
+            value={
+              duration ? `${entry.periodLabel} · ${duration}` : entry.periodLabel
+            }
+          />
+        )}
+        {entry.role && <Row term={'role'} value={entry.role} />}
+        {entry.employment && <Row term={'employ'} value={entry.employment} />}
+        {entry.domains && entry.domains.length > 0 && (
+          <Row term={'domain'} value={entry.domains.join(' · ')} />
+        )}
+      </div>
     </div>
   )
 }

@@ -26,6 +26,7 @@ type Props = Omit<React.ElementProps<'a' | 'button'>, 'ref'> & {
   accent?: Accent
   disabled?: boolean
   compact?: boolean
+  large?: boolean
   wide?: boolean
   quiet?: boolean
 }
@@ -36,6 +37,7 @@ export const Button = ({
   accent = 'brand',
   disabled,
   compact = false,
+  large = false,
   wide = false,
   quiet = false,
   className,
@@ -47,9 +49,12 @@ export const Button = ({
     <Text
       tag={'span'}
       face={compact ? 'regular' : 'title'}
-      size={compact ? 'hint' : 'regular'}
+      size={compact ? 'hint' : large ? 'lead' : 'regular'}
       uppercase
-      className={cns(!compact && 'mobile-m:text-[15px]')}
+      className={cns(
+        large && 'tracking-[0.08em]',
+        !compact && 'mobile-m:text-[15px]',
+      )}
     >
       {children}
     </Text>
@@ -90,6 +95,8 @@ export const Button = ({
     'relative grid grid-cols-[auto_1fr_auto] items-center gap-[10px] select-none',
     compact
       ? 'px-[12px] py-[9px]'
+      : large
+        ? 'min-h-[72px] px-[32px] py-[20px] mobile-m:min-h-[60px] mobile-m:px-[22px] mobile-m:py-[15px]'
       : 'px-[24px] py-[15px] mobile-m:px-[18px] mobile-m:py-[12px]',
     wide && 'w-full',
     quiet

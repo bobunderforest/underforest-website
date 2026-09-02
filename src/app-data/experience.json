@@ -448,7 +448,7 @@
       "from": "2018-08",
       "to": "2018-09",
       "role": "Front-end",
-      "employment": "Pet project",
+      "employment": "Contest project",
       "place": "Kowloon City Guide",
       "href": "https://kwcguide.bobunderforest.me/",
       "summary": ["An enthusiastic project, made with friends for a contest."],
@@ -467,7 +467,7 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "An immersive visual storytelling about one of the densely populated places on Earth."
+          "body": "An immersive visual storytelling website about one of the densely populated places on Earth."
         },
         {
           "kind": "video",

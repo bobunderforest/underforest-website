@@ -20,12 +20,14 @@ const DITHER_STYLE: React.CSSProperties = {
 }
 
 const PsySky = lazy(() => import('ui/fx/FXPsySky'))
+const Kaleidoscope = lazy(() => import('ui/fx/FXKaleidoscope'))
 
 const CUSTOM_COVERS: Record<
   ProjectBackground,
   React.ComponentType<{ active: boolean }>
 > = {
   [ProjectBackground.PsySky]: PsySky,
+  [ProjectBackground.Kaleidoscope]: Kaleidoscope,
 }
 
 type ProjectMediaCover = Extract<ProjectCover, { src: string }>
@@ -46,6 +48,7 @@ const CoverMedia = ({
 
   useVideoInView(videoRef, {
     enabled: active && !reduced && cover.kind === 'video',
+    smooth: true,
   })
 
   if (cover.kind === 'image') {

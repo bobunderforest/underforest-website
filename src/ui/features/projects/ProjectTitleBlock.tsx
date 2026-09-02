@@ -24,7 +24,7 @@ export const ProjectTitleBlock = ({ entry }: { entry: ProjectEntry }) => {
           'relative mb-15 w-fit max-w-full border border-edge bg-text px-4 pt-3 pb-2.5 tablet-s:px-3'
         }
       >
-        <ProjectTitleChart />
+        <ProjectTitleChart animate={locked} />
         <DataCaptureBorder />
         <h3
           className={

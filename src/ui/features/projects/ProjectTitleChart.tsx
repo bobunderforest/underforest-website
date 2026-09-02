@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useFullscreenShader } from 'utils/anim/fullscreen-shader'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
-import { useProjectFrame } from './project-frame-context'
+import { cns } from 'utils/formatters/classnames'
 
 const FRAGMENT_SHADER = `
 #extension GL_OES_standard_derivatives : enable
@@ -75,22 +75,30 @@ void main() {
 }
 `
 
-export const ProjectTitleChart = () => {
+export const ProjectTitleChart = ({
+  animate,
+  inverted = false,
+}: {
+  animate: boolean
+  inverted?: boolean
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { locked } = useProjectFrame()
   const [reduced] = useState(prefersReducedMotion)
 
   useFullscreenShader(canvasRef, {
     fragment: FRAGMENT_SHADER,
     extension: 'OES_standard_derivatives',
-    animate: locked && !reduced,
+    animate: animate && !reduced,
   })
 
   return (
     <canvas
       ref={canvasRef}
       aria-hidden
-      className={'pointer-events-none absolute inset-0 size-full bg-text'}
+      className={cns(
+        'pointer-events-none absolute inset-0 size-full bg-text',
+        inverted && 'invert',
+      )}
     />
   )
 }

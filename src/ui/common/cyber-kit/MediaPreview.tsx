@@ -1,15 +1,28 @@
 import { ImageOpenable } from 'ui/common/image-openable-modal/ImageOpenable'
+import type { ImageModalPaging } from 'ui/common/image-openable-modal/ImageModalPaging'
 import { VideoOpenable } from 'ui/common/video-openable-modal/VideoOpenable'
 
 type MediaPreviewProps =
-  | { kind: 'image'; src: string }
+  | {
+      kind: 'image'
+      src: string
+      alt?: string
+      paging?: ImageModalPaging
+      index?: number
+    }
   | { kind: 'video'; src: string; poster?: string }
   | { kind: 'embed'; provider: 'youtube'; embedId: string }
 
 export const MediaPreview = (props: MediaPreviewProps) => (
   <div className={'aspect-video w-full overflow-hidden border border-edge'}>
     {props.kind === 'image' && (
-      <ImageOpenable src={props.src} className={'size-full object-cover'} />
+      <ImageOpenable
+        src={props.src}
+        alt={props.alt}
+        paging={props.paging}
+        index={props.index}
+        className={'size-full object-cover'}
+      />
     )}
     {props.kind === 'video' && (
       <VideoOpenable

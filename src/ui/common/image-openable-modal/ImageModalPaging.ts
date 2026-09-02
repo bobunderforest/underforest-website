@@ -1,15 +1,23 @@
 export type ImageModalPagingListener = (index: number) => void
 
+type ImageModalPagingOptions = {
+  startIndex?: number
+  rectResolver?: (index: number) => DOMRect | null
+}
+
 export class ImageModalPaging {
   private readonly images: string[]
   private index: number
   private readonly listeners = new Set<ImageModalPagingListener>()
+  private readonly rectResolver?: (index: number) => DOMRect | null
 
-  rectResolver?: (index: number) => DOMRect | null
-
-  constructor(images: string[], startIndex = 0) {
+  constructor(
+    images: string[],
+    { startIndex = 0, rectResolver }: ImageModalPagingOptions = {},
+  ) {
     this.images = images
     this.index = this.clamp(startIndex)
+    this.rectResolver = rectResolver
   }
 
   private clamp(index: number): number {

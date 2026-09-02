@@ -8,11 +8,13 @@ import type { ImageModalPaging } from './ImageModalPaging'
 
 export const ImageOpenable = ({
   src,
+  alt = '',
   className,
   paging,
   index = 0,
 }: React.BaseProps & {
   src: string
+  alt?: string
   paging?: ImageModalPaging
   index?: number
 }) => {
@@ -36,7 +38,7 @@ export const ImageOpenable = ({
 
   return (
     <img
-      alt=""
+      alt={alt}
       className={cns('cursor-zoom-in', className, isOpened && 'opacity-0')}
       src={src}
       onClick={handleClick}

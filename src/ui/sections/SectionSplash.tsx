@@ -2,6 +2,7 @@ import { Section } from './Section'
 import { Text } from 'ui/common/typography/Text'
 import { ASCIIText } from 'ui/fx/AsciiText'
 import { SocialLinks } from './SocialLinks'
+import { FieldLabel } from './FieldLabel'
 
 export const SectionSplash = () => {
   return (
@@ -33,11 +34,13 @@ export const SectionSplash = () => {
           waveXAmplitude={0.1}
           waveYAmplitude={0.0}
           waveZAmplitude={0.0}
-          className={
-            'aspect-[900/320] w-full desktop-m:aspect-[900/280]'
-          }
+          className={'aspect-[900/320] w-full desktop-m:aspect-[900/280]'}
         />
       </div>
+      <div className={'mb-10'}>
+        <SocialLinks />
+      </div>
+      <FieldLabel>about me</FieldLabel>
       <Text tag={'p'} tone={'primary'} className={'mb-4 max-w-[62ch]'}>
         I am a full-stack web developer with 10+ years of experience and a
         strong focus on front-end. I have contributed to building high-traffic
@@ -56,9 +59,6 @@ export const SectionSplash = () => {
         <br />
         TODO: Write about AI
       </Text>
-      <div>
-        <SocialLinks />
-      </div>
     </Section>
   )
 }

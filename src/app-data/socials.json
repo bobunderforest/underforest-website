@@ -3,11 +3,11 @@
     "label": "linkedin",
     "href": "https://www.linkedin.com/in/dmitrypodlesny"
   },
+  { "label": "github", "href": "https://github.com/bobunderforest" },
+  { "label": "instagram", "href": "https://instagram.com/under.forest" },
   {
     "label": "youtube",
     "href": "https://www.youtube.com/@bobunderforest.develop"
   },
-  { "label": "github", "href": "https://github.com/bobunderforest" },
-  { "label": "itch", "href": "https://bobunderforest.itch.io/gnarly-crawl-vr" },
-  { "label": "instagram", "href": "https://instagram.com/under.forest" }
+  { "label": "itch", "href": "https://bobunderforest.itch.io/gnarly-crawl-vr" }
 ]

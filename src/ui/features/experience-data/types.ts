@@ -51,6 +51,7 @@ export type ExperienceEntry = {
 
 export enum ProjectBackground {
   PsySky = 'psy-sky',
+  Kaleidoscope = 'kaleidoscope',
 }
 
 export type ProjectCover =

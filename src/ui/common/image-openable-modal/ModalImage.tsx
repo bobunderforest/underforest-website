@@ -109,8 +109,8 @@ export const ModalImage = ({
       setZoom((z) => (z ? { ...z, cropped: true } : z))
     })
     window.setTimeout(() => {
-      closeModal()
       onClose()
+      requestAnimationFrame(closeModal)
     }, TIME_CLOSE)
   }, [phase, paging, rect, activeIndex, images, closeModal, onClose])
 
@@ -128,8 +128,8 @@ export const ModalImage = ({
       {/* Background */}
       <div
         className={cns(
-          'animate-enter-fade absolute top-0 left-0 h-full w-full bg-black animate-delay-100 animate-duration-200',
-          phase === 'exiting' && 'animate-exit-fade animate-duration-200',
+          'absolute top-0 left-0 h-full w-full bg-black transition-opacity duration-200 ease-in-out-sine',
+          phase === 'open' ? 'opacity-100' : 'opacity-0',
         )}
       />
 

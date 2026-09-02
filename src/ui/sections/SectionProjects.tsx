@@ -8,6 +8,7 @@ import { cns } from 'utils/formatters/classnames'
 import { padCount } from 'utils/formatters/numerals'
 import { PROJECTS } from 'ui/features/projects/projects-data'
 import { ProjectFrame } from 'ui/features/projects/ProjectFrame'
+import { ProjectTitleChart } from 'ui/features/projects/ProjectTitleChart'
 import { FieldLabel } from './FieldLabel'
 
 export const SectionProjects = () => {
@@ -19,14 +20,20 @@ export const SectionProjects = () => {
       data-stage={'Projects'}
       className={'relative border-b border-edge'}
     >
-      <TelemetryBorder />
+      <TelemetryBorder className={'z-20'} />
 
-      <SectionContent isPadded className={'pb-16 tablet-s:pb-12'}>
-        <StageIndex index={'03'} stage={'Projects'} />
-        <FieldLabel readout={`${PROJECTS.length} subjects locked`}>
-          featured
-        </FieldLabel>
-      </SectionContent>
+      <div className={'relative -mb-10 overflow-hidden bg-base'}>
+        <ProjectTitleChart animate inverted />
+        <SectionContent
+          isPadded
+          className={'relative pb-16 tablet-s:pb-12'}
+        >
+          <StageIndex index={'03'} stage={'Projects'} />
+          <FieldLabel readout={`${PROJECTS.length} subjects locked`}>
+            featured
+          </FieldLabel>
+        </SectionContent>
+      </div>
 
       <div className={'flex flex-col'}>
         {PROJECTS.map((entry, i) => (

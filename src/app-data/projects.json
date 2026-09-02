@@ -8,7 +8,7 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "Dungeon synth aesthetic VR game about escaping an interdemensional magical stronghold. Solo development — gameplay, VR interactions, Quest 3 standalone build optimization, and the promo site."
+          "body": "Dungeon synth aesthetic VR game about escaping an interdemensional magical stronghold.\nSolo development: gameplay, VR interactions, Quest 3 standalone build optimization, and the promo website."
         },
         {
           "kind": "video",
@@ -16,10 +16,26 @@
           "src": "/videos/gnarlycrawl-trailer.mp4"
         },
         {
-          "kind": "link",
-          "caption": "external",
-          "href": "https://bobunderforest.itch.io/gnarly-crawl-vr",
-          "label": "Itch page"
+          "kind": "gallery",
+          "caption": "gameplay · environments",
+          "items": [
+            {
+              "src": "/images/projects/gnarlycrawl/Screenshot-CastlePeak.jpg",
+              "alt": ""
+            },
+            {
+              "src": "/images/projects/gnarlycrawl/Screenshot-TortureRoom.jpg",
+              "alt": ""
+            },
+            {
+              "src": "/images/projects/gnarlycrawl/Screenshot-Fight-2.jpg",
+              "alt": ""
+            },
+            {
+              "src": "/images/projects/gnarlycrawl/Screenshot-Portal.jpg",
+              "alt": ""
+            }
+          ]
         }
       ]
     },
@@ -67,7 +83,7 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "An immersive visual storytelling piece about one of the most densely populated places on Earth. Built with friends for a contest."
+          "body": "An immersive visual storytelling website about one of the most densely populated places on Earth.\nBuilt with friends for a contest."
         },
         {
           "kind": "video",
@@ -97,8 +113,23 @@
       "label": "Kaleidoscope\nVisual",
       "href": "https://bobunderforest.github.io/kaleidoscope/",
       "period": "2018",
+      "employment": "Contest project",
       "domains": ["web"],
       "summary": ["A real-time generative kaleidoscope visual."],
+      "cover": { "kind": "kaleidoscope" },
+      "story": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "A small experiment on creating a kaleidoscopioc texture reflection."
+        },
+        {
+          "kind": "image",
+          "caption": "reflection scheme",
+          "src": "/images/projects/kaleidoscope/kaleidoscope-scheme.png",
+          "alt": "Geometric triangular reflection scheme for a kaleidoscope"
+        }
+      ],
       "links": [
         {
           "label": "GitHub",
@@ -110,7 +141,9 @@
       "id": "space-invaders",
       "label": "Space\nInvaders",
       "href": "https://bobunderforest.github.io/spaceinvaders/",
+      "cover": { "kind": "video", "src": "/videos/space-invaders.mp4" },
       "period": "2015",
+      "employment": "Programming test",
       "domains": ["web"],
       "summary": [
         "A compact Space Invaders clone, an early JavaScript exercise."
@@ -119,6 +152,18 @@
         {
           "label": "GitHub",
           "href": "https://github.com/bobunderforest/spaceinvaders"
+        }
+      ],
+      "story": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "A retro game replica made as a creative programming test when I was applying to a job."
+        },
+        {
+          "kind": "video",
+          "caption": "gameplay capture",
+          "src": "/videos/space-invaders.mp4"
         }
       ]
     }
