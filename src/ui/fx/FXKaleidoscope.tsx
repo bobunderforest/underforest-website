@@ -3,16 +3,14 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { drawKaleidoscope } from 'utils/anim/kaleidoscope'
 import { whenPageSettled } from 'utils/browser/idle'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
+import { themeColors } from 'utils/formatters/tailwind-merge-config.generated'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
-import {
-  createActivityRamp,
-  stepActivityRamp,
-} from 'utils/anim/activity-ramp'
+import { createActivityRamp, stepActivityRamp } from 'utils/anim/activity-ramp'
 
 const PATTERN_SRC = '/images/projects/kaleidoscope/pattern.jpg'
-const MAX_CANVAS_PIXELS = 500_000
+const MAX_CANVAS_PIXELS = 350_000
 const MAX_CANVAS_SCALE = 0.75
-const FRAME_INTERVAL_MS = 1000 / 45
+const FRAME_INTERVAL_MS = 1000 / 30
 
 const FXKaleidoscope = ({ active }: { active: boolean }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -82,7 +80,7 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
       patternContext.rotate(angle)
       patternContext.drawImage(image, -image.width / 2, -image.height / 2)
       patternContext.restore()
-      context.fillStyle = '#000'
+      context.fillStyle = themeColors.base
       context.fillRect(0, 0, canvas.width, canvas.height)
       drawKaleidoscope({
         context,

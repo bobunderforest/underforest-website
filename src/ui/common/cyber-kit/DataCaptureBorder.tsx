@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { cns } from 'utils/formatters/classnames'
 
@@ -8,13 +8,15 @@ type Props = {
   dashed?: boolean
   muted?: boolean
   blinkKey?: string | number
+  offset?: number
+  size?: number
 }
 
 const CORNERS = {
-  topLeft: 'top-[-2px] left-[-2px] border-t-2 border-l-2',
-  topRight: 'top-[-2px] right-[-2px] border-t-2 border-r-2',
-  bottomLeft: 'bottom-[-2px] left-[-2px] border-b-2 border-l-2',
-  bottomRight: 'right-[-2px] bottom-[-2px] border-r-2 border-b-2',
+  topLeft: 'border-t-2 border-l-2',
+  topRight: 'border-t-2 border-r-2',
+  bottomLeft: 'border-b-2 border-l-2',
+  bottomRight: 'border-r-2 border-b-2',
 }
 
 const DIAGONAL_CORNERS = ['topLeft', 'bottomRight'] as const
@@ -25,12 +27,31 @@ const ALL_CORNERS = [
   'bottomRight',
 ] as const
 
+type Corner = (typeof ALL_CORNERS)[number]
+
+const cornerStyle = ({
+  corner,
+  offset,
+  size,
+}: {
+  corner: Corner
+  offset: number
+  size: number
+}): CSSProperties => ({
+  width: size,
+  height: size,
+  ...(corner.startsWith('top') ? { top: -offset } : { bottom: -offset }),
+  ...(corner.endsWith('Left') ? { left: -offset } : { right: -offset }),
+})
+
 export const DataCaptureBorder = ({
   className,
   diagonal = false,
   dashed = false,
   muted = false,
   blinkKey,
+  offset = 2,
+  size = 7,
 }: Props) => {
   const [reduced] = useState(prefersReducedMotion)
   const colorClassName = muted ? 'border-muted/60' : 'border-accent'
@@ -52,8 +73,9 @@ export const DataCaptureBorder = ({
         <span
           key={`${corner}-${blinkKey ?? 'idle'}`}
           aria-hidden
+          style={cornerStyle({ corner, offset, size })}
           className={cns(
-            'pointer-events-none absolute size-[7px]',
+            'pointer-events-none absolute',
             blinkKey && !reduced && 'animate-data-capture-blink',
             colorClassName,
             className,

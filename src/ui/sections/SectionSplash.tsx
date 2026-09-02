@@ -3,8 +3,20 @@ import { Text } from 'ui/common/typography/Text'
 import { ASCIIText } from 'ui/fx/AsciiText'
 import { SocialLinks } from './SocialLinks'
 import { FieldLabel } from './FieldLabel'
+import type { ResponsiveValue } from 'utils/browser/breakpoints'
+import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
+
+const splashAsciiFontSize: ResponsiveValue<number> = {
+  desktop: 8,
+  'desktop-m': 7,
+  'tablet-s': 6,
+  'mobile-m': 5,
+  'mobile-s': 4,
+}
 
 export const SectionSplash = () => {
+  const asciiFontSize = useResponsiveValue(splashAsciiFontSize)
+
   return (
     <Section hideBorder id={'about'} index={'00'} stage={'Identity'}>
       <Text
@@ -25,7 +37,7 @@ export const SectionSplash = () => {
         <ASCIIText
           text={'DMITRII\nPODLESNYI'}
           enableWaves={true}
-          asciiFontSize={8}
+          asciiFontSize={asciiFontSize}
           textFontSize={400}
           ditherNoiseScale={0.15}
           ditherSpeed={2}
@@ -34,7 +46,9 @@ export const SectionSplash = () => {
           waveXAmplitude={0.1}
           waveYAmplitude={0.0}
           waveZAmplitude={0.0}
-          className={'aspect-[900/320] w-full desktop-m:aspect-[900/280]'}
+          className={
+            'aspect-[900/320] w-full desktop-m:aspect-[900/280] mobile-m:aspect-[9/4] mobile-s:aspect-[2/1]'
+          }
         />
       </div>
       <div className={'mb-10'}>

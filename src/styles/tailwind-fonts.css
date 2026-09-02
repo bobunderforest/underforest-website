@@ -1,75 +1,67 @@
-:root {
-  --font-face-title:
-    'Space Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
-  --font-face-regular: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
-
-  --font-display: 100px;
-  --font-title-1: 100px;
-  --font-title-2: 54px;
-  --font-title-3: 32px;
-  --font-title-4: 21px;
-  --font-lead: 24px;
-  --font-caption: 20px;
-  --font-regular: 15px;
-  --font-hint: 13px;
-
-  @media (max-width: 1580px) {
-    --font-display: 86px;
-    --font-title-1: 86px;
-    --font-title-2: 48px;
-    --font-title-3: 28px;
-    --font-title-4: 21px;
-    --font-lead: 18px;
-    --font-caption: 16px;
-    --font-regular: 15px;
-    --font-hint: 13px;
-  }
-
-  @media (max-width: 1260px) {
-    --font-display: 64px;
-    --font-title-1: 64px;
-    --font-title-2: 42px;
-    --font-title-3: 24px;
-    --font-title-4: 18px;
-    --font-lead: 16px;
-    --font-caption: 14px;
-    --font-regular: 14px;
-    --font-hint: 12px;
-  }
-
-  @media (max-width: 920px) {
-    --font-display: 56px;
-    --font-title-1: 56px;
-    --font-title-2: 38px;
-    --font-title-3: 21px;
-    --font-title-4: 16px;
-    --font-lead: 16px;
-    --font-caption: 14px;
-    --font-regular: 14px;
-    --font-hint: 11px;
-  }
-}
-
 @theme {
-  --font-face-title:
-    'Space Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
-  --font-face-regular: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
-
   --text-*: initial;
   --leading-*: initial;
+
+  --font-face-title:
+    'Space Mono', ui-monospace, 'JetBrains Mono', Menlo, monospace;
+  --font-face-regular: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
+
+  --text-display: 100px;
+  --text-title-1: 100px;
+  --text-title-2: 54px;
+  --text-title-3: 32px;
+  --text-title-4: 21px;
+  --text-lead: 24px;
+  --text-caption: 20px;
+  --text-regular: 15px;
+  --text-hint: 13px;
+
+  --leading-display: 1;
+  --leading-title-1: 1;
+  --leading-title-2: 1.1;
+  --leading-title-3: 1.2;
+  --leading-title-4: 1.3;
+  --leading-lead: 1.4;
+  --leading-caption: 1.45;
+  --leading-regular: 1.6;
+  --leading-hint: 1.5;
 }
 
-@theme inline {
-  --text-display: var(--font-display);
-  --text-title-1: var(--font-title-1);
-  --text-title-2: var(--font-title-2);
-  --text-title-3: var(--font-title-3);
-  --text-title-4: var(--font-title-4);
+:root {
+  @variant desktop-m {
+    --text-display: 86px;
+    --text-title-1: 86px;
+    --text-title-2: 48px;
+    --text-title-3: 28px;
+    --text-title-4: 21px;
+    --text-lead: 18px;
+    --text-caption: 16px;
+    --text-regular: 15px;
+    --text-hint: 13px;
+  }
 
-  --text-lead: var(--font-lead);
-  --text-caption: var(--font-caption);
-  --text-regular: var(--font-regular);
-  --text-hint: var(--font-hint);
+  @variant tablet-s {
+    --text-display: 64px;
+    --text-title-1: 64px;
+    --text-title-2: 42px;
+    --text-title-3: 24px;
+    --text-title-4: 18px;
+    --text-lead: 16px;
+    --text-caption: 14px;
+    --text-regular: 14px;
+    --text-hint: 12px;
+  }
+
+  @variant mobile-m {
+    --text-display: 56px;
+    --text-title-1: 56px;
+    --text-title-2: 38px;
+    --text-title-3: 21px;
+    --text-title-4: 16px;
+    --text-lead: 16px;
+    --text-caption: 14px;
+    --text-regular: 14px;
+    --text-hint: 11px;
+  }
 }

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { whenPageSettled } from 'utils/browser/idle'
+import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { cns } from 'utils/formatters/classnames'
 
 const vertexShader = `
@@ -58,6 +60,8 @@ interface PixelDitherOptions {
   dotResolution: number
   noiseScale: number
 }
+
+const FRAME_INTERVAL_MS = 1000 / 30
 
 class PixelDitherPass {
   renderer: THREE.WebGLRenderer
@@ -268,6 +272,7 @@ class DitherTextRenderer {
   pixelPass!: PixelDitherPass
   animationFrameId: number = 0
   lastFrameTime: number | null = null
+  lastRenderTime: number = 0
   elapsedTime: number = 0
 
   constructor(
@@ -384,7 +389,11 @@ class DitherTextRenderer {
       placeholderBounds.top - containerBounds.top + placeholderBounds.height / 2
     const targetHeight =
       (placeholderBounds.height / containerBounds.height) * visibleHeight
-    const scale = targetHeight / this.options.planeBaseHeight
+    const targetWidth =
+      (placeholderBounds.width / containerBounds.width) * visibleWidth
+    const heightScale = targetHeight / this.options.planeBaseHeight
+    const widthScale = targetWidth / this.geometry.parameters.width
+    const scale = Math.min(heightScale, widthScale)
     const meshWidth = this.geometry.parameters.width * scale
 
     this.mesh.position.x =
@@ -394,20 +403,29 @@ class DitherTextRenderer {
     this.mesh.scale.setScalar(scale)
   }
 
-  load() {
-    this.animate()
-  }
-
-  animate() {
+  start() {
+    if (this.animationFrameId) return
+    this.lastFrameTime = null
     const animateFrame = (frameTime: number) => {
       this.animationFrameId = requestAnimationFrame(animateFrame)
       if (this.lastFrameTime === null) this.lastFrameTime = frameTime
       const delta = Math.min((frameTime - this.lastFrameTime) / 1000, 0.05)
       this.lastFrameTime = frameTime
       this.elapsedTime += delta
+      if (frameTime - this.lastRenderTime < FRAME_INTERVAL_MS) return
+      this.lastRenderTime = frameTime
       this.render(this.elapsedTime)
     }
     this.animationFrameId = requestAnimationFrame(animateFrame)
+  }
+
+  stop() {
+    cancelAnimationFrame(this.animationFrameId)
+    this.animationFrameId = 0
+  }
+
+  renderStill() {
+    this.render(this.elapsedTime)
   }
 
   render(time: number) {
@@ -417,7 +435,7 @@ class DitherTextRenderer {
   }
 
   dispose() {
-    cancelAnimationFrame(this.animationFrameId)
+    this.stop()
     this.pixelPass.canvas.remove()
     this.scene.remove(this.mesh)
     this.geometry.dispose()
@@ -454,8 +472,7 @@ export function ASCIIText({
 
   useEffect(() => {
     const placeholder = placeholderRef.current
-    const section = placeholder?.closest<HTMLElement>('section')
-    if (!placeholder || !section) return
+    if (!placeholder) return
 
     const container = document.createElement('div')
     container.className = 'dither-text-layer'
@@ -466,10 +483,21 @@ export function ASCIIText({
       overflow: 'hidden',
       pointerEvents: 'none',
     })
-    section.appendChild(container)
+    placeholder.appendChild(container)
 
     let cancelled = false
     let initializing = false
+    let hasSettled = false
+    let isOnScreen = false
+    const reduced = prefersReducedMotion()
+
+    const syncPlayback = () => {
+      const renderer = rendererRef.current
+      if (!renderer) return
+      if (hasSettled && isOnScreen && !reduced) renderer.start()
+      else renderer.stop()
+    }
+
     const options: DitherTextOptions = {
       text,
       asciiFontSize,
@@ -499,6 +527,7 @@ export function ASCIIText({
 
       if (rendererRef.current) {
         rendererRef.current.setSize(bounds.width, bounds.height)
+        rendererRef.current.renderStill()
         return
       }
       if (initializing) return
@@ -521,18 +550,32 @@ export function ASCIIText({
       const currentBounds = container.getBoundingClientRect()
       renderer.setSize(currentBounds.width, currentBounds.height)
       rendererRef.current = renderer
-      renderer.load()
+      renderer.renderStill()
+      syncPlayback()
     }
 
     const resizeObserver = new ResizeObserver(() => {
       void syncRenderer()
     })
-    resizeObserver.observe(section)
     resizeObserver.observe(placeholder)
+
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      isOnScreen = entry.isIntersecting
+      syncPlayback()
+    })
+    intersectionObserver.observe(placeholder)
+
+    const cancelSettle = whenPageSettled(() => {
+      hasSettled = true
+      syncPlayback()
+    })
+
     void syncRenderer()
 
     return () => {
       cancelled = true
+      cancelSettle()
+      intersectionObserver.disconnect()
       resizeObserver.disconnect()
       if (rendererRef.current) {
         rendererRef.current.dispose()

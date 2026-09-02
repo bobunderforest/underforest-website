@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { TelemetryBorder } from 'ui/fx/TelemetryBorder'
+import { SignalBorder } from 'ui/fx/SignalBorder'
 import { BusDivider } from 'ui/fx/BusDivider'
 import { SectionContent } from 'ui/common/SectionContent'
 import { StageIndex } from 'ui/sections/StageIndex'
@@ -21,7 +21,7 @@ export const SectionProjects = () => {
       data-stage={'Projects'}
       className={'relative border-b border-edge'}
     >
-      <TelemetryBorder className={'z-20'} />
+      <SignalBorder className={'z-20'} />
 
       <div className={'relative -mb-10 overflow-hidden bg-base'}>
         <ProjectTitleChart animate inverted />

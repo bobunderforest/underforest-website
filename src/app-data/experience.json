@@ -232,12 +232,12 @@
       "skills": ["Three.js"],
       "links": [
         {
-          "label": "GitHub",
-          "href": "https://github.com/bobunderforest/into-into-web-ar"
-        },
-        {
           "label": "Instagram post",
           "href": "https://www.instagram.com/p/DHA3yaZCbYV/?hl=en&img_index=3"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/into-into-web-ar"
         }
       ],
       "domains": ["web"],

@@ -4,6 +4,9 @@ import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
 import legacy from '@vitejs/plugin-legacy'
+import { twMergeConfig } from './scripts/vite-plugin-tw-merge.mjs'
+
+const buildRev = new Date().toISOString().slice(0, 10).replace(/-/g, '.')
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,7 +18,11 @@ export default defineConfig({
   },
 
   vite: {
+    define: {
+      __BUILD_REV__: JSON.stringify(buildRev),
+    },
     plugins: [
+      twMergeConfig(),
       tailwindcss(),
       svgr(),
       legacy({

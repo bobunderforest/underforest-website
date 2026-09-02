@@ -1,49 +1,43 @@
-:root {
-  --content-width: 1500px;
-  --content-padding: 40px;
-  --footer-height: 200px;
-  --section-padding: 150px;
-  --intersection-padding: 75px;
-  --magazine-padding: 245px;
-  --grid-gap-regular: 50px;
+@theme {
+  --spacing-content-width: 1500px;
+  --spacing-content-padding: 40px;
+  --spacing-footer-height: 200px;
+  --spacing-section-padding: 150px;
+  --spacing-intersection-padding: 75px;
+  --spacing-magazine-padding: 245px;
+  --spacing-experience-column-width: 600px;
+  --spacing-grid-gap-regular: 50px;
 
-  --content-outer: calc((100vw - var(--content-width)) / 2);
-  --content-outer-padded: calc(var(--content-outer) + var(--content-padding));
-
-  @media (max-width: 1580px) {
-    --content-width: 1200px;
-    --content-padding: 30px;
-  }
-
-  @media (max-width: 1260px) {
-    --content-width: 620px;
-    --content-padding: 20px;
-    --section-padding: 100px;
-    --intersection-padding: 50px;
-    --grid-gap-regular: 30px;
-    --magazine-padding: 0px;
-  }
-
-  @media (max-width: 920px) {
-    --content-width: 420px;
-    --section-padding: 60px;
-    --intersection-padding: 30px;
-    --grid-gap-regular: 20px;
-  }
-
-  @media (max-width: 420px) {
-    --content-width: 100%;
-  }
+  --spacing-content-outer: calc((100vw - var(--spacing-content-width)) / 2);
+  --spacing-content-outer-padded: calc(
+    var(--spacing-content-outer) + var(--spacing-content-padding)
+  );
 }
 
-@theme inline {
-  --spacing-content-width: var(--content-width);
-  --spacing-content-padding: var(--content-padding);
-  --spacing-section-padding: var(--section-padding);
-  --spacing-intersection-padding: var(--intersection-padding);
-  --spacing-footer-height: var(--footer-height);
-  --spacing-magazine-padding: var(--magazine-padding);
-  --spacing-grid-gap-regular: var(--grid-gap-regular);
-  --spacing-content-outer: var(--content-outer);
-  --spacing-content-outer-padded: var(--content-outer-padded);
+:root {
+  @variant desktop-m {
+    --spacing-content-width: 1200px;
+    --spacing-content-padding: 30px;
+    --spacing-experience-column-width: 500px;
+  }
+
+  @variant tablet-s {
+    --spacing-content-width: 840px;
+    --spacing-content-padding: 20px;
+    --spacing-section-padding: 100px;
+    --spacing-intersection-padding: 50px;
+    --spacing-grid-gap-regular: 30px;
+    --spacing-magazine-padding: 0px;
+  }
+
+  @variant mobile-m {
+    --spacing-content-width: 420px;
+    --spacing-section-padding: 60px;
+    --spacing-intersection-padding: 30px;
+    --spacing-grid-gap-regular: 20px;
+  }
+
+  @variant mobile-s {
+    --spacing-content-width: 100%;
+  }
 }

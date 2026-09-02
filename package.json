@@ -3,11 +3,12 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "cross-env TAILWIND_MODE=watch astro dev --port 3000 --host",
+    "dev": "astro dev --port 3000 --host",
     "build": "astro build",
     "preview": "astro preview --host --port 3000",
     "astro": "astro",
-    "lint": "eslint ."
+    "lint": "node scripts/gen-tw-merge.mjs --check && eslint .",
+    "gen:tw-merge": "node scripts/gen-tw-merge.mjs"
   },
   "dependencies": {
     "@nanostores/react": "^1.1.0",
@@ -37,7 +38,6 @@
     "@types/three": "^0.185.4",
     "@typescript-eslint/parser": "^8.68.0",
     "@vitejs/plugin-legacy": "^8.2.3",
-    "cross-env": "^10.1.0",
     "eslint": "^10.9.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "prettier": "^3.9.6",
@@ -48,5 +48,5 @@
     "typescript": "^6.0.3",
     "vite-plugin-svgr": "^5.2.0"
   },
-  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
+  "packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

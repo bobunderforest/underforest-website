@@ -5,6 +5,8 @@
 
 @import './global-defaults.css';
 @import './scroll-util.css';
+@import './hud.css';
+@import './channel-link.css';
 
 @layer base {
   .body--slides {
@@ -14,8 +16,7 @@
 
   body {
     color: var(--color-text);
-    font-size: var(--font-regular);
-    line-height: var(--font-leading-regular);
+    font-size: var(--text-regular);
     font-family: var(--font-face-regular);
     line-height: 1.6;
     background-color: var(--color-background);

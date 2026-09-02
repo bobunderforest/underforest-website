@@ -1,0 +1,69 @@
+@layer base {
+  html.is-booting::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background-color: var(--color-base);
+  }
+}
+
+@layer components {
+  .hud-frame {
+    --hud-cut: 10px;
+    position: relative;
+    padding: 1px;
+    background-color: color-mix(in srgb, var(--color-edge) 90%, transparent);
+    clip-path: polygon(
+      var(--hud-cut) 0,
+      100% 0,
+      100% calc(100% - var(--hud-cut)),
+      calc(100% - var(--hud-cut)) 100%,
+      0 100%,
+      0 var(--hud-cut)
+    );
+  }
+
+  .hud-frame-fill {
+    --hud-cut: 9px;
+    background-color: color-mix(in srgb, var(--color-base) 78%, transparent);
+    backdrop-filter: blur(3px);
+    clip-path: polygon(
+      var(--hud-cut) 0,
+      100% 0,
+      100% calc(100% - var(--hud-cut)),
+      calc(100% - var(--hud-cut)) 100%,
+      0 100%,
+      0 var(--hud-cut)
+    );
+  }
+
+  .hud-glow {
+    text-shadow: 0 0 7px color-mix(in srgb, currentColor 40%, transparent);
+  }
+
+  .hud-ticks {
+    background-image: repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-muted) 55%, transparent) 0 1px,
+      transparent 1px 5px
+    );
+  }
+
+  .hud-crosshair::before,
+  .hud-crosshair::after {
+    content: '';
+    position: absolute;
+    background-color: color-mix(in srgb, var(--color-muted) 70%, transparent);
+  }
+
+  .hud-crosshair::before {
+    inset: calc(50% - 0.5px) 0 auto 0;
+    height: 1px;
+  }
+
+  .hud-crosshair::after {
+    inset: 0 calc(50% - 0.5px) 0 auto;
+    width: 1px;
+  }
+}

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Skill } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
@@ -10,12 +11,15 @@ export const SkillTag = ({
   skill: Skill
   dimmed: boolean
 }) => {
+  const [borderBlinkKey, setBorderBlinkKey] = useState(0)
+
   return (
     <Text
       tag={'li'}
       size={'hint'}
       tone={'primary'}
       uppercase
+      onMouseEnter={() => setBorderBlinkKey((key) => key + 1)}
       className={cns(
         'relative inline-flex items-center gap-[8px] border px-[11px] py-[6px]',
         'transition-opacity duration-300',
@@ -41,6 +45,7 @@ export const SkillTag = ({
         diagonal
         dashed={skill.rising}
         muted={!skill.primary}
+        blinkKey={borderBlinkKey || undefined}
       />
     </Text>
   )

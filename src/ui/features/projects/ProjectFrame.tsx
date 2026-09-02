@@ -18,7 +18,7 @@ import { ProjectMetaReadout } from './ProjectMetaReadout'
 import { ProjectTitleBlock } from './ProjectTitleBlock'
 import { ProjectStoryTrack } from './ProjectStoryTrack'
 
-const STICKY_RAIL_TOP = 32
+const STICKY_RAIL_TOP = 148
 const WIRE_BEND_FROM_TARGET_X = 25
 
 export const ProjectFrame = ({

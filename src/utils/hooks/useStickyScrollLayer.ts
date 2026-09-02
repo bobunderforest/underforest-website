@@ -67,12 +67,20 @@ export const useStickyScrollLayer = <T extends HTMLElement = HTMLDivElement>({
   )
 
   const measure = useCallback(() => {
-    setSize({
+    const next = {
       viewportWidth: stageRef.current?.offsetWidth ?? 0,
       viewportHeight: stageRef.current?.offsetHeight ?? 0,
       contentHeight: contentRef.current?.offsetHeight ?? 0,
       sectionHeight: sectionRef.current?.offsetHeight ?? 0,
-    })
+    }
+    setSize((prev) =>
+      prev.viewportWidth === next.viewportWidth &&
+      prev.viewportHeight === next.viewportHeight &&
+      prev.contentHeight === next.contentHeight &&
+      prev.sectionHeight === next.sectionHeight
+        ? prev
+        : next,
+    )
   }, [])
 
   useResizeObserver(stageRef, measure)

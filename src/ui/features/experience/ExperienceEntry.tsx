@@ -91,7 +91,7 @@ export const ExperienceEntry = ({
         data-reached={reached}
         data-lit={lit}
         className={cns(
-          'group relative isolate w-[600px] desktop-s:w-[460px] tablet-s:w-full',
+          'group relative isolate w-experience-column-width tablet-s:w-full',
           clickable && 'cursor-pointer',
         )}
         onMouseEnter={() => setHovered(true)}

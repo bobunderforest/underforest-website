@@ -272,7 +272,7 @@ export const ExperienceDetails = ({
         onClick={(e) => e.stopPropagation()}
         className={cns(
           'pointer-events-auto fixed top-1/2 right-content-outer-padded z-[51]',
-          'w-[clamp(360px,39vw,600px)] cursor-default tablet-s:hidden',
+          'w-experience-column-width cursor-default tablet-s:hidden',
         )}
         initial={{ opacity: 1, x: 0, y: '-50%' }}
         animate={{ opacity: 1, x: 0, y: '-50%' }}

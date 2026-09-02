@@ -24,7 +24,7 @@ const RULER_STYLE: React.CSSProperties = {
   backgroundPosition: 'left bottom',
 }
 
-export const TelemetryBorder = ({ className }: { className?: string }) => {
+export const SignalBorder = ({ className }: { className?: string }) => {
   const host = useRef<HTMLDivElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
   const size = useRef({ w: 0, h: 0, dpr: 1 })

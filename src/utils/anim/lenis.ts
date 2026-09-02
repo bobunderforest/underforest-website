@@ -13,7 +13,6 @@ export const createLenis = () => {
   instance = new Lenis({
     autoRaf: false,
     overscroll: true,
-    lerp: 0.2,
     wheelMultiplier: 0.85,
     duration: 1,
     syncTouch: true,

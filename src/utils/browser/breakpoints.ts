@@ -1,8 +1,9 @@
 export const breakpointMaxWidths = {
-  'desktop-m': 1720,
+  'desktop-m': 1580,
   'desktop-s': 1420,
   'tablet-s': 1260,
-  'mobile-m': 740,
+  'mobile-m': 940,
+  'mobile-s': 420,
 } as const
 
 export type BreakpointName = keyof typeof breakpointMaxWidths
