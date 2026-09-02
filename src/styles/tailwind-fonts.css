@@ -5,7 +5,7 @@
   --font-face-special: 'Space Mono', ui-monospace, Menlo, monospace;
 
   --font-display: 100px;
-  --font-title-1: 86px;
+  --font-title-1: 100px;
   --font-title-2: 54px;
   --font-title-3: 32px;
   --font-title-4: 21px;
@@ -13,6 +13,42 @@
   --font-caption: 20px;
   --font-regular: 15px;
   --font-hint: 13px;
+
+  @media (max-width: 1580px) {
+    --font-display: 86px;
+    --font-title-1: 86px;
+    --font-title-2: 48px;
+    --font-title-3: 28px;
+    --font-title-4: 21px;
+    --font-lead: 18px;
+    --font-caption: 16px;
+    --font-regular: 15px;
+    --font-hint: 13px;
+  }
+
+  @media (max-width: 1260px) {
+    --font-display: 64px;
+    --font-title-1: 64px;
+    --font-title-2: 42px;
+    --font-title-3: 24px;
+    --font-title-4: 18px;
+    --font-lead: 16px;
+    --font-caption: 14px;
+    --font-regular: 14px;
+    --font-hint: 12px;
+  }
+
+  @media (max-width: 920px) {
+    --font-display: 56px;
+    --font-title-1: 56px;
+    --font-title-2: 38px;
+    --font-title-3: 21px;
+    --font-title-4: 16px;
+    --font-lead: 16px;
+    --font-caption: 14px;
+    --font-regular: 14px;
+    --font-hint: 11px;
+  }
 }
 
 @theme {

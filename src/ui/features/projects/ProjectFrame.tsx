@@ -1,15 +1,23 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
-import { useScroll, useTransform } from 'framer-motion'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { SectionContent } from 'ui/common/SectionContent'
+import { DataWire } from 'ui/common/cyber-kit/DataWire'
 import { ExperienceDetailsCredits } from 'ui/features/experience-details/ExperienceDetailsCredits'
+import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
+import { useResizeObserver } from 'utils/hooks/useResizeObserver'
+import { useWindowSize } from 'utils/hooks/useWindowSize'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
 import { ProjectFrameContext } from './project-frame-context'
 import { ProjectFrameBackground } from './ProjectFrameBackground'
 import { ProjectFrameHud } from './ProjectFrameHud'
+import { ProjectLinkRow } from './ProjectLinkRow'
 import { ProjectMetaReadout } from './ProjectMetaReadout'
 import { ProjectTitleBlock } from './ProjectTitleBlock'
 import { ProjectStoryTrack } from './ProjectStoryTrack'
+
+const STICKY_RAIL_TOP = 32
+const WIRE_BEND_FROM_TARGET_X = 25
 
 export const ProjectFrame = ({
   entry,
@@ -19,9 +27,22 @@ export const ProjectFrame = ({
   slot: string
 }) => {
   const frameRef = useRef<HTMLElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const stickyRailRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+  const primaryActionRef = useRef<HTMLDivElement>(null)
   const [locked, setLocked] = useState(false)
+  const [wireGeometry, setWireGeometry] = useState({
+    sourceDocumentY: 0,
+    sourceX: 0,
+    targetDocumentY: 0,
+    targetMaxDocumentY: 0,
+    targetMinY: 0,
+    targetX: 0,
+  })
+  const { width: viewportWidth, height: viewportHeight } = useWindowSize()
 
-  const { scrollYProgress: frameProgress } = useScroll({
+  const { scrollY, scrollYProgress: frameProgress } = useScroll({
     target: frameRef,
     offset: ['start end', 'end start'],
   })
@@ -36,6 +57,36 @@ export const ProjectFrame = ({
   )
   useCenterActivationObserver(frameRef, handleActivation)
 
+  const measureWire = useCallback(() => {
+    const title = titleRef.current
+    const primaryAction = primaryActionRef.current
+    const grid = gridRef.current
+    const stickyRail = stickyRailRef.current
+    if (!title || !primaryAction || !grid || !stickyRail) return
+    const titleRect = title.getBoundingClientRect()
+    const primaryActionRect = primaryAction.getBoundingClientRect()
+    const gridRect = grid.getBoundingClientRect()
+    const stickyRailRect = stickyRail.getBoundingClientRect()
+    const scrollTop = scrollY.get()
+    const targetOffsetY =
+      primaryActionRect.top + primaryActionRect.height / 2 - stickyRailRect.top
+    setWireGeometry({
+      sourceDocumentY: titleRect.top + scrollTop + titleRect.height / 2,
+      sourceX: titleRect.right,
+      targetDocumentY: gridRect.top + scrollTop + targetOffsetY,
+      targetMaxDocumentY:
+        gridRect.bottom + scrollTop - stickyRailRect.height + targetOffsetY,
+      targetMinY: STICKY_RAIL_TOP + targetOffsetY,
+      targetX: primaryActionRect.left,
+    })
+  }, [scrollY])
+
+  useResizeObserver(titleRef, measureWire)
+  useResizeObserver(primaryActionRef, measureWire, { initCall: false })
+  useResizeObserver(gridRef, measureWire, { initCall: false })
+  useResizeObserver(stickyRailRef, measureWire, { initCall: false })
+  useEffect(measureWire, [locked, measureWire, viewportWidth, viewportHeight])
+
   const value = useMemo(
     () => ({ slot, locked, confidence: confidenceLabel, frameProgress }),
     [slot, locked, confidenceLabel, frameProgress],
@@ -47,31 +98,73 @@ export const ProjectFrame = ({
         ref={frameRef}
         data-locked={locked}
         className={
-          'relative isolate flex min-h-[var(--viewport-height)] w-full flex-col justify-end overflow-hidden'
+          'relative isolate flex min-h-[var(--viewport-height)] w-full flex-col justify-end overflow-clip'
         }
       >
+        <AnimatePresence>
+          {locked && entry.href && wireGeometry.targetX > 0 && (
+            <DataWire
+              key={'project-data-wire'}
+              bendFromTargetX={WIRE_BEND_FROM_TARGET_X}
+              reduced={prefersReducedMotion()}
+              scrollY={scrollY}
+              sourceDocumentY={wireGeometry.sourceDocumentY}
+              lockedSourceY={null}
+              sourceX={wireGeometry.sourceX}
+              targetX={wireGeometry.targetX}
+              targetRange={{
+                documentY: wireGeometry.targetDocumentY,
+                minY: wireGeometry.targetMinY,
+                maxDocumentY: wireGeometry.targetMaxDocumentY,
+              }}
+              viewportWidth={viewportWidth}
+              viewportHeight={viewportHeight}
+            />
+          )}
+        </AnimatePresence>
         <ProjectFrameBackground cover={entry.cover} active={locked} />
         <ProjectFrameHud />
 
         <SectionContent className={'py-20 tablet-s:py-14'}>
           <div
+            ref={gridRef}
             className={
               'grid grid-cols-[minmax(0,1fr)_minmax(19rem,26rem)] items-start gap-x-12 gap-y-10 tablet-s:grid-cols-1 tablet-s:gap-x-0 tablet-s:gap-y-8 [&>*]:min-w-0'
             }
           >
-            <ProjectTitleBlock entry={entry} />
-
-            <div className={'flex flex-col gap-2'}>
-              <ProjectMetaReadout entry={entry} />
-              {entry.credits && entry.credits.length > 0 && (
-                <ExperienceDetailsCredits
-                  credits={entry.credits}
-                  className={'bg-base/50 backdrop-blur-md'}
-                />
-              )}
+            <div className={'tablet-s:contents'}>
+              <div className={'tablet-s:order-1'}>
+                <ProjectTitleBlock entry={entry} titleRef={titleRef} />
+              </div>
+              <div className={'tablet-s:order-4'}>
+                <ProjectStoryTrack entry={entry} />
+              </div>
             </div>
 
-            <ProjectStoryTrack entry={entry} />
+            <div
+              ref={stickyRailRef}
+              style={{ top: STICKY_RAIL_TOP }}
+              className={
+                'sticky flex flex-col gap-2 tablet-s:static tablet-s:contents'
+              }
+            >
+              <div className={'tablet-s:order-2'}>
+                <ProjectMetaReadout entry={entry} />
+              </div>
+              {entry.credits && entry.credits.length > 0 && (
+                <div className={'tablet-s:order-5'}>
+                  <ExperienceDetailsCredits
+                    credits={entry.credits}
+                    className={'bg-base/50 backdrop-blur-md'}
+                  />
+                </div>
+              )}
+              {(entry.href || entry.links?.length) && (
+                <div className={'tablet-s:order-3'}>
+                  <ProjectLinkRow entry={entry} primaryRef={primaryActionRef} />
+                </div>
+              )}
+            </div>
           </div>
         </SectionContent>
       </article>

@@ -1,10 +1,10 @@
 const CHANNEL_TAG: [test: RegExp, tag: string][] = [
-  [/linkedin\.com/, 'in'],
+  [/linkedin\.com/, 'job'],
   [/github\.com/, 'src'],
   [/(youtube\.com|youtu\.be)/, 'vid'],
-  [/instagram\.com/, 'ig'],
+  [/instagram\.com/, 'img'],
   [/store\.steampowered\.com/, 'steam'],
-  [/itch\.io/, 'itch'],
+  [/itch\.io/, 'play'],
   [/behance\.net/, 'bnc'],
 ]
 

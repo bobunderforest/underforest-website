@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { MountInView } from 'ui/fx/MountInView'
 import { useFullscreenShader } from 'utils/anim/fullscreen-shader'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 
@@ -103,7 +104,7 @@ void main() {
 }
 `
 
-const FXPsySky = ({ active }: { active: boolean }) => {
+const PsySkyCanvas = ({ active }: { active: boolean }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [reduced] = useState(prefersReducedMotion)
 
@@ -116,5 +117,11 @@ const FXPsySky = ({ active }: { active: boolean }) => {
 
   return <canvas ref={canvasRef} className={'block size-full'} />
 }
+
+const FXPsySky = ({ active }: { active: boolean }) => (
+  <MountInView className={'size-full'}>
+    <PsySkyCanvas active={active} />
+  </MountInView>
+)
 
 export default FXPsySky

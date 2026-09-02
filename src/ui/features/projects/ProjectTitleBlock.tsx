@@ -1,11 +1,17 @@
 import { Text } from 'ui/common/typography/Text'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
+import { cns } from 'utils/formatters/classnames'
 import { useProjectFrame } from './project-frame-context'
 import { ProjectTitleChart } from './ProjectTitleChart'
-import { ProjectLinkRow } from './ProjectLinkRow'
 
-export const ProjectTitleBlock = ({ entry }: { entry: ProjectEntry }) => {
+export const ProjectTitleBlock = ({
+  entry,
+  titleRef,
+}: {
+  entry: ProjectEntry
+  titleRef?: React.RefObject<HTMLDivElement | null>
+}) => {
   const { slot, locked } = useProjectFrame()
 
   return (
@@ -20,9 +26,11 @@ export const ProjectTitleBlock = ({ entry }: { entry: ProjectEntry }) => {
       </Text>
 
       <div
-        className={
-          'relative mb-15 w-fit max-w-full border border-edge bg-text px-4 pt-3 pb-2.5 tablet-s:px-3'
-        }
+        ref={titleRef}
+        className={cns(
+          'relative w-fit max-w-full border border-edge bg-text px-4 pt-3 pb-2.5 tablet-s:px-3',
+          entry.description && 'mb-15',
+        )}
       >
         <ProjectTitleChart animate={locked} />
         <DataCaptureBorder />
@@ -45,8 +53,6 @@ export const ProjectTitleBlock = ({ entry }: { entry: ProjectEntry }) => {
           {entry.description}
         </Text>
       )}
-
-      <ProjectLinkRow entry={entry} />
     </div>
   )
 }

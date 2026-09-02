@@ -61,6 +61,7 @@ export type ProjectCover =
 
 export type ProjectStoryBlock =
   | ExperienceDetail
+  | { kind: 'end'; caption?: string }
   | {
       kind: 'gallery'
       items: { src: string; alt?: string }[]

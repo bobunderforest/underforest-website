@@ -1,13 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useInView } from 'framer-motion'
 import { compileShader, createProgram } from 'utils/anim/webgl-utils'
 import { whenPageSettled } from 'utils/browser/idle'
 import { getDpr } from 'utils/browser/dpr'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
-import {
-  createActivityRamp,
-  stepActivityRamp,
-} from 'utils/anim/activity-ramp'
+import { createActivityRamp, stepActivityRamp } from 'utils/anim/activity-ramp'
 
 const VERTEX_SHADER = `
 attribute vec2 position;
@@ -47,7 +43,7 @@ export const useFullscreenShader = (
   const activityRef = useRef(createActivityRamp())
   const [ready, setReady] = useState(false)
   const [settled, setSettled] = useState(false)
-  const inView = useInView(canvasRef)
+  const [contextEpoch, setContextEpoch] = useState(0)
 
   const measure = useCallback(() => {
     const canvas = canvasRef.current
@@ -70,47 +66,83 @@ export const useFullscreenShader = (
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas || !enabled || !settled || !inView) return
-    const gl = canvas.getContext('webgl')
-    if (!gl) return
-    if (extension && !gl.getExtension(extension)) return
-
-    const vertexShader = compileShader(gl, VERTEX_SHADER, gl.VERTEX_SHADER)
-    const fragmentShader = compileShader(gl, fragment, gl.FRAGMENT_SHADER)
-    if (!vertexShader || !fragmentShader) return
-    const program = createProgram(gl, vertexShader, fragmentShader)
-    gl.deleteShader(vertexShader)
-    gl.deleteShader(fragmentShader)
-    if (!program) return
-
-    const buffer = gl.createBuffer()
-    if (!buffer) return
-    const position = gl.getAttribLocation(program, 'position')
-    const resolution = gl.getUniformLocation(program, 'uResolution')
-    const time = gl.getUniformLocation(program, 'uTime')
-    if (!resolution || !time) return
-
-    gl.useProgram(program)
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-    gl.bufferData(gl.ARRAY_BUFFER, TRIANGLE, gl.STATIC_DRAW)
-    gl.enableVertexAttribArray(position)
-    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0)
-
-    glRef.current = gl
-    resolutionRef.current = resolution
-    timeRef.current = time
-    measure()
-    setReady(true)
-
-    return () => {
+    if (!canvas) return
+    const handleContextLost = (event: Event) => {
+      event.preventDefault()
       setReady(false)
       glRef.current = null
       resolutionRef.current = null
       timeRef.current = null
-      gl.deleteBuffer(buffer)
-      gl.deleteProgram(program)
     }
-  }, [canvasRef, enabled, extension, fragment, inView, measure, settled])
+    const handleContextRestored = () => {
+      setContextEpoch((epoch) => epoch + 1)
+    }
+    canvas.addEventListener('webglcontextlost', handleContextLost)
+    canvas.addEventListener('webglcontextrestored', handleContextRestored)
+    return () => {
+      canvas.removeEventListener('webglcontextlost', handleContextLost)
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored)
+    }
+  }, [canvasRef])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas || !enabled || !settled) return
+    const gl = canvas.getContext('webgl')
+    if (!gl) return
+    if (extension && !gl.getExtension(extension)) return
+    if (gl.isContextLost()) return
+    let buffer: WebGLBuffer | null = null
+    let program: WebGLProgram | null = null
+
+    const releaseResources = () => {
+      setReady(false)
+      glRef.current = null
+      resolutionRef.current = null
+      timeRef.current = null
+      if (!gl.isContextLost()) {
+        if (buffer) gl.deleteBuffer(buffer)
+        if (program) gl.deleteProgram(program)
+      }
+      buffer = null
+      program = null
+    }
+
+    const initializeResources = () => {
+      const vertexShader = compileShader(gl, VERTEX_SHADER, gl.VERTEX_SHADER)
+      const fragmentShader = compileShader(gl, fragment, gl.FRAGMENT_SHADER)
+      if (!vertexShader || !fragmentShader) return
+      program = createProgram(gl, vertexShader, fragmentShader)
+      gl.deleteShader(vertexShader)
+      gl.deleteShader(fragmentShader)
+      if (!program) return
+
+      buffer = gl.createBuffer()
+      if (!buffer) return
+      const position = gl.getAttribLocation(program, 'position')
+      const resolution = gl.getUniformLocation(program, 'uResolution')
+      const time = gl.getUniformLocation(program, 'uTime')
+      if (!resolution || !time) return
+
+      gl.useProgram(program)
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+      gl.bufferData(gl.ARRAY_BUFFER, TRIANGLE, gl.STATIC_DRAW)
+      gl.enableVertexAttribArray(position)
+      gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0)
+
+      glRef.current = gl
+      resolutionRef.current = resolution
+      timeRef.current = time
+      measure()
+      setReady(true)
+    }
+
+    initializeResources()
+
+    return () => {
+      releaseResources()
+    }
+  }, [canvasRef, contextEpoch, enabled, extension, fragment, measure, settled])
 
   useEffect(() => {
     const gl = glRef.current

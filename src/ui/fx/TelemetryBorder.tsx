@@ -122,7 +122,7 @@ export const TelemetryBorder = ({ className }: { className?: string }) => {
       ref={host}
       aria-hidden
       className={cns(
-        'pointer-events-none absolute inset-x-0 top-0 h-16 select-none',
+        'pointer-events-none relative h-16 select-none',
         className,
       )}
     >

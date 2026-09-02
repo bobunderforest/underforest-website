@@ -36,6 +36,10 @@
               "alt": ""
             }
           ]
+        },
+        {
+          "kind": "end",
+          "caption": "// END"
         }
       ]
     },
@@ -48,12 +52,16 @@
         {
           "kind": "text",
           "caption": "sample · classification shift",
-          "body": "A conceptual virtual reality experience. First full-time gamedev role — the web → gamedev reclassification point."
+          "body": "A conceptual virtual reality experience.\nFirst full-time gamedev role, the web → gamedev reclassification point."
         },
         {
           "kind": "video",
           "caption": "previs · arcanum works",
           "src": "/videos/ocean-threshold-previs.mp4"
+        },
+        {
+          "kind": "end",
+          "caption": "// END"
         }
       ]
     },
@@ -71,6 +79,10 @@
           "kind": "video",
           "caption": "capture · arcanum works",
           "src": "/videos/in2into-web-ar.mp4"
+        },
+        {
+          "kind": "end",
+          "caption": "// END"
         }
       ]
     },
@@ -89,6 +101,10 @@
           "kind": "video",
           "caption": "screen capture",
           "src": "/videos/kwc-screencast.mp4"
+        },
+        {
+          "kind": "end",
+          "caption": "// END"
         }
       ]
     },
@@ -100,6 +116,12 @@
       "domains": ["web"],
       "summary": [
         "An ongoing sketchbook of creative-coding and physics simulation experiments."
+      ],
+      "story": [
+        {
+          "kind": "end",
+          "caption": "// END"
+        }
       ],
       "links": [
         {
@@ -128,6 +150,10 @@
           "caption": "reflection scheme",
           "src": "/images/projects/kaleidoscope/kaleidoscope-scheme.png",
           "alt": "Geometric triangular reflection scheme for a kaleidoscope"
+        },
+        {
+          "kind": "end",
+          "caption": "// END"
         }
       ],
       "links": [
@@ -164,6 +190,10 @@
           "kind": "video",
           "caption": "gameplay capture",
           "src": "/videos/space-invaders.mp4"
+        },
+        {
+          "kind": "end",
+          "caption": "// END"
         }
       ]
     }

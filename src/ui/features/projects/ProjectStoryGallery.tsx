@@ -12,23 +12,22 @@ export const ProjectStoryGallery = ({ items }: { items: GalleryItem[] }) => {
   const galleryId = useId()
   const paging = useMemo(
     () =>
-      new ImageModalPaging(items.map((item) => item.src), {
-        rectResolver: (index) => {
-          const item = document.querySelector(
-            `[data-gallery-id="${galleryId}"][data-gallery-index="${index}"]`,
-          )
-          return item?.getBoundingClientRect() ?? null
+      new ImageModalPaging(
+        items.map((item) => item.src),
+        {
+          rectResolver: (index) => {
+            const item = document.querySelector(
+              `[data-gallery-id="${galleryId}"][data-gallery-index="${index}"]`,
+            )
+            return item?.getBoundingClientRect() ?? null
+          },
         },
-      }),
+      ),
     [galleryId, items],
   )
 
   return (
-    <div
-      className={
-        'grid grid-cols-4 gap-2 tablet-s:grid-cols-2 mobile-m:grid-cols-1'
-      }
-    >
+    <div className={'grid grid-cols-4 gap-2 mobile-m:grid-cols-2'}>
       {items.map((item, index) => (
         <div
           key={item.src}

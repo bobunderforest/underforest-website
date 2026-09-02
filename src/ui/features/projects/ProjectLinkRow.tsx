@@ -2,21 +2,23 @@ import { ChannelLink } from 'ui/common/cyber-kit/ChannelLink'
 import { Button } from 'ui/controls/Button'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
 
-export const ProjectLinkRow = ({ entry }: { entry: ProjectEntry }) => {
+export const ProjectLinkRow = ({
+  entry,
+  primaryRef,
+}: {
+  entry: ProjectEntry
+  primaryRef?: React.RefObject<HTMLDivElement | null>
+}) => {
   if (!entry.href && !entry.links?.length) return null
 
   return (
-    <div className={'flex flex-col items-start gap-3'}>
+    <div className={'mt-1 flex flex-col items-start gap-3 tablet-s:mt-0'}>
       {entry.href && (
-        <Button
-          href={entry.href}
-          isExternal
-          large
-          wide
-          className={'w-[380px] max-w-full'}
-        >
-          Visit project ↗
-        </Button>
+        <div ref={primaryRef} className={'w-full'}>
+          <Button href={entry.href} isExternal large wide className={'w-full'}>
+            Visit project ↗
+          </Button>
+        </div>
       )}
       {!!entry.links?.length && (
         <div className={'flex flex-wrap items-center gap-2'}>

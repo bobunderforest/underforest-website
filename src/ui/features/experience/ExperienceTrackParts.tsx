@@ -17,10 +17,6 @@ export const ExperienceTrackNode = forwardRef<
     ref={ref}
     className={cns(
       'relative py-8 pl-16 transition-opacity duration-300',
-      '[--track-anchor-top:calc(32px+var(--font-regular)*1.6+6px)]',
-      'before:absolute before:top-0 before:bottom-0 before:left-0 before:w-px before:bg-edge',
-      'first:before:top-[calc(var(--track-anchor-top)-50px)]',
-      'last:before:bottom-auto last:before:h-[calc(var(--track-anchor-top)+10px)]',
       dimmed && 'opacity-30',
       active && 'z-[1]',
     )}
@@ -70,13 +66,14 @@ export const ExperienceAnchor = ({
 export const ExperienceMarker = ({ entry }: { entry: ExperienceEntry }) => (
   <span
     aria-hidden
+    data-experience-track-marker={entry.id}
     className={cns(
-      'absolute z-[1] border-2 bg-base',
+      'absolute z-[1] border-2 bg-base transition-[transform,background-color,border-color] duration-300 ease-out',
+      'group-data-[reached=true]:scale-150 group-data-[reached=true]:border-accent group-data-[reached=true]:bg-accent',
       entry.break
         ? 'top-[7px] left-[-67px] size-[6px] border-muted'
         : 'top-[5px] left-[-69px] size-[10px]',
-      !entry.break && entry.reclassified && 'border-accent bg-accent',
-      !entry.break && !entry.reclassified && 'border-system',
+      !entry.break && 'border-system',
     )}
   />
 )

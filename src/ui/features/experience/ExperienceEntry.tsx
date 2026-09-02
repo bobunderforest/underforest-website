@@ -11,6 +11,7 @@ import { openExternal } from 'utils/browser/open-external'
 import { cns } from 'utils/formatters/classnames'
 import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
 import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
+import { ProjectTitleChart } from 'ui/features/projects/ProjectTitleChart'
 import {
   ExperienceAnchor,
   ExperienceDetectionFrame,
@@ -31,6 +32,7 @@ import {
 type ExperienceEntryProps = {
   entry: ExperienceEntryData
   active: boolean
+  reached: boolean
   detailsExpanded: boolean
   onInViewChange: (id: string, inView: boolean) => void
   onDetailsExpandedChange: (
@@ -51,6 +53,7 @@ const fullEntryClick = {
 export const ExperienceEntry = ({
   entry,
   active,
+  reached,
   detailsExpanded,
   onInViewChange,
   onDetailsExpandedChange,
@@ -83,9 +86,10 @@ export const ExperienceEntry = ({
       <div
         ref={bodyRef}
         data-active={active}
+        data-reached={reached}
         data-lit={lit}
         className={cns(
-          'group relative isolate w-[600px] tablet-s:w-full',
+          'group relative isolate w-[600px] desktop-s:w-[460px] tablet-s:w-full',
           clickable && 'cursor-pointer',
         )}
         onMouseEnter={() => setHovered(true)}
@@ -108,6 +112,15 @@ export const ExperienceEntry = ({
         }
       >
         <ExperienceDetectionFrame />
+        {active && (
+          <ProjectTitleChart
+            animate
+            palette={'dark-red'}
+            className={
+              '-top-[19px] -right-[25px] -bottom-[19px] -left-[25px] size-auto overflow-hidden'
+            }
+          />
+        )}
         {clickable && (
           <span
             aria-hidden
@@ -116,42 +129,44 @@ export const ExperienceEntry = ({
             }
           />
         )}
-        <ExperienceEntryTags entry={entry} />
-        <ExperienceMeta entry={entry} />
-        <ExperienceAnchor className={'mb-2'}>
-          <ExperienceMarker entry={entry} />
-          <TextTitle
-            size={4}
-            tag={'h3'}
-            tone={'primary'}
-            className={'flex flex-wrap items-baseline gap-x-2.5 gap-y-1'}
-          >
-            {entry.href ? (
-              <ExperienceTitleLink href={entry.href}>
-                {entry.place} ↗
-              </ExperienceTitleLink>
-            ) : (
-              entry.place
-            )}
-            <ExperienceTitleRole role={entry.role} />
-          </TextTitle>
-        </ExperienceAnchor>
-        <ExperienceLinkRow entry={entry} />
-        <ExperienceSummary
-          lines={entry.summary}
-          hasStatusNote={Boolean(entry.status?.note)}
-        />
-        {entry.status && <ExperienceStatusNote status={entry.status} />}
-        {hasDetails && (
-          <ExperienceDetailsDisclosure
-            entry={entry}
-            expanded={detailsExpanded}
-            onExpandedChange={(expanded) =>
-              onDetailsExpandedChange(entry.id, expanded, ref.current)
-            }
-            onCollapseComplete={() => onDetailsCollapseComplete(entry.id)}
+        <div className={'relative z-[1]'}>
+          <ExperienceEntryTags entry={entry} />
+          <ExperienceMeta entry={entry} />
+          <ExperienceAnchor className={'mb-2'}>
+            <ExperienceMarker entry={entry} />
+            <TextTitle
+              size={4}
+              tag={'h3'}
+              tone={'primary'}
+              className={'flex flex-wrap items-baseline gap-x-2.5 gap-y-1'}
+            >
+              {entry.href ? (
+                <ExperienceTitleLink href={entry.href}>
+                  {entry.place} ↗
+                </ExperienceTitleLink>
+              ) : (
+                entry.place
+              )}
+              <ExperienceTitleRole role={entry.role} />
+            </TextTitle>
+          </ExperienceAnchor>
+          <ExperienceLinkRow entry={entry} />
+          <ExperienceSummary
+            lines={entry.summary}
+            hasStatusNote={Boolean(entry.status?.note)}
           />
-        )}
+          {entry.status && <ExperienceStatusNote status={entry.status} />}
+          {hasDetails && (
+            <ExperienceDetailsDisclosure
+              entry={entry}
+              expanded={detailsExpanded}
+              onExpandedChange={(expanded) =>
+                onDetailsExpandedChange(entry.id, expanded, ref.current)
+              }
+              onCollapseComplete={() => onDetailsCollapseComplete(entry.id)}
+            />
+          )}
+        </div>
       </div>
     </ExperienceTrackNode>
   )

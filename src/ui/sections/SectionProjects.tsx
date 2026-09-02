@@ -24,10 +24,7 @@ export const SectionProjects = () => {
 
       <div className={'relative -mb-10 overflow-hidden bg-base'}>
         <ProjectTitleChart animate inverted />
-        <SectionContent
-          isPadded
-          className={'relative pb-16 tablet-s:pb-12'}
-        >
+        <SectionContent isPadded className={'relative pb-16 tablet-s:pb-12'}>
           <StageIndex index={'03'} stage={'Projects'} />
           <FieldLabel readout={`${PROJECTS.length} subjects locked`}>
             featured

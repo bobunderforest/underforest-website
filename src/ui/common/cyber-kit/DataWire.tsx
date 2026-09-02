@@ -2,19 +2,27 @@ import { motion, useTransform, type MotionValue } from 'framer-motion'
 import { motionEase } from 'utils/anim/motion-ease'
 import { clamp } from 'utils/math/clamp'
 
-type DataWireProps = {
+type DataWireTarget =
+  | { targetY: number; targetRange?: never }
+  | {
+      targetY?: never
+      targetRange: { documentY: number; minY: number; maxDocumentY: number }
+    }
+
+type DataWireProps = DataWireTarget & {
+  bendFromTargetX?: number
   reduced: boolean
   scrollY: MotionValue<number>
   sourceDocumentY: number
   lockedSourceY: number | null
   sourceX: number
   targetX: number
-  targetY: number
   viewportWidth: number
   viewportHeight: number
 }
 
 export const DataWire = ({
+  bendFromTargetX,
   reduced,
   scrollY,
   sourceDocumentY,
@@ -22,6 +30,7 @@ export const DataWire = ({
   sourceX,
   targetX,
   targetY,
+  targetRange,
   viewportWidth,
   viewportHeight,
 }: DataWireProps) => {
@@ -29,18 +38,41 @@ export const DataWire = ({
     lockedSourceY === null ? sourceDocumentY - value : lockedSourceY,
   )
   const sourceMarkerY = useTransform(sourceY, (value) => value - 2.5)
-  const turnX = sourceX + Math.max((targetX - sourceX) * 0.48, 18)
-  const diagonalX = clamp(targetX - turnX, 0, 10)
-  const path = useTransform(sourceY, (value) => {
-    const direction = Math.sign(targetY - value) || 1
-    const diagonalY = Math.min(Math.abs(targetY - value) / 2, diagonalX)
-    const firstDiagonalStartX = turnX - diagonalY
-    const firstDiagonalEndY = value + direction * diagonalY
-    const diagonalStartY = targetY - direction * diagonalY
-    return `M ${sourceX} ${value} H ${firstDiagonalStartX} L ${turnX} ${firstDiagonalEndY} V ${diagonalStartY} L ${turnX + diagonalY} ${targetY} H ${targetX}`
+  const resolvedTargetY = useTransform(scrollY, (value): number => {
+    if (!targetRange) return targetY ?? 0
+    return Math.min(
+      Math.max(targetRange.documentY - value, targetRange.minY),
+      targetRange.maxDocumentY - value,
+    )
   })
+  const targetMarkerY = useTransform(resolvedTargetY, (value) => value - 2.5)
+  const targetMarkerTransform = useTransform(
+    resolvedTargetY,
+    (value) => `rotate(45 ${targetX} ${value})`,
+  )
+  const defaultTurnX = sourceX + Math.max((targetX - sourceX) * 0.48, 18)
+  const configuredTurnX =
+    bendFromTargetX === undefined ? defaultTurnX : targetX - bendFromTargetX
+  const turnX = clamp(configuredTurnX, sourceX + 18, targetX)
+  const diagonalX = clamp(targetX - turnX, 0, 10)
+  const path = useTransform<number, string>(
+    [sourceY, resolvedTargetY],
+    ([source, target]) => {
+      const direction = Math.sign(target - source) || 1
+      const diagonalY = Math.min(Math.abs(target - source) / 2, diagonalX)
+      const firstDiagonalStartX = turnX - diagonalY
+      const firstDiagonalEndY = source + direction * diagonalY
+      const diagonalStartY = target - direction * diagonalY
+      return `M ${sourceX} ${source} H ${firstDiagonalStartX} L ${turnX} ${firstDiagonalEndY} V ${diagonalStartY} L ${turnX + diagonalY} ${target} H ${targetX}`
+    },
+  )
   const transition = {
-    duration: reduced ? 0 : 0.32,
+    duration: reduced ? 0 : 0.48,
+    ease: motionEase.enter,
+  }
+  const pinTransition = {
+    duration: reduced ? 0 : 0.12,
+    delay: reduced ? 0 : 0.36,
     ease: motionEase.enter,
   }
 
@@ -52,13 +84,13 @@ export const DataWire = ({
       }
       viewBox={`0 0 ${viewportWidth} ${viewportHeight}`}
       preserveAspectRatio={'none'}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={transition}
     >
       <motion.path
         d={path}
+        initial={{ pathLength: 0, pathOffset: 0 }}
+        animate={{ pathLength: 1, pathOffset: 0 }}
+        exit={{ pathLength: 0, pathOffset: 1 }}
+        transition={transition}
         fill={'none'}
         stroke={'var(--color-accent)'}
         strokeDasharray={'5 5'}
@@ -66,6 +98,13 @@ export const DataWire = ({
         opacity={0.7}
       />
       <motion.rect
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{
+          opacity: 0,
+          transition: { duration: reduced ? 0 : 0.1 },
+        }}
+        transition={{ duration: reduced ? 0 : 0.1 }}
         width={5}
         height={5}
         x={sourceX - 2.5}
@@ -73,14 +112,18 @@ export const DataWire = ({
         fill={'var(--color-base)'}
         stroke={'var(--color-accent)'}
       />
-      <rect
+      <motion.rect
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0, transition: pinTransition }}
+        transition={pinTransition}
         width={5}
         height={5}
         x={targetX - 2.5}
-        y={targetY - 2.5}
+        y={targetMarkerY}
         fill={'var(--color-base)'}
         stroke={'var(--color-accent)'}
-        transform={`rotate(45 ${targetX} ${targetY})`}
+        transform={targetMarkerTransform}
       />
     </motion.svg>
   )
