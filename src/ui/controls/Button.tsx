@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { cns } from 'utils/formatters/classnames'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { Link } from 'ui/common/typography/Link'
@@ -44,6 +45,7 @@ export const Button = ({
   children,
   ...restProps
 }: Props) => {
+  const [borderBlinkKey, setBorderBlinkKey] = useState(0)
   const accentStyle = accentStyles[accent]
   const text = (
     <Text
@@ -87,7 +89,11 @@ export const Button = ({
       >
         ▚
       </Text>
-      <DataCaptureBorder diagonal className={accentStyle.corners} />
+      <DataCaptureBorder
+        diagonal
+        blinkKey={borderBlinkKey || undefined}
+        className={accentStyle.corners}
+      />
     </>
   )
 
@@ -112,6 +118,8 @@ export const Button = ({
 
   return (
     <span
+      onMouseEnter={() => !disabled && setBorderBlinkKey((key) => key + 1)}
+      onClick={() => !disabled && setBorderBlinkKey((key) => key + 1)}
       className={cns(
         'inline-flex align-middle',
         wide && 'w-full',

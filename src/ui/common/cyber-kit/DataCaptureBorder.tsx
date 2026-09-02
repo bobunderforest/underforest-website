@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { cns } from 'utils/formatters/classnames'
 
 type Props = {
@@ -5,6 +7,7 @@ type Props = {
   diagonal?: boolean
   dashed?: boolean
   muted?: boolean
+  blinkKey?: string | number
 }
 
 const CORNERS = {
@@ -27,7 +30,9 @@ export const DataCaptureBorder = ({
   diagonal = false,
   dashed = false,
   muted = false,
+  blinkKey,
 }: Props) => {
+  const [reduced] = useState(prefersReducedMotion)
   const colorClassName = muted ? 'border-muted/60' : 'border-accent'
   const corners = diagonal ? DIAGONAL_CORNERS : ALL_CORNERS
 
@@ -45,10 +50,13 @@ export const DataCaptureBorder = ({
       )}
       {corners.map((corner) => (
         <span
-          key={corner}
+          key={`${corner}-${blinkKey ?? 'idle'}`}
           aria-hidden
           className={cns(
             'pointer-events-none absolute size-[7px]',
+            blinkKey !== undefined &&
+              !reduced &&
+              'animate-data-capture-blink',
             colorClassName,
             className,
             CORNERS[corner],

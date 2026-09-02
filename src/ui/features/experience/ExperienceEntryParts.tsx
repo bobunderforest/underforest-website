@@ -192,11 +192,13 @@ export const ExperienceLinkRow = ({ entry }: { entry: ExperienceEntry }) =>
 export const ExperienceBreakNode = ({
   entry,
   dimmed,
+  entryRef,
 }: {
   entry: ExperienceEntry
   dimmed: boolean
+  entryRef: React.RefObject<HTMLLIElement | null>
 }) => (
-  <ExperienceTrackNode dimmed={dimmed}>
+  <ExperienceTrackNode ref={entryRef} dimmed={dimmed}>
     <ExperienceAnchor className={'mb-1.5'}>
       <ExperienceMarker entry={entry} />
       <Text size={'hint'} tone={'dimmed'} uppercase>

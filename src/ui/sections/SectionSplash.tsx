@@ -6,7 +6,7 @@ import { FieldLabel } from './FieldLabel'
 
 export const SectionSplash = () => {
   return (
-    <Section id={'about'} index={'00'} stage={'Identity'}>
+    <Section hideBorder id={'about'} index={'00'} stage={'Identity'}>
       <Text
         uppercase
         className={'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1'}

@@ -27,6 +27,5 @@ const resolveProject = (raw: ProjectRef): ProjectEntry => {
   }
 }
 
-export const PROJECTS: ProjectEntry[] = (projects.projects as ProjectRef[]).map(
-  resolveProject,
-)
+export const getProjects = (): ProjectEntry[] =>
+  (projects.projects as ProjectRef[]).map(resolveProject)

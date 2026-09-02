@@ -17,12 +17,12 @@ export const ProjectFrameHud = () => {
         uppercase
         tone={locked ? 'accent' : 'dimmed'}
         className={
-          'absolute top-[26px] left-[26px] flex items-center gap-2 transition-colors duration-300'
+          'absolute top-[26px] left-[26px] flex items-center gap-2 italic transition-colors duration-300'
         }
       >
         <span className={'tabular-nums'}>P-{slot}</span>
         <span className={'inline-block h-px w-6 bg-current'} />
-        <span>{locked ? 'locked' : 'tracking'}</span>
+        <span>{locked ? 'target locked' : 'target tracking'}</span>
       </Text>
 
       <Text
@@ -33,7 +33,7 @@ export const ProjectFrameHud = () => {
           'absolute right-[26px] bottom-[26px] flex items-center gap-2'
         }
       >
-        <span>conf</span>
+        <span>signal</span>
         <motion.span className={'tabular-nums'}>{confidence}</motion.span>
         <span>{locked ? '▲' : '▽'}</span>
       </Text>

@@ -47,7 +47,7 @@
       "id": "ocean-threshold",
       "dataFromExperience": true,
       "label": "Ocean\nThreshold",
-      "cover": { "kind": "video", "src": "/videos/ocean-threshold-previs.mp4" },
+      "cover": { "kind": "video", "src": "/videos/ocean-threshold.mp4" },
       "story": [
         {
           "kind": "text",
@@ -56,8 +56,8 @@
         },
         {
           "kind": "video",
-          "caption": "previs · arcanum works",
-          "src": "/videos/ocean-threshold-previs.mp4"
+          "caption": "devlog · arcanum works",
+          "src": "/videos/ocean-threshold.mp4"
         },
         {
           "kind": "end",
@@ -73,7 +73,7 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "Interactive mobile AR showcase for a contemporary jewelry brand. Presented at the exhibition “Secret, Sacred and Scattered”."
+          "body": "Interactive mobile AR showcase for a contemporary jewelry brand.\nPresented at the exhibition “Secret,&nbsp;Sacred&nbsp;and&nbsp;Scattered”."
         },
         {
           "kind": "video",
@@ -111,13 +111,21 @@
     {
       "id": "physics-programming-practice",
       "label": "Physics\nProgramming\nPractice",
+      "cover": { "kind": "video", "src": "/videos/physics-practice.mp4" },
       "href": "https://bobunderforest.github.io/coding-train-practice/",
       "period": "2018 — present",
       "domains": ["web"],
-      "summary": [
-        "An ongoing sketchbook of creative-coding and physics simulation experiments."
-      ],
+      "summary": [""],
       "story": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "An sketchbook of creative-coding and physics simulation experiments inspired by [CodingTrain](https://www.youtube.com/@TheCodingTrain) YouTube tutorials."
+        },
+        {
+          "kind": "video",
+          "src": "/videos/physics-practice.mp4"
+        },
         {
           "kind": "end",
           "caption": "// END"
@@ -143,7 +151,7 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "A small experiment on creating a kaleidoscopioc texture reflection."
+          "body": "A small experiment on creating a kaleidoscopic texture reflection."
         },
         {
           "kind": "image",

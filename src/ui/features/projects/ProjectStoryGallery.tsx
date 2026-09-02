@@ -40,6 +40,7 @@ export const ProjectStoryGallery = ({ items }: { items: GalleryItem[] }) => {
             alt={item.alt}
             paging={paging}
             index={index}
+            aspectRatio={1}
           />
         </div>
       ))}

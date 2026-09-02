@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useRef, useState } from 'react'
 import { motion, useTransform } from 'framer-motion'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { useVideoInView } from 'utils/hooks/useVideoInView'
@@ -39,12 +39,23 @@ const isCustomCover = (
 const CoverMedia = ({
   cover,
   active,
+  startVideoAtMiddle,
 }: {
   cover: ProjectMediaCover
   active: boolean
+  startVideoAtMiddle: boolean
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [reduced] = useState(prefersReducedMotion)
+  const handleLoadedMetadata = useCallback(
+    (event: React.SyntheticEvent<HTMLVideoElement>) => {
+      const video = event.currentTarget
+      if (startVideoAtMiddle && Number.isFinite(video.duration)) {
+        video.currentTime = video.duration / 2
+      }
+    },
+    [startVideoAtMiddle],
+  )
 
   useVideoInView(videoRef, {
     enabled: active && !reduced && cover.kind === 'video',
@@ -73,6 +84,7 @@ const CoverMedia = ({
       loop
       playsInline
       preload={'none'}
+      onLoadedMetadata={handleLoadedMetadata}
       className={MEDIA_CLASS}
     />
   )
@@ -81,9 +93,11 @@ const CoverMedia = ({
 export const ProjectFrameBackground = ({
   cover,
   active,
+  startVideoAtMiddle,
 }: {
   cover?: ProjectCover
   active: boolean
+  startVideoAtMiddle: boolean
 }) => {
   const { frameProgress } = useProjectFrame()
   const ditherOpacity = useTransform(
@@ -105,7 +119,13 @@ export const ProjectFrameBackground = ({
         </Suspense>
       ) : (
         cover &&
-        !isCustomCover(cover) && <CoverMedia cover={cover} active={active} />
+        !isCustomCover(cover) && (
+          <CoverMedia
+            cover={cover}
+            active={active}
+            startVideoAtMiddle={startVideoAtMiddle}
+          />
+        )
       )}
       <motion.div
         className={'absolute inset-0'}

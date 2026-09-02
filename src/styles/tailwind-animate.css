@@ -288,6 +288,24 @@
   }
 }
 
+@utility animate-data-capture-blink {
+  animation: data-capture-blink 500ms steps(1, end);
+}
+
+@keyframes data-capture-blink {
+  0%,
+  25%,
+  50%,
+  75%,
+  100% {
+    opacity: 1;
+  }
+  12.5%,
+  37.5% {
+    opacity: 0;
+  }
+}
+
 @keyframes tab-border-corner {
   0% {
     width: 0;

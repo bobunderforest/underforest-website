@@ -75,10 +75,12 @@ export const ExperienceEntry = ({
   const clickable = Boolean(entry.href) && active && fullEntryClickEnabled
   const lit = clickable && hovered && !innerHovered
 
-  useCenterActivationObserver(ref, handleInView, !entry.break)
+  useCenterActivationObserver(ref, handleInView)
 
   if (entry.break) {
-    return <ExperienceBreakNode entry={entry} dimmed={dimmed} />
+    return (
+      <ExperienceBreakNode entry={entry} dimmed={dimmed} entryRef={ref} />
+    )
   }
 
   return (
@@ -111,7 +113,7 @@ export const ExperienceEntry = ({
             : undefined
         }
       >
-        <ExperienceDetectionFrame />
+        <ExperienceDetectionFrame blinkKey={active ? entry.id : undefined} />
         {active && (
           <ProjectTitleChart
             animate

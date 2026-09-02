@@ -3,6 +3,7 @@ import { createContextWithHook } from 'utils/primitives/create-context-with-hook
 
 type ProjectFrameContextValue = {
   slot: string
+  subjectHash: string
   locked: boolean
   confidence: MotionValue<string>
   frameProgress: MotionValue<number>

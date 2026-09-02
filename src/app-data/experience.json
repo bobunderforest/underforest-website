@@ -120,7 +120,7 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "A course teaching semiotics to understand and compose contemparary art."
+          "body": "A course in semiotics for understanding and creating contemporary art."
         }
       ]
     },
@@ -174,8 +174,8 @@
         },
         {
           "kind": "video",
-          "caption": "previs · arcanum works",
-          "src": "/videos/ocean-threshold-previs.mp4"
+          "caption": "devlog · arcanum works",
+          "src": "/videos/ocean-threshold.mp4"
         }
       ]
     },

@@ -5,7 +5,6 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion'
-import { Text } from 'ui/common/typography/Text'
 import { TRACK_MARKER_SIZE, TRACK_TICK_STYLE } from 'ui/fx/track-rail'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 import { cns } from 'utils/formatters/classnames'
@@ -74,18 +73,18 @@ const ProjectStoryTrackItem = ({
         style={{ opacity: markerOpacity, y: markerY }}
         className={'absolute top-0 left-0 size-[7px] bg-accent'}
       />
-      <Text
-        size={'hint'}
+      <FieldLabel
         tone={'system'}
-        uppercase
-        className={'relative mb-2 flex gap-2'}
+        className={'relative mb-2'}
       >
         <span
           className={'absolute top-[9px] left-[-23px] h-px w-[14px] bg-edge'}
         />
         <span className={'tabular-nums'}>{padIndex(index)}</span>
-        {block.caption && <span className={'text-muted'}>{block.caption}</span>}
-      </Text>
+        {block.caption && (
+          <span className={'ml-2 text-muted'}>{block.caption}</span>
+        )}
+      </FieldLabel>
       <ProjectStoryBlockContent block={block} />
     </li>
   )

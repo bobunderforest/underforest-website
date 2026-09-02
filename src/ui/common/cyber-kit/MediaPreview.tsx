@@ -9,12 +9,20 @@ type MediaPreviewProps =
       alt?: string
       paging?: ImageModalPaging
       index?: number
+      aspectRatio?: number
     }
-  | { kind: 'video'; src: string; poster?: string }
+  | { kind: 'video'; src: string; poster?: string; aspectRatio?: number }
   | { kind: 'embed'; provider: 'youtube'; embedId: string }
 
 export const MediaPreview = (props: MediaPreviewProps) => (
-  <div className={'aspect-video w-full overflow-hidden border border-edge'}>
+  <div
+    style={
+      props.kind !== 'embed' && props.aspectRatio
+        ? { aspectRatio: props.aspectRatio }
+        : undefined
+    }
+    className={'aspect-video w-full overflow-hidden border border-edge'}
+  >
     {props.kind === 'image' && (
       <ImageOpenable
         src={props.src}

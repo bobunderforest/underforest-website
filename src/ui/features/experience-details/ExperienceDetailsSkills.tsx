@@ -1,4 +1,5 @@
 import { Text } from 'ui/common/typography/Text'
+import { FieldLabel } from 'ui/sections/FieldLabel'
 
 const ExperienceDetailsSkillTag = ({ skill }: { skill: string }) => (
   <Text
@@ -15,9 +16,7 @@ const ExperienceDetailsSkillTag = ({ skill }: { skill: string }) => (
 
 export const ExperienceDetailsSkills = ({ skills }: { skills: string[] }) => (
   <div className={'flex flex-col gap-1'}>
-    <Text size={'hint'} tone={'secondary'} uppercase>
-      skills
-    </Text>
+    <FieldLabel className={'mb-0'}>skills</FieldLabel>
     <Text
       tag={'ul'}
       size={'inherit'}

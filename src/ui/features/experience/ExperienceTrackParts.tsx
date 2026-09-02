@@ -25,7 +25,11 @@ export const ExperienceTrackNode = forwardRef<
   </li>
 ))
 
-export const ExperienceDetectionFrame = () => (
+export const ExperienceDetectionFrame = ({
+  blinkKey,
+}: {
+  blinkKey?: string
+}) => (
   <span
     aria-hidden
     className={
@@ -39,6 +43,7 @@ export const ExperienceDetectionFrame = () => (
       )}
     />
     <DataCaptureBorder
+      blinkKey={blinkKey}
       className={
         'opacity-0 transition-opacity duration-300 group-data-[active=true]:opacity-100'
       }

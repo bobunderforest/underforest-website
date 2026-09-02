@@ -12,7 +12,7 @@ export const ProjectTitleBlock = ({
   entry: ProjectEntry
   titleRef?: React.RefObject<HTMLDivElement | null>
 }) => {
-  const { slot, locked } = useProjectFrame()
+  const { subjectHash, locked } = useProjectFrame()
 
   return (
     <div className={'flex flex-col'}>
@@ -20,9 +20,13 @@ export const ProjectTitleBlock = ({
         size={'hint'}
         uppercase
         tone={locked ? 'accent' : 'dimmed'}
-        className={'mb-5 flex items-center transition-colors duration-300'}
+        className={
+          'mb-5 flex items-center italic transition-colors duration-300'
+        }
       >
-        <span className={'tabular-nums'}>subject {slot}</span>
+        <span>subject</span>
+        <span className={'mx-2 inline-block h-px w-5 bg-current'} />
+        <span className={'tabular-nums'}>#{subjectHash}</span>
       </Text>
 
       <div
@@ -33,7 +37,7 @@ export const ProjectTitleBlock = ({
         )}
       >
         <ProjectTitleChart animate={locked} />
-        <DataCaptureBorder />
+        <DataCaptureBorder blinkKey={locked ? entry.id : undefined} />
         <h3
           className={
             'relative font-face-title text-display leading-[0.8] font-bold [hyphens:none] whitespace-pre-line text-black uppercase'

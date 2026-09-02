@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { cns } from 'utils/formatters/classnames'
 import { openModal } from 'modules/modal/modalStore'
@@ -18,28 +18,38 @@ export const ImageOpenable = ({
   paging?: ImageModalPaging
   index?: number
 }) => {
-  const [isOpened, setOpened] = useState(false)
+  const [modalOpened, setModalOpened] = useState(false)
+  const [pagingIndex, setPagingIndex] = useState(index)
+
+  useEffect(() => paging?.subscribe(setPagingIndex), [paging])
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLImageElement>) => {
       const rect = e.currentTarget.getBoundingClientRect()
       paging?.setIndex(index)
+      setPagingIndex(index)
 
       openModal(ModalImage, {
         imageUrl: src,
         rect,
         paging,
-        onOpen: () => setOpened(true),
-        onClose: () => setOpened(false),
+        onOpen: () => setModalOpened(true),
+        onClose: () => setModalOpened(false),
       })
     },
     [src, paging, index],
   )
 
+  const isActiveModalSource = modalOpened && (!paging || pagingIndex === index)
+
   return (
     <img
       alt={alt}
-      className={cns('cursor-zoom-in', className, isOpened && 'opacity-0')}
+      className={cns(
+        'cursor-zoom-in',
+        className,
+        isActiveModalSource && 'opacity-0',
+      )}
       src={src}
       onClick={handleClick}
     />

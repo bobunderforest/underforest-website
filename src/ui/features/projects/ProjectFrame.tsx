@@ -3,11 +3,13 @@ import { AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { SectionContent } from 'ui/common/SectionContent'
 import { DataWire } from 'ui/common/cyber-kit/DataWire'
 import { ExperienceDetailsCredits } from 'ui/features/experience-details/ExperienceDetailsCredits'
+import { ExperienceDetailsStatus } from 'ui/features/experience-details/ExperienceDetailsStatus'
 import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
 import { useWindowSize } from 'utils/hooks/useWindowSize'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
+import { toSubjectHash } from 'utils/formatters/identifiers'
 import { ProjectFrameContext } from './project-frame-context'
 import { ProjectFrameBackground } from './ProjectFrameBackground'
 import { ProjectFrameHud } from './ProjectFrameHud'
@@ -32,6 +34,7 @@ export const ProjectFrame = ({
   const titleRef = useRef<HTMLDivElement>(null)
   const primaryActionRef = useRef<HTMLDivElement>(null)
   const [locked, setLocked] = useState(false)
+  const subjectHash = toSubjectHash(entry.id)
   const [wireGeometry, setWireGeometry] = useState({
     sourceDocumentY: 0,
     sourceX: 0,
@@ -87,9 +90,23 @@ export const ProjectFrame = ({
   useResizeObserver(stickyRailRef, measureWire, { initCall: false })
   useEffect(measureWire, [locked, measureWire, viewportWidth, viewportHeight])
 
+  const coverVideoSrc =
+    entry.cover?.kind === 'video' ? entry.cover.src : undefined
+  const coverVideoAppearsInStory =
+    coverVideoSrc !== undefined &&
+    entry.story.some(
+      (block) => block.kind === 'video' && block.src === coverVideoSrc,
+    )
+
   const value = useMemo(
-    () => ({ slot, locked, confidence: confidenceLabel, frameProgress }),
-    [slot, locked, confidenceLabel, frameProgress],
+    () => ({
+      slot,
+      subjectHash,
+      locked,
+      confidence: confidenceLabel,
+      frameProgress,
+    }),
+    [slot, subjectHash, locked, confidenceLabel, frameProgress],
   )
 
   return (
@@ -122,7 +139,11 @@ export const ProjectFrame = ({
             />
           )}
         </AnimatePresence>
-        <ProjectFrameBackground cover={entry.cover} active={locked} />
+        <ProjectFrameBackground
+          cover={entry.cover}
+          active={locked}
+          startVideoAtMiddle={coverVideoAppearsInStory}
+        />
         <ProjectFrameHud />
 
         <SectionContent className={'py-20 tablet-s:py-14'}>
@@ -148,7 +169,10 @@ export const ProjectFrame = ({
                 'sticky flex flex-col gap-2 tablet-s:static tablet-s:contents'
               }
             >
-              <div className={'tablet-s:order-2'}>
+              <div className={'flex flex-col gap-2 tablet-s:order-2'}>
+                {entry.status && (
+                  <ExperienceDetailsStatus status={entry.status} />
+                )}
                 <ProjectMetaReadout entry={entry} />
               </div>
               {entry.credits && entry.credits.length > 0 && (

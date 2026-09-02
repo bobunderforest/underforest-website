@@ -8,6 +8,7 @@ type Props = {
   readout?: ReactNode
   className?: string
   tone?: TextTone
+  blockComment?: boolean
 }
 
 export const FieldLabel = ({
@@ -15,6 +16,7 @@ export const FieldLabel = ({
   readout,
   className,
   tone = 'secondary',
+  blockComment = false,
 }: Props) => {
   return (
     <Text
@@ -22,11 +24,11 @@ export const FieldLabel = ({
       tone={tone}
       uppercase
       className={cns(
-        'mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1',
+        'mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 italic',
         className,
       )}
     >
-      <span>// {children}</span>
+      <span>{blockComment ? <>/* {children} */</> : <>// {children}</>}</span>
       {readout != null && (
         <Text tag={'span'} size={'hint'} tone={'system'}>
           {readout}

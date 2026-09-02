@@ -1,20 +1,23 @@
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { Link } from 'ui/common/typography/Link'
 import { Text } from 'ui/common/typography/Text'
+import { cns } from 'utils/formatters/classnames'
 import { channelTag } from 'utils/formatters/links'
 
 type Props = {
   href: string
   label: string
+  className?: string
 }
 
-export const ChannelLink = ({ href, label }: Props) => (
+export const ChannelLink = ({ href, label, className }: Props) => (
   <Link
     href={href}
     isExternal
-    className={
-      'group relative inline-flex items-stretch border border-edge transition-colors duration-150 hover:border-accent'
-    }
+    className={cns(
+      'group relative inline-flex items-stretch border border-edge transition-colors duration-150 hover:border-accent',
+      className,
+    )}
   >
     <DataCaptureBorder diagonal muted className={'group-hover:border-accent'} />
     <Text

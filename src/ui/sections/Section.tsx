@@ -8,6 +8,8 @@ type Props = React.BaseProps & {
   id: string
   index: string
   stage: string
+  stageAlias?: string
+  hideBorder?: boolean
   restOffsetTimeline?: number
   enterOffsetTimeline?: number
 }
@@ -16,6 +18,8 @@ export const Section = ({
   id,
   index,
   stage,
+  stageAlias,
+  hideBorder,
   restOffsetTimeline = 0.28,
   enterOffsetTimeline,
   className,
@@ -24,14 +28,10 @@ export const Section = ({
   useSectionAnchor({ id, restOffsetTimeline, enterOffsetTimeline })
 
   return (
-    <section
-      id={id}
-      data-stage={stage}
-      className={'relative'}
-    >
-      <TelemetryBorder />
+    <section id={id} data-stage={stage} className={'relative'}>
+      {!hideBorder && <TelemetryBorder />}
       <SectionContent isPadded className={className}>
-        <StageIndex index={index} stage={stage} />
+        <StageIndex index={index} stage={stage} alias={stageAlias} />
         {children}
       </SectionContent>
     </section>

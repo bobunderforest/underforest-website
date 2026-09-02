@@ -4,9 +4,25 @@ export type ExperienceDomainFilter = Domain | 'unified'
 
 export type LinkRef = { label: string; href: string }
 
+export type MediaGeometry = {
+  width: number
+  height: number
+  aspectRatio: number
+}
+
 export type ExperienceDetail =
-  | { kind: 'image'; src: string; alt?: string; caption?: string }
-  | { kind: 'video'; src: string; poster?: string; caption?: string }
+  | ({
+      kind: 'image'
+      src: string
+      alt?: string
+      caption?: string
+    } & Partial<MediaGeometry>)
+  | ({
+      kind: 'video'
+      src: string
+      poster?: string
+      caption?: string
+    } & Partial<MediaGeometry>)
   | { kind: 'embed'; provider: 'youtube'; embedId: string; caption?: string }
   | { kind: 'text'; body: string; caption?: string }
 
@@ -64,7 +80,7 @@ export type ProjectStoryBlock =
   | { kind: 'end'; caption?: string }
   | {
       kind: 'gallery'
-      items: { src: string; alt?: string }[]
+      items: ({ src: string; alt?: string } & Partial<MediaGeometry>)[]
       caption?: string
     }
   | { kind: 'link'; href: string; label: string; caption?: string }

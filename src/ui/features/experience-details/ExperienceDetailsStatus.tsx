@@ -7,7 +7,11 @@ export const ExperienceDetailsStatus = ({
 }: {
   status: ExperienceStatus
 }) => (
-  <div className={'border border-accent/50 bg-accent/[0.06] px-3 py-2'}>
+  <div
+    className={
+      'border border-accent/50 bg-accent/[0.06] px-3 py-2 backdrop-blur-md'
+    }
+  >
     <Text
       size={'hint'}
       tone={'accent'}

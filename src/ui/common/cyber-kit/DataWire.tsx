@@ -2,6 +2,8 @@ import { motion, useTransform, type MotionValue } from 'framer-motion'
 import { motionEase } from 'utils/anim/motion-ease'
 import { clamp } from 'utils/math/clamp'
 
+export const DATA_WIRE_DRAW_DURATION = 0.48
+
 type DataWireTarget =
   | { targetY: number; targetRange?: never }
   | {
@@ -67,7 +69,7 @@ export const DataWire = ({
     },
   )
   const transition = {
-    duration: reduced ? 0 : 0.48,
+    duration: reduced ? 0 : DATA_WIRE_DRAW_DURATION,
     ease: motionEase.enter,
   }
   const pinTransition = {

@@ -1,11 +1,21 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import {
+  AnimatePresence,
+  motion,
+  useIsPresent,
+  useScroll,
+  useTransform,
+} from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
-import { DataWire } from 'ui/common/cyber-kit/DataWire'
+import {
+  DATA_WIRE_DRAW_DURATION,
+  DataWire,
+} from 'ui/common/cyber-kit/DataWire'
 import { Text } from 'ui/common/typography/Text'
 import { Button } from 'ui/controls/Button'
 import type { ExperienceEntry } from 'ui/features/experience-data/types'
+import { FieldLabel } from 'ui/sections/FieldLabel'
 import { useStableHeightCollapseScroll } from 'utils/anim/collapsible-scroll'
 import { limitLenisWheelInput } from 'utils/anim/lenis'
 import { ease } from 'utils/anim/easings'
@@ -24,6 +34,7 @@ import { ExperienceDetailsSkills } from './ExperienceDetailsSkills'
 
 const VIEWPORT_PADDING = 24
 const FEED_HEADER_HEIGHT = 29
+const FEED_EXIT_FADE_DURATION = 0.1
 const WIRE_GAP = 26
 
 const ExperienceDetailsActions = ({
@@ -58,9 +69,9 @@ const ExperienceDetailsContent = ({
     {details.map((detail, i) => (
       <div key={i} className={'flex flex-col gap-2'}>
         {detail.caption && (
-          <Text size={'hint'} tone={'secondary'} uppercase>
+          <FieldLabel className={'mb-0'}>
             {detail.caption}
-          </Text>
+          </FieldLabel>
         )}
         <ExperienceDetailsBody detail={detail} />
       </div>
@@ -153,6 +164,7 @@ export const ExperienceDetails = ({
   sourceRef: React.RefObject<HTMLElement | null>
 }) => {
   const [reduced] = useState(prefersReducedMotion)
+  const isPresent = useIsPresent()
   const portalReady = useMounted()
   const { width: viewportWidth, height: viewportHeight } = useWindowSize()
   const { ref: contentRef, height: contentHeight } =
@@ -163,6 +175,8 @@ export const ExperienceDetails = ({
   const [sourceDocumentY, setSourceDocumentY] = useState(0)
   const [lockedSourceY, setLockedSourceY] = useState<number | null>(null)
   const [panelLeft, setPanelLeft] = useState(0)
+  const [borderVisible, setBorderVisible] = useState(false)
+  const [borderBlinkKey, setBorderBlinkKey] = useState(0)
   const { scrollY, scrollYProgress } = useScroll({
     target: entryRef,
     offset: ['start center', 'end center'],
@@ -273,8 +287,10 @@ export const ExperienceDetails = ({
           x: 0,
           y: '-50%',
           transition: {
-            duration: reduced ? 0 : 0.1,
-            delay: reduced ? 0 : 0.22,
+            duration: reduced ? 0 : FEED_EXIT_FADE_DURATION,
+            delay: reduced
+              ? 0
+              : DATA_WIRE_DRAW_DURATION - FEED_EXIT_FADE_DURATION,
             ease: motionEase.exit,
           },
         }}
@@ -289,20 +305,25 @@ export const ExperienceDetails = ({
             duration: reduced ? 0 : 0.22,
             ease: motionEase.travel,
           }}
+          onAnimationComplete={() => {
+            setBorderVisible(true)
+            setBorderBlinkKey((current) => current + 1)
+          }}
         >
-          <DataCaptureBorder />
+          {isPresent && borderVisible && (
+            <DataCaptureBorder blinkKey={borderBlinkKey || undefined} />
+          )}
           <div className={'h-full overflow-hidden'}>
-            <Text
-              size={'hint'}
+            <FieldLabel
               tone={'system'}
-              uppercase
+              blockComment
+              readout={<span aria-hidden>▚</span>}
               className={
-                'flex shrink-0 items-center justify-between border-b border-accent/25 px-3 py-[6px]'
+                'mb-0 w-full shrink-0 justify-between border-b border-accent/25 px-3 py-[6px]'
               }
             >
-              <span>detail feed</span>
-              <span aria-hidden>▚</span>
-            </Text>
+              detail feed
+            </FieldLabel>
             <div
               className={'overflow-hidden'}
               style={{ maxHeight: availableContentHeight }}
