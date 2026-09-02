@@ -54,9 +54,7 @@ export const DataCaptureBorder = ({
           aria-hidden
           className={cns(
             'pointer-events-none absolute size-[7px]',
-            blinkKey !== undefined &&
-              !reduced &&
-              'animate-data-capture-blink',
+            blinkKey && !reduced && 'animate-data-capture-blink',
             colorClassName,
             className,
             CORNERS[corner],

@@ -21,7 +21,6 @@ const resolveProject = (raw: ProjectRef): ProjectEntry => {
   return {
     ...merged,
     title: merged.label || merged.place || merged.id,
-    description: merged.description,
     periodLabel,
     story: merged.story ?? merged.details ?? [],
   }

@@ -107,25 +107,24 @@ export const ProjectFrameBackground = ({
   )
   const CustomCover =
     cover && isCustomCover(cover) ? CUSTOM_COVERS[cover.kind] : undefined
+  const mediaCover = cover && !isCustomCover(cover) ? cover : undefined
 
   return (
     <div
       aria-hidden
       className={'pointer-events-none absolute inset-0 -z-[1] bg-surface'}
     >
-      {CustomCover ? (
+      {CustomCover && (
         <Suspense fallback={null}>
           <CustomCover active={active} />
         </Suspense>
-      ) : (
-        cover &&
-        !isCustomCover(cover) && (
-          <CoverMedia
-            cover={cover}
-            active={active}
-            startVideoAtMiddle={startVideoAtMiddle}
-          />
-        )
+      )}
+      {mediaCover && (
+        <CoverMedia
+          cover={mediaCover}
+          active={active}
+          startVideoAtMiddle={startVideoAtMiddle}
+        />
       )}
       <motion.div
         className={'absolute inset-0'}

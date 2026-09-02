@@ -1,3 +1,4 @@
+import { cns } from 'utils/formatters/classnames'
 import { ChannelLink } from 'ui/common/cyber-kit/ChannelLink'
 import { Button } from 'ui/controls/Button'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
@@ -22,7 +23,7 @@ export const ProjectLinkRow = ({
             isExternal
             large
             wide
-            className={`w-full ${LINK_BACKGROUND_CLASS}`}
+            className={cns('w-full', LINK_BACKGROUND_CLASS)}
           >
             Visit project ↗
           </Button>

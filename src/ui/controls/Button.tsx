@@ -91,7 +91,7 @@ export const Button = ({
       </Text>
       <DataCaptureBorder
         diagonal
-        blinkKey={borderBlinkKey || undefined}
+        blinkKey={borderBlinkKey}
         className={accentStyle.corners}
       />
     </>

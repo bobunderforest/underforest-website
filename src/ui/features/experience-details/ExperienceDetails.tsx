@@ -8,10 +8,7 @@ import {
 } from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
-import {
-  DATA_WIRE_DRAW_DURATION,
-  DataWire,
-} from 'ui/common/cyber-kit/DataWire'
+import { DATA_WIRE_DRAW_DURATION, DataWire } from 'ui/common/cyber-kit/DataWire'
 import { Text } from 'ui/common/typography/Text'
 import { Button } from 'ui/controls/Button'
 import type { ExperienceEntry } from 'ui/features/experience-data/types'
@@ -69,9 +66,7 @@ const ExperienceDetailsContent = ({
     {details.map((detail, i) => (
       <div key={i} className={'flex flex-col gap-2'}>
         {detail.caption && (
-          <FieldLabel className={'mb-0'}>
-            {detail.caption}
-          </FieldLabel>
+          <FieldLabel className={'mb-0'}>{detail.caption}</FieldLabel>
         )}
         <ExperienceDetailsBody detail={detail} />
       </div>
@@ -175,7 +170,6 @@ export const ExperienceDetails = ({
   const [sourceDocumentY, setSourceDocumentY] = useState(0)
   const [lockedSourceY, setLockedSourceY] = useState<number | null>(null)
   const [panelLeft, setPanelLeft] = useState(0)
-  const [borderVisible, setBorderVisible] = useState(false)
   const [borderBlinkKey, setBorderBlinkKey] = useState(0)
   const { scrollY, scrollYProgress } = useScroll({
     target: entryRef,
@@ -305,13 +299,12 @@ export const ExperienceDetails = ({
             duration: reduced ? 0 : 0.22,
             ease: motionEase.travel,
           }}
-          onAnimationComplete={() => {
-            setBorderVisible(true)
+          onAnimationComplete={() =>
             setBorderBlinkKey((current) => current + 1)
-          }}
+          }
         >
-          {isPresent && borderVisible && (
-            <DataCaptureBorder blinkKey={borderBlinkKey || undefined} />
+          {isPresent && borderBlinkKey > 0 && (
+            <DataCaptureBorder blinkKey={borderBlinkKey} />
           )}
           <div className={'h-full overflow-hidden'}>
             <FieldLabel

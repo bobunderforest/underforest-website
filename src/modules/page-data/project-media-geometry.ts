@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises'
+import { open } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 import type {
@@ -48,13 +48,37 @@ const findVideoTrackGeometry = (buffer: Buffer): MediaGeometry | undefined => {
   return visitBoxes(0, buffer.length)
 }
 
-const resolveMediaGeometry = async (
+const MP4_PROBE_BYTES = 512 * 1024
+
+const readVideoGeometry = async (
+  path: string,
+): Promise<MediaGeometry | undefined> => {
+  const file = await open(path, 'r')
+  try {
+    const { size } = await file.stat()
+    const windowSize = Math.min(size, MP4_PROBE_BYTES)
+    const head = Buffer.alloc(windowSize)
+    await file.read(head, 0, windowSize, 0)
+    const headGeometry = findVideoTrackGeometry(head)
+    if (headGeometry || size <= windowSize) return headGeometry
+
+    const tail = Buffer.alloc(windowSize)
+    await file.read(tail, 0, windowSize, size - windowSize)
+    return findVideoTrackGeometry(tail)
+  } finally {
+    await file.close()
+  }
+}
+
+const geometryCache = new Map<string, Promise<MediaGeometry | undefined>>()
+
+const readMediaGeometry = async (
   src: string,
 ): Promise<MediaGeometry | undefined> => {
   if (!src.startsWith('/')) return undefined
   const path = `${publicDirectory}${src.slice(1)}`
   if (src.toLowerCase().endsWith('.mp4')) {
-    return findVideoTrackGeometry(await readFile(path))
+    return readVideoGeometry(path)
   }
   const metadata = await sharp(path).metadata()
   if (!metadata.width || !metadata.height) return undefined
@@ -63,6 +87,14 @@ const resolveMediaGeometry = async (
     height: metadata.height,
     aspectRatio: metadata.width / metadata.height,
   }
+}
+
+const resolveMediaGeometry = (src: string) => {
+  const cached = geometryCache.get(src)
+  if (cached) return cached
+  const pending = readMediaGeometry(src)
+  geometryCache.set(src, pending)
+  return pending
 }
 
 const enrichBlock = async (

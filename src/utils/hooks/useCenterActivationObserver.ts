@@ -4,13 +4,12 @@ import { useWindowSize } from 'utils/hooks/useWindowSize'
 export const useCenterActivationObserver = <E extends HTMLElement>(
   ref: React.RefObject<E | null>,
   onChange: (inView: boolean) => void,
-  enabled = true,
 ) => {
   const { height: viewportHeight } = useWindowSize()
 
   useEffect(() => {
     const node = ref.current
-    if (!enabled || !node) return
+    if (!node) return
 
     const activationAreaHeight = Math.max(viewportHeight * 0.04, 1)
     const verticalMargin = Math.max(
@@ -24,5 +23,5 @@ export const useCenterActivationObserver = <E extends HTMLElement>(
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [enabled, onChange, ref, viewportHeight])
+  }, [onChange, ref, viewportHeight])
 }
