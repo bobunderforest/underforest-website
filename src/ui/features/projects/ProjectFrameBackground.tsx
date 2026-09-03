@@ -1,6 +1,5 @@
-import { lazy, Suspense, useCallback, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useRef } from 'react'
 import { motion, useTransform } from 'framer-motion'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { useVideoInView } from 'utils/hooks/useVideoInView'
 import {
   ProjectBackground,
@@ -46,7 +45,6 @@ const CoverMedia = ({
   startVideoAtMiddle: boolean
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [reduced] = useState(prefersReducedMotion)
   const handleLoadedMetadata = useCallback(
     (event: React.SyntheticEvent<HTMLVideoElement>) => {
       const video = event.currentTarget
@@ -58,7 +56,7 @@ const CoverMedia = ({
   )
 
   useVideoInView(videoRef, {
-    enabled: active && !reduced && cover.kind === 'video',
+    enabled: active && cover.kind === 'video',
     smooth: true,
   })
 
@@ -80,7 +78,6 @@ const CoverMedia = ({
       ref={videoRef}
       src={cover.src}
       poster={cover.poster}
-      muted
       loop
       playsInline
       preload={'none'}

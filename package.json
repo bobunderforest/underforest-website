@@ -8,7 +8,8 @@
     "preview": "astro preview --host --port 3000",
     "astro": "astro",
     "lint": "node scripts/gen-tw-merge.mjs --check && eslint .",
-    "gen:tw-merge": "node scripts/gen-tw-merge.mjs"
+    "gen:tw-merge": "node scripts/gen-tw-merge.mjs",
+    "gen:resume": "node scripts/gen-resume-pdf.mjs"
   },
   "dependencies": {
     "@nanostores/react": "^1.1.0",
@@ -40,6 +41,7 @@
     "@vitejs/plugin-legacy": "^8.2.3",
     "eslint": "^10.9.0",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "pdfkit": "^0.20.2",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",

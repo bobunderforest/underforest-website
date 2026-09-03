@@ -11,7 +11,7 @@ import { openExternal } from 'utils/browser/open-external'
 import { cns } from 'utils/formatters/classnames'
 import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
 import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
-import { ProjectTitleChart } from 'ui/features/projects/ProjectTitleChart'
+import { ContourField } from 'ui/common/cyber-kit/ContourField'
 import {
   ExperienceAnchor,
   ExperienceDetectionFrame,
@@ -78,9 +78,7 @@ export const ExperienceEntry = ({
   useCenterActivationObserver(ref, handleInView)
 
   if (entry.break) {
-    return (
-      <ExperienceBreakNode entry={entry} dimmed={dimmed} entryRef={ref} />
-    )
+    return <ExperienceBreakNode entry={entry} dimmed={dimmed} entryRef={ref} />
   }
 
   return (
@@ -115,7 +113,7 @@ export const ExperienceEntry = ({
       >
         <ExperienceDetectionFrame blinkKey={active ? entry.id : undefined} />
         {active && (
-          <ProjectTitleChart
+          <ContourField
             animate
             palette={'dark-red'}
             className={

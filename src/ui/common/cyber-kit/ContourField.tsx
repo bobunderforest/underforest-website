@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { MountInView } from 'ui/fx/MountInView'
 import { useFullscreenShader } from 'utils/anim/fullscreen-shader'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { cns } from 'utils/formatters/classnames'
 
 const createFragmentShader = ({
@@ -109,30 +108,42 @@ const FRAGMENT_SHADERS = {
     contourStrength: 'glow * 0.08 + fine * 0.58',
     bandStrength: 'bandGlow * 0.03 + bands * 0.24',
   }),
+  'bold-accent': createFragmentShader({
+    background: 'vec3(1.0, 0.416, 0.122)',
+    contour: 'vec3(0.15, 0.045, 0.024)',
+    band: 'vec3(0.18, 0.055, 0.03)',
+    contourStrength: 'glow * 0.035 + fine * 0.28',
+    bandStrength: 'bandGlow * 0.02 + bands * 0.14',
+  }),
 } as const
 
-type ProjectTitleChartPalette = keyof typeof FRAGMENT_SHADERS
+export type ContourFieldPalette = keyof typeof FRAGMENT_SHADERS
 
-const ProjectTitleChartCanvas = ({
+const PALETTE_GROUNDS: Record<ContourFieldPalette, string> = {
+  light: 'bg-text',
+  'dark-red': 'bg-[#0e0203]',
+  'bold-accent': 'bg-accent',
+}
+
+const ContourFieldCanvas = ({
   animate,
   palette,
 }: {
   animate: boolean
-  palette: ProjectTitleChartPalette
+  palette: ContourFieldPalette
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [reduced] = useState(prefersReducedMotion)
 
   useFullscreenShader(canvasRef, {
     fragment: FRAGMENT_SHADERS[palette],
     extension: 'OES_standard_derivatives',
-    animate: animate && !reduced,
+    animate,
   })
 
   return <canvas ref={canvasRef} className={'block size-full'} />
 }
 
-export const ProjectTitleChart = ({
+export const ContourField = ({
   animate,
   inverted = false,
   palette = 'light',
@@ -140,18 +151,18 @@ export const ProjectTitleChart = ({
 }: {
   animate: boolean
   inverted?: boolean
-  palette?: ProjectTitleChartPalette
+  palette?: ContourFieldPalette
   className?: string
 }) => (
   <MountInView
     decorative
     className={cns(
-      'pointer-events-none absolute inset-0 size-full',
-      palette === 'dark-red' ? 'bg-[#0e0203]' : 'bg-text',
+      'pointer-events-none absolute inset-0',
+      PALETTE_GROUNDS[palette],
       inverted && 'invert',
       className,
     )}
   >
-    <ProjectTitleChartCanvas animate={animate} palette={palette} />
+    <ContourFieldCanvas animate={animate} palette={palette} />
   </MountInView>
 )

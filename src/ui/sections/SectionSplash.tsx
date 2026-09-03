@@ -1,10 +1,12 @@
 import { Section } from './Section'
-import { Text } from 'ui/common/typography/Text'
+import { Text, type TextTone } from 'ui/common/typography/Text'
 import { ASCIIText } from 'ui/fx/AsciiText'
 import { SocialLinks } from './SocialLinks'
 import { FieldLabel } from './FieldLabel'
 import type { ResponsiveValue } from 'utils/browser/breakpoints'
 import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
+import { CrtDitherOverlay } from 'ui/fx/CrtDitherOverlay'
+import splash from 'app-data/splash.json'
 
 const splashAsciiFontSize: ResponsiveValue<number> = {
   desktop: 8,
@@ -18,25 +20,33 @@ export const SectionSplash = () => {
   const asciiFontSize = useResponsiveValue(splashAsciiFontSize)
 
   return (
-    <Section hideBorder id={'about'} index={'00'} stage={'Identity'}>
+    <Section
+      hideBorder
+      id={'about'}
+      index={'00'}
+      stage={'Identity'}
+      decoration={<CrtDitherOverlay />}
+    >
       <Text
         uppercase
-        className={'mb-[50px] flex flex-wrap items-baseline gap-x-3 gap-y-1'}
+        tone={'primary'}
+        className={
+          'mb-intersection-padding flex flex-wrap items-baseline gap-x-3 gap-y-1'
+        }
       >
-        <Text tag={'span'} tone={'primary'}>
-          Frontend Developer
+        <span>
+          {splash.role}
           <Text tag={'span'} tone={'accent'}>
-            {' → '}
-            Game Developer
+            {splash.roleAccent}
           </Text>
-        </Text>
+        </span>
       </Text>
 
-      <div className={'relative mb-8'}>
-        <h1 className={'sr-only'}>Dmitrii Podlesnyi</h1>
+      <div className={'relative mb-intersection-padding'}>
+        <h1 className={'sr-only'}>{splash.nameLabel}</h1>
         <ASCIIText
-          text={'DMITRII\nPODLESNYI'}
-          enableWaves={true}
+          text={splash.name}
+          enableWaves
           asciiFontSize={asciiFontSize}
           textFontSize={400}
           ditherNoiseScale={0.15}
@@ -51,28 +61,24 @@ export const SectionSplash = () => {
           }
         />
       </div>
-      <div className={'mb-10'}>
+      <div className={'mb-intersection-padding'}>
         <SocialLinks />
       </div>
-      <FieldLabel>about me</FieldLabel>
-      <Text tag={'p'} tone={'primary'} className={'mb-4 max-w-[62ch]'}>
-        I am a full-stack web developer with 10+ years of experience and a
-        strong focus on front-end. I have contributed to building high-traffic
-        platforms, Web3 solutions, and interactive 3D projects.
-      </Text>
-      <Text tag={'p'} tone={'soft'} className={'mb-4 max-w-[62ch]'}>
-        I am excited about contributing to creative, challenging, and
-        passion-driven projects.
-      </Text>
-      <Text tag={'p'} tone={'soft'} className={'mb-12 max-w-[62ch]'}>
-        TODO: Write about game dev switch
-        <br />
-        TODO: Write about teamwork and collaboration processes experience
-        <br />
-        TODO: Write about scroll animations
-        <br />
-        TODO: Write about AI
-      </Text>
+      <FieldLabel>{splash.aboutLabel}</FieldLabel>
+      {splash.about.map((paragraph, index) => (
+        <Text
+          key={index}
+          tag={'p'}
+          tone={paragraph.tone as TextTone}
+          className={
+            index < splash.about.length - 1
+              ? 'mb-4 max-w-prose-measure'
+              : 'max-w-prose-measure'
+          }
+        >
+          {paragraph.text}
+        </Text>
+      ))}
     </Section>
   )
 }

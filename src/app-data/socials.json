@@ -1,13 +1,28 @@
 [
   {
     "label": "linkedin",
-    "href": "https://www.linkedin.com/in/dmitrypodlesny"
+    "href": "https://www.linkedin.com/in/dmitrypodlesny",
+    "tone": "atomic"
   },
-  { "label": "github", "href": "https://github.com/bobunderforest" },
-  { "label": "instagram", "href": "https://instagram.com/under.forest" },
+  {
+    "label": "github",
+    "href": "https://github.com/bobunderforest"
+  },
+  {
+    "label": "instagram",
+    "href": "https://instagram.com/under.forest"
+  },
+  {
+    "label": "itch",
+    "href": "https://bobunderforest.itch.io/gnarly-crawl-vr"
+  },
   {
     "label": "youtube",
     "href": "https://www.youtube.com/@bobunderforest.develop"
   },
-  { "label": "itch", "href": "https://bobunderforest.itch.io/gnarly-crawl-vr" }
+  {
+    "label": "twitter",
+    "href": "https://x.com/dmitrypodlesny",
+    "scribbled": true
+  }
 ]

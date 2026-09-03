@@ -17,7 +17,6 @@ import { useStableHeightCollapseScroll } from 'utils/anim/collapsible-scroll'
 import { limitLenisWheelInput } from 'utils/anim/lenis'
 import { ease } from 'utils/anim/easings'
 import { motionEase } from 'utils/anim/motion-ease'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { subscribeScrollLockChange } from 'utils/browser/scroll-util'
 import { cns } from 'utils/formatters/classnames'
 import { useElementSize } from 'utils/hooks/useElementSize'
@@ -66,25 +65,23 @@ const ExperienceDetailsContent = ({
     {details.map((detail, i) => (
       <div key={i} className={'flex flex-col gap-2'}>
         {detail.caption && (
-          <FieldLabel className={'mb-0'}>{detail.caption}</FieldLabel>
+          <FieldLabel gap={'none'}>{detail.caption}</FieldLabel>
         )}
         <ExperienceDetailsBody detail={detail} />
       </div>
     ))}
+    <ExperienceDetailsActions href={href} links={links} />
+    {status && <ExperienceDetailsStatus status={status} />}
     {credits && credits.length > 0 && (
       <ExperienceDetailsCredits credits={credits} />
     )}
-    {status && <ExperienceDetailsStatus status={status} />}
-    <ExperienceDetailsActions href={href} links={links} />
   </>
 )
 
 const ExperienceDetailsContentTransition = ({
   entry,
-  reduced,
 }: {
   entry: ExperienceEntry
-  reduced: boolean
 }) => (
   <AnimatePresence mode={'wait'}>
     <motion.div
@@ -94,14 +91,14 @@ const ExperienceDetailsContentTransition = ({
       animate={{
         opacity: 1,
         transition: {
-          duration: reduced ? 0 : 0.18,
+          duration: 0.18,
           ease: motionEase.enter,
         },
       }}
       exit={{
         opacity: 0,
         transition: {
-          duration: reduced ? 0 : 0.18,
+          duration: 0.18,
           ease: motionEase.exit,
         },
       }}
@@ -158,7 +155,6 @@ export const ExperienceDetails = ({
   entryRef: React.RefObject<HTMLElement | null>
   sourceRef: React.RefObject<HTMLElement | null>
 }) => {
-  const [reduced] = useState(prefersReducedMotion)
   const isPresent = useIsPresent()
   const portalReady = useMounted()
   const { width: viewportWidth, height: viewportHeight } = useWindowSize()
@@ -256,7 +252,6 @@ export const ExperienceDetails = ({
   return createPortal(
     <>
       <DataWire
-        reduced={reduced}
         scrollY={scrollY}
         sourceDocumentY={sourceDocumentY}
         lockedSourceY={lockedSourceY}
@@ -281,10 +276,8 @@ export const ExperienceDetails = ({
           x: 0,
           y: '-50%',
           transition: {
-            duration: reduced ? 0 : FEED_EXIT_FADE_DURATION,
-            delay: reduced
-              ? 0
-              : DATA_WIRE_DRAW_DURATION - FEED_EXIT_FADE_DURATION,
+            duration: FEED_EXIT_FADE_DURATION,
+            delay: DATA_WIRE_DRAW_DURATION - FEED_EXIT_FADE_DURATION,
             ease: motionEase.exit,
           },
         }}
@@ -296,7 +289,7 @@ export const ExperienceDetails = ({
           animate={{ height: panelHeight }}
           exit={{ height: 0 }}
           transition={{
-            duration: reduced ? 0 : 0.22,
+            duration: 0.22,
             ease: motionEase.travel,
           }}
           onAnimationComplete={() =>
@@ -311,8 +304,9 @@ export const ExperienceDetails = ({
               tone={'system'}
               blockComment
               readout={<span aria-hidden>▚</span>}
+              gap={'none'}
               className={
-                'mb-0 w-full shrink-0 justify-between border-b border-accent/25 px-3 py-[6px]'
+                'w-full shrink-0 justify-between border-b border-accent/25 px-3 py-[6px]'
               }
             >
               detail feed
@@ -322,10 +316,7 @@ export const ExperienceDetails = ({
               style={{ maxHeight: availableContentHeight }}
             >
               <motion.div ref={contentRef} style={{ y: contentY }}>
-                <ExperienceDetailsContentTransition
-                  entry={entry}
-                  reduced={reduced}
-                />
+                <ExperienceDetailsContentTransition entry={entry} />
               </motion.div>
             </div>
           </div>
@@ -347,7 +338,6 @@ export const ExperienceDetailsDisclosure = ({
   onExpandedChange: (expanded: boolean) => void
   onCollapseComplete: () => void
 }) => {
-  const [reduced] = useState(prefersReducedMotion)
   const panelId = useId()
   const {
     panelRef,
@@ -389,7 +379,7 @@ export const ExperienceDetailsDisclosure = ({
             onUpdate={handleAnimationUpdate}
             onAnimationComplete={handleAnimationComplete}
             transition={{
-              duration: reduced ? 0 : 0.32,
+              duration: 0.32,
               ease: motionEase.enter,
             }}
           >

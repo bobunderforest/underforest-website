@@ -6,6 +6,7 @@ import { cns } from 'utils/formatters/classnames'
 import { Text } from 'ui/common/typography/Text'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { motionEase } from 'utils/anim/motion-ease'
+import { CrtHoverTexture } from 'ui/fx/CrtHoverTexture'
 
 const OPTIONS: {
   value: ExperienceDomainFilter
@@ -26,35 +27,36 @@ const FilterLockPlate = ({ reclassifying }: { reclassifying: boolean }) => (
     aria-hidden
     layoutId={'experience-filter-lock'}
     transition={{ duration: 0.32, ease: motionEase.travel }}
-    className={'absolute inset-0 -z-10 overflow-hidden bg-system'}
+    className={'absolute inset-0 -z-10 overflow-hidden bg-accent'}
   >
+    <CrtHoverTexture mode={'muted'} />
     {reclassifying && (
       <motion.span
         key={'reclassification-scan'}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: [0, 1, 0] }}
         transition={{ duration: 0.38, ease: motionEase.travel }}
-        className={'absolute inset-0 origin-left bg-accent'}
+        className={'absolute inset-0 origin-left bg-system'}
       />
     )}
     <span
       className={
-        'absolute top-0 left-0 size-[6px] border-t border-l border-accent'
+        'absolute top-0 left-0 size-[6px] border-t border-l border-system'
       }
     />
     <span
       className={
-        'absolute top-0 right-0 size-[6px] border-t border-r border-accent'
+        'absolute top-0 right-0 size-[6px] border-t border-r border-system'
       }
     />
     <span
       className={
-        'absolute bottom-0 left-0 size-[6px] border-b border-l border-accent'
+        'absolute bottom-0 left-0 size-[6px] border-b border-l border-system'
       }
     />
     <span
       className={
-        'absolute right-0 bottom-0 size-[6px] border-r border-b border-accent'
+        'absolute right-0 bottom-0 size-[6px] border-r border-b border-system'
       }
     />
   </motion.span>
@@ -70,9 +72,14 @@ export const ExperienceFilter = ({ className }: Props) => {
         uppercase
         role={'group'}
         aria-label={'Experience domain filter'}
-        className={cns('relative inline-flex border border-edge', className)}
+        size={'lead'}
+        className={cns(
+          'relative inline-flex bg-base/85 backdrop-blur-md',
+          'border border-edge',
+          className,
+        )}
       >
-        <DataCaptureBorder diagonal offset={5} size={9} />
+        <DataCaptureBorder diagonal offset={6} size={12} />
         {OPTIONS.map((option) => {
           const active = option.value === domainFilter
           const selectOption = () => {
@@ -88,18 +95,19 @@ export const ExperienceFilter = ({ className }: Props) => {
               aria-pressed={active}
               onClick={selectOption}
               className={cns(
-                'relative isolate cursor-pointer overflow-hidden px-[25px] py-[10px] uppercase',
+                'relative isolate cursor-pointer overflow-hidden uppercase',
+                'px-[46px] py-[20px] tablet-s:px-[28px] tablet-s:py-[14px]',
                 'border-r border-edge last:border-r-0',
                 'transition-colors duration-150',
-                active ? 'text-black' : 'text-muted hover:text-text',
+                active ? 'text-base' : 'text-muted hover:text-text',
               )}
             >
               {active && <FilterLockPlate reclassifying={reclassifying} />}
               <span
                 aria-hidden
                 className={cns(
-                  'absolute top-[3px] left-[5px] text-[7px] leading-none tracking-normal',
-                  active ? 'text-black/55' : 'text-muted/60',
+                  'absolute top-[6px] left-[9px] text-[9px] leading-none tracking-normal',
+                  active ? 'text-base/55' : 'text-muted/60',
                 )}
               >
                 {option.index}

@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useRef, type RefObject } from 'react'
 import { whenPageSettled } from 'utils/browser/idle'
-import {
-  createActivityRamp,
-  stepActivityRamp,
-} from 'utils/anim/activity-ramp'
+import { createActivityRamp, stepActivityRamp } from 'utils/anim/activity-ramp'
 
 type Options = { enabled?: boolean; smooth?: boolean }
 
@@ -43,11 +40,7 @@ export const useVideoInView = (
       const delta =
         previous === null ? 0 : Math.min(now - previous, MAX_DELTA_MS)
       previous = now
-      const activity = stepActivityRamp(
-        activityRef.current,
-        shouldPlay,
-        delta,
-      )
+      const activity = stepActivityRamp(activityRef.current, shouldPlay, delta)
       video.playbackRate = Math.max(activity, MIN_PLAYBACK_RATE)
       if (!shouldPlay && activity === 0) {
         video.pause()
@@ -62,6 +55,7 @@ export const useVideoInView = (
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+    video.muted = true
     return whenPageSettled(() => {
       video.preload = 'auto'
       video.load()
@@ -75,8 +69,10 @@ export const useVideoInView = (
       isInViewRef.current = entries.some((entry) => entry.isIntersecting)
       updatePlayback()
     })
+    video.addEventListener('canplay', updatePlayback)
     observer.observe(video)
     return () => {
+      video.removeEventListener('canplay', updatePlayback)
       observer.disconnect()
       cancelAnimationFrame(frameRef.current)
     }

@@ -3,20 +3,23 @@ import 'styles/global.css'
 
 import Html from 'ui/layout/Html.astro'
 import HeadScripts from './HeadScripts.astro'
-import { Header } from 'ui/layout/Header'
+import { SectionSplash } from 'ui/sections/SectionSplash'
+import { SiteRuntime } from 'ui/layout/SiteRuntime'
+import { HudNav } from 'ui/features/navigation/HudNav'
+import { PageOutro } from 'ui/layout/PageOutro'
 import { ModalRenderer } from 'modules/modal/ModalRenderer'
 
+import type { NavTargetId } from 'ui/features/navigation/nav-targets'
 import type { MetaData } from 'utils/types/data'
 
 import metaTagsBase from 'app-data/meta-tags.json'
 
 type Props = {
   meta?: MetaData
-  useHeader?: boolean
-  isHeaderContrast?: boolean
+  navCurrent?: NavTargetId
 }
 
-const { meta, useHeader = true, isHeaderContrast } = Astro.props
+const { meta, navCurrent } = Astro.props
 
 const metaData = {
   metaUrl: metaTagsBase.url,
@@ -27,11 +30,13 @@ const metaData = {
 
 <Html {...metaData}>
   <HeadScripts slot="head" />
-  {
-    useHeader && (
-      <Header isContrast={isHeaderContrast} client:load transition:persist />
-    )
-  }
-  <slot />
+  <a class="skip-link" href="#stage">Skip to content</a>
+  <HudNav client:load transition:persist="site-nav" />
+  <SectionSplash client:load transition:persist="site-splash" />
+  <main id="stage">
+    <slot />
+  </main>
+  <PageOutro client:visible current={navCurrent} />
+  <SiteRuntime client:load transition:persist="site-runtime" />
   <ModalRenderer client:load />
 </Html>

@@ -27,7 +27,7 @@ export const ExperienceDetailsCredits = ({
   className?: string
 }) => (
   <div className={cns('border border-edge px-3 py-2', className)}>
-    <FieldLabel tone={'system'} className={'mb-2'}>
+    <FieldLabel tone={'system'} gap={'tight'}>
       credits
     </FieldLabel>
     <Text tag={'ul'} className={'flex flex-col gap-1'}>

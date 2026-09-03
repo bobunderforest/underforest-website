@@ -8,12 +8,26 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "Dungeon synth aesthetic VR game about escaping an interdemensional magical stronghold.\nSolo development: gameplay, VR interactions, Quest 3 standalone build optimization, and the promo website."
+          "body": [
+            "Dungeon synth aesthetic VR game about escaping an interdemensional magical stronghold.",
+            "Solo development: gameplay, VR interactions, Quest 3 standalone build optimization, and the promo website."
+          ]
         },
         {
           "kind": "video",
           "caption": "trailer · gameplay capture",
           "src": "/videos/gnarlycrawl-trailer.mp4"
+        },
+        {
+          "kind": "text",
+          "caption": "systems I have worked on",
+          "body": [
+            "GAS-inspired ability system, data-driven behaviour.",
+            "Save/load checkpoint system.",
+            "VR interaction: physics-based grabbing, two-handed wielding, pocket inventory, comfort options.",
+            "Motion-based melee combat, shield blocking, firearms.",
+            "Quest 3 on-device profiling and frame-budget tuning."
+          ]
         },
         {
           "kind": "gallery",
@@ -47,17 +61,39 @@
       "id": "ocean-threshold",
       "dataFromExperience": true,
       "label": "Ocean\nThreshold",
-      "cover": { "kind": "video", "src": "/videos/ocean-threshold.mp4" },
+      "cover": { "kind": "video", "src": "/videos/ocean-threshold-safe.mp4" },
       "story": [
         {
           "kind": "text",
           "caption": "sample · classification shift",
-          "body": "A conceptual virtual reality experience.\nFirst full-time gamedev role, the web → gamedev reclassification point."
+          "body": [
+            "First full-time gamedev role, the web → gamedev reclassification point."
+          ]
+        },
+        {
+          "kind": "text",
+          "caption": "about the project",
+          "body": [
+            "A narrative experience by Arden Vald — an immersive descent into the space between life and death, and the journey back.",
+            "It contributes to ongoing conversations around mental health, suicide awareness, and the role of storytelling in healing."
+          ]
         },
         {
           "kind": "video",
           "caption": "devlog · arcanum works",
-          "src": "/videos/ocean-threshold.mp4"
+          "src": "/videos/ocean-threshold.mp4",
+          "safeSrc": "/videos/ocean-threshold-safe.mp4"
+        },
+        {
+          "kind": "text",
+          "caption": "systems I have worked on",
+          "body": [
+            "Real-time stereoscopic VR mirrors.",
+            "Full-body VR player avatar.",
+            "VR locomotion: climbing, rope climbing, hanging and swinging.",
+            "Immersive zero-gravity floating movement.",
+            "The origin of my personal game framework: input handling, ability system, VR hand interactions, later shared across other projects."
+          ]
         },
         {
           "kind": "end",
@@ -68,12 +104,17 @@
     {
       "id": "in2into",
       "dataFromExperience": true,
+      "domains": ["web", "game"],
+      "resumeNote": "Interactive mobile WebAR showcase (Three.js, real-time 3D)",
       "cover": { "kind": "video", "src": "/videos/in2into-web-ar.mp4" },
       "story": [
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "Interactive mobile AR showcase for a contemporary jewelry brand.\nPresented at the exhibition “Secret,&nbsp;Sacred&nbsp;and&nbsp;Scattered”."
+          "body": [
+            "Interactive mobile AR showcase for a contemporary jewelry brand.",
+            "Presented at the exhibition “Secret,&nbsp;Sacred&nbsp;and&nbsp;Scattered”."
+          ]
         },
         {
           "kind": "video",
@@ -90,12 +131,17 @@
       "id": "kowloon-city-guide",
       "dataFromExperience": true,
       "label": "Kowloon\nCity Guide",
+      "domains": ["web"],
+      "resumeNote": "Immersive visual-storytelling site about the Kowloon Walled City",
       "cover": { "kind": "video", "src": "/videos/kowloon-short-preview.mp4" },
       "story": [
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "An immersive visual storytelling website about one of the most densely populated places on Earth.\nBuilt with friends for a contest."
+          "body": [
+            "An immersive visual storytelling website about one of the most densely populated places on Earth.",
+            "Built with friends for a contest."
+          ]
         },
         {
           "kind": "video",
@@ -113,14 +159,15 @@
       "label": "Physics\nProgramming\nPractice",
       "cover": { "kind": "video", "src": "/videos/physics-practice.mp4" },
       "href": "https://bobunderforest.github.io/coding-train-practice/",
-      "period": "2018 — sometimes",
-      "domains": ["web"],
+      "period": "2018 – sometimes",
+      "domains": ["web", "game"],
+      "resumeNote": "Creative-coding and physics-simulation exercises",
       "summary": [""],
       "story": [
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "An sketchbook of creative-coding and physics simulation experiments inspired by [CodingTrain](https://www.youtube.com/@TheCodingTrain) YouTube tutorials."
+          "body": "A sketchbook of creative-coding and physics-simulation exercises inspired by [CodingTrain](https://www.youtube.com/@TheCodingTrain) YouTube tutorials."
         },
         {
           "kind": "video",
@@ -144,7 +191,8 @@
       "href": "https://bobunderforest.github.io/kaleidoscope/",
       "period": "2018",
       "employment": "Contest project",
-      "domains": ["web"],
+      "domains": ["web", "game"],
+      "resumeNote": "Real-time generative kaleidoscope, a creative-programming experiment",
       "summary": ["A real-time generative kaleidoscope visual."],
       "cover": { "kind": "kaleidoscope" },
       "story": [
@@ -178,7 +226,8 @@
       "cover": { "kind": "video", "src": "/videos/space-invaders.mp4" },
       "period": "2015",
       "employment": "Programming test",
-      "domains": ["web"],
+      "domains": ["web", "game"],
+      "resumeNote": "One of my first creative-programming experiences, built as a job-application test",
       "summary": [
         "A compact Space Invaders clone, an early JavaScript exercise."
       ],

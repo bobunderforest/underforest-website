@@ -120,7 +120,7 @@ export const ExperienceStatusNote = ({
       tag={'p'}
       size={'hint'}
       tone={'secondary'}
-      className={'hidden max-w-[62ch] italic tablet-s:block'}
+      className={'hidden max-w-prose-measure italic tablet-s:block'}
     >
       {status.note}
     </Text>
@@ -158,7 +158,7 @@ export const ExperienceSummary = ({
     tag={'ul'}
     tone={'secondary'}
     className={cns(
-      'max-w-[62ch] transition-colors duration-300 group-data-[active=true]:text-text',
+      'max-w-prose-measure transition-colors duration-300 group-data-[active=true]:text-text',
       hasStatusNote && 'tablet-s:mb-3',
     )}
   >

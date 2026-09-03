@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr'
 import legacy from '@vitejs/plugin-legacy'
 import { twMergeConfig } from './scripts/vite-plugin-tw-merge.mjs'
+import { resumePdf } from './scripts/vite-plugin-resume-pdf.mjs'
 
 const buildRev = new Date().toISOString().slice(0, 10).replace(/-/g, '.')
 
@@ -23,6 +24,7 @@ export default defineConfig({
     },
     plugins: [
       twMergeConfig(),
+      resumePdf(),
       tailwindcss(),
       svgr(),
       legacy({

@@ -1,5 +1,4 @@
-import { useState, type CSSProperties } from 'react'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
+import { type CSSProperties } from 'react'
 import { cns } from 'utils/formatters/classnames'
 
 type Props = {
@@ -53,7 +52,6 @@ export const DataCaptureBorder = ({
   offset = 2,
   size = 7,
 }: Props) => {
-  const [reduced] = useState(prefersReducedMotion)
   const colorClassName = muted ? 'border-muted/60' : 'border-accent'
   const corners = diagonal ? DIAGONAL_CORNERS : ALL_CORNERS
 
@@ -76,7 +74,7 @@ export const DataCaptureBorder = ({
           style={cornerStyle({ corner, offset, size })}
           className={cns(
             'pointer-events-none absolute',
-            blinkKey && !reduced && 'animate-data-capture-blink',
+            blinkKey && 'animate-data-capture-blink',
             colorClassName,
             className,
             CORNERS[corner],

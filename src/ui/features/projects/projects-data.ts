@@ -1,12 +1,15 @@
+import experience from 'app-data/experience.json'
 import projects from 'app-data/projects.json'
-import { EXPERIENCE } from 'ui/features/experience-data/experience-data'
 import type {
+  ExperienceEntry,
   ProjectEntry,
   ProjectRef,
 } from 'ui/features/experience-data/types'
 import { formatDateRange } from 'utils/formatters/dates'
 
-const experienceById = new Map(EXPERIENCE.map((entry) => [entry.id, entry]))
+const experienceById = new Map(
+  (experience.experience as ExperienceEntry[]).map((entry) => [entry.id, entry]),
+)
 
 const resolveProject = (raw: ProjectRef): ProjectEntry => {
   const base = raw.dataFromExperience ? experienceById.get(raw.id) : undefined

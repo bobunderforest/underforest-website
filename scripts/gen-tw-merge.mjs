@@ -69,6 +69,70 @@ const readBreakpointMaxWidths = (design, names) =>
     }),
   )
 
+const SPACING_CLASS_GROUPS = [
+  'p',
+  'px',
+  'py',
+  'pt',
+  'pr',
+  'pb',
+  'pl',
+  'ps',
+  'pe',
+  'm',
+  'mx',
+  'my',
+  'mt',
+  'mr',
+  'mb',
+  'ml',
+  'ms',
+  'me',
+  'gap',
+  'gap-x',
+  'gap-y',
+  'space-x',
+  'space-y',
+  'w',
+  'min-w',
+  'h',
+  'min-h',
+  'size',
+  'inset',
+  'inset-x',
+  'inset-y',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'start',
+  'end',
+  'translate-x',
+  'translate-y',
+  'basis',
+]
+
+const CONTAINER_CLASS_GROUPS = ['w', 'min-w', 'max-w']
+
+const buildClassGroups = (groups, names) =>
+  names.length
+    ? Object.fromEntries(groups.map((group) => [group, [{ [group]: names }]]))
+    : {}
+
+const mergeClassGroups = (...sources) =>
+  sources.reduce(
+    (merged, source) => ({
+      ...merged,
+      ...Object.fromEntries(
+        Object.entries(source).map(([group, definitions]) => [
+          group,
+          [...(merged[group] ?? []), ...definitions],
+        ]),
+      ),
+    }),
+    {},
+  )
+
 const buildSources = async () => {
   const design = await loadDesign()
 
@@ -77,11 +141,17 @@ const buildSources = async () => {
   const themeColors = readThemeValues(design, '--color-')
   const fontSizes = readThemeNamespace(design, '--text-')
   const leadings = readThemeNamespace(design, '--leading-')
+  const spacings = readThemeNamespace(design, '--spacing-')
+  const containers = readThemeNamespace(design, '--container-')
 
-  const classGroups = {
-    ...(fontSizes.length && { 'font-size': [{ text: fontSizes }] }),
-    ...(leadings.length && { leading: [{ leading: leadings }] }),
-  }
+  const classGroups = mergeClassGroups(
+    {
+      ...(fontSizes.length && { 'font-size': [{ text: fontSizes }] }),
+      ...(leadings.length && { leading: [{ leading: leadings }] }),
+    },
+    buildClassGroups(SPACING_CLASS_GROUPS, spacings),
+    buildClassGroups(CONTAINER_CLASS_GROUPS, containers),
+  )
 
   const twMerge = `import type { ConfigExtension, DefaultClassGroupIds, DefaultThemeGroupIds } from 'tailwind-merge'
 

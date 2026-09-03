@@ -1,4 +1,3 @@
-import { createPortal } from 'react-dom'
 import { useScroll, useTransform, useVelocity, motion } from 'framer-motion'
 import { HudLegend, HudPanel, HudReadout } from 'ui/features/hud/HudPanel'
 import { HudReticles } from 'ui/features/hud/HudReticles'
@@ -40,11 +39,11 @@ export const HudLayer = () => {
   const stage = useActiveStage()
   const { width, height } = useWindowSize()
   const dpr = useDpr()
-  const portalReady = useMounted()
+  const mounted = useMounted()
 
-  if (!portalReady) return null
+  if (!mounted) return null
 
-  return createPortal(
+  return (
     <div
       aria-hidden
       className={
@@ -97,7 +96,6 @@ export const HudLayer = () => {
           </HudLegend>
         </div>
       </HudPanel>
-    </div>,
-    document.body,
+    </div>
   )
 }

@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Text } from 'ui/common/typography/Text'
 import { HUD_BOOT_LINES, type HudBootLine } from 'ui/features/hud/hud-fields'
@@ -43,7 +42,7 @@ const HudBootOverlay = () => {
     return () => window.removeEventListener('keydown', finish)
   }, [active, finish])
 
-  return createPortal(
+  return (
     <AnimatePresence>
       {active && (
         <motion.div
@@ -84,8 +83,7 @@ const HudBootOverlay = () => {
           </Text>
         </motion.div>
       )}
-    </AnimatePresence>,
-    document.body,
+    </AnimatePresence>
   )
 }
 

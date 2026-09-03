@@ -1,0 +1,26 @@
+{
+  "name": "Dmitrii Podlesnyi",
+  "location": "Tbilisi, Georgia — remote or relocation",
+  "email": "rezed93@gmail.com",
+  "phone": "",
+  "site": "https://bobunderforest.me",
+  "variants": {
+    "web": {
+      "file": "Resume_Dmitrii_Podlesnyi_Frontend.pdf",
+      "title": "Front-end Developer",
+      "summary": [
+        "Front-end developer with 10+ years of experience building production web applications in React, TypeScript and Next.js, including Web3 interfaces, streaming platforms and real-time WebGL graphics.",
+        "AI-assisted tooling is part of my workflow: scaffolding, refactors, code review, and architecture research."
+      ]
+    },
+    "game": {
+      "file": "Resume_Dmitrii_Podlesnyi_Gamedev.pdf",
+      "title": "Game Developer · Unreal Engine",
+      "summary": [
+        "Gameplay programmer in Unreal Engine with C++ and Blueprints. Experienced in VR development. Backed by 10+ years of web engineering, including WebGL rendering and performance-critical animation.",
+        "Shipped a game as sole developer; collaborated on Ocean Threshold, an artist-led VR project.",
+        "AI-assisted tooling is part of my workflow: scaffolding, refactors, code review, and architecture research."
+      ]
+    }
+  }
+}

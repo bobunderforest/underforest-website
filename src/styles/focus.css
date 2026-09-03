@@ -1,0 +1,35 @@
+@layer base {
+  :where(
+    a,
+    button,
+    summary,
+    [tabindex],
+    input,
+    textarea,
+    select
+  ):focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 300;
+    padding: 9px 16px;
+    background-color: var(--color-accent);
+    color: var(--color-base);
+    font-family: var(--font-face-title);
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transform: translateY(calc(-100% - 24px));
+  }
+
+  .skip-link:focus-visible {
+    outline-offset: 2px;
+    transform: translateY(0);
+  }
+}

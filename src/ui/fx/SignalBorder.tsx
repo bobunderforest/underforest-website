@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useInView, useScroll, useVelocity } from 'framer-motion'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { whenPageSettled } from 'utils/browser/idle'
 import { clamp } from 'utils/math/clamp'
 import { cns } from 'utils/formatters/classnames'
@@ -95,7 +94,7 @@ export const SignalBorder = ({ className }: { className?: string }) => {
   useEffect(() => whenPageSettled(() => setSettled(true)), [])
 
   useEffect(() => {
-    if (!settled || !visible || prefersReducedMotion()) return
+    if (!settled || !visible) return
 
     let frame = 0
     let previous = 0

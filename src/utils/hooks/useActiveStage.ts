@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { useMotionValueEvent, useScroll } from 'framer-motion'
-import { sectionAnchorsChanged } from 'utils/anim/section-anchors'
 import { getScrollPosition } from 'utils/browser/scroll-util'
 import { debounce } from 'utils/primitives/debounce'
 
@@ -62,12 +61,12 @@ export const useActiveStage = () => {
 
     const resizeObserver = new ResizeObserver(remeasure)
     resizeObserver.observe(document.body)
-    const unsubscribe = sectionAnchorsChanged.on(remeasure)
+    document.addEventListener('astro:page-load', remeasure)
     document.fonts?.ready.then(remeasure)
 
     return () => {
       resizeObserver.disconnect()
-      unsubscribe()
+      document.removeEventListener('astro:page-load', remeasure)
     }
   }, [scrollY])
 

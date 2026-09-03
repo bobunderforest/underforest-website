@@ -13,7 +13,12 @@ export const ExperienceDetailsBody = ({
 
   if (detail.kind === 'video') {
     return (
-      <MediaPreview kind={'video'} src={detail.src} poster={detail.poster} />
+      <MediaPreview
+        kind={'video'}
+        src={detail.src}
+        safeSrc={detail.safeSrc}
+        poster={detail.poster}
+      />
     )
   }
 

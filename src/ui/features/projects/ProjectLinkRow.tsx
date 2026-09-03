@@ -1,9 +1,6 @@
-import { cns } from 'utils/formatters/classnames'
 import { ChannelLink } from 'ui/common/cyber-kit/ChannelLink'
 import { Button } from 'ui/controls/Button'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
-
-const LINK_BACKGROUND_CLASS = 'bg-base/50 backdrop-blur-md'
 
 export const ProjectLinkRow = ({
   entry,
@@ -23,7 +20,8 @@ export const ProjectLinkRow = ({
             isExternal
             large
             wide
-            className={cns('w-full', LINK_BACKGROUND_CLASS)}
+            field
+            className={'w-full'}
           >
             Visit project ↗
           </Button>
@@ -32,11 +30,7 @@ export const ProjectLinkRow = ({
       {!!entry.links?.length && (
         <div className={'flex flex-wrap items-center gap-2'}>
           {entry.links.map((link) => (
-            <ChannelLink
-              key={link.href}
-              {...link}
-              className={LINK_BACKGROUND_CLASS}
-            />
+            <ChannelLink key={link.href} {...link} />
           ))}
         </div>
       )}

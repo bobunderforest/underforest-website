@@ -8,6 +8,9 @@
   --spacing-experience-column-width: 600px;
   --spacing-grid-gap-regular: 50px;
 
+  --container-prose-measure: 68ch;
+  --container-column-width: 800px;
+
   --spacing-content-outer: calc((100vw - var(--spacing-content-width)) / 2);
   --spacing-content-outer-padded: calc(
     var(--spacing-content-outer) + var(--spacing-content-padding)

@@ -3,7 +3,7 @@ import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
 import { useProjectFrame } from './project-frame-context'
-import { ProjectTitleChart } from './ProjectTitleChart'
+import { ContourField } from 'ui/common/cyber-kit/ContourField'
 
 export const ProjectTitleBlock = ({
   entry,
@@ -12,23 +12,10 @@ export const ProjectTitleBlock = ({
   entry: ProjectEntry
   titleRef?: React.RefObject<HTMLDivElement | null>
 }) => {
-  const { subjectHash, locked } = useProjectFrame()
+  const { locked } = useProjectFrame()
 
   return (
     <div className={'flex flex-col'}>
-      <Text
-        size={'hint'}
-        uppercase
-        tone={locked ? 'accent' : 'dimmed'}
-        className={
-          'mb-5 flex items-center italic transition-colors duration-300'
-        }
-      >
-        <span>subject</span>
-        <span className={'mx-2 inline-block h-px w-5 bg-current'} />
-        <span className={'tabular-nums'}>#{subjectHash}</span>
-      </Text>
-
       <div
         ref={titleRef}
         className={cns(
@@ -36,7 +23,7 @@ export const ProjectTitleBlock = ({
           entry.description && 'mb-15',
         )}
       >
-        <ProjectTitleChart animate={locked} />
+        <ContourField animate={locked} />
         <DataCaptureBorder blinkKey={locked ? entry.id : undefined} />
         <h3
           className={
@@ -52,7 +39,7 @@ export const ProjectTitleBlock = ({
           tag={'p'}
           size={'lead'}
           tone={'primary'}
-          className={'mb-5 max-w-[62ch] whitespace-pre-line'}
+          className={'mb-5 max-w-prose-measure whitespace-pre-line'}
         >
           {entry.description}
         </Text>

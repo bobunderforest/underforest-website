@@ -1,0 +1,14 @@
+---
+import Layout from 'ui/layout/Layout.astro'
+import { PageResume } from 'ui/pages/PageResume'
+
+const meta = {
+  metaTitle: 'Resume — Dmitrii Podlesnyi',
+  metaDescription:
+    'Full-stack and front-end engineering record: 10+ years of shipped work, skills, languages and education.',
+}
+---
+
+<Layout meta={meta} navCurrent="resume">
+  <PageResume client:load />
+</Layout>

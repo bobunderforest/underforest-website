@@ -1,6 +1,5 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useMotionValueEvent, type MotionValue } from 'framer-motion'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { cns } from 'utils/formatters/classnames'
 import { useIsomorphicLayoutEffect } from 'utils/hooks/useIsomorphicLayoutEffect'
 
@@ -17,7 +16,6 @@ const EDGE_FRACTIONS = [0.25, 0.5, 0.75]
 const CROSS_CYCLE_PX = 420
 const CROSS_RATE_MIN = 0.55
 const CROSS_RATE_RANGE = 1.5
-const CROSS_REDUCED_OPACITY = 0.4
 const CROSS_BLINK_MS = 500
 
 const wrap = (value: number) => ((value % 1) + 1) % 1
@@ -110,7 +108,6 @@ const CornerReticle = () => (
 )
 
 export const HudReticles = ({ scrollY }: { scrollY: MotionValue<number> }) => {
-  const [reduced] = useState(prefersReducedMotion)
   const crossRefs = useRef<(HTMLSpanElement | null)[]>([])
   const ticksRef = useRef<number[]>([])
 
@@ -119,16 +116,13 @@ export const HudReticles = ({ scrollY }: { scrollY: MotionValue<number> }) => {
       const tick = crossTick(scrollY.get(), timing)
       const element = crossRefs.current[index]
       if (element) {
-        element.style.opacity = reduced
-          ? String(CROSS_REDUCED_OPACITY)
-          : String(isTickVisible(tick) ? 1 : 0)
+        element.style.opacity = String(isTickVisible(tick) ? 1 : 0)
       }
       return tick
     })
-  }, [reduced, scrollY])
+  }, [scrollY])
 
   useMotionValueEvent(scrollY, 'change', (value) => {
-    if (reduced) return
     CROSS_TIMINGS.forEach((timing, index) => {
       const element = crossRefs.current[index]
       if (!element) return

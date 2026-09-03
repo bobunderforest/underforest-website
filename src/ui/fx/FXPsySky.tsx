@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { MountInView } from 'ui/fx/MountInView'
 import { useFullscreenShader } from 'utils/anim/fullscreen-shader'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 
 const RESOLUTION_SCALE = 0.75
 const skyPixelRatio = () => RESOLUTION_SCALE
@@ -106,12 +105,10 @@ void main() {
 
 const PsySkyCanvas = ({ active }: { active: boolean }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [reduced] = useState(prefersReducedMotion)
 
   useFullscreenShader(canvasRef, {
     fragment: FRAGMENT_SHADER,
     pixelRatio: skyPixelRatio,
-    enabled: !reduced,
     animate: active,
   })
 

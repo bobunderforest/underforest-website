@@ -1,12 +1,15 @@
 @layer base {
-  html.html-scroll-lock {
-    overflow-y: scroll;
+  html {
+    scrollbar-gutter: stable;
   }
 
-  body.body-scroll-lock {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
+  html.html-scroll-lock {
+    scrollbar-color: transparent transparent;
+
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
   }
 }
 

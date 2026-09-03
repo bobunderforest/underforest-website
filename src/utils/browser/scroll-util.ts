@@ -3,7 +3,6 @@ import { isBrowser } from './is-browser'
 
 // export const SCROLL_STORAGE_PREFIX = 'saved-scroll-'
 export const HTML_LOCK_CLASS = 'html-scroll-lock'
-export const BODY_LOCK_CLASS = 'body-scroll-lock'
 
 let lockersStack = 0
 let scrollPosition = 0
@@ -11,17 +10,27 @@ let isScrollLocked = false
 const scrollLockChange = new EventEmitter<boolean>()
 // let preventScrollRestoring = false
 
-let body: any
-let html: any
+const applyScrollLock = () => {
+  document.documentElement.classList.add(HTML_LOCK_CLASS)
+}
+
+const holdScrollPosition = () => {
+  if (window.scrollY !== scrollPosition) window.scrollTo(0, scrollPosition)
+}
 
 if (isBrowser) {
-  body = document.body
-  html = document.documentElement
+  document.addEventListener('astro:after-swap', () => {
+    if (isScrollLocked) applyScrollLock()
+  })
 }
 
 export const getScrollPosition = () => {
   if (!isScrollLocked) {
-    scrollPosition = window.pageYOffset || html.scrollTop || body.scrollTop || 0
+    scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
   }
   return scrollPosition
 }
@@ -29,7 +38,6 @@ export const getScrollPosition = () => {
 export const setScrollPosition = (scroll: number) => {
   if (isScrollLocked) {
     scrollPosition = scroll
-    body.style.top = `-${scroll}px`
   } else {
     window.scrollTo(0, scroll)
   }
@@ -37,12 +45,16 @@ export const setScrollPosition = (scroll: number) => {
 
 // Scroll Locker
 export const lockScroll = () => {
-  if (!isBrowser || ++lockersStack > 1) return
-  const scroll = getScrollPosition()
+  if (!isBrowser) return
+  lockersStack += 1
+  if (isScrollLocked) {
+    applyScrollLock()
+    return
+  }
+  getScrollPosition()
   isScrollLocked = true
-  html.classList.add(HTML_LOCK_CLASS)
-  body.classList.add(BODY_LOCK_CLASS)
-  body.style.top = `-${scroll}px`
+  applyScrollLock()
+  window.addEventListener('scroll', holdScrollPosition)
   scrollLockChange.fire(true)
 }
 
@@ -50,11 +62,13 @@ export const lockScroll = () => {
 export const unlockScroll = () => {
   if (!isBrowser || lockersStack === 0) return
   lockersStack -= 1
-  if (lockersStack > 0) return
-  html.classList.remove(HTML_LOCK_CLASS)
-  body.classList.remove(BODY_LOCK_CLASS)
-  body.style.top = ''
+  if (lockersStack > 0) {
+    applyScrollLock()
+    return
+  }
+  document.documentElement.classList.remove(HTML_LOCK_CLASS)
   const scroll = getScrollPosition()
+  window.removeEventListener('scroll', holdScrollPosition)
   window.scrollTo(0, scroll)
   isScrollLocked = false
   scrollLockChange.fire(false)

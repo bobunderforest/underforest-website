@@ -12,7 +12,13 @@ type MediaPreviewProps =
       index?: number
       aspectRatio?: number
     }
-  | { kind: 'video'; src: string; poster?: string; aspectRatio?: number }
+  | {
+      kind: 'video'
+      src: string
+      safeSrc?: string
+      poster?: string
+      aspectRatio?: number
+    }
   | { kind: 'embed'; provider: 'youtube'; embedId: string }
 
 export const MediaPreview = (props: MediaPreviewProps) => {
@@ -38,6 +44,7 @@ export const MediaPreview = (props: MediaPreviewProps) => {
       {props.kind === 'video' && (
         <VideoOpenable
           src={props.src}
+          safeSrc={props.safeSrc}
           poster={props.poster}
           className={'size-full'}
         />

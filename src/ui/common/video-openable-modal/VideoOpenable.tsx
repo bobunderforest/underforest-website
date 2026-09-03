@@ -5,16 +5,20 @@ import { useVideoInView } from 'utils/hooks/useVideoInView'
 import { grabVideoFrame } from './frame-grab'
 import { CanvasFrame } from './CanvasFrame'
 import { ModalVideo } from './ModalVideo'
+import { SensitiveVideoConsent } from './SensitiveVideoConsent'
 
 export const VideoOpenable = ({
   src,
+  safeSrc,
   poster,
   className,
-}: React.BaseProps & { src: string; poster?: string }) => {
+}: React.BaseProps & { src: string; safeSrc?: string; poster?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const frameRef = useRef<string | undefined>(undefined)
   const [isOpened, setOpened] = useState(false)
+  const [hasConsented, setHasConsented] = useState(false)
   const [restoreCanvas, setRestoreCanvas] = useState<HTMLCanvasElement>()
+  const activeSrc = safeSrc && !hasConsented ? safeSrc : src
 
   useVideoInView(videoRef, { enabled: !isOpened })
 
@@ -41,7 +45,7 @@ export const VideoOpenable = ({
       void grabVideoFrame(video).then((frame) => {
         frameRef.current = frame
         openModal(ModalVideo, {
-          src,
+          src: activeSrc,
           poster,
           still: frame ?? poster,
           rect,
@@ -70,8 +74,10 @@ export const VideoOpenable = ({
         })
       })
     },
-    [src, poster, clearRestore],
+    [activeSrc, poster, clearRestore],
   )
+
+  const handleConsent = useCallback(() => setHasConsented(true), [])
 
   return (
     <div
@@ -84,15 +90,17 @@ export const VideoOpenable = ({
     >
       <video
         ref={videoRef}
-        src={src}
+        src={activeSrc}
         poster={poster}
-        muted
         loop
         playsInline
         preload={'none'}
         onSeeked={clearRestore}
         className={'absolute top-0 left-0 h-full w-full object-cover'}
       />
+      {safeSrc && !hasConsented && (
+        <SensitiveVideoConsent onConsent={handleConsent} />
+      )}
       {restoreCanvas && (
         <CanvasFrame
           canvas={restoreCanvas}

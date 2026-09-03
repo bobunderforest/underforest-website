@@ -1,0 +1,54 @@
+@layer components {
+  .scribble-strike {
+    position: relative;
+    display: inline-block;
+    color: color-mix(in srgb, currentColor 68%, transparent);
+    text-decoration: none;
+    text-shadow:
+      -1px 0 var(--color-muted),
+      1px 0 var(--color-base);
+  }
+
+  .scribble-strike::before,
+  .scribble-strike::after {
+    position: absolute;
+    left: -3%;
+    width: 106%;
+    pointer-events: none;
+    content: '';
+    background: currentColor;
+    transform-origin: center;
+  }
+
+  .scribble-strike::before {
+    top: 43%;
+    height: 2px;
+    clip-path: polygon(
+      0 30%,
+      13% 0,
+      24% 70%,
+      39% 15%,
+      53% 100%,
+      68% 20%,
+      82% 80%,
+      100% 35%,
+      100% 100%,
+      0 100%
+    );
+    transform: rotate(-2deg) translateX(-1px);
+  }
+
+  .scribble-strike::after {
+    top: 58%;
+    height: 1px;
+    opacity: 0.65;
+    transform: rotate(1deg) translateX(2px);
+  }
+
+  .group:hover .scribble-strike {
+    color: inherit;
+    text-shadow:
+      -2px 0 var(--color-system),
+      2px 0 var(--color-base);
+  }
+}

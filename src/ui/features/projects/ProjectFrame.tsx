@@ -4,12 +4,11 @@ import { SectionContent } from 'ui/common/SectionContent'
 import { DataWire } from 'ui/common/cyber-kit/DataWire'
 import { ExperienceDetailsCredits } from 'ui/features/experience-details/ExperienceDetailsCredits'
 import { ExperienceDetailsStatus } from 'ui/features/experience-details/ExperienceDetailsStatus'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
+import { getScrollPosition } from 'utils/browser/scroll-util'
 import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
 import { useWindowSize } from 'utils/hooks/useWindowSize'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
-import { toSubjectHash } from 'utils/formatters/identifiers'
 import { ProjectFrameContext } from './project-frame-context'
 import { ProjectFrameBackground } from './ProjectFrameBackground'
 import { ProjectFrameHud } from './ProjectFrameHud'
@@ -34,7 +33,6 @@ export const ProjectFrame = ({
   const titleRef = useRef<HTMLDivElement>(null)
   const primaryActionRef = useRef<HTMLDivElement>(null)
   const [locked, setLocked] = useState(false)
-  const subjectHash = toSubjectHash(entry.id)
   const [wireGeometry, setWireGeometry] = useState({
     sourceDocumentY: 0,
     sourceX: 0,
@@ -70,7 +68,7 @@ export const ProjectFrame = ({
     const primaryActionRect = primaryAction.getBoundingClientRect()
     const gridRect = grid.getBoundingClientRect()
     const stickyRailRect = stickyRail.getBoundingClientRect()
-    const scrollTop = scrollY.get()
+    const scrollTop = getScrollPosition()
     const targetOffsetY =
       primaryActionRect.top + primaryActionRect.height / 2 - stickyRailRect.top
     setWireGeometry({
@@ -82,7 +80,7 @@ export const ProjectFrame = ({
       targetMinY: STICKY_RAIL_TOP + targetOffsetY,
       targetX: primaryActionRect.left,
     })
-  }, [scrollY])
+  }, [])
 
   useResizeObserver(titleRef, measureWire)
   useResizeObserver(primaryActionRef, measureWire, { initCall: false })
@@ -101,12 +99,11 @@ export const ProjectFrame = ({
   const value = useMemo(
     () => ({
       slot,
-      subjectHash,
       locked,
       confidence: confidenceLabel,
       frameProgress,
     }),
-    [slot, subjectHash, locked, confidenceLabel, frameProgress],
+    [slot, locked, confidenceLabel, frameProgress],
   )
 
   return (
@@ -123,7 +120,6 @@ export const ProjectFrame = ({
             <DataWire
               key={'project-data-wire'}
               bendFromTargetX={WIRE_BEND_FROM_TARGET_X}
-              reduced={prefersReducedMotion()}
               scrollY={scrollY}
               sourceDocumentY={wireGeometry.sourceDocumentY}
               lockedSourceY={null}
@@ -146,7 +142,7 @@ export const ProjectFrame = ({
         />
         <ProjectFrameHud />
 
-        <SectionContent className={'py-20 tablet-s:py-14'}>
+        <SectionContent isPadded>
           <div
             ref={gridRef}
             className={

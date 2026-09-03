@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { whenPageSettled } from 'utils/browser/idle'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { cns } from 'utils/formatters/classnames'
 
 const vertexShader = `
@@ -139,13 +138,7 @@ class PixelDitherPass {
         sampleHeight,
       )
       this.context.clearRect(0, 0, outputWidth, outputHeight)
-      this.context.drawImage(
-        this.sampleCanvas,
-        0,
-        0,
-        outputWidth,
-        outputHeight,
-      )
+      this.context.drawImage(this.sampleCanvas, 0, 0, outputWidth, outputHeight)
       this.applyDither(this.context, outputWidth, outputHeight, time)
     }
   }
@@ -174,7 +167,7 @@ class PixelDitherPass {
         const phase = areaTime - cycle
         const isActive =
           noiseHash(areaX, areaY, cycle + 1) < this.options.amount
-        const localX = (blockX % areaColumns + 0.5) / areaColumns
+        const localX = ((blockX % areaColumns) + 0.5) / areaColumns
         const revealedUntil = THREE.MathUtils.clamp(phase / 0.3, 0, 1)
         const hiddenUntil = THREE.MathUtils.clamp((phase - 0.55) / 0.3, 0, 1)
         const isRevealed = localX <= revealedUntil
@@ -359,7 +352,6 @@ class DitherTextRenderer {
 
     this.container.appendChild(this.pixelPass.canvas)
     this.setSize(this.width, this.height)
-
   }
 
   setSize(w: number, h: number) {
@@ -489,12 +481,11 @@ export function ASCIIText({
     let initializing = false
     let hasSettled = false
     let isOnScreen = false
-    const reduced = prefersReducedMotion()
 
     const syncPlayback = () => {
       const renderer = rendererRef.current
       if (!renderer) return
-      if (hasSettled && isOnScreen && !reduced) renderer.start()
+      if (hasSettled && isOnScreen) renderer.start()
       else renderer.stop()
     }
 

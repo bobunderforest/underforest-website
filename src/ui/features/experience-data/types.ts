@@ -20,11 +20,12 @@ export type ExperienceDetail =
   | ({
       kind: 'video'
       src: string
+      safeSrc?: string
       poster?: string
       caption?: string
     } & Partial<MediaGeometry>)
   | { kind: 'embed'; provider: 'youtube'; embedId: string; caption?: string }
-  | { kind: 'text'; body: string; caption?: string }
+  | { kind: 'text'; body: string | string[]; caption?: string }
 
 export type ExperienceStatusKind = 'discontinued' | 'unavailable' | 'suspended'
 
@@ -44,6 +45,7 @@ export type Skill = {
   domains: Domain[]
   primary?: boolean
   rising?: boolean
+  area?: string
 }
 
 export type ExperienceEntry = {
@@ -63,6 +65,14 @@ export type ExperienceEntry = {
   details?: ExperienceDetail[]
   status?: ExperienceStatus
   credits?: Credit[]
+  resumeVariants?: string[]
+  aside?: boolean
+  asideLabel?: string
+  periodLabel?: string
+  resume?: {
+    summary?: string[]
+    skills?: string[]
+  }
 }
 
 export enum ProjectBackground {
@@ -89,6 +99,7 @@ export type ProjectRef = {
   id: string
   description?: string
   dataFromExperience?: boolean
+  resumeNote?: string
   from?: string
   to?: string
   period?: string

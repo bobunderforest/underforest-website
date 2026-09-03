@@ -1,11 +1,12 @@
 const CHANNEL_TAG: [test: RegExp, tag: string][] = [
-  [/linkedin\.com/, 'job'],
+  [/linkedin\.com/, 'hire me'],
   [/github\.com/, 'src'],
   [/(youtube\.com|youtu\.be)/, 'vid'],
   [/instagram\.com/, 'img'],
   [/store\.steampowered\.com/, 'steam'],
-  [/itch\.io/, 'play'],
+  [/itch\.io/, 'game'],
   [/behance\.net/, 'bnc'],
+  [/x\.com/, 'x.com'],
 ]
 
 export const channelTag = (href: string) =>

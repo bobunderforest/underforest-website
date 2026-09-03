@@ -13,7 +13,6 @@ type DataWireTarget =
 
 type DataWireProps = DataWireTarget & {
   bendFromTargetX?: number
-  reduced: boolean
   scrollY: MotionValue<number>
   sourceDocumentY: number
   lockedSourceY: number | null
@@ -25,7 +24,6 @@ type DataWireProps = DataWireTarget & {
 
 export const DataWire = ({
   bendFromTargetX,
-  reduced,
   scrollY,
   sourceDocumentY,
   lockedSourceY,
@@ -69,12 +67,12 @@ export const DataWire = ({
     },
   )
   const transition = {
-    duration: reduced ? 0 : DATA_WIRE_DRAW_DURATION,
+    duration: DATA_WIRE_DRAW_DURATION,
     ease: motionEase.enter,
   }
   const pinTransition = {
-    duration: reduced ? 0 : 0.12,
-    delay: reduced ? 0 : 0.36,
+    duration: 0.12,
+    delay: 0.36,
     ease: motionEase.enter,
   }
 
@@ -82,7 +80,7 @@ export const DataWire = ({
     <motion.svg
       aria-hidden
       className={
-        'pointer-events-none fixed inset-0 z-[52] size-full tablet-s:hidden'
+        'pointer-events-none fixed inset-0 z-[52] h-full w-[100vw] tablet-s:hidden'
       }
       viewBox={`0 0 ${viewportWidth} ${viewportHeight}`}
       preserveAspectRatio={'none'}
@@ -104,9 +102,9 @@ export const DataWire = ({
         animate={{ opacity: 1 }}
         exit={{
           opacity: 0,
-          transition: { duration: reduced ? 0 : 0.1 },
+          transition: { duration: 0.1 },
         }}
-        transition={{ duration: reduced ? 0 : 0.1 }}
+        transition={{ duration: 0.1 }}
         width={5}
         height={5}
         x={sourceX - 2.5}

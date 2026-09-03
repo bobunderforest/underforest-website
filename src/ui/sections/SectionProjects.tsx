@@ -1,48 +1,32 @@
 import { Fragment } from 'react'
-import { SignalBorder } from 'ui/fx/SignalBorder'
-import { BusDivider } from 'ui/fx/BusDivider'
-import { SectionContent } from 'ui/common/SectionContent'
-import { StageIndex } from 'ui/sections/StageIndex'
-import { useSectionAnchor } from 'utils/hooks/useSectionAnchor'
-import { cns } from 'utils/formatters/classnames'
+import { SectionShell } from './SectionShell'
+import { ClampDivider } from 'ui/common/cyber-kit/ClampDivider'
 import { padCount } from 'utils/formatters/numerals'
 import { usePageDataMain } from 'modules/page-data/page-data-hooks'
 import { ProjectFrame } from 'ui/features/projects/ProjectFrame'
-import { ProjectTitleChart } from 'ui/features/projects/ProjectTitleChart'
-import { FieldLabel } from './FieldLabel'
+import { StageHeader } from './StageHeader'
 
 export const SectionProjects = () => {
-  useSectionAnchor({ id: 'projects', restOffsetTimeline: 0.28 })
   const projects = usePageDataMain('projects')
 
   return (
-    <section
-      id={'projects'}
-      data-stage={'Projects'}
-      className={'relative border-b border-edge'}
-    >
-      <SignalBorder className={'z-20'} />
-
-      <div className={'relative -mb-10 overflow-hidden bg-base'}>
-        <ProjectTitleChart animate inverted />
-        <SectionContent isPadded className={'relative pb-16 tablet-s:pb-12'}>
-          <StageIndex index={'03'} stage={'Projects'} alias={'portfolio'} />
-          <FieldLabel readout={`${projects.length} subjects locked`}>
-            featured
-          </FieldLabel>
-        </SectionContent>
-      </div>
+    <SectionShell withEdge id={'projects'} stage={'Projects'}>
+      <StageHeader
+        index={'01'}
+        stage={'Projects'}
+        alias={'portfolio'}
+        label={'featured'}
+        readout={`${projects.length} subjects locked`}
+      />
 
       <div className={'flex flex-col'}>
         {projects.map((entry, i) => (
           <Fragment key={entry.id}>
-            <BusDivider
-              className={cns('relative z-10 -mb-10', i > 0 && '-mt-10')}
-            />
+            <ClampDivider className={'relative z-10'} />
             <ProjectFrame entry={entry} slot={padCount(i)} />
           </Fragment>
         ))}
       </div>
-    </section>
+    </SectionShell>
   )
 }

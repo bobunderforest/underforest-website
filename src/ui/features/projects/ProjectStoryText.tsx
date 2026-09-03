@@ -54,8 +54,10 @@ const renderProjectStoryText = (text: string) => {
   return parts
 }
 
-export const ProjectStoryText = ({ body }: { body: string }) => {
-  const paragraphs = body.split(/\n+/).filter(Boolean)
+export const ProjectStoryText = ({ body }: { body: string | string[] }) => {
+  const paragraphs = (Array.isArray(body) ? body : body.split(/\n+/)).filter(
+    Boolean,
+  )
 
   return (
     <div className={'max-w-[84ch]'}>

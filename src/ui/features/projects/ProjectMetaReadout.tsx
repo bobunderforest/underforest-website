@@ -39,11 +39,9 @@ export const ProjectMetaReadout = ({ entry }: { entry: ProjectEntry }) => {
 
   return (
     <div
-      className={
-        'border border-edge bg-base/50 px-3 py-2.5 backdrop-blur-md'
-      }
+      className={'border border-edge bg-base/50 px-3 py-2.5 backdrop-blur-md'}
     >
-      <FieldLabel tone={'system'} className={'mb-2'}>
+      <FieldLabel tone={'system'} gap={'tight'}>
         info
       </FieldLabel>
       <div className={'flex flex-col gap-1'}>
@@ -51,7 +49,9 @@ export const ProjectMetaReadout = ({ entry }: { entry: ProjectEntry }) => {
           <Row
             term={'period'}
             value={
-              duration ? `${entry.periodLabel} · ${duration}` : entry.periodLabel
+              duration
+                ? `${entry.periodLabel} · ${duration}`
+                : entry.periodLabel
             }
           />
         )}

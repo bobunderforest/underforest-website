@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { drawKaleidoscope } from 'utils/anim/kaleidoscope'
 import { whenPageSettled } from 'utils/browser/idle'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { themeColors } from 'utils/formatters/tailwind-merge-config.generated'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
 import { createActivityRamp, stepActivityRamp } from 'utils/anim/activity-ramp'
@@ -18,7 +17,6 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
   const activityRef = useRef(createActivityRamp())
   const restartRef = useRef<() => void>(() => {})
   const [settled, setSettled] = useState(false)
-  const [reduced] = useState(prefersReducedMotion)
 
   const resize = useCallback(() => {
     const canvas = canvasRef.current
@@ -87,7 +85,7 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
         image: pattern,
         radius: Math.max(120, Math.max(canvas.width, canvas.height) / 7),
       })
-      if (!reduced && (activeRef.current || activity > 0)) {
+      if (activeRef.current || activity > 0) {
         frame = requestAnimationFrame(draw)
       } else {
         running = false
@@ -114,7 +112,7 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
       restartRef.current = () => {}
       cancelAnimationFrame(frame)
     }
-  }, [reduced, settled])
+  }, [settled])
 
   return <canvas ref={canvasRef} className={'block size-full'} />
 }

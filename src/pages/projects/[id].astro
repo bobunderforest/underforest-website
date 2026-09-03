@@ -1,0 +1,21 @@
+---
+import Layout from 'ui/layout/Layout.astro'
+import { PageProject } from 'ui/pages/PageProject'
+
+import { getPageDataProject } from 'modules/page-data/page-data-project'
+import { getProjects } from 'ui/features/projects/projects-data'
+
+export const getStaticPaths = () =>
+  getProjects().map((project) => ({ params: { id: project.id } }))
+
+const { project } = await getPageDataProject(Astro.params.id!)
+
+const meta = {
+  metaTitle: `${project.title} — Dmitrii Podlesnyi`,
+  metaDescription: project.description ?? project.summary?.join(' '),
+}
+---
+
+<Layout meta={meta} navCurrent="projects">
+  <PageProject client:load pageData={{ project }} />
+</Layout>

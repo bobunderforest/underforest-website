@@ -16,12 +16,8 @@ const ExperienceDetailsSkillTag = ({ skill }: { skill: string }) => (
 
 export const ExperienceDetailsSkills = ({ skills }: { skills: string[] }) => (
   <div className={'flex flex-col gap-1'}>
-    <FieldLabel className={'mb-0'}>skills</FieldLabel>
-    <Text
-      tag={'ul'}
-      size={'inherit'}
-      className={'flex flex-wrap gap-1'}
-    >
+    <FieldLabel gap={'none'}>skills</FieldLabel>
+    <Text tag={'ul'} size={'inherit'} className={'flex flex-wrap gap-1'}>
       {skills.map((skill) => (
         <ExperienceDetailsSkillTag key={skill} skill={skill} />
       ))}

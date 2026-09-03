@@ -67,6 +67,7 @@ export const ProjectStoryBlockContent = ({
           <MediaPreview
             kind={'video'}
             src={block.src}
+            safeSrc={block.safeSrc}
             poster={block.poster}
             aspectRatio={block.aspectRatio}
           />

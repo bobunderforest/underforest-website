@@ -9,12 +9,18 @@ const wheelInputLimits = new Map<symbol, number>()
 const wheelInputScale = () =>
   wheelInputLimits.size > 0 ? Math.min(...wheelInputLimits.values()) : 1
 
+const stopWithoutLayoutChange = () => {
+  instance?.stop()
+  document.documentElement.classList.remove('lenis-stopped')
+}
+
 export const createLenis = () => {
   instance = new Lenis({
     autoRaf: false,
     overscroll: true,
     wheelMultiplier: 0.85,
-    duration: 1,
+    // duration: 0.8,
+    lerp: 0.5,
     syncTouch: true,
     // syncTouchLerp: 0.01,
     smoothWheel: true,
@@ -26,7 +32,7 @@ export const createLenis = () => {
       return true
     },
   })
-  if (pauseCount > 0) instance.stop()
+  if (pauseCount > 0) stopWithoutLayoutChange()
   return instance
 }
 
@@ -37,7 +43,7 @@ export const destroyLenis = () => {
 
 export const pauseLenis = () => {
   pauseCount += 1
-  if (pauseCount === 1) instance?.stop()
+  if (pauseCount === 1) stopWithoutLayoutChange()
 }
 
 export const resumeLenis = () => {
@@ -84,7 +90,8 @@ const durationFor = (
 
 export const jumpLenisTo = (scrollY: number) => {
   if (instance) {
-    instance.scrollTo(scrollY, { immediate: true })
+    instance.resize()
+    instance.scrollTo(scrollY, { immediate: true, force: true })
     return
   }
   window.scrollTo(0, scrollY)

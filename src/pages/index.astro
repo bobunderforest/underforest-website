@@ -1,12 +1,18 @@
 ---
-import { PageHome } from 'ui/pages/PageHome'
 import Layout from 'ui/layout/Layout.astro'
+import { PageProjects } from 'ui/pages/PageProjects'
 
 import { getPageDataMain } from 'modules/page-data/page-data-main'
 
 const pageDataMain = await getPageDataMain()
+
+const meta = {
+  metaTitle: 'Dmitrii Podlesnyi — Frontend / Game Developer',
+  metaDescription:
+    'Selected builds: interactive 3D, Web3 platforms and high-traffic front-ends, by a developer moving toward game development.',
+}
 ---
 
-<Layout>
-  <PageHome client:load pageData={pageDataMain} />
+<Layout meta={meta} navCurrent="projects">
+  <PageProjects client:load pageData={pageDataMain} />
 </Layout>

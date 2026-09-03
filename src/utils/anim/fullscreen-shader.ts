@@ -15,8 +15,11 @@ void main() {
 const TRIANGLE = new Float32Array([-1, -1, 3, -1, -1, 3])
 const DELTA_CEILING_S = 0.05
 const MAX_DPR = 2
+const PHASE_PERIOD_S = 1000
 
 const cappedDpr = () => getDpr(MAX_DPR)
+
+const startingPhase = () => Math.random() * PHASE_PERIOD_S
 
 type Options = {
   fragment: string
@@ -39,7 +42,8 @@ export const useFullscreenShader = (
   const glRef = useRef<WebGLRenderingContext | null>(null)
   const resolutionRef = useRef<WebGLUniformLocation | null>(null)
   const timeRef = useRef<WebGLUniformLocation | null>(null)
-  const elapsedRef = useRef(0)
+  const [phaseOrigin] = useState(startingPhase)
+  const elapsedRef = useRef(phaseOrigin)
   const activityRef = useRef(createActivityRamp())
   const [ready, setReady] = useState(false)
   const [settled, setSettled] = useState(false)

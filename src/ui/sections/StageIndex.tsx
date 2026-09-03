@@ -29,15 +29,15 @@ const StageAlias = ({ children }: { children: string }) => (
 
 export const StageIndex = ({ index, stage, alias, className }: Props) => {
   return (
-    <div
-      className={cns('relative mb-25 items-baseline tablet-s:mb-15', className)}
-    >
+    <div className={cns('relative mb-25 tablet-s:mb-15', className)}>
       <Text
         tag={'div'}
         size={'inherit'}
         face={'title'}
         tone={'accent'}
-        className={'text-[40px] leading-[1] font-light italic'}
+        className={
+          'text-[calc(var(--text-title-1)*0.4)] leading-[1] font-light italic'
+        }
       >
         {index}
       </Text>

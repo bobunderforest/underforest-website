@@ -24,6 +24,11 @@
 
 <script>
   const PREFIX = 'scrollpos:'
+  let traversed = false
+
+  window.addEventListener('popstate', () => {
+    traversed = true
+  })
 
   document.addEventListener('astro:before-preparation', (event: any) => {
     try {
@@ -33,6 +38,10 @@
   })
 
   document.addEventListener('astro:page-load', () => {
+    const shouldRestore = traversed
+    traversed = false
+    if (!shouldRestore) return
+
     let saved: string | null = null
     try {
       saved = sessionStorage.getItem(PREFIX + location.pathname)

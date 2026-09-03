@@ -4,49 +4,134 @@
       "label": "Unreal Engine",
       "domains": ["game"],
       "primary": true,
-      "rising": true
+      "rising": true,
+      "area": "Engine & gameplay"
     },
     {
       "label": "C++ / Blueprints",
       "domains": ["game"],
       "primary": true,
-      "rising": true
+      "rising": true,
+      "area": "Engine & gameplay"
     },
     {
       "label": "Gameplay programming",
       "domains": ["game"],
       "primary": true,
-      "rising": true
+      "rising": true,
+      "area": "Engine & gameplay"
     },
     {
       "label": "VR / XR",
       "domains": ["game"],
       "primary": true,
-      "rising": true
+      "rising": true,
+      "area": "Engine & gameplay"
     },
-    { "label": "React", "domains": ["web"], "primary": true },
-    { "label": "TypeScript", "domains": ["web", "game"], "primary": true },
-    { "label": "CSS / Tailwind", "domains": ["web"], "primary": true },
+    {
+      "label": "React",
+      "domains": ["web"],
+      "primary": true,
+      "area": "Web & frontend"
+    },
+    {
+      "label": "TypeScript",
+      "domains": ["web", "game"],
+      "primary": true,
+      "area": "Web & frontend"
+    },
+    {
+      "label": "CSS / Tailwind",
+      "domains": ["web"],
+      "primary": true,
+      "area": "Web & frontend"
+    },
     {
       "label": "Three.js",
       "domains": ["web", "game"],
-      "primary": true
+      "primary": true,
+      "area": "Graphics & real-time"
     },
-    { "label": "GLSL / Shaders", "domains": ["web", "game"] },
-    { "label": "Canvas / 2D", "domains": ["web", "game"] },
-    { "label": "Styled Components", "domains": ["web"] },
-    { "label": "Astro / Next.js", "domains": ["web"] },
-    { "label": "Vue.js", "domains": ["web"] },
-    { "label": "Vite / Webpack", "domains": ["web"] },
-    { "label": "Node.js / Express", "domains": ["web"] },
-    { "label": "Ethers.js / Wagmi", "domains": ["web"] },
-    { "label": "Git", "domains": ["web", "game"] },
-    { "label": "Storybook", "domains": ["web"] },
-    { "label": "Jest / Testing", "domains": ["web"] },
-    { "label": "SQL / MongoDB", "domains": ["web"] },
-    { "label": "Docker", "domains": ["web"] }
+    {
+      "label": "Git Version Control",
+      "domains": ["web", "game"],
+      "area": "Tooling"
+    },
+    {
+      "label": "Chaos Physics",
+      "domains": ["game"],
+      "area": "Engine & gameplay"
+    },
+    {
+      "label": "Niagara",
+      "domains": ["game"],
+      "area": "Engine & gameplay"
+    },
+    {
+      "label": "GLSL / Shaders",
+      "domains": ["web", "game"],
+      "area": "Graphics & real-time"
+    },
+    {
+      "label": "Canvas / 2D",
+      "domains": ["web", "game"],
+      "area": "Graphics & real-time"
+    },
+    {
+      "label": "Styled Components",
+      "domains": ["web"],
+      "area": "Web & frontend"
+    },
+    {
+      "label": "Astro / Next.js",
+      "domains": ["web"],
+      "area": "Web & frontend"
+    },
+    { "label": "Vue.js", "domains": ["web"], "area": "Web & frontend" },
+    {
+      "label": "Vite / Webpack",
+      "domains": ["web"],
+      "area": "Tooling"
+    },
+    {
+      "label": "Node.js / Express",
+      "domains": ["web"],
+      "area": "Backend & data"
+    },
+    { "label": "Ethers.js / Wagmi", "domains": ["web"], "area": "Web3" },
+    {
+      "label": "Storybook",
+      "domains": ["web"],
+      "area": "Tooling"
+    },
+    {
+      "label": "Jest / Testing",
+      "domains": ["web"],
+      "area": "Tooling"
+    },
+    { "label": "SQL / MongoDB", "domains": ["web"], "area": "Backend & data" },
+    { "label": "Docker", "domains": ["web"], "area": "Tooling" }
   ],
   "experience": [
+    {
+      "id": "gamedev-focus",
+      "from": "2025-05",
+      "to": "2026-08",
+      "aside": true,
+      "asideLabel": "Parallel track: Game development",
+      "resumeVariants": ["web"],
+      "domains": ["game"],
+      "summary": [
+        "Full-time gameplay and VR programming in Unreal Engine (C++ / Blueprints): shipped a solo VR game for Meta Quest 3, collaborated on the VR project Ocean Threshold, and built real-time systems, on-device profiling, and custom engine tooling. It grew out of a long-running creative-coding practice — physics, generative graphics, small games — and was a deliberate step in that direction. I keep front-end work going alongside it, not instead of it."
+      ],
+      "links": [
+        {
+          "label": "Game Developer resume",
+          "href": "https://bobunderforest.me/resume/Resume_Dmitrii_Podlesnyi_Gamedev.pdf"
+        },
+        { "label": "Portfolio", "href": "https://bobunderforest.me" }
+      ]
+    },
     {
       "id": "gamedev-solo",
       "from": "2026-04",
@@ -56,9 +141,11 @@
       "place": "Gnarly Crawl",
       "href": "https://gnarlycrawl.bobunderforest.me/",
       "summary": [
-        "Solo development of a small-sized virtual reality game.",
-        "Gameplay and VR interactions programming.",
-        "Quest 3 standalone build optimizations.",
+        "Solo development of a small-sized VR game.",
+        "Own C++ data-driven ability framework.",
+        "Gameplay and VR interactions programming: combat, grabbing, climbing, inventory.",
+        "Quest 3 standalone build profiling and optimization.",
+        "Save/load system.",
         "Promo website development."
       ],
       "skills": [
@@ -67,6 +154,29 @@
         "VR / XR interactions",
         "C++ / Blueprints"
       ],
+      "resume": {
+        "summary": [
+          "Solo-developed a VR game for Meta Quest 3 standalone.",
+          "Built a custom C++ data-driven gameplay framework: ability/attributes system, composable actor behaviour, split across reusable modules and plugins.",
+          "Programmed VR interaction and locomotion: physics grab, climbing, pocket inventory, two-handed manipulation, comfort options.",
+          "Built combat and enemy AI: motion-based melee, shield blocking, firearms, Behavior Tree enemies.",
+          "Built a save/checkpoint system with physics-state restore and cross-object reference resolution on load.",
+          "Profiled and optimized on-device to the Quest 3 frame budget (Unreal Insights, CSV Profiler, RenderDoc); built custom AI-assisted profiling tooling.",
+          "Built the promo website."
+        ],
+        "skills": [
+          "Unreal Engine",
+          "C++ / Blueprints",
+          "Gameplay programming",
+          "VR / XR",
+          "OpenXR",
+          "Behavior Trees",
+          "Chaos Physics",
+          "Save systems",
+          "Performance profiling",
+          "Niagara"
+        ]
+      },
       "links": [
         {
           "label": "Game website",
@@ -133,8 +243,11 @@
       "place": "Ocean Threshold",
       "href": "https://arcanumworks.com/projects/previs-oceanthreshold/",
       "summary": [
-        "Virtual Reality Experience development.",
-        "Gameplay and VR interactions programming."
+        "Gameplay and VR interactions programming.",
+        "VR locomotion: climbing, rope, swinging.",
+        "Gravity-mode system for zero-g gameplay.",
+        "Real-time stereoscopic VR mirrors.",
+        "Started the personal gameplay framework, reused in later projects."
       ],
       "skills": [
         "Unreal Engine",
@@ -142,6 +255,23 @@
         "VR / XR interactions",
         "C++ / Blueprints"
       ],
+      "resume": {
+        "summary": [
+          "Gameplay and VR interaction programming on an artist-led narrative VR experience.",
+          "Built custom VR locomotion: climbing, rope climbing, hanging, swinging.",
+          "Built a gravity-mode system enabling zero-g gameplay.",
+          "Built real-time stereoscopic VR mirrors via scene-capture, with off-screen and distance culling to hold frame budget.",
+          "Started a personal reusable C++ gameplay framework (ability system, input handling, VR hand interactions), later carried across projects via git submodules."
+        ],
+        "skills": [
+          "Unreal Engine",
+          "C++ / Blueprints",
+          "Gameplay programming",
+          "VR / XR",
+          "OpenXR",
+          "Chaos Physics"
+        ]
+      },
       "links": [
         {
           "label": "Steam Page",
@@ -170,13 +300,34 @@
         {
           "kind": "text",
           "caption": "sample · classification shift",
-          "body": "A conceptual virtual reality experience.\nFirst full-time gamedev role\n Web → gamedev reclassification."
+          "body": "A narrative experience by Arden Vald — an immersive descent into the space between life and death, and the journey back.\nWeb → gamedev reclassification."
         },
         {
           "kind": "video",
           "caption": "devlog · arcanum works",
-          "src": "/videos/ocean-threshold.mp4"
+          "src": "/videos/ocean-threshold.mp4",
+          "safeSrc": "/videos/ocean-threshold-safe.mp4"
         }
+      ]
+    },
+    {
+      "id": "web-background",
+      "from": "2014",
+      "to": "2025",
+      "periodLabel": "2014 — present",
+      "aside": true,
+      "asideLabel": "Background: Web engineering",
+      "resumeVariants": ["game"],
+      "domains": ["web"],
+      "summary": [
+        "Behind the games work: over 10 years building production web software, in-office and remote. I am experienced with team workflows, version control, code review, and Scrum/Agile. Alongside that, I kept up a creative-coding practice: physics, generative graphics, small hackathon games. Moving into Unreal Engine was a deliberate step in that direction."
+      ],
+      "links": [
+        {
+          "label": "Front-end resume",
+          "href": "https://bobunderforest.me/resume/Resume_Dmitrii_Podlesnyi_Frontend.pdf"
+        },
+        { "label": "Portfolio", "href": "https://bobunderforest.me" }
       ]
     },
     {
@@ -229,7 +380,7 @@
         "Built a mobile-friendly Augmented Reality showcase.",
         "Integrated 3D models for immersive product visualization."
       ],
-      "skills": ["Three.js"],
+      "skills": ["React Three Fiber", "Three.js", "TypeScript"],
       "links": [
         {
           "label": "Instagram post",
@@ -281,7 +432,7 @@
       "from": "2024-06",
       "to": "2024-08",
       "role": "Front-end",
-      "employment": "Full-time",
+      "employment": "Contract",
       "place": "Triark",
       "summary": [
         "Portfolio website development.",
@@ -309,7 +460,7 @@
       "employment": "Full-time",
       "place": "Lido.fi",
       "summary": [
-        "Contributed to Web3 liquid-staking platform",
+        "Contributed to a Web3 liquid-staking platform",
         "Integrated UI with blockchain smart contracts via ABI.",
         "Built wallet-connection flows using Ethers.js and Wagmi."
       ],
@@ -339,9 +490,9 @@
       "employment": "Part-time",
       "place": "Roci.fi",
       "summary": [
-        "Contributed to a decentralized credit-scoring platform.",
-        "Integrated smart contracts into frontend flows via ABI.",
-        "Focused on Web3 integrations, clean UI and user experience."
+        "Front-end for a decentralized on-chain credit-scoring protocol.",
+        "Smart-contract integration via ABI and wallet-connection flows (Ethers.js / Wagmi).",
+        "Part-time alongside Lido"
       ],
       "skills": ["React", "TypeScript", "Ethers.js / Wagmi"],
       "domains": ["web"],
@@ -409,7 +560,7 @@
       "employment": "Full-time",
       "place": "Matter Streaming",
       "summary": [
-        "Collaborated in development of a music-streaming startup.",
+        "Collaborated on development of a music-streaming startup.",
         "Participated in architectural decision-making.",
         "Created and maintained a component library.",
         "Collaborated on UX flow design."
@@ -451,6 +602,7 @@
       "employment": "Contest project",
       "place": "Kowloon City Guide",
       "href": "https://kwcguide.bobunderforest.me/",
+      "resumeVariants": [],
       "summary": ["An enthusiastic project, made with friends for a contest."],
       "links": [
         {
@@ -496,7 +648,7 @@
         "Developed an animated UI for an educational platform.",
         "Collaborated with a remote team."
       ],
-      "skills": ["React"],
+      "skills": ["React", "Sass / SCSS", "CSS Modules"],
       "domains": ["web"]
     },
     {
@@ -505,8 +657,8 @@
       "to": "2017-09",
       "role": "Full-stack",
       "employment": "Freelance",
-      "place": "Freelance projects",
-      "summary": ["Worked on multiple small-scale freelance projects."],
+      "place": "Independent",
+      "summary": ["Delivered several small-scale client projects end to end."],
       "skills": ["React", "TypeScript", "Webpack", "Express", "MongoDB"],
       "domains": ["web"]
     },
@@ -520,8 +672,8 @@
       "href": "https://www.tradingview.com/",
       "summary": [
         "Participated in maintaining a social trading platform.",
-        "Collaborated on a rebranding a UI component library.",
-        "Contributed in migrating the codebase to TypeScript."
+        "Collaborated on a UI component library.",
+        "Contributed to migrating the codebase to TypeScript."
       ],
       "skills": ["React", "TypeScript", "Webpack", "Canvas / 2D"],
       "domains": ["web"]
@@ -534,16 +686,17 @@
       "employment": "Full-time",
       "place": "Oleg Chulakov Studio",
       "summary": [
-        "Worked at fast-paced studio environment",
-        "Focused on delivering brand-marked quality projects.",
-        "Worked closely with UX/UI-team on animations and interactions."
+        "Front-end at a fast-paced digital design studio.",
+        "Delivered polished, brand-driven marketing websites.",
+        "Worked closely with the design team on animation and interaction."
       ],
+      "skills": ["jQuery", "HTML5 / CSS3", "Sass / SCSS", "Gulp / Grunt", "WordPress"],
       "domains": ["web"]
     }
   ],
   "languages": [
     { "term": "English", "value": "" },
-    { "term": "Russian", "value": "native" }
+    { "term": "Russian", "value": "" }
   ],
   "education": [
     {

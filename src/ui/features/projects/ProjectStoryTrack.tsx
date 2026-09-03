@@ -73,10 +73,7 @@ const ProjectStoryTrackItem = ({
         style={{ opacity: markerOpacity, y: markerY }}
         className={'absolute top-0 left-0 size-[7px] bg-accent'}
       />
-      <FieldLabel
-        tone={'system'}
-        className={'relative mb-2'}
-      >
+      <FieldLabel tone={'system'} gap={'tight'} className={'relative'}>
         <span
           className={'absolute top-[9px] left-[-23px] h-px w-[14px] bg-edge'}
         />
@@ -111,7 +108,9 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
     (_, index) => (itemHeights[index] ?? 0) > 0,
   )
   const totalHeight = itemHeights.reduce((sum, height) => sum + height, 0)
-  let precedingHeight = 0
+  const precedingHeights = entry.story.map((_, index) =>
+    itemHeights.slice(0, index).reduce((sum, height) => sum + (height ?? 0), 0),
+  )
 
   return (
     <div className={'pt-8'}>
@@ -122,6 +121,7 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
       <ol ref={storyRef} className={'grid'}>
         {entry.story.map((block, i) => {
           const itemHeight = itemHeights[i] ?? 0
+          const precedingHeight = precedingHeights[i]
           const itemStart = hasMeasurements
             ? precedingHeight / totalHeight
             : i / entry.story.length
@@ -130,7 +130,6 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
           const itemEnd = hasMeasurements
             ? (precedingHeight + trackHeight) / totalHeight
             : (i + 1) / entry.story.length
-          precedingHeight += itemHeight
 
           return (
             <ProjectStoryTrackItem

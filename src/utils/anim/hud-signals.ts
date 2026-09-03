@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { useMotionValue } from 'framer-motion'
-import { prefersReducedMotion } from 'utils/browser/prefers-reduced-motion'
 import { whenPageSettled } from 'utils/browser/idle'
 import { formatClock, formatCursor } from 'utils/formatters/hud-readouts'
 import { lerp } from 'utils/math/lerp'
@@ -46,11 +45,6 @@ const onVisibility = () => {
 }
 
 const subscribeHudFrames = (listener: FrameListener) => {
-  if (prefersReducedMotion()) {
-    listener(0)
-    return () => {}
-  }
-
   frameListeners.add(listener)
 
   if (frameListeners.size === 1) {
