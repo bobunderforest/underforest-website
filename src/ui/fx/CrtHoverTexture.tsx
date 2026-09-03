@@ -19,8 +19,10 @@ const MODE_OPACITY = {
 
 export const CrtHoverTexture = ({
   mode = 'hover',
+  className,
 }: {
   mode?: keyof typeof MODE_OPACITY
+  className?: string
 }) => (
   <span
     aria-hidden
@@ -28,6 +30,7 @@ export const CrtHoverTexture = ({
     className={cns(
       'pointer-events-none absolute inset-0 transition-opacity duration-150',
       MODE_OPACITY[mode],
+      className,
     )}
   />
 )

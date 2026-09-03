@@ -20,13 +20,7 @@ export const SectionSplash = () => {
   const asciiFontSize = useResponsiveValue(splashAsciiFontSize)
 
   return (
-    <Section
-      hideBorder
-      id={'about'}
-      index={'00'}
-      stage={'Identity'}
-      decoration={<CrtDitherOverlay />}
-    >
+    <Section id={'about'} stage={'Identity'} decoration={<CrtDitherOverlay />}>
       <Text
         uppercase
         tone={'primary'}
@@ -34,12 +28,10 @@ export const SectionSplash = () => {
           'mb-intersection-padding flex flex-wrap items-baseline gap-x-3 gap-y-1'
         }
       >
-        <span>
-          {splash.role}
-          <Text tag={'span'} tone={'accent'}>
-            {splash.roleAccent}
-          </Text>
-        </span>
+        <span>{splash.role}</span>
+        <Text tag={'span'} tone={'accent'}>
+          {splash.roleAccent}
+        </Text>
       </Text>
 
       <div className={'relative mb-intersection-padding'}>

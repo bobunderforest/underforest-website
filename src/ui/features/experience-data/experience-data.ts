@@ -23,6 +23,8 @@ export const RESUME_VARIANTS = resume.variants as Record<
   { file: string; title: string; summary: string[] }
 >
 
+export const EXPERIENCE_READOUT = `${EXPERIENCE.length} entries · ${SKILLS.length} skills detected`
+
 export const resumeVariantFor = (domainFilter: ExperienceDomainFilter) =>
   domainFilter === 'unified'
     ? RESUME_VARIANTS.web

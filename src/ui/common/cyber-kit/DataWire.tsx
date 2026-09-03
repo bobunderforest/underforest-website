@@ -1,6 +1,11 @@
 import { motion, useTransform, type MotionValue } from 'framer-motion'
 import { motionEase } from 'utils/anim/motion-ease'
 import { clamp } from 'utils/math/clamp'
+import {
+  WIRE_MARKER_SIZE,
+  wireElbowPath,
+  wireMarkerOffset,
+} from './wire-geometry'
 
 export const DATA_WIRE_DRAW_DURATION = 0.48
 
@@ -37,7 +42,10 @@ export const DataWire = ({
   const sourceY = useTransform(scrollY, (value) =>
     lockedSourceY === null ? sourceDocumentY - value : lockedSourceY,
   )
-  const sourceMarkerY = useTransform(sourceY, (value) => value - 2.5)
+  const sourceMarkerY = useTransform(
+    sourceY,
+    (value) => value - wireMarkerOffset,
+  )
   const resolvedTargetY = useTransform(scrollY, (value): number => {
     if (!targetRange) return targetY ?? 0
     return Math.min(
@@ -45,7 +53,10 @@ export const DataWire = ({
       targetRange.maxDocumentY - value,
     )
   })
-  const targetMarkerY = useTransform(resolvedTargetY, (value) => value - 2.5)
+  const targetMarkerY = useTransform(
+    resolvedTargetY,
+    (value) => value - wireMarkerOffset,
+  )
   const targetMarkerTransform = useTransform(
     resolvedTargetY,
     (value) => `rotate(45 ${targetX} ${value})`,
@@ -57,14 +68,12 @@ export const DataWire = ({
   const diagonalX = clamp(targetX - turnX, 0, 10)
   const path = useTransform<number, string>(
     [sourceY, resolvedTargetY],
-    ([source, target]) => {
-      const direction = Math.sign(target - source) || 1
-      const diagonalY = Math.min(Math.abs(target - source) / 2, diagonalX)
-      const firstDiagonalStartX = turnX - diagonalY
-      const firstDiagonalEndY = source + direction * diagonalY
-      const diagonalStartY = target - direction * diagonalY
-      return `M ${sourceX} ${source} H ${firstDiagonalStartX} L ${turnX} ${firstDiagonalEndY} V ${diagonalStartY} L ${turnX + diagonalY} ${target} H ${targetX}`
-    },
+    ([source, target]) =>
+      wireElbowPath(
+        { x: sourceX, y: source },
+        { x: targetX, y: target },
+        { turnX, maxChamfer: diagonalX },
+      ),
   )
   const transition = {
     duration: DATA_WIRE_DRAW_DURATION,
@@ -105,9 +114,9 @@ export const DataWire = ({
           transition: { duration: 0.1 },
         }}
         transition={{ duration: 0.1 }}
-        width={5}
-        height={5}
-        x={sourceX - 2.5}
+        width={WIRE_MARKER_SIZE}
+        height={WIRE_MARKER_SIZE}
+        x={sourceX - wireMarkerOffset}
         y={sourceMarkerY}
         fill={'var(--color-base)'}
         stroke={'var(--color-accent)'}
@@ -117,9 +126,9 @@ export const DataWire = ({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0, transition: pinTransition }}
         transition={pinTransition}
-        width={5}
-        height={5}
-        x={targetX - 2.5}
+        width={WIRE_MARKER_SIZE}
+        height={WIRE_MARKER_SIZE}
+        x={targetX - wireMarkerOffset}
         y={targetMarkerY}
         fill={'var(--color-base)'}
         stroke={'var(--color-accent)'}

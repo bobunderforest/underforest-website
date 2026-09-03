@@ -20,6 +20,38 @@ type Props = {
   blockComment?: boolean
 }
 
+export const FieldLabelHeading = ({
+  children,
+  readout,
+  className,
+}: Pick<Props, 'children' | 'readout' | 'className'>) => (
+  <div className={cns('mb-8 flex items-center gap-4', className)}>
+    <span aria-hidden className={'size-2 shrink-0 rotate-45 bg-accent'} />
+    <Text
+      tag={'span'}
+      size={'regular'}
+      face={'title'}
+      tone={'primary'}
+      uppercase
+      className={'shrink-0 tracking-[0.24em]'}
+    >
+      {children}
+    </Text>
+    <span aria-hidden className={'h-px flex-1 bg-edge'} />
+    {readout != null && (
+      <Text
+        tag={'span'}
+        size={'hint'}
+        tone={'system'}
+        uppercase
+        className={'shrink-0'}
+      >
+        {readout}
+      </Text>
+    )}
+  </div>
+)
+
 export const FieldLabel = ({
   children,
   readout,
@@ -27,24 +59,22 @@ export const FieldLabel = ({
   tone = 'secondary',
   gap = 'regular',
   blockComment = false,
-}: Props) => {
-  return (
-    <Text
-      size={'hint'}
-      tone={tone}
-      uppercase
-      className={cns(
-        'flex flex-wrap items-baseline gap-x-3 gap-y-1 italic',
-        GAP_CLASSES[gap],
-        className,
-      )}
-    >
-      <span>{blockComment ? <>/* {children} */</> : <>// {children}</>}</span>
-      {readout != null && (
-        <Text tag={'span'} size={'hint'} tone={'system'}>
-          {readout}
-        </Text>
-      )}
-    </Text>
-  )
-}
+}: Props) => (
+  <Text
+    size={'hint'}
+    tone={tone}
+    uppercase
+    className={cns(
+      'flex flex-wrap items-baseline gap-x-3 gap-y-1 italic',
+      GAP_CLASSES[gap],
+      className,
+    )}
+  >
+    <span>{blockComment ? <>/* {children} */</> : <>// {children}</>}</span>
+    {readout != null && (
+      <Text tag={'span'} size={'hint'} tone={'system'}>
+        {readout}
+      </Text>
+    )}
+  </Text>
+)

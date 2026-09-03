@@ -1,6 +1,6 @@
 ---
 import Layout from 'ui/layout/Layout.astro'
-import { PageProjects } from 'ui/pages/PageProjects'
+import { PageLanding } from 'ui/pages/PageLanding'
 
 import { getPageDataMain } from 'modules/page-data/page-data-main'
 
@@ -13,6 +13,6 @@ const meta = {
 }
 ---
 
-<Layout meta={meta} navCurrent="projects">
-  <PageProjects client:load pageData={pageDataMain} />
+<Layout meta={meta}>
+  <PageLanding client:load pageData={pageDataMain} />
 </Layout>

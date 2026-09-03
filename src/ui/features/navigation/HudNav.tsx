@@ -1,24 +1,33 @@
 import { Link } from 'ui/common/typography/Link'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
-import { NAV_ROUTES, isRouteActive, type NavTarget } from './nav-targets'
+import {
+  HUD_TARGETS,
+  isRouteActive,
+  navTargetHref,
+  type NavTarget,
+} from './nav-targets'
+import { CrtDitherOverlay } from 'ui/fx/CrtDitherOverlay'
+import { CrtHoverTexture } from 'ui/fx/CrtHoverTexture'
 import { cns } from 'utils/formatters/classnames'
 import { useRoutePath } from 'utils/hooks/useRoutePath'
+import { useActiveStage } from 'utils/hooks/useActiveStage'
 
 const HudNavCell = ({
   index,
   label,
   href,
   active,
-}: NavTarget & { active: boolean }) => (
+}: NavTarget & { href: string; active: boolean }) => (
   <Link
     href={href}
     aria-current={active ? 'page' : undefined}
     className={cns(
-      'relative flex cursor-pointer items-center px-[18px] py-[9px] no-underline transition-colors duration-150',
+      'relative flex cursor-pointer items-center overflow-hidden px-[18px] py-[9px] no-underline transition-colors duration-150',
       'border-r border-edge last:border-r-0',
       active ? 'bg-accent text-base' : 'text-muted hover:text-text',
     )}
   >
+    {active && <CrtHoverTexture mode={'muted'} />}
     <span
       aria-hidden
       className={cns(
@@ -28,12 +37,43 @@ const HudNavCell = ({
     >
       {index}
     </span>
-    {label}
+    <span className={'relative'}>{label}</span>
   </Link>
 )
 
+const HudNavCells = ({ path }: { path: string }) => (
+  <>
+    {HUD_TARGETS.map((route) => (
+      <HudNavCell
+        key={route.id}
+        {...route}
+        href={navTargetHref(route, path)}
+        active={isRouteActive(route, path)}
+      />
+    ))}
+  </>
+)
+
+const HudNavStageCells = () => {
+  const activeStage = useActiveStage()
+
+  return (
+    <>
+      {HUD_TARGETS.map((route) => (
+        <HudNavCell
+          key={route.id}
+          {...route}
+          href={route.hash}
+          active={route.stage === activeStage}
+        />
+      ))}
+    </>
+  )
+}
+
 export const HudNav = () => {
   const path = useRoutePath()
+  const onLanding = path === '/'
 
   return (
     <nav
@@ -46,19 +86,15 @@ export const HudNav = () => {
       <div className={'relative'}>
         <DataCaptureBorder diagonal offset={4} size={9} />
         <div className={'hud-frame'}>
-          <div className={'hud-frame-fill'}>
+          <div className={'hud-frame-fill relative'}>
+            <CrtDitherOverlay />
             <div
-              className={
-                'flex items-stretch font-face-regular text-[11px] leading-none tracking-[0.12em] uppercase mobile-m:text-[10px]'
-              }
+              className={cns(
+                'relative flex items-stretch font-face-regular uppercase',
+                'text-[11px] leading-none tracking-[0.12em] mobile-m:text-[10px]',
+              )}
             >
-              {NAV_ROUTES.map((route) => (
-                <HudNavCell
-                  key={route.href}
-                  {...route}
-                  active={isRouteActive(route.href, path)}
-                />
-              ))}
+              {onLanding ? <HudNavStageCells /> : <HudNavCells path={path} />}
             </div>
           </div>
         </div>

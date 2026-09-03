@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { SectionContent } from 'ui/common/SectionContent'
+import { FieldLabelHeading } from 'ui/sections/FieldLabel'
 import { DataWire } from 'ui/common/cyber-kit/DataWire'
 import { ExperienceDetailsCredits } from 'ui/features/experience-details/ExperienceDetailsCredits'
 import { ExperienceDetailsStatus } from 'ui/features/experience-details/ExperienceDetailsStatus'
 import { getScrollPosition } from 'utils/browser/scroll-util'
 import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
+import { useSettledMeasure } from 'utils/hooks/useSettledMeasure'
 import { useWindowSize } from 'utils/hooks/useWindowSize'
 import type { ProjectEntry } from 'ui/features/experience-data/types'
 import { ProjectFrameContext } from './project-frame-context'
@@ -86,6 +88,7 @@ export const ProjectFrame = ({
   useResizeObserver(primaryActionRef, measureWire, { initCall: false })
   useResizeObserver(gridRef, measureWire, { initCall: false })
   useResizeObserver(stickyRailRef, measureWire, { initCall: false })
+  useSettledMeasure(measureWire)
   useEffect(measureWire, [locked, measureWire, viewportWidth, viewportHeight])
 
   const coverVideoSrc =
@@ -143,6 +146,7 @@ export const ProjectFrame = ({
         <ProjectFrameHud />
 
         <SectionContent isPadded>
+          <FieldLabelHeading>project record</FieldLabelHeading>
           <div
             ref={gridRef}
             className={

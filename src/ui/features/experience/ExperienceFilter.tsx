@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { LayoutGroup, motion } from 'framer-motion'
 import { useExperienceDomainFilter } from 'ui/features/experience-data/experience-data-context'
+import { useDossierWire } from 'ui/features/experience-meta/dossier-wire-context'
 import type { ExperienceDomainFilter } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
 import { Text } from 'ui/common/typography/Text'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { motionEase } from 'utils/anim/motion-ease'
 import { CrtHoverTexture } from 'ui/fx/CrtHoverTexture'
+import { ease } from 'utils/anim/easings'
 
 const OPTIONS: {
   value: ExperienceDomainFilter
@@ -20,13 +22,14 @@ const OPTIONS: {
 
 type Props = {
   className?: string
+  orientation?: 'horizontal' | 'vertical'
 }
 
 const FilterLockPlate = ({ reclassifying }: { reclassifying: boolean }) => (
   <motion.span
     aria-hidden
     layoutId={'experience-filter-lock'}
-    transition={{ duration: 0.32, ease: motionEase.travel }}
+    transition={{ duration: 0.15, ease: ease.easeOutCubic }}
     className={'absolute inset-0 -z-10 overflow-hidden bg-accent'}
   >
     <CrtHoverTexture mode={'muted'} />
@@ -35,7 +38,7 @@ const FilterLockPlate = ({ reclassifying }: { reclassifying: boolean }) => (
         key={'reclassification-scan'}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: [0, 1, 0] }}
-        transition={{ duration: 0.38, ease: motionEase.travel }}
+        transition={{ duration: 0.15, ease: ease.easeOutCubic }}
         className={'absolute inset-0 origin-left bg-system'}
       />
     )}
@@ -62,9 +65,14 @@ const FilterLockPlate = ({ reclassifying }: { reclassifying: boolean }) => (
   </motion.span>
 )
 
-export const ExperienceFilter = ({ className }: Props) => {
+export const ExperienceFilter = ({
+  className,
+  orientation = 'horizontal',
+}: Props) => {
   const { domainFilter, setDomainFilter } = useExperienceDomainFilter()
+  const { registerSource } = useDossierWire()
   const [reclassifying, setReclassifying] = useState(false)
+  const vertical = orientation === 'vertical'
 
   return (
     <LayoutGroup id={'experience-domain-filter'}>
@@ -74,8 +82,9 @@ export const ExperienceFilter = ({ className }: Props) => {
         aria-label={'Experience domain filter'}
         size={'lead'}
         className={cns(
-          'relative inline-flex bg-base/85 backdrop-blur-md',
+          'relative bg-base/85 backdrop-blur-md',
           'border border-edge',
+          vertical ? 'flex flex-col' : 'inline-flex',
           className,
         )}
       >
@@ -93,11 +102,14 @@ export const ExperienceFilter = ({ className }: Props) => {
               key={option.value}
               type={'button'}
               aria-pressed={active}
+              ref={registerSource(option.value)}
               onClick={selectOption}
               className={cns(
                 'relative isolate cursor-pointer overflow-hidden uppercase',
                 'px-[46px] py-[20px] tablet-s:px-[28px] tablet-s:py-[14px]',
-                'border-r border-edge last:border-r-0',
+                vertical
+                  ? 'w-full border-b border-edge text-left last:border-b-0'
+                  : 'border-r border-edge last:border-r-0',
                 'transition-colors duration-150',
                 active ? 'text-base' : 'text-muted hover:text-text',
               )}

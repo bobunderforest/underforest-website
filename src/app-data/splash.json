@@ -6,16 +6,16 @@
   "aboutLabel": "about me",
   "about": [
     {
-      "tone": "primary",
-      "text": "I am a full-stack web developer with 10+ years of experience and a strong focus on front-end. I have contributed to building high-traffic platforms, Web3 solutions, and interactive 3D projects, with both small teams and big companies, remote and on-site."
+      "tone": "soft",
+      "text": "I am Front-End web developer with 10+ years of experience. I have contributed to building high-traffic platforms, Web3 solutions, and interactive 3D projects, with both small teams and big companies, in-office and remote."
     },
     {
       "tone": "soft",
       "text": "I am excited about contributing to creative passion-driven projects, I enjoy scroll-driven animation and webgl work."
     },
     {
-      "tone": "soft",
-      "text": "Over the past years I've been moving into gameplay programming using Unreal Engine. I've collaborated on the “Ocean&nbsp;Threshold” immersive experience and have shipped a “Gnarly Crawl” game as a solo developer."
+      "tone": "primary",
+      "text": "Over the past years I've been moving into gameplay programming using Unreal Engine. I've collaborated on the immersive experience “Ocean&nbsp;Threshold” and have shipped a VR game “Gnarly Crawl” as a solo developer."
     }
   ]
 }

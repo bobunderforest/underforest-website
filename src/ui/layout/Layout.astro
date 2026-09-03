@@ -6,20 +6,18 @@ import HeadScripts from './HeadScripts.astro'
 import { SectionSplash } from 'ui/sections/SectionSplash'
 import { SiteRuntime } from 'ui/layout/SiteRuntime'
 import { HudNav } from 'ui/features/navigation/HudNav'
-import { PageOutro } from 'ui/layout/PageOutro'
+import { Footer } from 'ui/layout/Footer'
 import { ModalRenderer } from 'modules/modal/ModalRenderer'
 
-import type { NavTargetId } from 'ui/features/navigation/nav-targets'
 import type { MetaData } from 'utils/types/data'
 
 import metaTagsBase from 'app-data/meta-tags.json'
 
 type Props = {
   meta?: MetaData
-  navCurrent?: NavTargetId
 }
 
-const { meta, navCurrent } = Astro.props
+const { meta } = Astro.props
 
 const metaData = {
   metaUrl: metaTagsBase.url,
@@ -36,7 +34,7 @@ const metaData = {
   <main id="stage">
     <slot />
   </main>
-  <PageOutro client:visible current={navCurrent} />
+  <Footer client:visible />
   <SiteRuntime client:load transition:persist="site-runtime" />
   <ModalRenderer client:load />
 </Html>

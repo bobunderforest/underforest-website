@@ -14,6 +14,10 @@ export default defineConfig({
   site: 'https://bobunderforest.me',
   integrations: [react()],
 
+  redirects: {
+    '/resume': '/#resume',
+  },
+
   build: {
     assets: '_assets',
   },

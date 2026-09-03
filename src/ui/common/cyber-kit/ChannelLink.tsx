@@ -13,12 +13,14 @@ const channelTones = {
     corners: 'group-hover:border-system',
     tag: 'bg-system/[0.08] text-system group-hover:bg-system',
     arrow: 'text-muted group-hover:text-system',
+    outline: 'focus-visible:outline-system',
   },
   atomic: {
     face: 'border-atomic-orange/60 bg-atomic-orange/[0.06] hover:border-atomic-orange',
     corners: 'border-atomic-orange group-hover:border-atomic-orange',
     tag: 'bg-atomic-orange/[0.18] text-atomic-orange group-hover:bg-atomic-orange',
     arrow: 'text-atomic-orange',
+    outline: 'focus-visible:outline-atomic-orange',
   },
 } as const
 
@@ -49,7 +51,9 @@ export const ChannelLink = ({
       isExternal
       className={cns(
         'group relative inline-flex items-stretch border bg-base/50 backdrop-blur-md transition-colors duration-150',
+        'focus-visible:outline-2 focus-visible:outline-offset-2',
         toneStyle.face,
+        toneStyle.outline,
         className,
       )}
     >

@@ -74,6 +74,8 @@ export const unlockScroll = () => {
   scrollLockChange.fire(false)
 }
 
+export const isScrollLockActive = () => isScrollLocked
+
 export const subscribeScrollLockChange = scrollLockChange.on
 
 // Animate Scroll

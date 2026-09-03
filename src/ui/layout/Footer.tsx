@@ -1,7 +1,6 @@
 import { ContourField } from 'ui/common/cyber-kit/ContourField'
 import { SectionContent } from 'ui/common/SectionContent'
 import { Text } from 'ui/common/typography/Text'
-import { SignalBorder } from 'ui/fx/SignalBorder'
 import { HUD_BUILD } from 'ui/features/hud/hud-fields'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 import { SocialLinks } from 'ui/sections/SocialLinks'
@@ -9,7 +8,6 @@ import { cns } from 'utils/formatters/classnames'
 
 export const Footer = () => (
   <footer className={'relative bg-base'}>
-    <SignalBorder />
     <div className={'relative overflow-hidden'}>
       <ContourField animate inverted />
       <SectionContent className={'relative py-intersection-padding'}>

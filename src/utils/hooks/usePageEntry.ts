@@ -1,9 +1,6 @@
 import { useEffect } from 'react'
-import { jumpLenisTo } from 'utils/anim/lenis'
+import { holdScrollAligned } from 'utils/anim/scroll-hold'
 import { getScrollPosition } from 'utils/browser/scroll-util'
-
-const SETTLE_WINDOW_MS = 900
-const INTENT_EVENTS = ['wheel', 'touchstart', 'pointerdown', 'keydown'] as const
 
 const PAGE_TOP = 0
 
@@ -11,35 +8,6 @@ const entryTop = () => {
   const stage = document.querySelector('main section')
   if (!stage) return PAGE_TOP
   return Math.round(stage.getBoundingClientRect().top + getScrollPosition())
-}
-
-const holdEntryAligned = () => {
-  let held = true
-  const align = () => {
-    if (!held) return
-    jumpLenisTo(entryTop())
-  }
-
-  const release = () => {
-    held = false
-    observer.disconnect()
-    clearTimeout(timer)
-    INTENT_EVENTS.forEach((name) =>
-      window.removeEventListener(name, release, { capture: true }),
-    )
-  }
-
-  const observer = new ResizeObserver(align)
-  const timer = setTimeout(release, SETTLE_WINDOW_MS)
-
-  align()
-  observer.observe(document.body)
-  document.fonts?.ready.then(align)
-  INTENT_EVENTS.forEach((name) =>
-    window.addEventListener(name, release, { capture: true, passive: true }),
-  )
-
-  return release
 }
 
 export const usePageEntry = () => {
@@ -62,7 +30,7 @@ export const usePageEntry = () => {
       if (!entering || window.location.hash) return
 
       release()
-      release = holdEntryAligned()
+      release = holdScrollAligned(entryTop)
     }
 
     window.addEventListener('popstate', markTraversed)
