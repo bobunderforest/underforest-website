@@ -3,6 +3,7 @@ import { useKeyPress } from 'utils/hooks/useKeyPress'
 import { useModalActions } from 'modules/modal/modalStore'
 import { cns } from 'utils/formatters/classnames'
 import { Text } from 'ui/common/typography/Text'
+import { VIDEO_COMPOSITOR_GUARD_CLASS } from 'ui/fx/video-compositor-guard'
 import { drawVideoFrame } from './frame-grab'
 
 const TIME_MORPH = 300
@@ -297,9 +298,10 @@ export const ModalVideo = ({
           onLoadedMetadata={handleMetadata}
           onSeeked={playVideo}
           onPlaying={revealWhenPainted}
-          className={
-            'pointer-events-none absolute top-0 left-0 h-full w-full object-contain'
-          }
+          className={cns(
+            'pointer-events-none absolute top-0 left-0 h-full w-full object-contain',
+            VIDEO_COMPOSITOR_GUARD_CLASS,
+          )}
         />
         {still && !videoReady && (
           <img

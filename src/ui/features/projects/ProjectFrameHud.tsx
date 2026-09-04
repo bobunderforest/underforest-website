@@ -8,7 +8,7 @@ export const ProjectFrameHud = () => {
 
   return (
     <div aria-hidden className={'pointer-events-none absolute inset-0'}>
-      <span className={'absolute inset-[12px]'}>
+      <span className={'absolute inset-[12px] mobile-m:hidden'}>
         <DataCaptureBorder muted={!locked} />
       </span>
 
@@ -17,7 +17,7 @@ export const ProjectFrameHud = () => {
         uppercase
         tone={locked ? 'accent' : 'dimmed'}
         className={
-          'absolute top-[26px] left-[26px] flex items-center gap-2 italic transition-colors duration-300'
+          'absolute top-[26px] left-[26px] flex items-center gap-2 italic transition-colors duration-300 mobile-m:hidden'
         }
       >
         <span className={'tabular-nums'}>P-{slot}</span>
@@ -30,7 +30,7 @@ export const ProjectFrameHud = () => {
         uppercase
         tone={'system'}
         className={
-          'absolute right-[26px] bottom-[26px] flex items-center gap-2'
+          'absolute right-[26px] bottom-[26px] flex items-center gap-2 mobile-m:hidden'
         }
       >
         <span>signal</span>

@@ -88,6 +88,7 @@ export const ExperienceEntry = ({
         data-active={active}
         data-reached={reached}
         data-lit={lit}
+        data-expanded={detailsExpanded}
         className={cns(
           'group relative isolate w-experience-column-width tablet-s:w-full',
           clickable && 'cursor-pointer',

@@ -15,7 +15,10 @@ import { ExperienceDetails } from 'ui/features/experience-details/ExperienceDeta
 import { TRACK_MARKER_SIZE, TRACK_TICK_STYLE } from 'ui/fx/track-rail'
 import { scrollElementToViewportCenter } from 'utils/anim/collapsible-scroll'
 import { motionEase } from 'utils/anim/motion-ease'
-import { useCenterActivationObserver } from 'utils/hooks/useCenterActivationObserver'
+import {
+  useCenterActivationEnabled,
+  useCenterActivationObserver,
+} from 'utils/hooks/useCenterActivationObserver'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
 import { clamp } from 'utils/math/clamp'
 import { ExperienceEntry } from './ExperienceEntry'
@@ -47,7 +50,7 @@ const ExperienceTrackProgress = ({
     <div
       aria-hidden
       style={{ top, height }}
-      className={'pointer-events-none absolute left-0 w-[6px]'}
+      className={'pointer-events-none absolute left-0 w-[6px] mobile-m:hidden'}
     >
       <span style={TRACK_TICK_STYLE} className={'absolute inset-0 w-[6px]'} />
       <span className={'absolute inset-y-0 left-0 w-px bg-edge'} />
@@ -157,6 +160,7 @@ export const ExperienceTrack = () => {
     document.fonts?.ready.then(measureTrackProgress)
   }, [measureTrackProgress])
 
+  const trackScrollActivationEnabled = useCenterActivationEnabled()
   useCenterActivationObserver(trackRef, handleTrackInView)
 
   const scrollPendingEntryToActivation = useCallback(() => {
@@ -206,7 +210,7 @@ export const ExperienceTrack = () => {
         return
       }
 
-      if (activeIdRef.current === id) {
+      if (activeIdRef.current === id || !trackScrollActivationEnabled) {
         pendingExpandedIdRef.current = null
         pendingExpandedNodeRef.current = null
         expandedIdRef.current = id
@@ -226,7 +230,7 @@ export const ExperienceTrack = () => {
       }
       if (!collapsingIdRef.current) scrollPendingEntryToActivation()
     },
-    [scrollPendingEntryToActivation],
+    [scrollPendingEntryToActivation, trackScrollActivationEnabled],
   )
 
   const handleDetailsCollapseComplete = useCallback(

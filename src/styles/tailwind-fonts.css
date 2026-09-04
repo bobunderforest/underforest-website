@@ -54,8 +54,8 @@
   }
 
   @variant mobile-m {
-    --text-display: 56px;
-    --text-title-1: 56px;
+    --text-display: 48px;
+    --text-title-1: 48px;
     --text-title-2: 38px;
     --text-title-3: 21px;
     --text-title-4: 16px;

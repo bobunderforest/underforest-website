@@ -107,13 +107,18 @@ const RouteHalf = ({
     >
       <ContourHoverField hover={hover} palette={'dark-red'} />
 
-      <DataCaptureBorder muted offset={-18} size={16} />
+      <DataCaptureBorder
+        muted
+        offset={-18}
+        size={16}
+        className={'mobile-m:hidden'}
+      />
       <DataCaptureBorder
         blinkKey={hover.blinkKey}
         offset={-18}
         size={16}
         className={cns(
-          'transition-opacity duration-200',
+          'transition-opacity duration-200 mobile-m:hidden',
           hover.active ? 'opacity-100' : 'opacity-0',
         )}
       />
@@ -150,7 +155,7 @@ const RouteHalf = ({
             face={'title'}
             tone={'system'}
             uppercase
-            className={'tabular-nums'}
+            className={'tabular-nums mobile-m:hidden'}
           >
             {readout ?? `lock ${hash} · vec ${DIRECTION_SIGN[direction]}y`}
           </Text>
@@ -207,7 +212,7 @@ export const SplitRoute = ({
       <FieldLabel
         readout={MODE_READOUT[direction]}
         className={
-          'pointer-events-none absolute top-[18px] left-1/2 z-20 -translate-x-1/2 justify-center bg-base px-3'
+          'pointer-events-none absolute top-[18px] left-1/2 z-20 -translate-x-1/2 justify-center bg-base px-3 mobile-m:hidden'
         }
       >
         route

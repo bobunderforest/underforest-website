@@ -138,11 +138,17 @@ export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => {
     >
       <span className={'tabular-nums'}>
         {formatDateRange(entry.from, entry.to, 'short')}
-        {duration && (
-          <span className={'text-muted/70 normal-case'}> ({duration})</span>
-        )}
       </span>
-      {entry.employment && <> · {entry.employment}</>}
+      <span className={'mobile-m:block'}>
+        {duration && (
+          <span className={'text-muted/70 normal-case'}>
+            <span className={'mobile-m:hidden'}>{' ('}</span>
+            {duration}
+            <span className={'mobile-m:hidden'}>{')'}</span>
+          </span>
+        )}
+        {entry.employment && <> · {entry.employment}</>}
+      </span>
     </Text>
   )
 }
@@ -159,6 +165,7 @@ export const ExperienceSummary = ({
     tone={'secondary'}
     className={cns(
       'max-w-prose-measure transition-colors duration-300 group-data-[active=true]:text-text',
+      'mobile-m:text-text',
       hasStatusNote && 'tablet-s:mb-3',
     )}
   >

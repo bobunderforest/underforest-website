@@ -79,7 +79,7 @@ export const HudNav = () => {
       aria-label={'Primary'}
       className={cns(
         'fixed inset-x-0 top-[26px] z-50 flex justify-center',
-        'tablet-s:top-auto tablet-s:bottom-[26px]',
+        'mobile-m:top-auto mobile-m:bottom-[26px]',
       )}
     >
       <div className={'relative'}>

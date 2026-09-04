@@ -52,30 +52,41 @@ const ProjectStoryTrackItem = ({
     : { bottom: 0 }
 
   return (
-    <li ref={ref} className={'relative grid py-3 pl-[26px] last:pb-0'}>
+    <li
+      ref={ref}
+      className={cns(
+        'relative grid py-3 pl-[26px] last:pb-0 mobile-m:pl-0',
+        isFinalBeat && 'mobile-m:hidden',
+      )}
+    >
       <span
         aria-hidden
         style={{ ...trackExtentStyle, ...TRACK_TICK_STYLE }}
-        className={cns(trackExtentClassName, 'w-[6px]')}
+        className={cns(trackExtentClassName, 'w-[6px] mobile-m:hidden')}
       />
       <span
         aria-hidden
         style={trackExtentStyle}
-        className={cns(trackExtentClassName, 'w-px bg-edge')}
+        className={cns(trackExtentClassName, 'w-px bg-edge mobile-m:hidden')}
       />
       <motion.span
         aria-hidden
         style={{ ...trackExtentStyle, scaleY: itemProgress }}
-        className={cns(trackExtentClassName, 'w-px origin-top bg-accent/70')}
+        className={cns(
+          trackExtentClassName,
+          'w-px origin-top bg-accent/70 mobile-m:hidden',
+        )}
       />
       <motion.span
         aria-hidden
         style={{ opacity: markerOpacity, y: markerY }}
-        className={'absolute top-0 left-0 size-[7px] bg-accent'}
+        className={'absolute top-0 left-0 size-[7px] bg-accent mobile-m:hidden'}
       />
       <FieldLabel tone={'system'} gap={'tight'} className={'relative'}>
         <span
-          className={'absolute top-[9px] left-[-23px] h-px w-[14px] bg-edge'}
+          className={
+            'absolute top-[9px] left-[-23px] h-px w-[14px] bg-edge mobile-m:hidden'
+          }
         />
         <span className={'tabular-nums'}>{padIndex(index)}</span>
         {block.caption && (
@@ -114,7 +125,10 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
 
   return (
     <div className={'pt-8'}>
-      <FieldLabel readout={`${entry.story.length} checkpoints`}>
+      <FieldLabel
+        className={'mobile-m:hidden'}
+        readout={`${entry.story.length} checkpoints`}
+      >
         storyline
       </FieldLabel>
 

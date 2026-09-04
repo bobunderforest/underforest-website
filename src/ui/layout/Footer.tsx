@@ -11,7 +11,7 @@ export const Footer = () => (
   <footer className={'relative bg-base'}>
     <div className={'relative overflow-hidden'}>
       <ContourField animate inverted />
-      <SectionContent className={'relative py-intersection-padding'}>
+      <SectionContent isPadded className={'relative'}>
         <SocialLinks />
         <ResumeLinks className={'mt-[40px]'} />
 

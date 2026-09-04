@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { cns } from 'utils/formatters/classnames'
 import { openModal } from 'modules/modal/modalStore'
 import { useVideoInView } from 'utils/hooks/useVideoInView'
+import { VIDEO_COMPOSITOR_GUARD_CLASS } from 'ui/fx/video-compositor-guard'
 import { grabVideoFrame } from './frame-grab'
 import { CanvasFrame } from './CanvasFrame'
 import { ModalVideo } from './ModalVideo'
@@ -96,7 +97,10 @@ export const VideoOpenable = ({
         playsInline
         preload={'none'}
         onSeeked={clearRestore}
-        className={'absolute top-0 left-0 h-full w-full object-cover'}
+        className={cns(
+          'absolute top-0 left-0 h-full w-full object-cover',
+          VIDEO_COMPOSITOR_GUARD_CLASS,
+        )}
       />
       {safeSrc && !hasConsented && (
         <SensitiveVideoConsent onConsent={handleConsent} />

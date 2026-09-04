@@ -1,13 +1,24 @@
 import { useEffect } from 'react'
+import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
 import { useWindowSize } from 'utils/hooks/useWindowSize'
+
+const centerActivationEnabled = {
+  desktop: true,
+  'mobile-m': false,
+}
+
+export const useCenterActivationEnabled = () =>
+  useResponsiveValue(centerActivationEnabled)
 
 export const useCenterActivationObserver = <E extends HTMLElement>(
   ref: React.RefObject<E | null>,
   onChange: (inView: boolean) => void,
 ) => {
   const { height: viewportHeight } = useWindowSize()
+  const enabled = useCenterActivationEnabled()
 
   useEffect(() => {
+    if (!enabled) return
     const node = ref.current
     if (!node) return
 
@@ -23,5 +34,5 @@ export const useCenterActivationObserver = <E extends HTMLElement>(
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [onChange, ref, viewportHeight])
+  }, [onChange, ref, viewportHeight, enabled])
 }

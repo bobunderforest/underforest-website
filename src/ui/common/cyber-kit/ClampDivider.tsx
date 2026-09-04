@@ -1,9 +1,9 @@
 import { cns } from 'utils/formatters/classnames'
 
-const NODE_COUNT = 5
+const CLAMP_CLASSES = ['', 'mobile-m:hidden', '', 'mobile-m:hidden', '']
 
-const Clamp = () => (
-  <span className={'flex shrink-0 flex-col items-center'}>
+const Clamp = ({ className }: { className?: string }) => (
+  <span className={cns('flex shrink-0 flex-col items-center', className)}>
     <span className={'h-[6px] w-[2px] bg-edge'} />
     <span className={'h-[2px] w-[28px] bg-edge'} />
     <span className={'h-[10px] w-px'} />
@@ -22,8 +22,8 @@ export const ClampDivider = ({ className }: { className?: string }) => (
         'relative mx-auto flex w-content-width -translate-y-1/2 items-center justify-between px-content-padding'
       }
     >
-      {Array.from({ length: NODE_COUNT }).map((_, i) => (
-        <Clamp key={i} />
+      {CLAMP_CLASSES.map((clampClassName, i) => (
+        <Clamp key={i} className={clampClassName} />
       ))}
     </div>
   </div>

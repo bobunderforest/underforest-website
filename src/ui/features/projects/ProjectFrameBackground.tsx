@@ -129,12 +129,12 @@ export const ProjectFrameBackground = ({
       />
       <div
         className={
-          'absolute inset-0 bg-gradient-to-t from-base via-base/70 to-base/20'
+          'absolute inset-0 bg-gradient-to-t from-base via-base/70 to-base/50'
         }
       />
       <div
         className={
-          'absolute inset-0 bg-gradient-to-r from-base/90 via-base/30 to-transparent'
+          'absolute inset-0 bg-gradient-to-r from-base/90 via-base/40 to-transparent'
         }
       />
     </div>

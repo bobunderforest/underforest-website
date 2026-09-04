@@ -37,8 +37,8 @@ export const HudPanel = ({
   flipCut = false,
   children,
 }: PanelProps) => (
-  <div className={cns('absolute w-[186px] mobile-m:w-[150px]', className)}>
-    <PanelTab title={title} align={align} />
+  <div className={cns('absolute w-[186px] mobile-m:hidden', className)}>
+    {/* <PanelTab title={title} align={align} /> */}
 
     <div className={cns('hud-frame', flipCut && 'hud-frame-flip')}>
       <div className={'hud-frame-fill px-[9px] py-[7px]'}>
