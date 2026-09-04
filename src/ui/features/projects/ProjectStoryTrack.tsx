@@ -61,11 +61,6 @@ const ProjectStoryTrackItem = ({
     >
       <span
         aria-hidden
-        style={{ ...trackExtentStyle, ...TRACK_TICK_STYLE }}
-        className={cns(trackExtentClassName, 'w-[6px] mobile-m:hidden')}
-      />
-      <span
-        aria-hidden
         style={trackExtentStyle}
         className={cns(trackExtentClassName, 'w-px bg-edge mobile-m:hidden')}
       />
@@ -122,6 +117,15 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
   const precedingHeights = entry.story.map((_, index) =>
     itemHeights.slice(0, index).reduce((sum, height) => sum + (height ?? 0), 0),
   )
+  const finalBeatHeight =
+    entry.story[entry.story.length - 1]?.kind === 'end'
+      ? (itemHeights[entry.story.length - 1] ?? 0)
+      : 0
+  const tickTrackHeight = hasMeasurements
+    ? totalHeight -
+      finalBeatHeight +
+      (finalBeatHeight > 0 ? FINAL_BEAT_TRACK_HEIGHT : 0)
+    : '100%'
 
   return (
     <div className={'pt-8'}>
@@ -132,7 +136,13 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
         storyline
       </FieldLabel>
 
-      <ol ref={storyRef} className={'grid'}>
+      <ol ref={storyRef} className={'relative grid'}>
+        <span
+          aria-hidden
+          style={{ ...TRACK_TICK_STYLE, height: tickTrackHeight }}
+          className={'absolute top-0 left-[3px] w-[6px] mobile-m:hidden'}
+        />
+
         {entry.story.map((block, i) => {
           const itemHeight = itemHeights[i] ?? 0
           const precedingHeight = precedingHeights[i]

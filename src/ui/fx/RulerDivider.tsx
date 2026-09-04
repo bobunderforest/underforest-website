@@ -1,14 +1,15 @@
 import { motion, useTransform, type MotionValue } from 'framer-motion'
+import { TRACK_MARKER_SIZE, TRACK_TICK_PERIOD } from 'ui/fx/track-rail'
 import { Text } from 'ui/common/typography/Text'
 import { useElementSize } from 'utils/hooks/useElementSize'
 import { cns } from 'utils/formatters/classnames'
 
-const MARKER_SIZE = 7
+const MAJOR_TICK_PERIOD = 48
 
 const TICK_STYLE: React.CSSProperties = {
   backgroundImage:
-    'repeating-linear-gradient(90deg, var(--color-edge) 0 1px, transparent 1px 48px),' +
-    'repeating-linear-gradient(90deg, var(--color-edge) 0 1px, transparent 1px 8px)',
+    `repeating-linear-gradient(90deg, var(--color-edge) 0 1px, transparent 1px ${MAJOR_TICK_PERIOD}px),` +
+    `repeating-linear-gradient(90deg, var(--color-edge) 0 1px, transparent 1px ${TRACK_TICK_PERIOD}px)`,
   backgroundRepeat: 'no-repeat, no-repeat',
   backgroundSize: '100% 9px, 100% 5px',
   backgroundPosition: 'left top, left top',
@@ -25,7 +26,7 @@ export const RulerDivider = ({ label, progress, className }: Props) => {
   const markerX = useTransform(
     progress,
     [0, 1],
-    [0, Math.max(width - MARKER_SIZE, 0)],
+    [0, Math.max(width - TRACK_MARKER_SIZE, 0)],
   )
 
   return (

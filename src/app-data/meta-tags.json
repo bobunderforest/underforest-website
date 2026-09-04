@@ -1,9 +1,12 @@
 {
-  "url": "",
+  "url": "https://bobunderforest.me",
   "meta": {
     "metaTitle": "Dmitrii Podlesnyi | Frontend and Game Developer",
-    "metaDescription": "Personal website presenting my work.",
-    "metaImage": "/images/og-images.png",
+    "metaDescription": "Personal porfolio-resume website",
+    "metaImage": "/images/og-image.png",
+    "metaImageWidth": 2400,
+    "metaImageHeight": 1260,
+    "metaImageAlt": "Dmitrii Podlesnyi",
     "metaFavicon": "/images/favicon.png",
     "metaFaviconType": "image/png"
   }
