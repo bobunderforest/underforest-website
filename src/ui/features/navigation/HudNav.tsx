@@ -1,5 +1,4 @@
 import { Link } from 'ui/common/typography/Link'
-import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import {
   HUD_TARGETS,
   isRouteActive,
@@ -84,8 +83,7 @@ export const HudNav = () => {
       )}
     >
       <div className={'relative'}>
-        <DataCaptureBorder diagonal offset={4} size={9} />
-        <div className={'hud-frame'}>
+        <div className={'hud-frame hud-frame-square'}>
           <div className={'hud-frame-fill relative'}>
             <CrtDitherOverlay />
             <div
@@ -98,7 +96,7 @@ export const HudNav = () => {
             </div>
           </div>
         </div>
-        <div className={'hud-ticks mt-[4px] h-[4px] opacity-60'} />
+        {/* <div className={'hud-ticks mt-[4px] h-[4px] opacity-60'} /> */}
       </div>
     </nav>
   )

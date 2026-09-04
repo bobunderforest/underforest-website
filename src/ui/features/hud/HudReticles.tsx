@@ -75,12 +75,12 @@ const CornerReticle = () => (
       }
     />
 
-    <span
+    {/* <span
       className={'absolute top-[9px] left-[9px] h-[2px] w-[17px] bg-accent'}
     />
     <span
       className={'absolute top-[9px] left-[9px] h-[17px] w-[2px] bg-accent'}
-    />
+    /> */}
 
     {ARM_TICKS.map((offset) => (
       <span

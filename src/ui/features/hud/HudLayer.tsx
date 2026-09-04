@@ -59,31 +59,36 @@ export const HudLayer = () => {
           value={stage ?? HUD_IDLE_STAGE}
           tone={'system'}
         />
-        <HudReadout label={'bld'} value={HUD_BUILD} />
       </HudPanel>
 
       <HudPanel
         title={'sensors'}
         align={'right'}
+        flipCut
         className={'top-[26px] right-[26px]'}
       >
         <HudReadout label={'clk'} value={clock} />
         <HudReadout label={'vpt'} value={formatViewport(width, height)} />
-        <HudReadout label={'dpr'} value={formatDpr(dpr)} />
         <HudReadout label={'cur'} value={cursor} />
       </HudPanel>
 
       <HudPanel
         title={'motion'}
         align={'right'}
-        className={'right-[26px] bottom-[26px] tablet-s:hidden'}
+        className={
+          'group pointer-events-auto right-[26px] bottom-[26px] tablet-s:hidden'
+        }
       >
         <HudVelocityGraph
           scrollVelocity={scrollVelocity}
           pointerVelocity={pointerVelocity}
           frameRate={frameRate}
         />
-        <div className={'mt-[5px] grid grid-cols-2 justify-between gap-1'}>
+        <div
+          className={
+            'absolute inset-0 mt-[5px] grid grid-cols-2 justify-between gap-1 bg-base p-2 opacity-0 group-hover:opacity-100'
+          }
+        >
           <HudLegend swatch={'accent'}>
             scr <motion.span>{scrollRate}</motion.span>
           </HudLegend>

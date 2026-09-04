@@ -38,6 +38,23 @@
     );
   }
 
+  .hud-frame-flip.hud-frame,
+  .hud-frame-flip .hud-frame-fill {
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--hud-cut)) 0,
+      100% var(--hud-cut),
+      100% 100%,
+      var(--hud-cut) 100%,
+      0 calc(100% - var(--hud-cut))
+    );
+  }
+
+  .hud-frame-square.hud-frame,
+  .hud-frame-square .hud-frame-fill {
+    clip-path: none;
+  }
+
   .hud-glow {
     text-shadow: 0 0 7px color-mix(in srgb, currentColor 40%, transparent);
   }

@@ -8,6 +8,7 @@ type PanelProps = React.BaseProps & {
   title: string
   align?: Align
   className: string
+  flipCut?: boolean
 }
 
 const PanelTab = ({ title, align }: { title: string; align: Align }) => (
@@ -33,12 +34,13 @@ export const HudPanel = ({
   title,
   align = 'left',
   className,
+  flipCut = false,
   children,
 }: PanelProps) => (
   <div className={cns('absolute w-[186px] mobile-m:w-[150px]', className)}>
     <PanelTab title={title} align={align} />
 
-    <div className={'hud-frame'}>
+    <div className={cns('hud-frame', flipCut && 'hud-frame-flip')}>
       <div className={'hud-frame-fill px-[9px] py-[7px]'}>
         <Text
           size={'note'}
@@ -50,7 +52,7 @@ export const HudPanel = ({
       </div>
     </div>
 
-    <div className={'hud-ticks mt-[4px] h-[4px] opacity-60'} />
+    {/* <div className={'hud-ticks mt-[4px] h-[4px] opacity-60'} /> */}
   </div>
 )
 
