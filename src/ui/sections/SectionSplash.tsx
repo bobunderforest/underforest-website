@@ -2,6 +2,7 @@ import { Section } from './Section'
 import { Text, type TextTone } from 'ui/common/typography/Text'
 import { ASCIIText } from 'ui/fx/AsciiText'
 import { SocialLinks } from './SocialLinks'
+import { ResumeLinks } from './ResumeLinks'
 import { FieldLabel } from './FieldLabel'
 import type { ResponsiveValue } from 'utils/browser/breakpoints'
 import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
@@ -53,8 +54,9 @@ export const SectionSplash = () => {
           }
         />
       </div>
-      <div className={'mb-intersection-padding'}>
+      <div className={'mb-intersection-padding flex flex-col gap-[40px]'}>
         <SocialLinks />
+        <ResumeLinks />
       </div>
       <FieldLabel>{splash.aboutLabel}</FieldLabel>
       {splash.about.map((paragraph, index) => (

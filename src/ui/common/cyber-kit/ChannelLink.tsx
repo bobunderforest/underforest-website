@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { DataCaptureBorder } from 'ui/common/cyber-kit/DataCaptureBorder'
 import { Link } from 'ui/common/typography/Link'
 import { Text } from 'ui/common/typography/Text'
@@ -31,6 +31,7 @@ export type ChannelLinkProps = {
   label: string
   tone?: Tone
   scribbled?: boolean
+  trailingIcon?: ReactNode
   className?: string
 }
 
@@ -39,6 +40,7 @@ export const ChannelLink = ({
   label,
   tone = 'system',
   scribbled = false,
+  trailingIcon,
   className,
 }: ChannelLinkProps) => {
   const [borderBlinkKey, setBorderBlinkKey] = useState(0)
@@ -97,8 +99,8 @@ export const ChannelLink = ({
         )}
       >
         {scribbled ? <ScribbleStrike>{label}</ScribbleStrike> : label}
-        <span aria-hidden className={toneStyle.arrow}>
-          ↗
+        <span aria-hidden className={cns('flex items-center', toneStyle.arrow)}>
+          {trailingIcon ?? '↗'}
         </span>
       </Text>
     </Link>

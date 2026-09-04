@@ -7,6 +7,7 @@ const CHANNEL_TAG: [test: RegExp, tag: string][] = [
   [/itch\.io/, 'game'],
   [/behance\.net/, 'bnc'],
   [/x\.com/, 'x.com'],
+  [/\.pdf$/, 'cv.pdf'],
 ]
 
 export const channelTag = (href: string) =>

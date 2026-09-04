@@ -3,6 +3,7 @@ import { SectionContent } from 'ui/common/SectionContent'
 import { Text } from 'ui/common/typography/Text'
 import { HUD_BUILD } from 'ui/features/hud/hud-fields'
 import { FieldLabel } from 'ui/sections/FieldLabel'
+import { ResumeLinks } from 'ui/sections/ResumeLinks'
 import { SocialLinks } from 'ui/sections/SocialLinks'
 import { cns } from 'utils/formatters/classnames'
 
@@ -12,6 +13,7 @@ export const Footer = () => (
       <ContourField animate inverted />
       <SectionContent className={'relative py-intersection-padding'}>
         <SocialLinks />
+        <ResumeLinks className={'mt-[40px]'} />
 
         <div
           className={cns(
