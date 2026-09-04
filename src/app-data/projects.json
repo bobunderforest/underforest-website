@@ -88,10 +88,10 @@
           "kind": "text",
           "caption": "systems I have worked on",
           "body": [
-            "Real-time stereoscopic VR mirrors.",
             "Full-body VR player avatar.",
             "VR locomotion: climbing, rope climbing, hanging and swinging.",
             "Immersive zero-gravity floating movement.",
+            "Real-time stereoscopic VR mirrors.",
             "The origin of my personal game framework: input handling, ability system, VR hand interactions, later shared across other projects."
           ]
         },

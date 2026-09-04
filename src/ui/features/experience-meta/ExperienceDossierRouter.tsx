@@ -20,6 +20,7 @@ import {
 import {
   RESUME_DOWNLOADS,
   ResumeDownloadButtons,
+  ResumeExportLabel,
 } from './ResumeDownloadButtons'
 
 const WIRE_TURN_RATIO = 0.5
@@ -122,7 +123,13 @@ export const ExperienceDossierRouter = () => {
 
         <ExperienceFilter orientation={'vertical'} className={'w-full'} />
 
-        <ResumeDownloadButtons className={'pt-[40px]'} />
+        <div className={'relative flex flex-col gap-3 tablet-s:gap-4'}>
+          <ResumeExportLabel
+            gap={'none'}
+            className={'absolute left-0 top-0 tablet-s:static'}
+          />
+          <ResumeDownloadButtons className={'pt-[40px] tablet-s:pt-0'} />
+        </div>
       </div>
     </DossierWireContext.Provider>
   )

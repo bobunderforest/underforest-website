@@ -1,0 +1,18 @@
+{
+  "model": "open-to-work",
+  "careerStartYear": 2014,
+  "buildPrefix": "rev.",
+  "idleStage": "standby",
+  "boot": [
+    { "label": "boot render pipeline", "status": "ok" },
+    { "label": "load profile {model}", "status": "ok" },
+    { "label": "mount modules", "status": ["react", "webgl", "unreal"] },
+    { "label": "scan career logs", "status": "{years} years" },
+    { "label": "calibrate skills", "status": "{skills} detected" },
+    { "label": "load projects", "status": "{projects} found" },
+    { "label": "visitor detected", "lead": true },
+    { "label": "await position offer", "status": "denied", "denied": true },
+    { "label": "fallback: open portfolio", "status": "ok" },
+    { "label": "begin the tour · welcome", "lead": true }
+  ]
+}

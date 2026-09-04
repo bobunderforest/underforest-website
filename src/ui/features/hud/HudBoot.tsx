@@ -21,7 +21,9 @@ const HudBootRow = ({ label, status, denied, lead }: HudBootLine) => (
             'min-w-[24px] flex-1 border-b border-dotted border-muted/45'
           }
         />
-        <span className={denied ? 'text-accent' : 'text-system'}>{status}</span>
+        <span className={denied ? 'text-accent' : 'text-system'}>
+          {Array.isArray(status) ? status.join(' · ') : status}
+        </span>
       </>
     )}
   </div>

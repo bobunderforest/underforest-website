@@ -9,7 +9,10 @@ import {
   SKILLS,
 } from 'ui/features/experience-data/experience-data'
 import { ExperienceDossierRouter } from 'ui/features/experience-meta/ExperienceDossierRouter'
-import { ResumeDownloadButtons } from 'ui/features/experience-meta/ResumeDownloadButtons'
+import {
+  ResumeDownloadButtons,
+  ResumeExportLabel,
+} from 'ui/features/experience-meta/ResumeDownloadButtons'
 import { ExperienceLanguageList } from 'ui/features/experience-meta/ExperienceLanguageList'
 import { ExperienceEducationList } from 'ui/features/experience-meta/ExperienceEducationList'
 
@@ -45,7 +48,10 @@ export const SectionExperience = () => {
         <div className={'grid max-w-column-width gap-10'}>
           <ExperienceLanguageList />
           <ExperienceEducationList />
-          <ResumeDownloadButtons />
+          <div>
+            <ResumeExportLabel />
+            <ResumeDownloadButtons />
+          </div>
         </div>
       </Section>
     </ExperienceDataProvider>
