@@ -6,6 +6,7 @@ export type NavTarget = {
   label: string
   alias: string
   hint: string
+  kicker?: string
   readout: string
   hash: string
   stage: string
@@ -30,6 +31,7 @@ export const NAV_ROUTES: NavTarget[] = [
     label: 'Projects',
     alias: 'portfolio',
     hint: 'selected builds, opened one detection at a time',
+    kicker: 'selected',
     readout: 'detections',
     hash: '#projects',
     stage: 'Projects',
@@ -41,6 +43,7 @@ export const NAV_ROUTES: NavTarget[] = [
     label: 'Resume',
     alias: 'cv',
     hint: 'ten years of shipped work, classified by employer',
+    kicker: 'complete',
     readout: 'trace / history',
     hash: '#resume',
     stage: 'RESUME',

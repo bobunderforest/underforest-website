@@ -15,7 +15,7 @@ type Props = React.BaseProps &
   React.ElementProps<'div'> & {
     size: TitleSize
     uppercase?: boolean
-    tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+    tag?: 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
     tone?: TextTone
   }
 

@@ -76,6 +76,7 @@ const RouteHalf = ({
   index,
   label,
   alias,
+  kicker,
   hash,
   href,
   direction,
@@ -153,16 +154,18 @@ const RouteHalf = ({
           >
             {readout ?? `lock ${hash} · vec ${DIRECTION_SIGN[direction]}y`}
           </Text>
-          <Text
-            tag={'span'}
-            size={'note'}
-            face={'title'}
-            tone={'dimmed'}
-            uppercase
-            className={'tabular-nums'}
-          >
-            {`[ ${index}00 · ${DIRECTION_SIGN[direction]}1 ]`}
-          </Text>
+          {kicker && (
+            <TextTitle
+              tag={'span'}
+              size={4}
+              uppercase
+              className={
+                'leading-[0.85] tracking-[0.04em] transition-colors duration-200 group-hover:text-accent'
+              }
+            >
+              {kicker}
+            </TextTitle>
+          )}
         </div>
 
         <TextTitle
@@ -170,7 +173,7 @@ const RouteHalf = ({
           size={1}
           uppercase
           className={
-            'leading-[0.85] font-bold tracking-[0.02em] transition-colors duration-200 group-hover:text-accent'
+            'relative left-[-0.05em] leading-[0.85] font-bold tracking-[0.02em] transition-colors duration-200 group-hover:text-accent'
           }
         >
           {label}
