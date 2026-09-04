@@ -612,8 +612,16 @@
       ],
       "domains": ["web"],
       "credits": [
-        { "role": "Design", "name": "Nikita Gusev" },
-        { "role": "Frontend", "name": "Giyos Abbaskhanov" }
+        {
+          "role": "Design",
+          "name": "Nikita Gusev",
+          "href": "https://www.linkedin.com/in/nikita-gusev/"
+        },
+        {
+          "role": "Frontend",
+          "name": "Giyos Abbaskhanov",
+          "href": "https://www.linkedin.com/in/giyos-abbaskhanov/"
+        }
       ],
       "details": [
         {
