@@ -21,6 +21,7 @@ const FINAL_BEAT_TRACK_HEIGHT = 21
 const ProjectStoryTrackItem = ({
   block,
   index,
+  isTrackEnd,
   itemEnd,
   itemStart,
   onHeightChange,
@@ -28,6 +29,7 @@ const ProjectStoryTrackItem = ({
 }: {
   block: ProjectStoryBlock
   index: number
+  isTrackEnd: boolean
   itemEnd: number
   itemStart: number
   onHeightChange: (index: number, height: number) => void
@@ -39,16 +41,20 @@ const ProjectStoryTrackItem = ({
   }, [height, index, onHeightChange])
   const itemProgress = useTransform(trackProgress, [itemStart, itemEnd], [0, 1])
   const isFinalBeat = block.kind === 'end'
-  const markerY = useTransform(itemProgress, (progress) => {
-    const trackHeight = isFinalBeat ? FINAL_BEAT_TRACK_HEIGHT : height
-    return progress * Math.max(trackHeight - TRACK_MARKER_SIZE, 0)
-  })
+  const trackHeight = isFinalBeat ? FINAL_BEAT_TRACK_HEIGHT : height
+  const markerTravel = isTrackEnd
+    ? Math.max(trackHeight - TRACK_MARKER_SIZE, 0)
+    : height
+  const markerY = useTransform(
+    itemProgress,
+    (progress) => progress * markerTravel,
+  )
   const markerOpacity = useTransform(trackProgress, (progress) =>
     progress >= itemStart && (isFinalBeat || progress < itemEnd) ? 1 : 0,
   )
   const trackExtentClassName = 'absolute top-0 left-[3px]'
   const trackExtentStyle: React.CSSProperties = isFinalBeat
-    ? { height: FINAL_BEAT_TRACK_HEIGHT }
+    ? { height: trackHeight }
     : { bottom: 0 }
 
   return (
@@ -160,6 +166,7 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
               key={i}
               block={block}
               index={i}
+              isTrackEnd={i === entry.story.length - 1}
               itemEnd={itemEnd}
               itemStart={itemStart}
               onHeightChange={setItemHeight}
