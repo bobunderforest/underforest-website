@@ -18,6 +18,7 @@ import { ProjectLinkRow } from './ProjectLinkRow'
 import { ProjectMetaReadout } from './ProjectMetaReadout'
 import { ProjectTitleBlock } from './ProjectTitleBlock'
 import { ProjectStoryTrack } from './ProjectStoryTrack'
+import { ProjectShareButton } from './ProjectShareButton'
 
 const STICKY_RAIL_TOP = 148
 const WIRE_BEND_FROM_TARGET_X = 25
@@ -166,10 +167,10 @@ export const ProjectFrame = ({
               ref={stickyRailRef}
               style={{ top: STICKY_RAIL_TOP }}
               className={
-                'sticky flex flex-col gap-2 tablet-s:static tablet-s:contents'
+                'sticky flex flex-col gap-4 tablet-s:static tablet-s:contents'
               }
             >
-              <div className={'flex flex-col gap-2 tablet-s:order-2'}>
+              <div className={'flex flex-col gap-4 tablet-s:order-2'}>
                 {entry.status && (
                   <ExperienceDetailsStatus status={entry.status} />
                 )}
@@ -188,6 +189,9 @@ export const ProjectFrame = ({
                   <ProjectLinkRow entry={entry} primaryRef={primaryActionRef} />
                 </div>
               )}
+              <div className={'tablet-s:order-3'}>
+                <ProjectShareButton entry={entry} />
+              </div>
             </div>
           </div>
         </SectionContent>

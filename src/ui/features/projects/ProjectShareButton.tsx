@@ -30,12 +30,12 @@ export const ProjectShareButton = ({
     <Button
       compact
       dither
-      accent={'bone'}
+      accent={'system'}
       onClick={copyLink}
       className={className}
       aria-label={`Copy link to ${entry.title}`}
     >
-      {copied ? 'Link copied' : 'Copy link'}
+      {copied ? 'Link copied' : 'Share link'}
     </Button>
   )
 }

@@ -33,8 +33,6 @@ export const ProjectTitleBlock = ({
         </h3>
       </div>
 
-      <ProjectShareButton entry={entry} className={'mt-4'} />
-
       {entry.description && (
         <Text
           tag={'p'}

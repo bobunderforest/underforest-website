@@ -8,6 +8,13 @@ import { CrtHoverTexture } from 'ui/fx/CrtHoverTexture'
 import { ScribbleStrike } from 'ui/fx/ScribbleStrike'
 
 const channelTones = {
+  brand: {
+    face: 'border-accent/55 hover:border-accent',
+    corners: 'group-hover:border-accent',
+    tag: 'bg-accent/[0.15] text-accent group-hover:bg-accent',
+    arrow: 'text-accent/60 group-hover:text-accent',
+    outline: 'focus-visible:outline-accent',
+  },
   system: {
     face: 'border-edge hover:border-system',
     corners: 'group-hover:border-system',

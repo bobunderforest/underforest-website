@@ -45,7 +45,7 @@ export const ResumeDownloadButtons = ({
             icon={<DisketteIcon className={'size-[25px]'} />}
             href={resumeFileHref(variant)}
             isExternal
-            accent={variant === 'game' ? 'blue' : 'brand'}
+            accent={variant === 'game' ? 'system' : 'brand'}
             aria-label={`Open ${RESUME_VARIANTS[variant].title} resume PDF`}
           >
             {label}

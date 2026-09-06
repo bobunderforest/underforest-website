@@ -29,7 +29,7 @@ export const FieldLabelHeading = ({
     <span aria-hidden className={'size-2 shrink-0 rotate-45 bg-accent'} />
     <Text
       tag={'span'}
-      size={'regular'}
+      size={'caption'}
       face={'title'}
       tone={'primary'}
       uppercase
@@ -37,7 +37,6 @@ export const FieldLabelHeading = ({
     >
       {children}
     </Text>
-    <span aria-hidden className={'h-px flex-1 bg-edge'} />
     {readout != null && (
       <Text
         tag={'span'}

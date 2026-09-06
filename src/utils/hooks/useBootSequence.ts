@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 
 const STORAGE_KEY = 'underforest:booted'
-const LINE_INTERVAL_MS = 190
-const HOLD_MS = 620
+const LINE_INTERVAL_MS = 100
+const HOLD_MS = 160
 
 const wasBooted = () => {
   try {

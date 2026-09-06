@@ -24,7 +24,7 @@ export const ResumeLinks = ({ className }: { className?: string }) => (
           key={variant}
           href={resumeFileHref(variant)}
           label={label}
-          tone={variant === 'game' ? 'atomic' : 'system'}
+          tone={variant === 'game' ? 'brand' : 'system'}
           trailingIcon={
             <DisketteIcon className={'my-[-0.4em] size-[1.5em] shrink-0'} />
           }

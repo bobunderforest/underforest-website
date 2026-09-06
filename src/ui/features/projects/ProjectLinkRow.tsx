@@ -12,7 +12,7 @@ export const ProjectLinkRow = ({
   if (!entry.href && !entry.links?.length) return null
 
   return (
-    <div className={'mt-1 flex flex-col items-start gap-3 tablet-s:mt-0'}>
+    <div className={'flex flex-col items-start gap-4'}>
       {entry.href && (
         <div ref={primaryRef} className={'w-full'}>
           <Button
@@ -28,7 +28,7 @@ export const ProjectLinkRow = ({
         </div>
       )}
       {!!entry.links?.length && (
-        <div className={'flex flex-wrap items-center gap-2'}>
+        <div className={'flex flex-wrap items-center gap-4'}>
           {entry.links.map((link) => (
             <ChannelLink key={link.href} {...link} />
           ))}

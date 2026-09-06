@@ -12,8 +12,8 @@ const accentStyles = {
     corners: 'border-accent',
     outline: 'outline-accent',
   },
-  blue: {
-    face: 'border-system/55 bg-system/[0.07] text-system hover:border-system hover:bg-system hover:text-base focus-visible:border-system focus-visible:bg-system focus-visible:text-base',
+  system: {
+    face: 'border-edge bg-system/[0.07] text-system hover:border-system hover:bg-system hover:text-base focus-visible:border-system focus-visible:bg-system focus-visible:text-base',
     corners: 'border-system',
     outline: 'outline-system',
   },

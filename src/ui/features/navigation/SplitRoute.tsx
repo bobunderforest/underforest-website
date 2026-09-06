@@ -19,13 +19,6 @@ import { ClampDivider } from 'ui/common/cyber-kit/ClampDivider'
 type Direction = 'down' | 'up'
 type RouteMode = Direction | 'between'
 
-const MODE_READOUT: Record<RouteMode, string> = {
-  down: 'descend',
-  up: 'ascend',
-  between: 'reroute',
-}
-const DIRECTION_SIGN: Record<Direction, string> = { down: '+', up: '−' }
-
 const CHEVRON_SLOTS = 21
 const CHEVRON_TOP_BLEED = 3
 const CHEVRON_STEP = 17
@@ -73,20 +66,16 @@ const halfDirection = (mode: RouteMode, targetIndex: number): Direction =>
   mode === 'between' ? (targetIndex === 0 ? 'up' : 'down') : mode
 
 const RouteHalf = ({
-  index,
   label,
   alias,
   kicker,
-  hash,
   href,
   direction,
   align,
-  readout,
 }: Omit<NavTarget, 'readout'> & {
   href: string
   direction: Direction
   align: 'start' | 'end'
-  readout?: ReactNode
 }) => {
   const hover = useCaptureHover()
 
@@ -126,20 +115,8 @@ const RouteHalf = ({
       <ChevronRail direction={direction} />
 
       <div className={'relative flex flex-1 flex-col justify-between'}>
-        <div className={'flex flex-col gap-4'}>
+        <div className={'flex flex-col gap-10'}>
           <div className={'flex items-center gap-3'}>
-            <Text
-              tag={'span'}
-              size={'note'}
-              face={'title'}
-              tone={'inverse'}
-              uppercase
-              className={
-                'bg-muted px-2 py-1 tabular-nums transition-colors duration-200 group-hover:bg-accent'
-              }
-            >
-              {`tgt·${index}`}
-            </Text>
             <Text
               size={'hint'}
               tone={'secondary'}
@@ -149,16 +126,6 @@ const RouteHalf = ({
               {`// aka ${alias}`}
             </Text>
           </div>
-          <Text
-            tag={'span'}
-            size={'note'}
-            face={'title'}
-            tone={'system'}
-            uppercase
-            className={'tabular-nums mobile-m:hidden'}
-          >
-            {readout ?? `lock ${hash} · vec ${DIRECTION_SIGN[direction]}y`}
-          </Text>
           {kicker && (
             <TextTitle
               tag={'span'}
@@ -209,14 +176,6 @@ export const SplitRoute = ({
   return (
     <section data-stage={'Route'} className={'relative'}>
       <ClampDivider className={'relative z-20'} />
-      <FieldLabel
-        readout={MODE_READOUT[direction]}
-        className={
-          'pointer-events-none absolute top-[18px] left-1/2 z-20 -translate-x-1/2 justify-center bg-base px-3 mobile-m:hidden'
-        }
-      >
-        route
-      </FieldLabel>
       <div
         className={cns(
           'relative z-10 flex w-full divide-x divide-edge border-y border-edge',

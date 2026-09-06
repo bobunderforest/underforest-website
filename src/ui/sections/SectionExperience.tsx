@@ -24,14 +24,14 @@ export const SectionExperience = () => {
       <Section id={'resume'} stage={'RESUME'} decoration={<CrtDitherOverlay />}>
         <div className={'mb-intersection-padding'}>
           <FieldLabel readout={EXPERIENCE_READOUT}>
-            domain filter · dossier export
+            domain filter
           </FieldLabel>
           <ExperienceDossierRouter />
         </div>
 
         <div className={'mb-intersection-padding'}>
           <FieldLabel
-            readout={`${primaryCount} primary · ${SKILLS.length} detected`}
+            readout={`${primaryCount} primary · ${SKILLS.length} total`}
           >
             skills
           </FieldLabel>

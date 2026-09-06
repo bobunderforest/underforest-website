@@ -129,18 +129,18 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
       : 0
   const tickTrackHeight = hasMeasurements
     ? totalHeight -
-      finalBeatHeight +
-      (finalBeatHeight > 0 ? FINAL_BEAT_TRACK_HEIGHT : 0)
+    finalBeatHeight +
+    (finalBeatHeight > 0 ? FINAL_BEAT_TRACK_HEIGHT : 0)
     : '100%'
 
   return (
     <div className={'pt-8'}>
-      <FieldLabel
+      {/* <FieldLabel
         className={'mobile-m:hidden'}
         readout={`${entry.story.length} checkpoints`}
       >
         storyline
-      </FieldLabel>
+      </FieldLabel> */}
 
       <ol ref={storyRef} className={'relative grid'}>
         <span
