@@ -8,6 +8,7 @@ import { SiteRuntime } from 'ui/layout/SiteRuntime'
 import { HudNav } from 'ui/features/navigation/HudNav'
 import { Footer } from 'ui/layout/Footer'
 import { ModalRenderer } from 'modules/modal/ModalRenderer'
+import { ClampDivider } from 'ui/common/cyber-kit/ClampDivider'
 
 import type { MetaData } from 'utils/types/data'
 
@@ -16,9 +17,10 @@ import metaTagsBase from 'app-data/meta-tags.json'
 type Props = {
   meta?: MetaData
   focusStageOnEntry?: string
+  withLandingDividers?: boolean
 }
 
-const { meta, focusStageOnEntry } = Astro.props
+const { meta, focusStageOnEntry, withLandingDividers } = Astro.props
 
 const metaData = {
   metaUrl: metaTagsBase.url,
@@ -32,9 +34,11 @@ const metaData = {
   <a class="skip-link" href="#stage">Skip to content</a>
   <HudNav client:load transition:persist="site-nav" />
   <SectionSplash client:load transition:persist="site-splash" />
+  {withLandingDividers && <ClampDivider className="relative z-10" />}
   <main id="stage" data-focus-on-entry={focusStageOnEntry}>
     <slot />
   </main>
+  {withLandingDividers && <ClampDivider className="relative z-10" />}
   <Footer client:visible />
   <SiteRuntime client:load transition:persist="site-runtime" />
   <ModalRenderer client:load />

@@ -24,14 +24,15 @@ export const FieldLabelHeading = ({
   children,
   readout,
   className,
-}: Pick<Props, 'children' | 'readout' | 'className'>) => (
+  muted = false,
+}: Pick<Props, 'children' | 'readout' | 'className'> & { muted?: boolean }) => (
   <div className={cns('mb-8 flex items-center gap-4', className)}>
-    <span aria-hidden className={'size-2 shrink-0 rotate-45 bg-accent'} />
+    <span aria-hidden className={cns('size-2 shrink-0 rotate-45 bg-accent')} />
     <Text
       tag={'span'}
       size={'caption'}
       face={'title'}
-      tone={'primary'}
+      tone={muted ? 'secondary' : 'primary'}
       uppercase
       className={'shrink-0 tracking-[0.24em]'}
     >
@@ -41,7 +42,7 @@ export const FieldLabelHeading = ({
       <Text
         tag={'span'}
         size={'hint'}
-        tone={'system'}
+        tone={muted ? 'secondary' : 'system'}
         uppercase
         className={'shrink-0'}
       >

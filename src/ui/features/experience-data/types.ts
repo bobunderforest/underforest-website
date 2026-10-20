@@ -1,4 +1,4 @@
-export type Domain = 'web' | 'game'
+export type Domain = 'web' | 'gamedev'
 
 export type ExperienceDomainFilter = Domain | 'unified'
 
@@ -100,6 +100,7 @@ export type ProjectRef = {
   description?: string
   dataFromExperience?: boolean
   resumeNote?: string
+  previewText?: string
   from?: string
   to?: string
   period?: string
@@ -118,6 +119,7 @@ export type ProjectRef = {
   status?: ExperienceStatus
   credits?: Credit[]
   cover?: ProjectCover
+  previewCover?: ProjectCover
   story?: ProjectStoryBlock[]
 }
 

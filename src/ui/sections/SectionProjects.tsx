@@ -1,23 +1,53 @@
-import { Fragment } from 'react'
 import { SectionShell } from './SectionShell'
-import { ClampDivider } from 'ui/common/cyber-kit/ClampDivider'
-import { padCount } from 'utils/formatters/numerals'
 import { usePageDataMain } from 'modules/page-data/page-data-hooks'
-import { ProjectFrame } from 'ui/features/projects/ProjectFrame'
+import { ProjectPreview } from 'ui/features/projects/ProjectPreview'
+import { SectionContent } from 'ui/common/SectionContent'
+import { SectionTitle } from './SectionTitle'
 
 export const SectionProjects = () => {
   const projects = usePageDataMain('projects')
+  const leftProjects = projects.filter((_, index) => index % 2 === 0)
+  const rightProjects = projects.filter((_, index) => index % 2 === 1)
 
   return (
-    <SectionShell withEdge id={'projects'} stage={'Projects'}>
-      <div className={'flex flex-col'}>
-        {projects.map((entry, i) => (
-          <Fragment key={entry.id}>
-            <ClampDivider className={'relative z-10'} />
-            <ProjectFrame entry={entry} slot={padCount(i)} />
-          </Fragment>
-        ))}
-      </div>
+    <SectionShell id={'projects'} stage={'Projects'}>
+      <SectionContent isPadded>
+        <SectionTitle alias={'portfolio'} kicker={'selected'}>
+          projects
+        </SectionTitle>
+        <div
+          className={
+            'grid grid-cols-2 gap-grid-gap-regular mobile-m:grid-cols-1'
+          }
+        >
+          <div className={'flex flex-col'}>
+            {leftProjects.map((entry, index) => (
+              <ProjectPreview
+                key={entry.id}
+                entry={entry}
+                className={
+                  index < leftProjects.length - 1
+                    ? 'mb-grid-gap-regular'
+                    : undefined
+                }
+              />
+            ))}
+          </div>
+          <div className={'flex flex-col pt-[28.125%] mobile-m:pt-0'}>
+            {rightProjects.map((entry, index) => (
+              <ProjectPreview
+                key={entry.id}
+                entry={entry}
+                className={
+                  index < rightProjects.length - 1
+                    ? 'mb-grid-gap-regular'
+                    : undefined
+                }
+              />
+            ))}
+          </div>
+        </div>
+      </SectionContent>
     </SectionShell>
   )
 }

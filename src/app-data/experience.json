@@ -2,28 +2,28 @@
   "skills": [
     {
       "label": "Unreal Engine",
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "primary": true,
       "rising": true,
       "area": "Engine & gameplay"
     },
     {
       "label": "C++ / Blueprints",
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "primary": true,
       "rising": true,
       "area": "Engine & gameplay"
     },
     {
       "label": "Gameplay programming",
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "primary": true,
       "rising": true,
       "area": "Engine & gameplay"
     },
     {
       "label": "VR / XR",
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "primary": true,
       "rising": true,
       "area": "Engine & gameplay"
@@ -36,7 +36,7 @@
     },
     {
       "label": "TypeScript",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "primary": true,
       "area": "Web & frontend"
     },
@@ -48,33 +48,33 @@
     },
     {
       "label": "Three.js",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "primary": true,
       "area": "Graphics & real-time"
     },
     {
       "label": "Git Version Control",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "area": "Tooling"
     },
     {
       "label": "Chaos Physics",
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "area": "Engine & gameplay"
     },
     {
       "label": "Niagara",
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "area": "Engine & gameplay"
     },
     {
       "label": "GLSL / Shaders",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "area": "Graphics & real-time"
     },
     {
       "label": "Canvas / 2D",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "area": "Graphics & real-time"
     },
     {
@@ -120,7 +120,7 @@
       "aside": true,
       "asideLabel": "Parallel track: Game development",
       "resumeVariants": ["web"],
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "summary": [
         "Full-time gameplay and VR programming in Unreal Engine (C++ / Blueprints): shipped a solo VR game for Meta Quest 3, collaborated on the VR project Ocean Threshold, and built real-time systems, on-device profiling, and custom engine tooling. It grew out of a long-running creative-coding practice — physics, generative graphics, small games — and was a deliberate step in that direction. I keep front-end work going alongside it, not instead of it."
       ],
@@ -223,7 +223,7 @@
           "href": "https://bobunderforest.itch.io/gnarly-crawl-vr"
         }
       ],
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "details": [
         {
           "kind": "text",
@@ -314,7 +314,7 @@
           "href": "https://store.steampowered.com/app/4865570/Ocean_Threshold/"
         }
       ],
-      "domains": ["game"],
+      "domains": ["gamedev"],
       "reclassified": true,
       "status": {
         "kind": "suspended",
@@ -353,7 +353,7 @@
       "periodLabel": "2014 — present",
       "aside": true,
       "asideLabel": "Background: Web engineering",
-      "resumeVariants": ["game"],
+      "resumeVariants": ["gamedev"],
       "domains": ["web"],
       "summary": [
         "Behind the games work: over 10 years building production web software, in-office and remote. I am experienced with team workflows, version control, code review, and Scrum/Agile. Alongside that, I kept up a creative-coding practice: physics, generative graphics, small hackathon games. Moving into Unreal Engine was a deliberate step in that direction."
@@ -677,7 +677,7 @@
       "from": "2018-05",
       "to": "2018-07",
       "summary": ["Break due to medical surgery."],
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "break": true
     },
     {

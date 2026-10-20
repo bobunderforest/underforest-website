@@ -6,7 +6,7 @@ import { cns } from 'utils/formatters/classnames'
 import { FieldLabel } from './FieldLabel'
 
 const resumeVariants: { variant: Domain; label: string }[] = [
-  { variant: 'game', label: 'gamedev' },
+  { variant: 'gamedev', label: 'gamedev' },
   { variant: 'web', label: 'frontend' },
 ]
 
@@ -24,7 +24,7 @@ export const ResumeLinks = ({ className }: { className?: string }) => (
           key={variant}
           href={resumeFileHref(variant)}
           label={label}
-          tone={variant === 'game' ? 'brand' : 'system'}
+          tone={variant === 'gamedev' ? 'brand' : 'system'}
           trailingIcon={
             <DisketteIcon className={'my-[-0.4em] size-[1.5em] shrink-0'} />
           }

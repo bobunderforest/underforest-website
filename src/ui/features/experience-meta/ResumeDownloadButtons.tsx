@@ -12,7 +12,7 @@ import { useDossierWire } from './dossier-wire-context'
 
 export const RESUME_DOWNLOADS: { variant: Domain; label: string }[] = [
   { variant: 'web', label: 'Resume_Frontend.PDF' },
-  { variant: 'game', label: 'Resume_Gamedev.PDF' },
+  { variant: 'gamedev', label: 'Resume_Gamedev.PDF' },
 ]
 
 export const ResumeExportLabel = ({
@@ -45,7 +45,7 @@ export const ResumeDownloadButtons = ({
             icon={<DisketteIcon className={'size-[25px]'} />}
             href={resumeFileHref(variant)}
             isExternal
-            accent={variant === 'game' ? 'system' : 'brand'}
+            accent={variant === 'gamedev' ? 'system' : 'brand'}
             aria-label={`Open ${RESUME_VARIANTS[variant].title} resume PDF`}
           >
             {label}

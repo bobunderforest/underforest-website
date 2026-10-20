@@ -17,7 +17,7 @@ const OPTIONS: {
 }[] = [
   { value: 'web', label: 'web', index: '01' },
   { value: 'unified', label: 'unified', index: '02' },
-  { value: 'game', label: 'gamedev', index: '03' },
+  { value: 'gamedev', label: 'gamedev', index: '03' },
 ]
 
 type Props = {

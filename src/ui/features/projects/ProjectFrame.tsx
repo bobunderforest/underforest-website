@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  type MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { SectionContent } from 'ui/common/SectionContent'
 import { FieldLabelHeading } from 'ui/sections/FieldLabel'
@@ -19,6 +26,8 @@ import { ProjectMetaReadout } from './ProjectMetaReadout'
 import { ProjectTitleBlock } from './ProjectTitleBlock'
 import { ProjectStoryTrack } from './ProjectStoryTrack'
 import { ProjectShareButton } from './ProjectShareButton'
+import { NavTarget } from 'ui/features/navigation/NavTarget'
+import { consumeProjectIndexReturn } from 'utils/browser/project-index-return'
 
 const STICKY_RAIL_TOP = 148
 const WIRE_BEND_FROM_TARGET_X = 25
@@ -58,6 +67,24 @@ export const ProjectFrame = ({
   const handleActivation = useCallback(
     (inView: boolean) => setLocked(inView),
     [],
+  )
+  const handleProjectIndexReturn = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
+      if (
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        window.history.length < 2 ||
+        !consumeProjectIndexReturn(entry.id)
+      ) {
+        return
+      }
+      event.preventDefault()
+      window.history.back()
+    },
+    [entry.id],
   )
   useCenterActivationObserver(frameRef, handleActivation)
 
@@ -151,7 +178,7 @@ export const ProjectFrame = ({
           <div
             ref={gridRef}
             className={
-              'grid grid-cols-[minmax(0,1fr)_minmax(19rem,26rem)] items-start gap-x-12 gap-y-10 tablet-s:grid-cols-1 tablet-s:gap-x-0 tablet-s:gap-y-8 [&>*]:min-w-0'
+              'mb-40 grid grid-cols-[minmax(0,1fr)_minmax(19rem,26rem)] items-start gap-x-12 gap-y-10 tablet-s:grid-cols-1 tablet-s:gap-x-0 tablet-s:gap-y-8 [&>*]:min-w-0'
             }
           >
             <div className={'tablet-s:contents'}>
@@ -194,6 +221,11 @@ export const ProjectFrame = ({
               </div>
             </div>
           </div>
+          <NavTarget
+            label={'Back to projects'}
+            href={'/#projects'}
+            onClick={handleProjectIndexReturn}
+          />
         </SectionContent>
       </article>
     </ProjectFrameContext.Provider>

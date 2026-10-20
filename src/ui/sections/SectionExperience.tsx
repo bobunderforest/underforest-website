@@ -15,6 +15,7 @@ import {
 } from 'ui/features/experience-meta/ResumeDownloadButtons'
 import { ExperienceLanguageList } from 'ui/features/experience-meta/ExperienceLanguageList'
 import { ExperienceEducationList } from 'ui/features/experience-meta/ExperienceEducationList'
+import { SectionTitle } from './SectionTitle'
 
 const primaryCount = SKILLS.filter((skill) => skill.primary).length
 
@@ -22,6 +23,9 @@ export const SectionExperience = () => {
   return (
     <ExperienceDataProvider>
       <Section id={'resume'} stage={'RESUME'} decoration={<CrtDitherOverlay />}>
+        <SectionTitle alias={'cv'} kicker={'complete'}>
+          resume
+        </SectionTitle>
         <div className={'mb-intersection-padding'}>
           <FieldLabel readout={EXPERIENCE_READOUT}>
             domain filter

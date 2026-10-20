@@ -4,6 +4,12 @@
       "id": "gamedev-solo",
       "dataFromExperience": true,
       "cover": { "kind": "psy-sky" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/gnarlycrawl-trailer.mp4"
+      },
+      "previewText": "Dungeon synth aesthetic VR game.",
+      "resumeNote": "Solo development of a Quest 3 VR dungeon crawler",
       "story": [
         {
           "kind": "text",
@@ -62,6 +68,12 @@
       "dataFromExperience": true,
       "label": "Ocean\nThreshold",
       "cover": { "kind": "video", "src": "/videos/ocean-threshold-safe.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/ocean-threshold-safe.mp4"
+      },
+      "previewText": "A narrative VR immersive experience, a descent through the space between life and death.",
+      "resumeNote": "Gameplay and VR interactions programming for a narrative Unreal Engine experience",
       "story": [
         {
           "kind": "text",
@@ -104,9 +116,14 @@
     {
       "id": "in2into",
       "dataFromExperience": true,
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "resumeNote": "Interactive mobile WebAR showcase (Three.js, real-time 3D)",
+      "previewText": "Mobile WebAR for a contemporary jewellery exhibition.",
       "cover": { "kind": "video", "src": "/videos/in2into-web-ar.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/in2into-web-ar.mp4"
+      },
       "story": [
         {
           "kind": "text",
@@ -133,7 +150,12 @@
       "label": "Kowloon\nCity Guide",
       "domains": ["web"],
       "resumeNote": "Immersive visual-storytelling site about the Kowloon Walled City",
+      "previewText": "A visual journey through Kowloon Walled City.",
       "cover": { "kind": "video", "src": "/videos/kowloon-short-preview.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/kowloon-short-preview.mp4"
+      },
       "story": [
         {
           "kind": "text",
@@ -158,10 +180,15 @@
       "id": "physics-programming-practice",
       "label": "Physics\nProgramming\nPractice",
       "cover": { "kind": "video", "src": "/videos/physics-practice.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/physics-practice.mp4"
+      },
       "href": "https://bobunderforest.github.io/coding-train-practice/",
       "period": "2018 – sometimes",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "resumeNote": "Creative-coding and physics-simulation exercises",
+      "previewText": "A sketchbook of creative-coding experiments.",
       "summary": [""],
       "story": [
         {
@@ -191,10 +218,12 @@
       "href": "https://bobunderforest.github.io/kaleidoscope/",
       "period": "2018",
       "employment": "Contest project",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "resumeNote": "Real-time generative kaleidoscope, a creative-programming experiment",
+      "previewText": "A real-time generative kaleidoscope experiment.",
       "summary": ["A real-time generative kaleidoscope visual."],
       "cover": { "kind": "kaleidoscope" },
+      "previewCover": { "kind": "kaleidoscope" },
       "story": [
         {
           "kind": "text",
@@ -224,10 +253,15 @@
       "label": "Space\nInvaders",
       "href": "https://bobunderforest.github.io/spaceinvaders/",
       "cover": { "kind": "video", "src": "/videos/space-invaders.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/space-invaders.mp4"
+      },
       "period": "2015",
       "employment": "Programming test",
-      "domains": ["web", "game"],
+      "domains": ["web", "gamedev"],
       "resumeNote": "One of my first creative-programming experiences, built as a job-application test",
+      "previewText": "An early JavaScript Space Invaders clone.",
       "summary": [
         "A compact Space Invaders clone, an early JavaScript exercise."
       ],
