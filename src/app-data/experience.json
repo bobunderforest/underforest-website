@@ -133,6 +133,42 @@
       ]
     },
     {
+      "id": "sempervirent",
+      "from": "2026-09",
+      "to": "2026-09",
+      "role": "Front-end",
+      "employment": "Contract",
+      "place": "Sempervirent",
+      "href": "https://deck.sempervirent.studio/",
+      "summary": ["Studio website development.", "Scroll-driven animations."],
+      "skills": ["Astro", "React", "CSS / Tailwind", "Three.js"],
+      "domains": ["web"],
+      "credits": [
+        {
+          "role": "Art Direction",
+          "name": "Sempervirent Studio",
+          "href": "https://sempervirent.studio/"
+        },
+        {
+          "role": "Design",
+          "name": "Anastasiia Vetushko",
+          "href": "https://www.behance.net/fairymymyu"
+        }
+      ],
+      "details": [
+        {
+          "kind": "text",
+          "caption": "project closeup",
+          "body": "Sempervirent studio webpage made in retro aesthetics enriched with scroll-driven animations."
+        },
+        {
+          "kind": "video",
+          "caption": "screen capture · web",
+          "src": "/videos/sempervirent.mp4"
+        }
+      ]
+    },
+    {
       "id": "gamedev-solo",
       "from": "2026-04",
       "to": "2026-08",
@@ -539,7 +575,7 @@
       "place": "XYZ School",
       "summary": [
         "Created a UI component system.",
-        "Integrated components into Storybook for team adoption.",
+        "Integrated components into Storybook.",
         "Collaborated with a remote team."
       ],
       "skills": ["React", "Storybook", "TypeScript", "Styled Components"],
@@ -666,7 +702,7 @@
       "role": "Full-stack",
       "employment": "Freelance",
       "place": "Independent",
-      "summary": ["Delivered several small-scale client projects end to end."],
+      "summary": ["Delivered several small-scale client projects."],
       "skills": ["React", "TypeScript", "Webpack", "Express", "MongoDB"],
       "domains": ["web"]
     },
@@ -681,7 +717,7 @@
       "summary": [
         "Participated in maintaining a social trading platform.",
         "Collaborated on a UI component library.",
-        "Contributed to migrating the codebase to TypeScript."
+        "Contributed to migrating the codebase to TypeScript and React."
       ],
       "skills": ["React", "TypeScript", "Webpack", "Canvas / 2D"],
       "domains": ["web"]

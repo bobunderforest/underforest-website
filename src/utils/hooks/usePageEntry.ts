@@ -4,6 +4,11 @@ import { getScrollPosition } from 'utils/browser/scroll-util'
 
 const PAGE_TOP = 0
 
+const focusesStageOnEntry = () =>
+  document.querySelector('main[data-focus-on-entry]') !== null
+
+const isAtPageTop = () => getScrollPosition() <= 1
+
 const entryTop = () => {
   const stage = document.querySelector('main section')
   if (!stage) return PAGE_TOP
@@ -14,6 +19,7 @@ export const usePageEntry = () => {
   useEffect(() => {
     let navigated = false
     let traversed = false
+    let opened = true
     let release = () => {}
 
     const markNavigated = () => {
@@ -25,9 +31,14 @@ export const usePageEntry = () => {
 
     const focusStage = () => {
       const entering = navigated && !traversed
+      const opening = opened && !traversed
       navigated = false
       traversed = false
-      if (!entering || window.location.hash) return
+      opened = false
+      if (window.location.hash) return
+      if (!entering && !(opening && focusesStageOnEntry() && isAtPageTop())) {
+        return
+      }
 
       release()
       release = holdScrollAligned(entryTop)
