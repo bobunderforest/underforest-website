@@ -10,7 +10,12 @@ const focusesStageOnEntry = () =>
 const isAtPageTop = () => getScrollPosition() <= 1
 
 const entryTop = () => {
-  const stage = document.querySelector('main section')
+  const entryTargetId = document
+    .querySelector('main[data-focus-on-entry]')
+    ?.getAttribute('data-focus-on-entry')
+  const stage = entryTargetId
+    ? document.getElementById(entryTargetId)
+    : document.querySelector('main section')
   if (!stage) return PAGE_TOP
   return Math.round(stage.getBoundingClientRect().top + getScrollPosition())
 }
