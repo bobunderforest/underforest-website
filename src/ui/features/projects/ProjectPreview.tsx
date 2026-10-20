@@ -126,6 +126,17 @@ export const ProjectPreview = ({ entry, className }: Props) => {
             'absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,transparent_0,rgba(0,0,0,0.5)_80%)]'
           }
         />
+        <div
+          style={{
+            backgroundImage:
+              'radial-gradient(var(--color-muted) 0.6px, transparent 0.9px)',
+            backgroundSize: '5px 5px',
+            maskImage: 'linear-gradient(to top, black, transparent)',
+          }}
+          className={
+            'pointer-events-none absolute inset-x-0 bottom-0 h-1/3 opacity-25'
+          }
+        />
         <div className={'relative flex w-full flex-col justify-between p-6'}>
           <div className={'flex items-start justify-between gap-4'}>
             <Text
