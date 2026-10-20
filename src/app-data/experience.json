@@ -178,7 +178,7 @@
       "href": "https://gnarlycrawl.bobunderforest.me/",
       "summary": [
         "Solo development of a small-sized VR game.",
-        "Own C++ data-driven ability framework.",
+        "Gameplay Ability System.",
         "Gameplay and VR interactions programming: combat, grabbing, climbing, inventory.",
         "Quest 3 standalone build profiling and optimization.",
         "Save/load system.",
@@ -193,7 +193,7 @@
       "resume": {
         "summary": [
           "Solo-developed a VR game for Meta Quest 3 standalone.",
-          "Built a custom C++ data-driven gameplay framework: ability/attributes system, composable actor behaviour, split across reusable modules and plugins.",
+          "Built a custom C++ data-driven gameplay framework for learning purposes. Ability/attributes system, composable actor behaviour, split across reusable modules and plugins. Later I've rewrote the project with Unreal's GAS.",
           "Programmed VR interaction and locomotion: physics grab, climbing, pocket inventory, two-handed manipulation, comfort options.",
           "Built combat and enemy AI: motion-based melee, shield blocking, firearms, Behavior Tree enemies.",
           "Built a save/checkpoint system with physics-state restore and cross-object reference resolution on load.",
@@ -297,7 +297,7 @@
           "Built custom VR locomotion: climbing, rope climbing, hanging, swinging.",
           "Built a gravity-mode system enabling zero-g gameplay.",
           "Built real-time stereoscopic VR mirrors via scene-capture, with off-screen and distance culling to hold frame budget.",
-          "Started a personal reusable C++ gameplay framework (ability system, input handling, VR hand interactions), later carried across projects via git submodules."
+          "Started a personal reusable C++ GAS-wrapper data-oriented composition framework (ability system, input handling, VR hand interactions), later carried across projects via git submodules."
         ],
         "skills": [
           "Unreal Engine",
