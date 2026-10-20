@@ -113,7 +113,7 @@ export const ExperienceEntry = ({
         }
       >
         <ExperienceDetectionFrame blinkKey={active ? entry.id : undefined} />
-        {active && (
+        {/* {active && (
           <ContourField
             animate
             palette={'dark-red'}
@@ -121,7 +121,7 @@ export const ExperienceEntry = ({
               '-top-[19px] -right-[25px] -bottom-[19px] -left-[25px] size-auto overflow-hidden'
             }
           />
-        )}
+        )} */}
         {clickable && (
           <span
             aria-hidden
