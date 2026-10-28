@@ -64,6 +64,16 @@
       ]
     },
     {
+      "id": "sempervirent",
+      "dataFromExperience": true,
+      "cover": { "kind": "video", "src": "/videos/sempervirent.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/sempervirent.mp4"
+      },
+      "previewText": "Retro-aesthetic studio website with scroll-driven animations."
+    },
+    {
       "id": "ocean-threshold",
       "dataFromExperience": true,
       "label": "Ocean\nThreshold",
@@ -114,6 +124,17 @@
       ]
     },
     {
+      "id": "arcanum-works",
+      "dataFromExperience": true,
+      "label": "Arcanum\nWorks",
+      "cover": { "kind": "video", "src": "/videos/arcanum.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/arcanum.mp4"
+      },
+      "previewText": "Portfolio website for a previs production agency, with WebGL effects."
+    },
+    {
       "id": "in2into",
       "dataFromExperience": true,
       "domains": ["web", "gamedev"],
@@ -143,6 +164,17 @@
           "caption": "END"
         }
       ]
+    },
+    {
+      "id": "matter-streaming",
+      "dataFromExperience": true,
+      "label": "Matter\nStreaming",
+      "cover": { "kind": "video", "src": "/videos/matter-streaming-demo.mp4" },
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/matter-streaming-demo.mp4"
+      },
+      "previewText": "A music-streaming social platform, made by musicians for musicians."
     },
     {
       "id": "kowloon-city-guide",

@@ -3,7 +3,6 @@ import resume from 'app-data/resume.json'
 import type {
   Domain,
   EducationEntry,
-  ExperienceDomainFilter,
   ExperienceEntry,
   ExperienceStatusKind,
   MetaLine,
@@ -23,20 +22,8 @@ export const RESUME_VARIANTS = resume.variants as Record<
   { file: string; title: string; summary: string[] }
 >
 
-export const EXPERIENCE_READOUT = `${EXPERIENCE.length} entries · ${SKILLS.length} skills detected`
-
-export const resumeVariantFor = (domainFilter: ExperienceDomainFilter) =>
-  domainFilter === 'unified'
-    ? RESUME_VARIANTS.web
-    : RESUME_VARIANTS[domainFilter]
-
-export const resumeFileHref = (domainFilter: ExperienceDomainFilter) =>
-  `/resume/${resumeVariantFor(domainFilter).file}`
-
-export const isDimmed = (
-  domainFilter: ExperienceDomainFilter,
-  domains: Domain[],
-) => domainFilter !== 'unified' && !domains.includes(domainFilter)
+export const resumeFileHref = (variant: Domain) =>
+  `/resume/${RESUME_VARIANTS[variant].file}`
 
 export const hasExperienceDetails = (entry: ExperienceEntry) =>
   Boolean(

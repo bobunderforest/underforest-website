@@ -1,7 +1,5 @@
 export type Domain = 'web' | 'gamedev'
 
-export type ExperienceDomainFilter = Domain | 'unified'
-
 export type LinkRef = { label: string; href: string }
 
 export type MediaGeometry = {

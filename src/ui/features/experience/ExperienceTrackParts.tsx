@@ -6,18 +6,16 @@ import type { ExperienceEntry } from 'ui/features/experience-data/types'
 type ExperienceTrackNodeProps = {
   active?: boolean
   children: ReactNode
-  dimmed: boolean
 }
 
 export const ExperienceTrackNode = forwardRef<
   HTMLLIElement,
   ExperienceTrackNodeProps
->(({ active = false, children, dimmed }, ref) => (
+>(({ active = false, children }, ref) => (
   <li
     ref={ref}
     className={cns(
-      'relative py-8 pl-16 transition-opacity duration-300 mobile-m:py-12 mobile-m:pl-0',
-      dimmed && 'opacity-30',
+      'relative py-8 pl-16 mobile-m:py-12 mobile-m:pl-0',
       active && 'z-[1]',
     )}
   >

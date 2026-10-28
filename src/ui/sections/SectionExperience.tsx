@@ -1,14 +1,9 @@
 import { Section } from './Section'
 import { CrtDitherOverlay } from 'ui/fx/CrtDitherOverlay'
 import { FieldLabel } from './FieldLabel'
-import { ExperienceDataProvider } from 'ui/features/experience-data/ExperienceDataProvider'
 import { SkillTagsContainer } from 'ui/features/skills/SkillTagsContainer'
 import { ExperienceTrack } from 'ui/features/experience/ExperienceTrack'
-import {
-  EXPERIENCE_READOUT,
-  SKILLS,
-} from 'ui/features/experience-data/experience-data'
-import { ExperienceDossierRouter } from 'ui/features/experience-meta/ExperienceDossierRouter'
+import { SKILLS } from 'ui/features/experience-data/experience-data'
 import {
   ResumeDownloadButtons,
   ResumeExportLabel,
@@ -21,43 +16,39 @@ const primaryCount = SKILLS.filter((skill) => skill.primary).length
 
 export const SectionExperience = () => {
   return (
-    <ExperienceDataProvider>
-      <Section id={'resume'} stage={'RESUME'} decoration={<CrtDitherOverlay />}>
-        <SectionTitle alias={'cv'} kicker={'complete'}>
-          resume
-        </SectionTitle>
-        <div className={'mb-intersection-padding'}>
-          <FieldLabel readout={EXPERIENCE_READOUT}>
-            domain filter
-          </FieldLabel>
-          <ExperienceDossierRouter />
-        </div>
+    <Section id={'resume'} stage={'RESUME'} decoration={<CrtDitherOverlay />}>
+      <SectionTitle alias={'cv'} kicker={'complete'}>
+        resume
+      </SectionTitle>
+      <div className={'mb-intersection-padding max-w-column-width'}>
+        <ResumeExportLabel />
+        <ResumeDownloadButtons />
+      </div>
 
-        <div className={'mb-intersection-padding'}>
-          <FieldLabel
-            readout={`${primaryCount} primary · ${SKILLS.length} total`}
-          >
-            skills
-          </FieldLabel>
-          <SkillTagsContainer />
-        </div>
+      <div className={'mb-intersection-padding'}>
+        <FieldLabel
+          readout={`${primaryCount} primary · ${SKILLS.length} total`}
+        >
+          skills
+        </FieldLabel>
+        <SkillTagsContainer />
+      </div>
 
-        <div className={'mb-intersection-padding'}>
-          <FieldLabel readout={'object trajectory · 2014 → 2026'}>
-            tracking
-          </FieldLabel>
-          <ExperienceTrack />
-        </div>
+      <div className={'mb-intersection-padding'}>
+        <FieldLabel readout={'object trajectory · 2014 → 2026'}>
+          tracking
+        </FieldLabel>
+        <ExperienceTrack />
+      </div>
 
-        <div className={'grid max-w-column-width gap-10'}>
-          <ExperienceLanguageList />
-          <ExperienceEducationList />
-          <div>
-            <ResumeExportLabel />
-            <ResumeDownloadButtons />
-          </div>
+      <div className={'grid max-w-column-width gap-10'}>
+        <ExperienceLanguageList />
+        <ExperienceEducationList />
+        <div>
+          <ResumeExportLabel />
+          <ResumeDownloadButtons />
         </div>
-      </Section>
-    </ExperienceDataProvider>
+      </div>
+    </Section>
   )
 }

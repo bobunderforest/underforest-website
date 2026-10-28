@@ -49,6 +49,7 @@ export const usePageEntry = () => {
       release = holdScrollAligned(entryTop)
     }
 
+    focusStage()
     window.addEventListener('popstate', markTraversed)
     document.addEventListener('astro:before-preparation', markNavigated)
     document.addEventListener('astro:page-load', focusStage)

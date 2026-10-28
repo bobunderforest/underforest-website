@@ -31,8 +31,15 @@ export const holdScrollAligned = (resolveTop: () => number | null) => {
     clearTimeout(minHoldTimer)
     clearTimeout(maxHoldTimer)
     INTENT_EVENTS.forEach((name) =>
-      window.removeEventListener(name, release, { capture: true }),
+      window.removeEventListener(name, releaseOnScrollIntent, {
+        capture: true,
+      }),
     )
+  }
+
+  const releaseOnScrollIntent = () => {
+    if (isScrollLockActive()) return
+    release()
   }
 
   const releaseWhenAligned = () => {
@@ -60,7 +67,10 @@ export const holdScrollAligned = (resolveTop: () => number | null) => {
   observer.observe(document.body)
   document.fonts?.ready.then(align)
   INTENT_EVENTS.forEach((name) =>
-    window.addEventListener(name, release, { capture: true, passive: true }),
+    window.addEventListener(name, releaseOnScrollIntent, {
+      capture: true,
+      passive: true,
+    }),
   )
 
   return release

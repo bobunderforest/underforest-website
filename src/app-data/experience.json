@@ -193,7 +193,7 @@
       "resume": {
         "summary": [
           "Solo-developed a VR game for Meta Quest 3 standalone.",
-          "Built a custom C++ data-driven gameplay framework for learning purposes. Ability/attributes system, composable actor behaviour, split across reusable modules and plugins. Later I've rewrote the project with Unreal's GAS.",
+          "Built a custom C++ data-driven gameplay framework: ability/attributes system, composable actor behaviour, split across reusable modules and plugins. Later rewrote it on Unreal’s GAS.",
           "Programmed VR interaction and locomotion: physics grab, climbing, pocket inventory, two-handed manipulation, comfort options.",
           "Built combat and enemy AI: motion-based melee, shield blocking, firearms, Behavior Tree enemies.",
           "Built a save/checkpoint system with physics-state restore and cross-object reference resolution on load.",
@@ -671,14 +671,6 @@
           "src": "/videos/kwc-screencast.mp4"
         }
       ]
-    },
-    {
-      "id": "medical-break",
-      "from": "2018-05",
-      "to": "2018-07",
-      "summary": ["Break due to medical surgery."],
-      "domains": ["web", "gamedev"],
-      "break": true
     },
     {
       "id": "harbour-space",

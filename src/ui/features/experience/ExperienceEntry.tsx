@@ -1,11 +1,7 @@
 import { useCallback, useState } from 'react'
 import { TextTitle } from 'ui/common/typography/TextTitle'
 import { ExperienceDetailsDisclosure } from '../experience-details/ExperienceDetails'
-import { useExperienceDomainFilter } from 'ui/features/experience-data/experience-data-context'
-import {
-  hasExperienceDetails,
-  isDimmed,
-} from 'ui/features/experience-data/experience-data'
+import { hasExperienceDetails } from 'ui/features/experience-data/experience-data'
 import type { ExperienceEntry as ExperienceEntryData } from 'ui/features/experience-data/types'
 import { openExternal } from 'utils/browser/open-external'
 import { cns } from 'utils/formatters/classnames'
@@ -61,8 +57,6 @@ export const ExperienceEntry = ({
   entryRef: ref,
   bodyRef,
 }: ExperienceEntryProps) => {
-  const { domainFilter } = useExperienceDomainFilter()
-  const dimmed = isDimmed(domainFilter, entry.domains)
   const [hovered, setHovered] = useState(false)
   const [innerHovered, setInnerHovered] = useState(false)
   const fullEntryClickEnabled = useResponsiveValue(fullEntryClick)
@@ -78,11 +72,11 @@ export const ExperienceEntry = ({
   useCenterActivationObserver(ref, handleInView)
 
   if (entry.break) {
-    return <ExperienceBreakNode entry={entry} dimmed={dimmed} entryRef={ref} />
+    return <ExperienceBreakNode entry={entry} entryRef={ref} />
   }
 
   return (
-    <ExperienceTrackNode ref={ref} dimmed={dimmed} active={active}>
+    <ExperienceTrackNode ref={ref} active={active}>
       <div
         ref={bodyRef}
         data-active={active}

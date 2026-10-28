@@ -8,7 +8,6 @@ import type { Domain } from 'ui/features/experience-data/types'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 import type { ComponentProps } from 'react'
 import { cns } from 'utils/formatters/classnames'
-import { useDossierWire } from './dossier-wire-context'
 
 export const RESUME_DOWNLOADS: { variant: Domain; label: string }[] = [
   { variant: 'web', label: 'Resume_Frontend.PDF' },
@@ -32,26 +31,22 @@ export const ResumeDownloadButtons = ({
   className,
 }: {
   className?: string
-}) => {
-  const { registerTarget } = useDossierWire()
-
-  return (
-    <div className={cns('flex flex-col gap-3', className)}>
-      {RESUME_DOWNLOADS.map(({ variant, label }) => (
-        <div key={variant} ref={registerTarget(variant)}>
-          <Button
-            dither
-            wide
-            icon={<DisketteIcon className={'size-[25px]'} />}
-            href={resumeFileHref(variant)}
-            isExternal
-            accent={variant === 'gamedev' ? 'system' : 'brand'}
-            aria-label={`Open ${RESUME_VARIANTS[variant].title} resume PDF`}
-          >
-            {label}
-          </Button>
-        </div>
-      ))}
-    </div>
-  )
-}
+}) => (
+  <div className={cns('flex flex-col gap-3', className)}>
+    {RESUME_DOWNLOADS.map(({ variant, label }) => (
+      <div key={variant}>
+        <Button
+          dither
+          wide
+          icon={<DisketteIcon className={'size-[25px]'} />}
+          href={resumeFileHref(variant)}
+          isExternal
+          accent={variant === 'gamedev' ? 'system' : 'brand'}
+          aria-label={`Open ${RESUME_VARIANTS[variant].title} resume PDF`}
+        >
+          {label}
+        </Button>
+      </div>
+    ))}
+  </div>
+)
