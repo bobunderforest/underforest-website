@@ -12,7 +12,7 @@ export const SiteRuntime = () => {
   return (
     <>
       <HudLayer />
-      <HudBoot />
+      {/* <HudBoot /> */}
     </>
   )
 }
