@@ -29,10 +29,7 @@ export const SectionSplash = () => {
           'mb-intersection-padding flex flex-wrap items-baseline gap-x-3 gap-y-1'
         }
       >
-        <span>{splash.role}</span>
-        <Text tag={'span'} tone={'accent'}>
-          {splash.roleAccent}
-        </Text>
+        {splash.role}
       </Text>
 
       <div className={'relative mb-intersection-padding'}>

@@ -1,21 +1,20 @@
 {
-  "role": "Frontend Developer",
-  "roleAccent": " → Game Developer",
+  "role": "Interactive Developer",
   "name": "DMITRII\nPODLESNYI",
   "nameLabel": "Dmitrii Podlesnyi",
   "aboutLabel": "about me",
   "about": [
     {
-      "tone": "soft",
-      "text": "I am a Front-End web developer with 10+ years of experience. I have contributed to building high-traffic platforms, Web3 solutions, and interactive 3D projects, with both small teams and big companies, in-office and remote."
-    },
-    {
-      "tone": "soft",
-      "text": "I am excited about contributing to creative passion-driven projects, I enjoy scroll-driven animation and webgl work."
-    },
-    {
       "tone": "primary",
-      "text": "Over the past years I've been moving into gameplay programming using Unreal Engine. I've collaborated on the immersive experience “Ocean&nbsp;Threshold” and have shipped a VR game “Gnarly Crawl” as a solo developer."
+      "text": "I build interactive experiences, on the web and in games. I’d love to work on creative, passion-driven projects."
+    },
+    {
+      "tone": "soft",
+      "text": "On the web, I have 10+ years of front-end experience. I enjoy creating scroll-driven animation and interactive 3D WebGL. I’ve contributed to building large-scale platforms and Web3 solutions."
+    },
+    {
+      "tone": "soft",
+      "text": "In games, I work in Unreal Engine with a focus on gameplay programming, including VR interactions. I’ve collaborated on the immersive experience “Ocean&nbsp;Threshold” and have shipped the VR game “Gnarly&nbsp;Crawl” as a solo developer."
     }
   ]
 }
