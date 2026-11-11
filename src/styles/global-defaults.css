@@ -56,6 +56,12 @@
   img {
     display: block;
   }
+
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1rem);
+  }
 }
 
 @utility link-dash {
