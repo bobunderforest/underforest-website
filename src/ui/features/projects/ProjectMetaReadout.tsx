@@ -35,7 +35,10 @@ const Row = ({ term, value }: { term: string; value: string }) => (
 
 export const ProjectMetaReadout = ({ entry }: { entry: ProjectEntry }) => {
   const duration =
-    entry.from && entry.to ? formatDateDuration(entry.from, entry.to) : null
+    // A single-month entry has no span worth stating.
+    entry.from && entry.to && entry.from !== entry.to
+      ? formatDateDuration(entry.from, entry.to)
+      : null
 
   return (
     <div
@@ -45,16 +48,8 @@ export const ProjectMetaReadout = ({ entry }: { entry: ProjectEntry }) => {
         info
       </FieldLabel>
       <div className={'flex flex-col gap-1'}>
-        {entry.periodLabel && (
-          <Row
-            term={'period'}
-            value={
-              duration
-                ? `${entry.periodLabel} · ${duration}`
-                : entry.periodLabel
-            }
-          />
-        )}
+        {entry.periodLabel && <Row term={'period'} value={entry.periodLabel} />}
+        {duration && <Row term={'span'} value={duration} />}
         {entry.role && <Row term={'role'} value={entry.role} />}
         {entry.employment && <Row term={'employ'} value={entry.employment} />}
         {entry.domains && entry.domains.length > 0 && (
