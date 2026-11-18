@@ -551,13 +551,16 @@
       "role": "Front-end",
       "employment": "Contract",
       "place": "Ego.Jobs",
-      "href": "https://ego.jobs/en",
       "summary": [
         "Built a UI component library.",
         "Implemented new UX flows improving the candidate and employer experience."
       ],
       "skills": ["React", "TypeScript", "Next.js", "Styled Components"],
       "domains": ["web"],
+      "status": {
+        "kind": "unavailable",
+        "note": "The site is no longer online."
+      },
       "details": [
         {
           "kind": "text",

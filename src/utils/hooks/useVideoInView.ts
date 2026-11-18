@@ -6,6 +6,7 @@ type Options = { enabled?: boolean; smooth?: boolean }
 
 const MIN_PLAYBACK_RATE = 0.0625
 const MAX_DELTA_MS = 50
+const PLAY_RETRY_MS = 1000
 
 export const useVideoInView = (
   videoRef: RefObject<HTMLVideoElement | null>,
@@ -15,14 +16,23 @@ export const useVideoInView = (
   const isInViewRef = useRef(false)
   const frameRef = useRef(0)
   const activityRef = useRef(createActivityRamp())
+  const retryRef = useRef(0)
 
   const updatePlayback = useCallback(() => {
     const video = videoRef.current
     if (!video) return
     const shouldPlay = enabledRef.current && isInViewRef.current
     cancelAnimationFrame(frameRef.current)
+    window.clearTimeout(retryRef.current)
+    const play = (): void => {
+      video.play().catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === 'AbortError') return
+        if (!enabledRef.current || !isInViewRef.current) return
+        retryRef.current = window.setTimeout(play, PLAY_RETRY_MS)
+      })
+    }
     if (!smooth) {
-      if (shouldPlay) video.play().catch(() => {})
+      if (shouldPlay) play()
       else video.pause()
       return
     }
@@ -34,7 +44,7 @@ export const useVideoInView = (
     if (shouldPlay && activityRef.current.value === 0) {
       video.playbackRate = MIN_PLAYBACK_RATE
     }
-    video.play().catch(() => {})
+    play()
     let previous: number | null = null
     const update = (now: number) => {
       const delta =
@@ -66,15 +76,29 @@ export const useVideoInView = (
     const video = videoRef.current
     if (!video) return
     const observer = new IntersectionObserver((entries) => {
-      isInViewRef.current = entries.some((entry) => entry.isIntersecting)
+      isInViewRef.current = entries[entries.length - 1].isIntersecting
       updatePlayback()
     })
+    const onPause = () => {
+      if (document.visibilityState !== 'visible') return
+      if (enabledRef.current && isInViewRef.current) updatePlayback()
+    }
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') updatePlayback()
+    }
     video.addEventListener('canplay', updatePlayback)
+    video.addEventListener('pause', onPause)
+    document.addEventListener('visibilitychange', onVisibility)
+    window.addEventListener('pageshow', updatePlayback)
     observer.observe(video)
     return () => {
       video.removeEventListener('canplay', updatePlayback)
+      video.removeEventListener('pause', onPause)
+      document.removeEventListener('visibilitychange', onVisibility)
+      window.removeEventListener('pageshow', updatePlayback)
       observer.disconnect()
       cancelAnimationFrame(frameRef.current)
+      window.clearTimeout(retryRef.current)
     }
   }, [videoRef, updatePlayback])
 

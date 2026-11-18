@@ -35,7 +35,6 @@ const Row = ({ term, value }: { term: string; value: string }) => (
 
 export const ProjectMetaReadout = ({ entry }: { entry: ProjectEntry }) => {
   const duration =
-    // A single-month entry has no span worth stating.
     entry.from && entry.to && entry.from !== entry.to
       ? formatDateDuration(entry.from, entry.to)
       : null

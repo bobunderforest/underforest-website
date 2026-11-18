@@ -11,9 +11,6 @@ const MAX_CANVAS_PIXELS = 350_000
 const MAX_CANVAS_SCALE = 0.75
 const FRAME_INTERVAL_MS = 1000 / 30
 
-// Shrinks the pattern to the size it will be drawn at, halving step by step so
-// each step stays a clean 2:1 filter. Drawing a large source straight into
-// small triangles every frame aliases and shimmers while it rotates.
 const downscaleImage = (image: CanvasImageSource, from: number, to: number) => {
   let source = image
   let size = from
@@ -38,7 +35,6 @@ const drawScaled = (source: CanvasImageSource, size: number) => {
 
 type Props = {
   active: boolean
-  // Multiplier for the mirror-triangle size; below 1 zooms the pattern out.
   radiusScale?: number
 }
 
