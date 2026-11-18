@@ -62,7 +62,7 @@ export const SectionProjects = () => {
             </FieldLabelHeading>
             <div
               className={
-                'grid grid-cols-4 gap-grid-gap-regular tablet-s:grid-cols-2 mobile-s:grid-cols-1'
+                'grid grid-cols-4 gap-grid-gap-regular tablet-s:grid-cols-3 mobile-m:grid-cols-2 mobile-s:grid-cols-1'
               }
             >
               {sketches.map((entry, index) => (
