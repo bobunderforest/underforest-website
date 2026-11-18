@@ -302,42 +302,46 @@ const buildDocument = ({ variant, data, socials, doc }) => {
     doc.moveDown(0.15)
   })
 
-  sectionHeading('Experience')
-  data.experience
+  const experienceEntries = data.experience
     .filter((entry) =>
       entry.resumeVariants
         ? entry.resumeVariants.includes(variant.domain)
         : matchesDomain(entry.domains, variant.domain),
     )
     .filter((entry) => !(entry.break && variant.domain !== 'web'))
-    .forEach((entry, index) => {
-      if (index > 0) doc.moveDown(0.65)
-      keepTogether(measureEntry(entry))
+  const listedExperienceIds = new Set(
+    experienceEntries.filter((entry) => !entry.aside).map((entry) => entry.id),
+  )
 
-      if (entry.aside) {
-        if (entry.asideLabel) {
-          paragraph(entry.asideLabel, { bold: true, size: SIZE.entry })
-        }
-        doc.font('Helvetica-Oblique').fontSize(SIZE.body).fillColor(COLOR.muted)
-        doc.text(asideText(entry), { width: contentWidth, lineGap: 1.5 })
-        const asideLinks = resolveLinks(entry)
-        if (asideLinks.length) {
-          doc.moveDown(0.15)
-          linkRow(asideLinks)
-        }
-        return
-      }
+  sectionHeading('Experience')
+  experienceEntries.forEach((entry, index) => {
+    if (index > 0) doc.moveDown(0.65)
+    keepTogether(measureEntry(entry))
 
-      paragraph(entryHeadline(entry), { bold: true, size: SIZE.entry })
-      linkRow(resolveLinks(entry))
-      paragraph(entryMeta(entry), { color: COLOR.muted })
-      doc.moveDown(0.25)
-      bullets(entry.resume?.summary ?? entry.summary ?? [])
-      const entrySkills = entry.resume?.skills ?? entry.skills
-      if (entrySkills?.length) {
-        paragraph(`Skills: ${entrySkills.join(', ')}`, { color: COLOR.muted })
+    if (entry.aside) {
+      if (entry.asideLabel) {
+        paragraph(entry.asideLabel, { bold: true, size: SIZE.entry })
       }
-    })
+      doc.font('Helvetica-Oblique').fontSize(SIZE.body).fillColor(COLOR.muted)
+      doc.text(asideText(entry), { width: contentWidth, lineGap: 1.5 })
+      const asideLinks = resolveLinks(entry)
+      if (asideLinks.length) {
+        doc.moveDown(0.15)
+        linkRow(asideLinks)
+      }
+      return
+    }
+
+    paragraph(entryHeadline(entry), { bold: true, size: SIZE.entry })
+    linkRow(resolveLinks(entry))
+    paragraph(entryMeta(entry), { color: COLOR.muted })
+    doc.moveDown(0.25)
+    bullets(entry.resume?.summary ?? entry.summary ?? [])
+    const entrySkills = entry.resume?.skills ?? entry.skills
+    if (entrySkills?.length) {
+      paragraph(`Skills: ${entrySkills.join(', ')}`, { color: COLOR.muted })
+    }
+  })
 
   const experienceById = new Map(
     data.experience.map((entry) => [entry.id, entry]),
@@ -350,7 +354,9 @@ const buildDocument = ({ variant, data, socials, doc }) => {
     }))
     .filter(
       (project) =>
-        project.resumeNote && matchesDomain(project.domains, variant.domain),
+        project.resumeNote &&
+        matchesDomain(project.domains, variant.domain) &&
+        !listedExperienceIds.has(project.id),
     )
   if (resumeProjects.length) {
     sectionHeading('Notable Projects', measureProject(resumeProjects[0]))

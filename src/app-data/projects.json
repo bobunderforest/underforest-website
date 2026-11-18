@@ -1,7 +1,28 @@
 {
   "projects": [
     {
-      "id": "gamedev-solo",
+      "id": "latteart",
+      "tier": "sketch",
+      "label": "Latte Art",
+      "href": "https://bobunderforest.itch.io/latteart-demo",
+      "period": "2026",
+      "domains": ["gamedev"],
+      "resumeNote": "Latte art drawing mini-game made in Unity",
+      "previewText": "Latte art drawing mini-game made in Unity.",
+      "summary": ["Latte art drawing mini-game made in Unity."],
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/latteart.mp4"
+      },
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/LatteArt"
+        }
+      ]
+    },
+    {
+      "id": "gnarlycrawl",
       "dataFromExperience": true,
       "cover": { "kind": "psy-sky" },
       "previewCover": {
@@ -205,26 +226,6 @@
         {
           "kind": "end",
           "caption": "END"
-        }
-      ]
-    },
-    {
-      "id": "latteart",
-      "tier": "sketch",
-      "label": "Latte Art",
-      "href": "https://bobunderforest.itch.io/latteart-demo",
-      "period": "2026",
-      "domains": ["gamedev"],
-      "previewText": "Latte art drawing mini-game made in Unity.",
-      "summary": ["Latte art drawing mini-game made in Unity."],
-      "previewCover": {
-        "kind": "video",
-        "src": "/videos/previews/latteart.mp4"
-      },
-      "links": [
-        {
-          "label": "GitHub",
-          "href": "https://github.com/bobunderforest/LatteArt"
         }
       ]
     },
