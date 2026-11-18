@@ -10,11 +10,7 @@
     },
     {
       "label": "mount modules",
-      "status": [
-        "react",
-        "webgl",
-        "unreal"
-      ]
+      "status": ["react", "webgl", "unreal"]
     },
     {
       "label": "scan career logs",

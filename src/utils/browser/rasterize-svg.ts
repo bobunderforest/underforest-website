@@ -1,8 +1,4 @@
-export const rasterizeSvg = (
-  svgText: string,
-  width: number,
-  height: number,
-) =>
+export const rasterizeSvg = (svgText: string, width: number, height: number) =>
   new Promise<HTMLCanvasElement>((resolve, reject) => {
     const sized = svgText
       .replace(/\s(?:width|height)="[^"]*"/g, '')

@@ -11,6 +11,7 @@ import { formatYearRange } from 'utils/formatters/dates'
 import { useVideoInView } from 'utils/hooks/useVideoInView'
 import { cns } from 'utils/formatters/classnames'
 import { markProjectIndexReturn } from 'utils/browser/project-index-return'
+import { ProjectPreviewOverlay } from './ProjectPreviewOverlay'
 
 const Kaleidoscope = lazy(() => import('ui/fx/FXKaleidoscope'))
 
@@ -42,21 +43,44 @@ const PreviewKaleidoscope = () => {
     <div ref={hostRef} className={'absolute inset-0'}>
       {active && (
         <Suspense fallback={null}>
-          <Kaleidoscope active={active} />
+          <Kaleidoscope active={active} radiusScale={0.5} />
         </Suspense>
       )}
     </div>
   )
 }
 
-const ProjectPreviewMedia = ({ entry }: { entry: ProjectEntry }) => {
+const handleProjectPreviewClick = (
+  event: React.MouseEvent,
+  projectId: string,
+) => {
+  if (
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return
+  }
+  markProjectIndexReturn(projectId)
+}
+
+export const ProjectPreviewMedia = ({
+  entry,
+  className,
+}: {
+  entry: ProjectEntry
+  className?: string
+}) => {
   const cover = entry.previewCover
 
   return (
     <div
-      className={
-        'pointer-events-none absolute inset-0 scale-100 transition-transform duration-500 group-hover:scale-[1.1] group-focus-visible:scale-[1.1]'
-      }
+      className={cns(
+        'pointer-events-none absolute inset-0 scale-100 transition-transform duration-500 group-hover:scale-[1.1] group-focus-visible:scale-[1.1]',
+        className,
+      )}
     >
       {cover?.kind === 'video' && <PreviewVideo src={cover.src} />}
       {cover?.kind === 'image' && (
@@ -99,44 +123,13 @@ export const ProjectPreview = ({ entry, className }: Props) => {
         onMouseLeave={() => setIsTargeted(false)}
         onFocus={() => setIsTargeted(true)}
         onBlur={() => setIsTargeted(false)}
-        onClick={(event) => {
-          if (
-            event.button !== 0 ||
-            event.metaKey ||
-            event.ctrlKey ||
-            event.shiftKey ||
-            event.altKey
-          ) {
-            return
-          }
-          markProjectIndexReturn(entry.id)
-        }}
+        onClick={(event) => handleProjectPreviewClick(event, entry.id)}
         className={
           'relative flex aspect-video overflow-hidden border border-edge bg-surface transition-colors duration-200 outline-none hover:border-accent focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent'
         }
       >
         <ProjectPreviewMedia entry={entry} />
-        <div
-          className={
-            'absolute inset-0 bg-gradient-to-t from-base via-base/40 to-base/5 transition-colors duration-200 group-hover:via-base/55 group-focus-visible:via-base/55'
-          }
-        />
-        <div
-          className={
-            'absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,transparent_0,rgba(0,0,0,0.5)_80%)]'
-          }
-        />
-        <div
-          style={{
-            backgroundImage:
-              'radial-gradient(var(--color-muted) 0.6px, transparent 0.9px)',
-            backgroundSize: '5px 5px',
-            maskImage: 'linear-gradient(to top, black, transparent)',
-          }}
-          className={
-            'pointer-events-none absolute inset-x-0 bottom-0 h-1/3 opacity-25'
-          }
-        />
+        <ProjectPreviewOverlay />
         <div className={'relative flex w-full flex-col justify-between p-6'}>
           <div className={'flex items-start justify-between gap-4'}>
             <Text
@@ -152,9 +145,8 @@ export const ProjectPreview = ({ entry, className }: Props) => {
               tag={'span'}
               size={'hint'}
               face={'title'}
-              tone={'system'}
               uppercase
-              className={'text-right'}
+              className={'text-shadow-s text-right'}
             >
               {years}
             </Text>

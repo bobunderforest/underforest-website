@@ -11,7 +11,39 @@ const MAX_CANVAS_PIXELS = 350_000
 const MAX_CANVAS_SCALE = 0.75
 const FRAME_INTERVAL_MS = 1000 / 30
 
-const FXKaleidoscope = ({ active }: { active: boolean }) => {
+// Shrinks the pattern to the size it will be drawn at, halving step by step so
+// each step stays a clean 2:1 filter. Drawing a large source straight into
+// small triangles every frame aliases and shimmers while it rotates.
+const downscaleImage = (image: CanvasImageSource, from: number, to: number) => {
+  let source = image
+  let size = from
+  while (size / 2 >= to) {
+    size = Math.floor(size / 2)
+    source = drawScaled(source, size)
+  }
+  return size === to ? source : drawScaled(source, to)
+}
+
+const drawScaled = (source: CanvasImageSource, size: number) => {
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const context = canvas.getContext('2d')
+  if (context) {
+    context.imageSmoothingQuality = 'high'
+    context.drawImage(source, 0, 0, size, size)
+  }
+  return canvas
+}
+
+type Props = {
+  active: boolean
+  // Multiplier for the mirror-triangle size; below 1 zooms the pattern out.
+  radiusScale?: number
+}
+
+const FXKaleidoscope = ({ active, radiusScale = 1 }: Props) => {
+  const radiusScaleRef = useRef(radiusScale)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const activeRef = useRef(active)
   const activityRef = useRef(createActivityRamp())
@@ -39,6 +71,10 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
   }, [active])
 
   useEffect(() => {
+    radiusScaleRef.current = radiusScale
+  }, [radiusScale])
+
+  useEffect(() => {
     const canvas = canvasRef.current
     const context = canvas?.getContext('2d')
     if (!canvas || !context || !settled) return
@@ -51,6 +87,7 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
     let previousPaintTime = 0
     let angle = 0
     let running = false
+    let source: CanvasImageSource | null = null
 
     const draw = (now: number) => {
       if (!patternContext || document.visibilityState !== 'visible') {
@@ -72,19 +109,35 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
         return
       }
       previousPaintTime = now
-      patternContext.clearRect(0, 0, pattern.width, pattern.height)
+      const radius =
+        Math.max(120, Math.max(canvas.width, canvas.height) / 7) *
+        radiusScaleRef.current
+      const patternSize = Math.max(
+        2,
+        Math.min(image.width, Math.ceil(radius * 2)),
+      )
+      if (!source || pattern.width !== patternSize) {
+        source = downscaleImage(image, image.width, patternSize)
+        pattern.width = patternSize
+        pattern.height = patternSize
+      }
+      patternContext.imageSmoothingQuality = 'high'
+      patternContext.clearRect(0, 0, patternSize, patternSize)
       patternContext.save()
-      patternContext.translate(pattern.width / 2, pattern.height / 2)
+      patternContext.translate(patternSize / 2, patternSize / 2)
       patternContext.rotate(angle)
-      patternContext.drawImage(image, -image.width / 2, -image.height / 2)
+      patternContext.drawImage(
+        source,
+        -patternSize / 2,
+        -patternSize / 2,
+        patternSize,
+        patternSize,
+      )
       patternContext.restore()
       context.fillStyle = themeColors.base
       context.fillRect(0, 0, canvas.width, canvas.height)
-      drawKaleidoscope({
-        context,
-        image: pattern,
-        radius: Math.max(120, Math.max(canvas.width, canvas.height) / 7),
-      })
+      context.imageSmoothingQuality = 'high'
+      drawKaleidoscope({ context, image: pattern, radius })
       if (activeRef.current || activity > 0) {
         frame = requestAnimationFrame(draw)
       } else {
@@ -100,8 +153,6 @@ const FXKaleidoscope = ({ active }: { active: boolean }) => {
     }
 
     image.onload = () => {
-      pattern.width = image.width
-      pattern.height = image.height
       restartRef.current = restart
       restart()
     }

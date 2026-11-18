@@ -8,7 +8,10 @@ import type {
 import { formatDateRange } from 'utils/formatters/dates'
 
 const experienceById = new Map(
-  (experience.experience as ExperienceEntry[]).map((entry) => [entry.id, entry]),
+  (experience.experience as ExperienceEntry[]).map((entry) => [
+    entry.id,
+    entry,
+  ]),
 )
 
 const resolveProject = (raw: ProjectRef): ProjectEntry => {

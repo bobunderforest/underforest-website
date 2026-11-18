@@ -1,0 +1,10 @@
+# build output
+dist/
+public/resume/
+
+# generated
+.astro/
+pnpm-lock.yaml
+
+# dependencies
+node_modules/

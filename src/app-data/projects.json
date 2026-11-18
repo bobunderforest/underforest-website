@@ -209,9 +209,29 @@
       ]
     },
     {
+      "id": "latteart",
+      "tier": "sketch",
+      "label": "Latte Art",
+      "href": "https://bobunderforest.itch.io/latteart-demo",
+      "period": "2026",
+      "domains": ["gamedev"],
+      "previewText": "Latte art drawing mini-game made in Unity.",
+      "summary": ["Latte art drawing mini-game made in Unity."],
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/latteart.mp4"
+      },
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/LatteArt"
+        }
+      ]
+    },
+    {
       "id": "physics-programming-practice",
+      "tier": "sketch",
       "label": "Physics\nProgramming\nPractice",
-      "cover": { "kind": "video", "src": "/videos/physics-practice.mp4" },
       "previewCover": {
         "kind": "video",
         "src": "/videos/previews/physics-practice.mp4"
@@ -229,10 +249,6 @@
           "body": "A sketchbook of creative-coding and physics-simulation exercises inspired by [CodingTrain](https://www.youtube.com/@TheCodingTrain) YouTube tutorials."
         },
         {
-          "kind": "video",
-          "src": "/videos/physics-practice.mp4"
-        },
-        {
           "kind": "end",
           "caption": "END"
         }
@@ -246,6 +262,7 @@
     },
     {
       "id": "kaleidoscope",
+      "tier": "sketch",
       "label": "Kaleidoscope\nVisual",
       "href": "https://bobunderforest.github.io/kaleidoscope/",
       "period": "2018",
@@ -282,9 +299,9 @@
     },
     {
       "id": "space-invaders",
+      "tier": "sketch",
       "label": "Space\nInvaders",
       "href": "https://bobunderforest.github.io/spaceinvaders/",
-      "cover": { "kind": "video", "src": "/videos/space-invaders.mp4" },
       "previewCover": {
         "kind": "video",
         "src": "/videos/previews/space-invaders.mp4"
@@ -308,11 +325,6 @@
           "kind": "text",
           "caption": "project closeup",
           "body": "A retro game replica made as a creative programming test when I was applying to a job."
-        },
-        {
-          "kind": "video",
-          "caption": "gameplay capture",
-          "src": "/videos/space-invaders.mp4"
         },
         {
           "kind": "end",

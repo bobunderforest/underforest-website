@@ -41,7 +41,11 @@ export const formatDateRange = (
     ? formatMonthYear(from, style)
     : `${formatMonthYear(from, style)} — ${formatMonthYear(to, style)}`
 
-export const formatYearRange = (from?: string, to?: string, period?: string) => {
+export const formatYearRange = (
+  from?: string,
+  to?: string,
+  period?: string,
+) => {
   const years = [from, to, period]
     .flatMap((value) => value?.match(/\b\d{4}\b/g) ?? [])
     .filter((year, index, values) => values.indexOf(year) === index)

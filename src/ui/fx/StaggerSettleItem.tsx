@@ -44,12 +44,7 @@ export const StaggerSettleItem = ({
     exitEase,
   })
   return (
-    <ScrollLayer
-      active={active}
-      y={y}
-      style={style}
-      className={className}
-    >
+    <ScrollLayer active={active} y={y} style={style} className={className}>
       {children}
     </ScrollLayer>
   )

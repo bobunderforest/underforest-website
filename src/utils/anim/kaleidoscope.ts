@@ -96,7 +96,11 @@ export const drawKaleidoscope = ({
       context.clip()
       const midpoint = center(triangle)
       context.translate(scale(midpoint.x), scale(midpoint.y))
-      context.rotate(radians(60 * (rotations[level]?.[index % rotations[level].length] ?? 0)))
+      context.rotate(
+        radians(
+          60 * (rotations[level]?.[index % rotations[level].length] ?? 0),
+        ),
+      )
       if (level % 2 === 1) context.scale(-1, 1)
       if (rotations[level]) {
         context.drawImage(image, -radius, -radius, radius * 2, radius * 2)

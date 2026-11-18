@@ -6,7 +6,9 @@ import { getPageDataProject } from 'modules/page-data/page-data-project'
 import { getProjects } from 'ui/features/projects/projects-data'
 
 export const getStaticPaths = () =>
-  getProjects().map((project) => ({ params: { id: project.id } }))
+  getProjects()
+    .filter((project) => project.tier !== 'sketch')
+    .map((project) => ({ params: { id: project.id } }))
 
 const { project } = await getPageDataProject(Astro.params.id!)
 

@@ -129,8 +129,8 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
       : 0
   const tickTrackHeight = hasMeasurements
     ? totalHeight -
-    finalBeatHeight +
-    (finalBeatHeight > 0 ? FINAL_BEAT_TRACK_HEIGHT : 0)
+      finalBeatHeight +
+      (finalBeatHeight > 0 ? FINAL_BEAT_TRACK_HEIGHT : 0)
     : '100%'
 
   return (

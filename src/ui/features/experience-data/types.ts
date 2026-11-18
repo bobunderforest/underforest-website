@@ -93,12 +93,15 @@ export type ProjectStoryBlock =
     }
   | { kind: 'link'; href: string; label: string; caption?: string }
 
+export type ProjectTier = 'selected' | 'sketch'
+
 export type ProjectRef = {
   id: string
   description?: string
   dataFromExperience?: boolean
   resumeNote?: string
   previewText?: string
+  tier?: ProjectTier
   from?: string
   to?: string
   period?: string

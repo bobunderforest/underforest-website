@@ -8,6 +8,8 @@
     "preview": "astro preview --host --port 3000",
     "astro": "astro",
     "lint": "node scripts/gen-tw-merge.mjs --check && eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "gen:tw-merge": "node scripts/gen-tw-merge.mjs",
     "gen:resume": "node scripts/gen-resume-pdf.mjs"
   },

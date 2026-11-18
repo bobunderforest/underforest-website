@@ -1,6 +1,7 @@
 import { isBrowser } from './is-browser'
 
-const storageKey = (projectId: string) => `underforest:project-index-return:${projectId}`
+const storageKey = (projectId: string) =>
+  `underforest:project-index-return:${projectId}`
 
 export const markProjectIndexReturn = (projectId: string) => {
   if (!isBrowser) return
