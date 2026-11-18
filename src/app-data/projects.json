@@ -299,6 +299,29 @@
       ]
     },
     {
+      "id": "trap-hata",
+      "tier": "sketch",
+      "label": "Trap Hata",
+      "href": "https://trap-hata.bobunderforest.me/",
+      "previewCover": {
+        "kind": "video",
+        "src": "/videos/previews/trap-hata.mp4"
+      },
+      "period": "2016",
+      "domains": ["web", "gamedev"],
+      "resumeNote": "Small party game where phones act as controllers, made for a hackathon with a friend",
+      "previewText": "Small party game, use your phone as a controller. Made for a hackathon with a friend.",
+      "summary": [
+        "Small party game, use your phone as a controller. Made for a hackathon with a friend."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/bobunderforest/trap-hata"
+        }
+      ]
+    },
+    {
       "id": "space-invaders",
       "tier": "sketch",
       "label": "Space\nInvaders",
