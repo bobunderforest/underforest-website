@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type FocusEvent } from 'react'
 import { useContourFieldHover } from './useContourFieldHover'
 
 export const useCaptureHover = ({ field = true, disabled = false } = {}) => {
@@ -11,6 +11,10 @@ export const useCaptureHover = ({ field = true, disabled = false } = {}) => {
     hoverField.engage()
   }
 
+  const engageOnKeyboardFocus = (event: FocusEvent<HTMLElement>) => {
+    if (event.target.matches(':focus-visible')) engage()
+  }
+
   return {
     armed: hoverField.armed,
     active: hoverField.active,
@@ -19,7 +23,7 @@ export const useCaptureHover = ({ field = true, disabled = false } = {}) => {
     release: hoverField.release,
     handlers: {
       onMouseEnter: engage,
-      onFocus: engage,
+      onFocus: engageOnKeyboardFocus,
       onMouseLeave: hoverField.release,
       onBlur: hoverField.release,
     },

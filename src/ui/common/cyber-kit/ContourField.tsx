@@ -9,12 +9,14 @@ const createFragmentShader = ({
   band,
   contourStrength,
   bandStrength,
+  opacity = '1.0',
 }: {
   background: string
   contour: string
   band: string
   contourStrength: string
   bandStrength: string
+  opacity?: string
 }) => `
 #extension GL_OES_standard_derivatives : enable
 #ifdef GL_ES
@@ -89,7 +91,7 @@ void main() {
   vec3 color = mix(background, contourInk, contourMix);
   color = mix(color, bandInk, bandMix);
 
-  gl_FragColor = vec4(color, 1.0);
+  gl_FragColor = vec4(color, ${opacity});
 }
 `
 
@@ -109,11 +111,12 @@ const FRAGMENT_SHADERS = {
     bandStrength: 'bandGlow * 0.03 + bands * 0.24',
   }),
   'bold-accent': createFragmentShader({
-    background: 'vec3(1.0, 0.416, 0.122)',
-    contour: 'vec3(0.15, 0.045, 0.024)',
-    band: 'vec3(0.18, 0.055, 0.03)',
+    background: 'vec3(0.0)',
+    contour: 'vec3(0.0)',
+    band: 'vec3(0.0)',
     contourStrength: 'glow * 0.035 + fine * 0.28',
     bandStrength: 'bandGlow * 0.02 + bands * 0.14',
+    opacity: '1.0 - (1.0 - contourMix) * (1.0 - bandMix)',
   }),
 } as const
 
