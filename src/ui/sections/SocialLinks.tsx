@@ -3,13 +3,13 @@ import {
   ChannelLink,
   type ChannelLinkProps,
 } from 'ui/common/cyber-kit/ChannelLink'
-import { FieldLabel } from './FieldLabel'
+import { FieldLabelHeading } from './FieldLabel'
 
 const socialLinks = socials as ChannelLinkProps[]
 
 export const SocialLinks = () => (
   <div>
-    <FieldLabel>socials</FieldLabel>
+    <FieldLabelHeading muted>socials</FieldLabelHeading>
     <div
       className={
         'flex max-w-column-width flex-wrap items-center gap-[8px] mobile-m:gap-[6px]'

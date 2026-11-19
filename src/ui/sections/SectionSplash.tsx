@@ -3,7 +3,7 @@ import { Text, type TextTone } from 'ui/common/typography/Text'
 import { ASCIIText } from 'ui/fx/AsciiText'
 import { SocialLinks } from './SocialLinks'
 import { ResumeLinks } from './ResumeLinks'
-import { FieldLabel } from './FieldLabel'
+import { FieldLabelHeading } from './FieldLabel'
 import type { ResponsiveValue } from 'utils/browser/breakpoints'
 import { useResponsiveValue } from 'utils/hooks/useResponsiveValue'
 import { CrtDitherOverlay } from 'ui/fx/CrtDitherOverlay'
@@ -22,15 +22,9 @@ export const SectionSplash = () => {
 
   return (
     <Section id={'about'} stage={'Identity'} decoration={<CrtDitherOverlay />}>
-      <Text
-        uppercase
-        tone={'primary'}
-        className={
-          'mb-intersection-padding flex flex-wrap items-baseline gap-x-3 gap-y-1'
-        }
-      >
+      <FieldLabelHeading className={'mb-intersection-padding'}>
         {splash.role}
-      </Text>
+      </FieldLabelHeading>
 
       <div className={'relative mb-intersection-padding'}>
         <h1 className={'sr-only'}>{splash.nameLabel}</h1>
@@ -51,25 +45,31 @@ export const SectionSplash = () => {
           }
         />
       </div>
-      <div className={'mb-intersection-padding flex flex-col gap-[40px]'}>
+      <div
+        className={
+          'mb-intersection-padding flex flex-col gap-intersection-padding'
+        }
+      >
         <SocialLinks />
         <ResumeLinks />
+        <div>
+          <FieldLabelHeading muted>{splash.aboutLabel}</FieldLabelHeading>
+          {splash.about.map((paragraph, index) => (
+            <Text
+              key={index}
+              tag={'p'}
+              tone={paragraph.tone as TextTone}
+              className={
+                index < splash.about.length - 1
+                  ? 'mb-4 max-w-prose-measure'
+                  : 'max-w-prose-measure'
+              }
+            >
+              {paragraph.text}
+            </Text>
+          ))}
+        </div>
       </div>
-      <FieldLabel>{splash.aboutLabel}</FieldLabel>
-      {splash.about.map((paragraph, index) => (
-        <Text
-          key={index}
-          tag={'p'}
-          tone={paragraph.tone as TextTone}
-          className={
-            index < splash.about.length - 1
-              ? 'mb-4 max-w-prose-measure'
-              : 'max-w-prose-measure'
-          }
-        >
-          {paragraph.text}
-        </Text>
-      ))}
     </Section>
   )
 }

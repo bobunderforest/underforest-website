@@ -3,7 +3,7 @@ import { DisketteIcon } from 'ui/common/cyber-kit/DisketteIcon'
 import { resumeFileHref } from 'ui/features/experience-data/experience-data'
 import type { Domain } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
-import { FieldLabel } from './FieldLabel'
+import { FieldLabelHeading } from './FieldLabel'
 
 const resumeVariants: { variant: Domain; label: string }[] = [
   { variant: 'gamedev', label: 'gamedev' },
@@ -12,7 +12,7 @@ const resumeVariants: { variant: Domain; label: string }[] = [
 
 export const ResumeLinks = ({ className }: { className?: string }) => (
   <div className={className}>
-    <FieldLabel readout={`${resumeVariants.length} files`}>resume</FieldLabel>
+    <FieldLabelHeading muted>resume</FieldLabelHeading>
     <div
       className={cns(
         'flex max-w-column-width flex-wrap items-center gap-[8px]',

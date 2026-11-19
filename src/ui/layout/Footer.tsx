@@ -12,28 +12,9 @@ export const Footer = () => (
     <div className={'relative overflow-hidden'}>
       <ContourField animate inverted className={'light:mix-blend-multiply'} />
       <SectionContent isPadded className={'relative'}>
-        <SocialLinks />
-        <ResumeLinks className={'mt-[40px]'} />
-
-        <div
-          className={cns(
-            'mt-[60px] mb-[100px] flex items-baseline justify-between gap-4 border-t border-edge pt-[14px]',
-            'mobile-m:flex-col mobile-m:gap-2',
-          )}
-        >
-          <FieldLabel readout={'eof'} gap={'none'}>
-            end of stream
-          </FieldLabel>
-          <Text
-            tag={'span'}
-            size={'note'}
-            face={'title'}
-            tone={'dimmed'}
-            uppercase
-            className={'tabular-nums'}
-          >
-            {HUD_BUILD}
-          </Text>
+        <div className={'flex flex-col gap-intersection-padding'}>
+          <SocialLinks />
+          <ResumeLinks />
         </div>
       </SectionContent>
     </div>
