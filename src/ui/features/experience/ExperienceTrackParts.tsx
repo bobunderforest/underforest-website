@@ -36,9 +36,9 @@ export const ExperienceDetectionFrame = ({
   >
     <span
       className={cns(
-        'absolute inset-0 border border-accent/40 bg-accent/[0.06] opacity-0 transition-[opacity,border-color,background-color] duration-300 group-data-[active=true]:opacity-100',
-        'group-data-[lit=true]:border-accent/65 group-data-[lit=true]:bg-accent/[0.09]',
-        'backdrop-blur-[2px] mobile-m:bg-base/10 mobile-m:opacity-0 mobile-m:backdrop-blur-[2px] mobile-m:group-data-[active=true]:opacity-0 mobile-m:group-data-[expanded=true]:opacity-100',
+        'absolute inset-0 border border-accent/40 bg-base opacity-0 transition-[opacity,border-color] duration-300 group-data-[active=true]:opacity-100',
+        'group-data-[lit=true]:border-accent/65',
+        'mobile-m:bg-base/10 mobile-m:opacity-0 mobile-m:backdrop-blur-[2px] mobile-m:group-data-[active=true]:opacity-0 mobile-m:group-data-[expanded=true]:opacity-100',
       )}
     />
     <DataCaptureBorder

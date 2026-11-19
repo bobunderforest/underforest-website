@@ -14,7 +14,6 @@ const HOVER_TEXTURE = crtTexture({
 const MODE_OPACITY = {
   hover: 'opacity-0 group-hover:opacity-40',
   on: 'opacity-40',
-  muted: 'opacity-[0.16]',
 } as const
 
 export const CrtHoverTexture = ({

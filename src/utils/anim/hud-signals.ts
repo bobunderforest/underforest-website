@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useMotionValue } from 'framer-motion'
 import { whenPageSettled } from 'utils/browser/idle'
-import { formatClock, formatCursor } from 'utils/formatters/hud-readouts'
 import { lerp } from 'utils/math/lerp'
 
 const MAX_FRAME_DELTA_MS = 100
@@ -75,21 +74,7 @@ export const useHudFrames = (listener: FrameListener) => {
   )
 }
 
-export const useHudClock = () => {
-  const clock = useMotionValue(formatClock(new Date()))
-
-  useEffect(() => {
-    const publish = () => clock.set(formatClock(new Date()))
-    publish()
-    const interval = window.setInterval(publish, 1000)
-    return () => window.clearInterval(interval)
-  }, [clock])
-
-  return clock
-}
-
-export const useHudPointer = () => {
-  const cursor = useMotionValue(formatCursor(0, 0))
+export const useHudPointerVelocity = () => {
   const velocity = useMotionValue(0)
 
   useEffect(() => {
@@ -110,12 +95,11 @@ export const useHudPointer = () => {
       previous.x = event.clientX
       previous.y = event.clientY
       previous.time = now
-      cursor.set(formatCursor(event.clientX, event.clientY))
     }
 
     window.addEventListener('pointermove', onPointerMove, { passive: true })
     return () => window.removeEventListener('pointermove', onPointerMove)
-  }, [cursor, velocity])
+  }, [velocity])
 
   useHudFrames((deltaMs) =>
     velocity.set(
@@ -123,7 +107,7 @@ export const useHudPointer = () => {
     ),
   )
 
-  return { cursor, velocity }
+  return velocity
 }
 
 export const useHudFrameRate = () => {

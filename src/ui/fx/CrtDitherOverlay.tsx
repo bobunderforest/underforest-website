@@ -2,9 +2,9 @@ import { cns } from 'utils/formatters/classnames'
 import { crtTexture } from './crt-texture'
 
 const DITHER_TEXTURE = crtTexture({
-  scanline: 'rgb(52 227 155 / 0.16)',
-  dot: 'rgb(52 227 155 / 0.48)',
-  dotFade: 'rgb(52 227 155 / 0.14)',
+  scanline: 'color-mix(in srgb, var(--color-system) 16%, transparent)',
+  dot: 'color-mix(in srgb, var(--color-system) 48%, transparent)',
+  dotFade: 'color-mix(in srgb, var(--color-system) 14%, transparent)',
   dotSize: 8,
   dotRadii: [0.95, 1.35, 1.75],
   maskCore: '12%',
@@ -23,7 +23,7 @@ export const CrtDitherOverlay = ({
       className,
     )}
   >
-    <div className={'absolute inset-0 opacity-28'} style={DITHER_TEXTURE} />
+    <div className={'absolute inset-0 opacity-28 light:opacity-12'} style={DITHER_TEXTURE} />
     <div
       className={
         'absolute inset-0 bg-[radial-gradient(ellipse_at_center,color-mix(in_srgb,var(--color-system)_4%,transparent)_0%,transparent_76%)]'

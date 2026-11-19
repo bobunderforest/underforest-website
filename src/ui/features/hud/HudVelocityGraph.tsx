@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { MotionValue } from 'framer-motion'
+import { useTheme } from 'modules/theme/themeStore'
 import { useHudFrames } from 'utils/anim/hud-signals'
 import { getDpr } from 'utils/browser/dpr'
 import { useElementSize } from 'utils/hooks/useElementSize'
@@ -84,10 +85,10 @@ const drawTrace = (
 }
 
 const TRACE_SPECS = [
-  { token: '--color-accent', project: burstCurve(SCROLL_FULL_SCALE) },
-  { token: '--color-system', project: burstCurve(POINTER_FULL_SCALE) },
+  { token: '--hud-trace-scroll', project: burstCurve(SCROLL_FULL_SCALE) },
+  { token: '--hud-trace-pointer', project: burstCurve(POINTER_FULL_SCALE) },
   {
-    token: '--color-info',
+    token: '--hud-trace-fps',
     project: (value: number) => clamp(value / FRAME_RATE_FULL_SCALE, 0, 1),
   },
 ] as const
@@ -96,6 +97,22 @@ const TRACE_TOKENS = [
   '--color-edge',
   ...TRACE_SPECS.map(({ token }) => token),
 ] as const
+
+type GraphState = {
+  head: number
+  steadyFrames: number
+  gridColor: string
+  traces: Trace[]
+}
+
+const applyThemeColors = (state: GraphState) => {
+  const colors = readThemeColors(TRACE_TOKENS)
+  state.gridColor = colors['--color-edge']
+  state.traces.forEach((trace, index) => {
+    trace.color = colors[TRACE_SPECS[index].token]
+  })
+  state.steadyFrames = 0
+}
 
 type Props = {
   scrollVelocity: MotionValue<number>
@@ -112,25 +129,30 @@ export const HudVelocityGraph = ({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const contextRef = useRef<CanvasRenderingContext2D | null>(null)
 
-  const stateRef = useRef({
+  const theme = useTheme()
+
+  const stateRef = useRef<GraphState>({
     head: 0,
     steadyFrames: 0,
     gridColor: '',
-    traces: [] as Trace[],
+    traces: [],
   })
 
   useEffect(() => {
     const state = stateRef.current
-    const colors = readThemeColors(TRACE_TOKENS)
-    state.gridColor = colors['--color-edge']
-    state.traces = TRACE_SPECS.map(({ token, project }, index) => ({
+    state.traces = TRACE_SPECS.map(({ project }, index) => ({
       values: new Float32Array(SAMPLES),
-      color: colors[token],
+      color: '',
       source: [scrollVelocity, pointerVelocity, frameRate][index],
       project,
       lastValue: 0,
     }))
+    applyThemeColors(state)
   }, [scrollVelocity, pointerVelocity, frameRate])
+
+  useEffect(() => {
+    applyThemeColors(stateRef.current)
+  }, [theme])
 
   useEffect(() => {
     const state = stateRef.current

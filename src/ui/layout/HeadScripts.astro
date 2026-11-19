@@ -1,12 +1,34 @@
-<script is:inline>
-  try {
-    if (!sessionStorage.getItem('underforest:booted')) {
-      // document.documentElement.classList.add('is-booting')
-      // setTimeout(function () {
-      //   document.documentElement.classList.remove('is-booting')
-      // }, 6000)
-    }
-  } catch (error) {}
+---
+import { THEME_BROWSER_COLORS, THEME_STORAGE_KEY } from 'modules/theme/theme'
+---
+
+<script
+  is:inline
+  define:vars={{
+    storageKey: THEME_STORAGE_KEY,
+    browserColors: THEME_BROWSER_COLORS,
+  }}
+>
+  function resolveTheme() {
+    var stored = null
+    try {
+      stored = localStorage.getItem(storageKey)
+    } catch (error) {}
+    if (stored === 'light' || stored === 'dark') return stored
+    return window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark'
+  }
+  function applyTheme(doc) {
+    var theme = resolveTheme()
+    doc.documentElement.dataset.theme = theme
+    var meta = doc.querySelector('meta[name="theme-color"]')
+    if (meta) meta.setAttribute('content', browserColors[theme])
+  }
+  applyTheme(document)
+  document.addEventListener('astro:before-swap', function (event) {
+    applyTheme(event.newDocument)
+  })
 </script>
 
 <script is:inline>

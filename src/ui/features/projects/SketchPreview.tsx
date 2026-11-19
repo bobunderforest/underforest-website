@@ -53,27 +53,29 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
       >
         <ProjectPreviewMedia entry={entry} />
         <ProjectPreviewOverlay />
-        <Text
-          tag={'span'}
-          size={'hint'}
-          face={'title'}
-          uppercase
-          className={'text-shadow-s absolute top-3 right-3 text-right'}
-        >
-          {years}
-        </Text>
-        <Text
-          tag={'span'}
-          size={'hint'}
-          face={'title'}
-          tone={'primary'}
-          uppercase
-          className={
-            'absolute right-3 bottom-3 translate-x-2 opacity-0 transition duration-200 group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100'
-          }
-        >
-          open ↗
-        </Text>
+        <div data-theme={'dark'} className={'absolute inset-0'}>
+          <Text
+            tag={'span'}
+            size={'hint'}
+            face={'title'}
+            uppercase
+            className={'text-shadow-s absolute top-3 right-3 text-right'}
+          >
+            {years}
+          </Text>
+          <Text
+            tag={'span'}
+            size={'hint'}
+            face={'title'}
+            tone={'primary'}
+            uppercase
+            className={
+              'absolute right-3 bottom-3 translate-x-2 opacity-0 transition duration-200 group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100'
+            }
+          >
+            open ↗
+          </Text>
+        </div>
       </Link>
       <div
         className={

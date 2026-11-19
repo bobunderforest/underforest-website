@@ -16,3 +16,40 @@
   --color-white: #fff;
   --color-black: #000;
 }
+
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-base: #ffffff;
+  --color-surface: #f2f2f2;
+  --color-edge: #9a9a9a;
+  --color-text: #000000;
+  --color-muted: #555555;
+  --color-accent: #8325a8;
+  --color-atomic-orange: #8f5e00;
+  --color-system: #4a4652;
+  --color-info: #1f5ed6;
+}
+
+:root[data-theme='light'] [data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-base: #000;
+  --color-surface: #131418;
+  --color-edge: rgb(83, 76, 76);
+  --color-text: #fff;
+  --color-muted: #8b8484;
+  --color-accent: #ff6a1f;
+  --color-atomic-orange: #fff70a;
+  --color-system: #34e39b;
+  --color-info: #4d8dff;
+  --color-background: var(--color-base);
+
+  color: var(--color-text);
+}
+
+@custom-variant light (&:where([data-theme='light'], [data-theme='light'] *):not(:where([data-theme='dark'], [data-theme='dark'] *)));

@@ -12,6 +12,7 @@ import { useVideoInView } from 'utils/hooks/useVideoInView'
 import { cns } from 'utils/formatters/classnames'
 import { markProjectIndexReturn } from 'utils/browser/project-index-return'
 import { ProjectPreviewOverlay } from './ProjectPreviewOverlay'
+import { PaperWash } from 'ui/fx/PaperWash'
 
 const Kaleidoscope = lazy(() => import('ui/fx/FXKaleidoscope'))
 
@@ -99,6 +100,7 @@ export const ProjectPreviewMedia = ({
         <PreviewKaleidoscope />
       )}
       {!cover && <div className={'absolute inset-0 bg-surface'} />}
+      <PaperWash />
     </div>
   )
 }
@@ -130,7 +132,10 @@ export const ProjectPreview = ({ entry, className }: Props) => {
       >
         <ProjectPreviewMedia entry={entry} />
         <ProjectPreviewOverlay />
-        <div className={'relative flex w-full flex-col justify-between p-6'}>
+        <div
+          data-theme={'dark'}
+          className={'relative flex w-full flex-col justify-between p-6'}
+        >
           <div className={'flex items-start justify-between gap-4'}>
             <Text
               tag={'span'}

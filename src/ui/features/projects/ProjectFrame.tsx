@@ -161,8 +161,6 @@ export const ProjectFrame = ({
                 minY: wireGeometry.targetMinY,
                 maxDocumentY: wireGeometry.targetMaxDocumentY,
               }}
-              viewportWidth={viewportWidth}
-              viewportHeight={viewportHeight}
             />
           )}
         </AnimatePresence>

@@ -1,11 +1,8 @@
 import type { ReactNode } from 'react'
 import { Link } from 'ui/common/typography/Link'
 import { Text } from 'ui/common/typography/Text'
-import { EXPERIENCE_STATUS_LABEL } from 'ui/features/experience-data/experience-data'
-import type {
-  ExperienceEntry,
-  ExperienceStatus,
-} from 'ui/features/experience-data/types'
+import { webEmploymentLabel } from 'ui/features/experience-data/experience-data'
+import type { ExperienceEntry } from 'ui/features/experience-data/types'
 import { cns } from 'utils/formatters/classnames'
 import { formatDateDuration, formatDateRange } from 'utils/formatters/dates'
 import {
@@ -30,20 +27,6 @@ export const ExperienceTitleLink = ({
   </Link>
 )
 
-export const ExperienceTitleRole = ({ role }: { role?: string }) =>
-  role ? (
-    <Text
-      tag={'span'}
-      size={'regular'}
-      tone={'secondary'}
-      weight={'normal'}
-      className={'whitespace-nowrap'}
-    >
-      <span aria-hidden>· </span>
-      {role}
-    </Text>
-  ) : null
-
 export const ExperienceInnerLink = ({
   children,
   href,
@@ -61,71 +44,6 @@ export const ExperienceInnerLink = ({
   </Link>
 )
 
-export const ExperienceTag = ({
-  children,
-  className,
-}: {
-  children: ReactNode
-  className: string
-}) => (
-  <Text
-    tag={'span'}
-    size={'hint'}
-    uppercase
-    className={cns(
-      'inline-flex items-center gap-[6px] border px-[6px] py-[1px]',
-      className,
-    )}
-  >
-    {children}
-  </Text>
-)
-
-export const ExperienceReclassifiedTag = () => (
-  <ExperienceTag className={'border-accent text-accent'}>
-    Reclassified · web → gamedev
-  </ExperienceTag>
-)
-
-export const ExperienceStatusTag = ({
-  status,
-}: {
-  status: ExperienceStatus
-}) => (
-  <ExperienceTag className={'border-muted/60 text-muted'}>
-    <span aria-hidden>⊘</span>
-    {EXPERIENCE_STATUS_LABEL[status.kind]}
-  </ExperienceTag>
-)
-
-export const ExperienceEntryTags = ({
-  entry,
-}: {
-  entry: Pick<ExperienceEntry, 'reclassified' | 'status'>
-}) =>
-  entry.reclassified || entry.status ? (
-    <div className={'mb-2 flex flex-wrap gap-2'}>
-      {entry.reclassified && <ExperienceReclassifiedTag />}
-      {entry.status && <ExperienceStatusTag status={entry.status} />}
-    </div>
-  ) : null
-
-export const ExperienceStatusNote = ({
-  status,
-}: {
-  status: ExperienceStatus
-}) =>
-  status.note ? (
-    <Text
-      tag={'p'}
-      size={'hint'}
-      tone={'secondary'}
-      className={'hidden max-w-prose-measure italic tablet-s:block'}
-    >
-      {status.note}
-    </Text>
-  ) : null
-
 export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => {
   const duration = formatDateDuration(entry.from, entry.to)
 
@@ -139,34 +57,41 @@ export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => {
       <span className={'tabular-nums'}>
         {formatDateRange(entry.from, entry.to, 'short')}
       </span>
-      <span className={'mobile-m:block'}>
-        {duration && (
-          <span className={'text-muted/70 normal-case'}>
-            <span className={'mobile-m:hidden'}>{' ('}</span>
-            {duration}
-            <span className={'mobile-m:hidden'}>{')'}</span>
-          </span>
-        )}
-        {entry.employment && <> · {entry.employment}</>}
-      </span>
+      {duration && (
+        <span className={'text-muted/70 normal-case mobile-m:block'}>
+          <span className={'mobile-m:hidden'}>{' ('}</span>
+          {duration}
+          <span className={'mobile-m:hidden'}>{')'}</span>
+        </span>
+      )}
     </Text>
   )
 }
 
-export const ExperienceSummary = ({
-  lines,
-  hasStatusNote,
-}: {
-  lines: string[]
-  hasStatusNote: boolean
-}) => (
+export const ExperienceEngagement = ({ entry }: { entry: ExperienceEntry }) => {
+  const engagement = [entry.role, webEmploymentLabel(entry)]
+    .filter(Boolean)
+    .join(' · ')
+
+  return engagement ? (
+    <Text
+      tag={'span'}
+      size={'hint'}
+      uppercase
+      className={'whitespace-nowrap text-muted/70'}
+    >
+      {engagement}
+    </Text>
+  ) : null
+}
+
+export const ExperienceSummary = ({ lines }: { lines: string[] }) => (
   <Text
     tag={'ul'}
     tone={'secondary'}
     className={cns(
       'max-w-prose-measure transition-colors duration-300 group-data-[active=true]:text-text',
       'mobile-m:text-text',
-      hasStatusNote && 'tablet-s:mb-3',
     )}
   >
     {lines.map((line) => (

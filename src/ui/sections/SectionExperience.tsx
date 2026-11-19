@@ -1,7 +1,7 @@
 import { Section } from './Section'
 import { CrtDitherOverlay } from 'ui/fx/CrtDitherOverlay'
 import { FieldLabel } from './FieldLabel'
-import { SkillTagsContainer } from 'ui/features/skills/SkillTagsContainer'
+import { SkillAreaGrid } from 'ui/features/skills/SkillAreaGrid'
 import { ExperienceTrack } from 'ui/features/experience/ExperienceTrack'
 import { SKILLS } from 'ui/features/experience-data/experience-data'
 import {
@@ -31,7 +31,7 @@ export const SectionExperience = () => {
         >
           skills
         </FieldLabel>
-        <SkillTagsContainer />
+        <SkillAreaGrid />
       </div>
 
       <div className={'mb-intersection-padding'}>
@@ -44,10 +44,6 @@ export const SectionExperience = () => {
       <div className={'grid max-w-column-width gap-10'}>
         <ExperienceLanguageList />
         <ExperienceEducationList />
-        <div>
-          <ResumeExportLabel />
-          <ResumeDownloadButtons />
-        </div>
       </div>
     </Section>
   )

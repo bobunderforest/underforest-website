@@ -35,6 +35,28 @@ export const hasExperienceDetails = (entry: ExperienceEntry) =>
     entry.links?.length,
   )
 
+const WEB_EMPLOYMENT_LABEL: Record<string, string | undefined> = {
+  'Full-time': undefined,
+  'Personal project': 'Personal',
+  'Contest project': 'Contest',
+}
+
+const WEB_EMPLOYMENT_LABEL_BY_ENTRY: Record<string, string> = {
+  'ocean-threshold': 'Career pivot',
+}
+
+export const webEmploymentLabel = ({
+  id,
+  employment,
+}: Pick<ExperienceEntry, 'id' | 'employment'>) => {
+  if (id in WEB_EMPLOYMENT_LABEL_BY_ENTRY) {
+    return WEB_EMPLOYMENT_LABEL_BY_ENTRY[id]
+  }
+  return employment && employment in WEB_EMPLOYMENT_LABEL
+    ? WEB_EMPLOYMENT_LABEL[employment]
+    : employment
+}
+
 export const EXPERIENCE_STATUS_LABEL: Record<ExperienceStatusKind, string> = {
   discontinued: 'Discontinued',
   unavailable: 'Unavailable',

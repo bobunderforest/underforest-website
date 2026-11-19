@@ -258,8 +258,6 @@ export const ExperienceDetails = ({
         sourceX={sourceRight + WIRE_GAP}
         targetX={panelLeft}
         targetY={viewportHeight / 2}
-        viewportWidth={viewportWidth}
-        viewportHeight={viewportHeight}
       />
       <motion.aside
         ref={panelRef}
@@ -284,7 +282,7 @@ export const ExperienceDetails = ({
         transition={{ duration: 0.32, ease: motionEase.enter }}
       >
         <motion.div
-          className={'relative border border-accent/45 bg-[#0f0602]'}
+          className={'relative border border-accent/45 bg-base'}
           initial={{ height: 0 }}
           animate={{ height: panelHeight }}
           exit={{ height: 0 }}

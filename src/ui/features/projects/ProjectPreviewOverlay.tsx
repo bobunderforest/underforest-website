@@ -6,7 +6,7 @@ const DOT_PATTERN_STYLE = {
 }
 
 export const ProjectPreviewOverlay = () => (
-  <>
+  <div data-theme={'dark'} className={'pointer-events-none absolute inset-0'}>
     <div
       className={
         'pointer-events-none absolute inset-0 bg-gradient-to-t from-base/50 via-base/10 to-base/0 transition-colors duration-200'
@@ -23,5 +23,5 @@ export const ProjectPreviewOverlay = () => (
         'pointer-events-none absolute inset-x-0 bottom-0 h-1/3 opacity-65'
       }
     />
-  </>
+  </div>
 )

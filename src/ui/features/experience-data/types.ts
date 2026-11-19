@@ -42,7 +42,6 @@ export type Skill = {
   label: string
   domains: Domain[]
   primary?: boolean
-  rising?: boolean
   area?: string
 }
 
@@ -58,7 +57,6 @@ export type ExperienceEntry = {
   summary: string[]
   links?: LinkRef[]
   domains: Domain[]
-  reclassified?: boolean
   break?: boolean
   details?: ExperienceDetail[]
   status?: ExperienceStatus
@@ -114,7 +112,6 @@ export type ProjectRef = {
   summary?: string[]
   links?: LinkRef[]
   domains?: Domain[]
-  reclassified?: boolean
   break?: boolean
   details?: ExperienceDetail[]
   status?: ExperienceStatus

@@ -8,7 +8,6 @@ type PanelProps = React.BaseProps & {
   title: string
   align?: Align
   className: string
-  flipCut?: boolean
 }
 
 const PanelTab = ({ title, align }: { title: string; align: Align }) => (
@@ -34,13 +33,12 @@ export const HudPanel = ({
   title,
   align = 'left',
   className,
-  flipCut = false,
   children,
 }: PanelProps) => (
   <div className={cns('absolute w-[186px] mobile-m:hidden', className)}>
     {/* <PanelTab title={title} align={align} /> */}
 
-    <div className={cns('hud-frame', flipCut && 'hud-frame-flip')}>
+    <div className={'hud-frame'}>
       <div className={'hud-frame-fill px-[9px] py-[7px]'}>
         <Text
           size={'note'}
@@ -56,36 +54,26 @@ export const HudPanel = ({
   </div>
 )
 
-type Tone = 'text' | 'system'
-
 type ReadoutProps = {
   label: string
   value: string | MotionValue<string>
-  tone?: Tone
 }
 
-const TONE_CLASSES: Record<Tone, string> = {
-  text: 'text-text',
-  system: 'text-system',
-}
-
-export const HudReadout = ({ label, value, tone = 'text' }: ReadoutProps) => (
+export const HudReadout = ({ label, value }: ReadoutProps) => (
   <div className={'flex items-baseline justify-between gap-2'}>
     <span className={'shrink-0 text-muted'}>{label}</span>
-    <motion.span
-      className={cns('hud-glow truncate tabular-nums', TONE_CLASSES[tone])}
-    >
+    <motion.span className={'hud-glow truncate text-text tabular-nums'}>
       {value}
     </motion.span>
   </div>
 )
 
-type Swatch = 'accent' | 'system' | 'info'
+type Swatch = 'scroll' | 'pointer' | 'fps'
 
 const SWATCH_CLASSES: Record<Swatch, string> = {
-  accent: 'bg-accent',
-  system: 'bg-system',
-  info: 'bg-info',
+  scroll: 'bg-(--hud-trace-scroll)',
+  pointer: 'bg-(--hud-trace-pointer)',
+  fps: 'bg-(--hud-trace-fps)',
 }
 
 export const HudLegend = ({

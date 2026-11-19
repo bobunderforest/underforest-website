@@ -23,8 +23,6 @@ type DataWireProps = DataWireTarget & {
   lockedSourceY: number | null
   sourceX: number
   targetX: number
-  viewportWidth: number
-  viewportHeight: number
 }
 
 export const DataWire = ({
@@ -36,8 +34,6 @@ export const DataWire = ({
   targetX,
   targetY,
   targetRange,
-  viewportWidth,
-  viewportHeight,
 }: DataWireProps) => {
   const sourceY = useTransform(scrollY, (value) =>
     lockedSourceY === null ? sourceDocumentY - value : lockedSourceY,
@@ -89,10 +85,8 @@ export const DataWire = ({
     <motion.svg
       aria-hidden
       className={
-        'pointer-events-none fixed inset-0 z-[52] h-full w-[100vw] tablet-s:hidden'
+        'pointer-events-none fixed inset-0 z-[52] size-full overflow-visible tablet-s:hidden'
       }
-      viewBox={`0 0 ${viewportWidth} ${viewportHeight}`}
-      preserveAspectRatio={'none'}
     >
       <motion.path
         d={path}

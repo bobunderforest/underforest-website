@@ -18,7 +18,7 @@ const TONE_CLASSES: Record<TextTone, string> = {
   system: 'text-system',
   inverse: 'text-base',
   soft: 'text-text/85',
-  dimmed: 'text-muted/70',
+  dimmed: 'text-muted/70 light:text-muted/85',
   faint: 'text-text/60',
 }
 

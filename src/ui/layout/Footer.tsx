@@ -10,7 +10,7 @@ import { cns } from 'utils/formatters/classnames'
 export const Footer = () => (
   <footer className={'relative bg-base'}>
     <div className={'relative overflow-hidden'}>
-      <ContourField animate inverted />
+      <ContourField animate inverted className={'light:mix-blend-multiply'} />
       <SectionContent isPadded className={'relative'}>
         <SocialLinks />
         <ResumeLinks className={'mt-[40px]'} />

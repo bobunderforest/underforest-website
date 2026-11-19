@@ -16,12 +16,10 @@ import {
 } from './ExperienceTrackParts'
 import {
   ExperienceBreakNode,
-  ExperienceEntryTags,
   ExperienceLinkRow,
+  ExperienceEngagement,
   ExperienceMeta,
-  ExperienceStatusNote,
   ExperienceSummary,
-  ExperienceTitleRole,
   ExperienceTitleLink,
 } from './ExperienceEntryParts'
 
@@ -125,16 +123,12 @@ export const ExperienceEntry = ({
           />
         )}
         <div className={'relative z-[1]'}>
-          <ExperienceEntryTags entry={entry} />
           <ExperienceMeta entry={entry} />
-          <ExperienceAnchor className={'mb-2'}>
+          <ExperienceAnchor
+            className={'mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1'}
+          >
             <ExperienceMarker entry={entry} />
-            <TextTitle
-              size={4}
-              tag={'h3'}
-              tone={'primary'}
-              className={'flex flex-wrap items-baseline gap-x-2.5 gap-y-1'}
-            >
+            <TextTitle size={4} tag={'h3'} tone={'primary'}>
               {entry.href ? (
                 <ExperienceTitleLink href={entry.href}>
                   {entry.place} ↗
@@ -142,15 +136,11 @@ export const ExperienceEntry = ({
               ) : (
                 entry.place
               )}
-              <ExperienceTitleRole role={entry.role} />
             </TextTitle>
+            <ExperienceEngagement entry={entry} />
           </ExperienceAnchor>
           <ExperienceLinkRow entry={entry} />
-          <ExperienceSummary
-            lines={entry.summary}
-            hasStatusNote={Boolean(entry.status?.note)}
-          />
-          {entry.status && <ExperienceStatusNote status={entry.status} />}
+          <ExperienceSummary lines={entry.summary} />
           {hasDetails && (
             <ExperienceDetailsDisclosure
               entry={entry}

@@ -4,29 +4,31 @@
       "label": "Unreal Engine",
       "domains": ["gamedev"],
       "primary": true,
-      "rising": true,
-      "area": "Engine & gameplay"
+      "area": "Game development"
     },
     {
       "label": "C++ / Blueprints",
       "domains": ["gamedev"],
       "primary": true,
-      "rising": true,
-      "area": "Engine & gameplay"
+      "area": "Game development"
     },
     {
       "label": "Gameplay programming",
       "domains": ["gamedev"],
       "primary": true,
-      "rising": true,
-      "area": "Engine & gameplay"
+      "area": "Game development"
+    },
+    {
+      "label": "Gameplay Ability System",
+      "domains": ["gamedev"],
+      "primary": true,
+      "area": "Game development"
     },
     {
       "label": "VR / XR",
       "domains": ["gamedev"],
       "primary": true,
-      "rising": true,
-      "area": "Engine & gameplay"
+      "area": "Game development"
     },
     {
       "label": "React",
@@ -41,13 +43,13 @@
       "area": "Web & frontend"
     },
     {
-      "label": "CSS / Tailwind",
+      "label": "CSS / Sass / Tailwind",
       "domains": ["web"],
       "primary": true,
       "area": "Web & frontend"
     },
     {
-      "label": "Three.js",
+      "label": "Three.js / R3F",
       "domains": ["web", "gamedev"],
       "primary": true,
       "area": "Graphics & real-time"
@@ -55,18 +57,25 @@
     {
       "label": "Git Version Control",
       "domains": ["web", "gamedev"],
+      "primary": true,
       "area": "Tooling"
     },
     {
       "label": "Chaos Physics",
       "domains": ["gamedev"],
-      "area": "Engine & gameplay"
+      "area": "Game development"
     },
     {
       "label": "Niagara",
       "domains": ["gamedev"],
-      "area": "Engine & gameplay"
+      "area": "Game development"
     },
+    {
+      "label": "Profiling",
+      "domains": ["gamedev"],
+      "area": "Game development"
+    },
+    { "label": "Unity", "domains": ["gamedev"], "area": "Game development" },
     {
       "label": "GLSL / Shaders",
       "domains": ["web", "gamedev"],
@@ -91,25 +100,25 @@
     {
       "label": "Vite / Webpack",
       "domains": ["web"],
+      "primary": true,
       "area": "Tooling"
     },
-    {
-      "label": "Node.js / Express",
-      "domains": ["web"],
-      "area": "Backend & data"
-    },
-    { "label": "Ethers.js / Wagmi", "domains": ["web"], "area": "Web3" },
+    { "label": "Node.js", "domains": ["web"], "area": "Backend & data" },
+    { "label": "Express", "domains": ["web"], "area": "Backend & data" },
+    { "label": "Ethers.js", "domains": ["web"], "area": "Web3" },
+    { "label": "Wagmi", "domains": ["web"], "area": "Web3" },
     {
       "label": "Storybook",
       "domains": ["web"],
       "area": "Tooling"
     },
     {
-      "label": "Jest / Testing",
+      "label": "Jest / TDD",
       "domains": ["web"],
       "area": "Tooling"
     },
-    { "label": "SQL / MongoDB", "domains": ["web"], "area": "Backend & data" },
+    { "label": "SQL", "domains": ["web"], "area": "Backend & data" },
+    { "label": "MongoDB", "domains": ["web"], "area": "Backend & data" },
     { "label": "Docker", "domains": ["web"], "area": "Tooling" }
   ],
   "experience": [
@@ -163,7 +172,7 @@
         },
         {
           "kind": "video",
-          "caption": "screen capture · web",
+          "caption": "screen capture",
           "src": "/videos/sempervirent.mp4"
         }
       ]
@@ -232,7 +241,7 @@
         },
         {
           "kind": "video",
-          "caption": "trailer · gameplay capture",
+          "caption": "screen capture",
           "src": "/videos/gnarlycrawl-trailer.mp4"
         }
       ]
@@ -310,12 +319,11 @@
       },
       "links": [
         {
-          "label": "Steam Page",
+          "label": "Steam page",
           "href": "https://store.steampowered.com/app/4865570/Ocean_Threshold/"
         }
       ],
       "domains": ["gamedev"],
-      "reclassified": true,
       "status": {
         "kind": "suspended",
         "note": "The project development has been suspended indefinitely."
@@ -335,12 +343,12 @@
       "details": [
         {
           "kind": "text",
-          "caption": "sample · classification shift",
+          "caption": "career pivot",
           "body": "A narrative experience by Arden Vald — an immersive descent into the space between life and death, and the journey back."
         },
         {
           "kind": "video",
-          "caption": "devlog · arcanum works",
+          "caption": "screen capture",
           "src": "/videos/ocean-threshold.mp4",
           "safeSrc": "/videos/ocean-threshold-safe.mp4"
         }
@@ -399,7 +407,7 @@
         },
         {
           "kind": "video",
-          "caption": "capture · arcanum works",
+          "caption": "screen capture",
           "src": "/videos/arcanum.mp4"
         }
       ]
@@ -458,7 +466,7 @@
         },
         {
           "kind": "video",
-          "caption": "capture · arcanum works",
+          "caption": "screen capture",
           "src": "/videos/in2into-web-ar.mp4"
         }
       ]
@@ -496,7 +504,7 @@
       "employment": "Full-time",
       "place": "Lido.fi",
       "summary": [
-        "Contributed to a Web3 liquid-staking platform",
+        "Contributed to a Web3 liquid-staking platform.",
         "Integrated UI with blockchain smart contracts via ABI.",
         "Built wallet-connection flows using Ethers.js and Wagmi."
       ],
@@ -528,7 +536,7 @@
       "summary": [
         "Front-end for a decentralized on-chain credit-scoring protocol.",
         "Smart-contract integration via ABI and wallet-connection flows (Ethers.js / Wagmi).",
-        "Part-time alongside Lido"
+        "Part-time alongside Lido."
       ],
       "skills": ["React", "TypeScript", "Ethers.js / Wagmi"],
       "domains": ["web"],
@@ -624,11 +632,11 @@
         {
           "kind": "text",
           "caption": "project closeup",
-          "body": "A music straming social platform, made “by musicians for musicians”.\n"
+          "body": "A music streaming social platform, made “by musicians for musicians”."
         },
         {
           "kind": "video",
-          "caption": "screencast · product demo",
+          "caption": "screen capture",
           "src": "/videos/matter-streaming-demo.mp4"
         }
       ]
@@ -705,7 +713,7 @@
       "id": "tradingview",
       "from": "2015-07",
       "to": "2017-06",
-      "role": "Full-stack",
+      "role": "Front-end",
       "employment": "Full-time",
       "place": "TradingView",
       "href": "https://www.tradingview.com/",

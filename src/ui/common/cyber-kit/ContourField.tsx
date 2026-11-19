@@ -120,7 +120,7 @@ const FRAGMENT_SHADERS = {
 export type ContourFieldPalette = keyof typeof FRAGMENT_SHADERS
 
 const PALETTE_GROUNDS: Record<ContourFieldPalette, string> = {
-  light: 'bg-text',
+  light: 'bg-white',
   'dark-red': 'bg-[#0e0203]',
   'bold-accent': 'bg-accent',
 }
@@ -159,7 +159,7 @@ export const ContourField = ({
     className={cns(
       'pointer-events-none absolute inset-0',
       PALETTE_GROUNDS[palette],
-      inverted && 'invert',
+      inverted && 'invert light:invert-0',
       className,
     )}
   >

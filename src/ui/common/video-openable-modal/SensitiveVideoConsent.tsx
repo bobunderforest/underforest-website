@@ -7,6 +7,7 @@ export const SensitiveVideoConsent = ({
   onConsent: () => void
 }) => (
   <div
+    data-theme={'dark'}
     className={
       'pointer-events-none absolute inset-0 z-10 flex items-end select-none'
     }

@@ -2,7 +2,6 @@ export type NavTargetId = 'index' | 'projects' | 'resume'
 
 export type NavTarget = {
   id: NavTargetId
-  index: string
   label: string
   alias: string
   hint: string
@@ -15,7 +14,6 @@ export type NavTarget = {
 
 export const INDEX_TARGET: NavTarget = {
   id: 'index',
-  index: '00',
   label: 'Index',
   alias: 'identity',
   hint: 'who is speaking, and from where',
@@ -27,7 +25,6 @@ export const INDEX_TARGET: NavTarget = {
 export const NAV_ROUTES: NavTarget[] = [
   {
     id: 'projects',
-    index: '01',
     label: 'Projects',
     alias: 'portfolio',
     hint: 'selected builds, opened one detection at a time',
@@ -39,7 +36,6 @@ export const NAV_ROUTES: NavTarget[] = [
   },
   {
     id: 'resume',
-    index: '02',
     label: 'Resume',
     alias: 'cv',
     hint: 'ten years of shipped work, classified by employer',
