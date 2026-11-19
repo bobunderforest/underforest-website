@@ -12,9 +12,3 @@
     }
   }
 }
-
-@layer components {
-  .scroll-stage > * {
-    pointer-events: auto;
-  }
-}
