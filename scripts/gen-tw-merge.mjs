@@ -145,25 +145,41 @@ const buildSources = async () => {
   const containers = readThemeNamespace(design, '--container-')
 
   const classGroups = mergeClassGroups(
-    {
-      ...(fontSizes.length && { 'font-size': [{ text: fontSizes }] }),
-      ...(leadings.length && { leading: [{ leading: leadings }] }),
-    },
+    { ...(leadings.length && { leading: [{ leading: leadings }] }) },
     buildClassGroups(SPACING_CLASS_GROUPS, spacings),
     buildClassGroups(CONTAINER_CLASS_GROUPS, containers),
   )
 
-  const twMerge = `import type { ConfigExtension, DefaultClassGroupIds, DefaultThemeGroupIds } from 'tailwind-merge'
+  const twMerge = `import {
+  validators,
+  type ConfigExtension,
+  type DefaultClassGroupIds,
+  type DefaultThemeGroupIds,
+} from 'tailwind-merge'
 
-type TwMergeExtend = NonNullable<
-  ConfigExtension<DefaultClassGroupIds, DefaultThemeGroupIds>['extend']
->
-
-export const twMergeExtend: TwMergeExtend = {
-  theme: {
-    breakpoint: ${serialize(breakpoints).replace(/\n/g, '\n    ')},
+export const twMergeConfig: ConfigExtension<
+  DefaultClassGroupIds,
+  DefaultThemeGroupIds
+> = {
+  override: {
+    classGroups: {
+      'font-size': [
+        {
+          text: [
+            ${fontSizes.map((name) => `'${name}'`).join(', ')},
+            validators.isArbitraryVariableLength,
+            validators.isArbitraryLength,
+          ],
+        },
+      ],
+    },
   },
-  classGroups: ${serialize(classGroups).replace(/\n/g, '\n  ')},
+  extend: {
+    theme: {
+      breakpoint: ${serialize(breakpoints)},
+    },
+    classGroups: ${serialize(classGroups)},
+  },
 }
 
 export const themeColors = ${serialize(themeColors)} as const

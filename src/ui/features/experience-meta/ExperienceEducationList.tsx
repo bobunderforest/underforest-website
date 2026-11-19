@@ -1,10 +1,10 @@
 import { EDUCATION } from 'ui/features/experience-data/experience-data'
-import { FieldLabel } from 'ui/sections/FieldLabel'
+import { FieldLabelHeading } from 'ui/sections/FieldLabel'
 import { Text } from 'ui/common/typography/Text'
 
 export const ExperienceEducationList = () => (
   <div>
-    <FieldLabel>education</FieldLabel>
+    <FieldLabelHeading>Education</FieldLabelHeading>
     <Text tag={'ul'} className={'grid gap-4'}>
       {EDUCATION.map((entry) => (
         <li key={entry.degree}>

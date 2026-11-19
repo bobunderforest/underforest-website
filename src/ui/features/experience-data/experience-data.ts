@@ -14,6 +14,12 @@ export const SKILLS = experience.skills as Skill[]
 export const EXPERIENCE = (experience.experience as ExperienceEntry[]).filter(
   (entry) => !entry.break && !entry.resumeVariants,
 )
+const experienceYears = EXPERIENCE.flatMap(({ from, to }) => [from, to]).map(
+  (date) => Number(date.slice(0, 4)),
+)
+export const EXPERIENCE_FIRST_YEAR = Math.min(...experienceYears)
+export const EXPERIENCE_LAST_YEAR = Math.max(...experienceYears)
+
 export const LANGUAGES = experience.languages as MetaLine[]
 export const EDUCATION = experience.education as EducationEntry[]
 

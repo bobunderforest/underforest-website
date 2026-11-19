@@ -3,6 +3,10 @@ import { CrtDitherOverlay } from 'ui/fx/CrtDitherOverlay'
 import { FieldLabelHeading } from './FieldLabel'
 import { SkillAreaGrid } from 'ui/features/skills/SkillAreaGrid'
 import { ExperienceTrack } from 'ui/features/experience/ExperienceTrack'
+import {
+  EXPERIENCE_FIRST_YEAR,
+  EXPERIENCE_LAST_YEAR,
+} from 'ui/features/experience-data/experience-data'
 import { ResumeDownloadButtons } from 'ui/features/experience-meta/ResumeDownloadButtons'
 import { ExperienceLanguageList } from 'ui/features/experience-meta/ExperienceLanguageList'
 import { ExperienceEducationList } from 'ui/features/experience-meta/ExperienceEducationList'
@@ -23,7 +27,11 @@ export const SectionExperience = () => {
       </div>
 
       <div className={'mb-intersection-padding'}>
-        <FieldLabelHeading readout={'2014 → 2026'}>timeline</FieldLabelHeading>
+        <FieldLabelHeading
+          readout={`${EXPERIENCE_FIRST_YEAR} → ${EXPERIENCE_LAST_YEAR}`}
+        >
+          timeline
+        </FieldLabelHeading>
         <ExperienceTrack />
       </div>
 

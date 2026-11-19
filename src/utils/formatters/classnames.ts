@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { extendTailwindMerge } from 'tailwind-merge'
-import { twMergeExtend } from './tailwind-merge-config.generated'
+import { twMergeConfig } from './tailwind-merge-config.generated'
 
-const twMerge = extendTailwindMerge({ extend: twMergeExtend })
+const twMerge = extendTailwindMerge(twMergeConfig)
 
 export const cns = (...classes: ClassValue[]) => twMerge(clsx(...classes))
