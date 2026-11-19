@@ -12,7 +12,7 @@ import {
   hasExperienceDetails,
 } from 'ui/features/experience-data/experience-data'
 import { ExperienceDetails } from 'ui/features/experience-details/ExperienceDetails'
-import { TRACK_MARKER_SIZE, TRACK_TICK_STYLE } from 'ui/fx/track-rail'
+import { TRACK_MARKER_SIZE } from 'ui/fx/track-rail'
 import { scrollElementToViewportCenter } from 'utils/anim/collapsible-scroll'
 import { motionEase } from 'utils/anim/motion-ease'
 import {
@@ -52,7 +52,6 @@ const ExperienceTrackProgress = ({
       style={{ top, height }}
       className={'pointer-events-none absolute left-0 w-[6px] mobile-m:hidden'}
     >
-      <span style={TRACK_TICK_STYLE} className={'absolute inset-0 w-[6px]'} />
       <span className={'absolute inset-y-0 left-0 w-px bg-edge'} />
       <motion.span
         initial={false}

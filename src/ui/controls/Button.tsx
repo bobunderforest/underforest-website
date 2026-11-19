@@ -22,6 +22,11 @@ const accentStyles = {
     corners: 'border-text',
     outline: 'outline-text',
   },
+  neutral: {
+    face: 'border-edge bg-text/[0.03] text-text hover:border-accent hover:bg-accent hover:text-base focus-visible:border-accent focus-visible:bg-accent focus-visible:text-base',
+    corners: 'border-accent',
+    outline: 'outline-accent',
+  },
   atomic: {
     face: 'border-atomic-orange/55 bg-atomic-orange/[0.07] text-atomic-orange hover:border-atomic-orange hover:bg-atomic-orange hover:text-base focus-visible:border-atomic-orange focus-visible:bg-atomic-orange focus-visible:text-base',
     corners: 'border-atomic-orange',

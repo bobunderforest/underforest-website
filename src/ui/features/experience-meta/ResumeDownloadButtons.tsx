@@ -5,8 +5,6 @@ import {
   resumeFileHref,
 } from 'ui/features/experience-data/experience-data'
 import type { Domain } from 'ui/features/experience-data/types'
-import { FieldLabel } from 'ui/sections/FieldLabel'
-import type { ComponentProps } from 'react'
 import { cns } from 'utils/formatters/classnames'
 
 export const RESUME_DOWNLOADS: { variant: Domain; label: string }[] = [
@@ -14,25 +12,14 @@ export const RESUME_DOWNLOADS: { variant: Domain; label: string }[] = [
   { variant: 'gamedev', label: 'Resume_Gamedev.PDF' },
 ]
 
-export const ResumeExportLabel = ({
-  gap,
-  className,
-}: Pick<ComponentProps<typeof FieldLabel>, 'gap' | 'className'>) => (
-  <FieldLabel
-    gap={gap}
-    className={className}
-    readout={`${RESUME_DOWNLOADS.length} files`}
-  >
-    dossier export
-  </FieldLabel>
-)
-
 export const ResumeDownloadButtons = ({
   className,
 }: {
   className?: string
 }) => (
-  <div className={cns('flex flex-col gap-3', className)}>
+  <div
+    className={cns('grid grid-cols-2 gap-3 tablet-s:grid-cols-1', className)}
+  >
     {RESUME_DOWNLOADS.map(({ variant, label }) => (
       <div key={variant}>
         <Button
@@ -41,7 +28,7 @@ export const ResumeDownloadButtons = ({
           icon={<DisketteIcon className={'size-[25px]'} />}
           href={resumeFileHref(variant)}
           isExternal
-          accent={variant === 'gamedev' ? 'system' : 'brand'}
+          accent={'neutral'}
           aria-label={`Open ${RESUME_VARIANTS[variant].title} resume PDF`}
         >
           {label}

@@ -1,13 +1,11 @@
 import { TextTitle } from 'ui/common/typography/TextTitle'
-import { FieldLabelHeading } from './FieldLabel'
 
 type Props = {
-  alias: string
   kicker: string
   children: string
 }
 
-export const SectionTitle = ({ alias, kicker, children }: Props) => (
+export const SectionTitle = ({ kicker, children }: Props) => (
   <header className={'mb-intersection-padding'}>
     <TextTitle
       tag={'span'}
@@ -22,11 +20,10 @@ export const SectionTitle = ({ alias, kicker, children }: Props) => (
       size={1}
       uppercase
       className={
-        'relative left-[-0.05em] mb-5 leading-[0.85] font-bold tracking-[0.02em]'
+        'relative left-[-0.05em] leading-[0.85] font-bold tracking-[0.02em]'
       }
     >
       {children}
     </TextTitle>
-    <FieldLabelHeading muted>{`aka ${alias}`}</FieldLabelHeading>
   </header>
 )

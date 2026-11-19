@@ -16,9 +16,7 @@ export const SectionProjects = () => {
   return (
     <SectionShell id={'projects'} stage={'Projects'}>
       <SectionContent isPadded>
-        <SectionTitle alias={'portfolio'} kicker={'selected'}>
-          projects
-        </SectionTitle>
+        <SectionTitle kicker={'selected'}>projects</SectionTitle>
         <div
           className={
             'grid grid-cols-2 gap-grid-gap-regular mobile-m:grid-cols-1'

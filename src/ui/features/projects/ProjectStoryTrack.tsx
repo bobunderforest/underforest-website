@@ -5,7 +5,7 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion'
-import { TRACK_MARKER_SIZE, TRACK_TICK_STYLE } from 'ui/fx/track-rail'
+import { TRACK_MARKER_SIZE } from 'ui/fx/track-rail'
 import { FieldLabel } from 'ui/sections/FieldLabel'
 import { cns } from 'utils/formatters/classnames'
 import { padIndex } from 'utils/formatters/numerals'
@@ -123,32 +123,10 @@ export const ProjectStoryTrack = ({ entry }: { entry: ProjectEntry }) => {
   const precedingHeights = entry.story.map((_, index) =>
     itemHeights.slice(0, index).reduce((sum, height) => sum + (height ?? 0), 0),
   )
-  const finalBeatHeight =
-    entry.story[entry.story.length - 1]?.kind === 'end'
-      ? (itemHeights[entry.story.length - 1] ?? 0)
-      : 0
-  const tickTrackHeight = hasMeasurements
-    ? totalHeight -
-      finalBeatHeight +
-      (finalBeatHeight > 0 ? FINAL_BEAT_TRACK_HEIGHT : 0)
-    : '100%'
 
   return (
     <div className={'pt-8'}>
-      {/* <FieldLabel
-        className={'mobile-m:hidden'}
-        readout={`${entry.story.length} checkpoints`}
-      >
-        storyline
-      </FieldLabel> */}
-
       <ol ref={storyRef} className={'relative grid'}>
-        <span
-          aria-hidden
-          style={{ ...TRACK_TICK_STYLE, height: tickTrackHeight }}
-          className={'absolute top-0 left-[3px] w-[6px] mobile-m:hidden'}
-        />
-
         {entry.story.map((block, i) => {
           const itemHeight = itemHeights[i] ?? 0
           const precedingHeight = precedingHeights[i]
