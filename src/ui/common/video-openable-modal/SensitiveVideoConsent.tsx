@@ -13,9 +13,10 @@ export const SensitiveVideoConsent = ({
     }
   >
     <div
-      className={
-        'pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-base via-base/80 to-transparent'
-      }
+      className={`
+        pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t
+        from-base via-base/80 to-transparent
+      `}
     />
     <div
       style={{

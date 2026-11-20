@@ -13,15 +13,19 @@ const Row = ({ term, value }: { term: string; value: string }) => (
     <Text
       tag={'span'}
       tone={'dimmed'}
-      className={'transition-colors duration-200 group-hover/row:text-system'}
+      className={`
+        transition-colors duration-200
+        group-hover/row:text-system
+      `}
     >
       {term}
     </Text>
     <span
       aria-hidden
-      className={
-        'border-b border-dotted border-muted/45 transition-colors duration-200 group-hover/row:border-system/75'
-      }
+      className={`
+        border-b border-dotted border-muted/45 transition-colors duration-200
+        group-hover/row:border-system/75
+      `}
     />
     <Text
       tag={'span'}

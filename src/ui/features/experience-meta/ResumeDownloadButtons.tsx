@@ -18,7 +18,13 @@ export const ResumeDownloadButtons = ({
   className?: string
 }) => (
   <div
-    className={cns('grid grid-cols-2 gap-3 tablet-s:grid-cols-1', className)}
+    className={cns(
+      `
+        grid grid-cols-2 gap-3
+        tablet-s:grid-cols-1
+      `,
+      className,
+    )}
   >
     {RESUME_DOWNLOADS.map(({ variant, label }) => (
       <div key={variant}>

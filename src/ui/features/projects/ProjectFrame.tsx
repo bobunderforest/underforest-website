@@ -142,9 +142,10 @@ export const ProjectFrame = ({
       <article
         ref={frameRef}
         data-locked={locked}
-        className={
-          'relative isolate flex min-h-[var(--viewport-height)] w-full flex-col justify-end overflow-clip'
-        }
+        className={`
+          relative isolate flex min-h-(--viewport-height) w-full flex-col
+          justify-end overflow-clip
+        `}
       >
         <AnimatePresence>
           {locked && entry.href && wireGeometry.targetX > 0 && (
@@ -175,9 +176,12 @@ export const ProjectFrame = ({
           <FieldLabelHeading>project record</FieldLabelHeading>
           <div
             ref={gridRef}
-            className={
-              'mb-40 grid grid-cols-[minmax(0,1fr)_minmax(19rem,26rem)] items-start gap-x-12 gap-y-10 tablet-s:grid-cols-1 tablet-s:gap-x-0 tablet-s:gap-y-8 [&>*]:min-w-0'
-            }
+            className={`
+              mb-40 grid grid-cols-[minmax(0,1fr)_minmax(19rem,26rem)]
+              items-start gap-x-12 gap-y-10
+              tablet-s:grid-cols-1 tablet-s:gap-x-0 tablet-s:gap-y-8
+              [&>*]:min-w-0
+            `}
           >
             <div className={'tablet-s:contents'}>
               <div className={'tablet-s:order-1'}>
@@ -191,11 +195,17 @@ export const ProjectFrame = ({
             <div
               ref={stickyRailRef}
               style={{ top: STICKY_RAIL_TOP }}
-              className={
-                'sticky flex flex-col gap-4 tablet-s:static tablet-s:contents'
-              }
+              className={`
+                sticky flex flex-col gap-4
+                tablet-s:static tablet-s:contents
+              `}
             >
-              <div className={'flex flex-col gap-4 tablet-s:order-2'}>
+              <div
+                className={`
+                  flex flex-col gap-4
+                  tablet-s:order-2
+                `}
+              >
                 {entry.status && (
                   <ExperienceDetailsStatus status={entry.status} />
                 )}

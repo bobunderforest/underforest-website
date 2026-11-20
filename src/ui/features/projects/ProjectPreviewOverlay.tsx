@@ -8,14 +8,16 @@ const DOT_PATTERN_STYLE = {
 export const ProjectPreviewOverlay = () => (
   <div data-theme={'dark'} className={'pointer-events-none absolute inset-0'}>
     <div
-      className={
-        'pointer-events-none absolute inset-0 bg-gradient-to-t from-base/50 via-base/10 to-base/0 transition-colors duration-200'
-      }
+      className={`
+        pointer-events-none absolute inset-0 bg-gradient-to-t from-base/50
+        via-base/10 to-base/0 transition-colors duration-200
+      `}
     />
     <div
-      className={
-        'pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,transparent_0,rgba(0,0,0,0.2)_100%)]'
-      }
+      className={`
+        pointer-events-none absolute inset-0
+        bg-[radial-gradient(circle_at_85%_12%,transparent_0,rgba(0,0,0,0.2)_100%)]
+      `}
     />
     <div
       style={DOT_PATTERN_STYLE}

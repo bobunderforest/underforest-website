@@ -24,8 +24,16 @@ const HudNavCell = ({
     href={href}
     aria-current={active ? 'page' : undefined}
     className={cns(
-      'relative flex cursor-pointer items-center px-[12px] py-[7px] no-underline transition-colors duration-150',
-      active ? 'text-base' : 'text-muted hover:text-text',
+      `
+        relative flex cursor-pointer items-center px-[12px] py-[7px]
+        no-underline transition-colors duration-150
+      `,
+      active
+        ? 'text-base'
+        : `
+          text-muted
+          hover:text-text
+        `,
     )}
   >
     {active && (
@@ -89,23 +97,27 @@ const HudThemeToggle = () => {
       aria-checked={isLightAfterHydration}
       aria-label={'Light theme'}
       onClick={toggleTheme}
-      className={cns(
-        'group/theme relative flex cursor-pointer items-center gap-[8px] px-[10px] py-[7px] uppercase',
-        'text-muted transition-colors duration-150 hover:text-text',
-      )}
+      className={`
+        group/theme relative flex cursor-pointer items-center gap-[8px]
+        px-[10px] py-[7px] text-muted uppercase transition-colors duration-150
+        hover:text-text
+      `}
     >
       <span>theme</span>
       <span
         aria-hidden
-        className={
-          'relative block h-[11px] w-[24px] border border-edge transition-colors duration-150 group-hover/theme:border-muted'
-        }
+        className={`
+          relative block h-[11px] w-[24px] border border-edge transition-colors
+          duration-150
+          group-hover/theme:border-muted
+        `}
       >
         <span
-          className={cns(
-            'absolute top-[1px] left-[1px] block size-[7px] bg-accent',
-            'transition-transform duration-200 ease-out-cubic light:translate-x-[13px]',
-          )}
+          className={`
+            absolute top-[1px] left-[1px] block size-[7px] bg-accent
+            transition-transform duration-200 ease-out-cubic
+            light:translate-x-[13px]
+          `}
         />
       </span>
     </button>
@@ -119,16 +131,17 @@ export const HudNav = () => {
   return (
     <nav
       aria-label={'Primary'}
-      className={cns(
-        'fixed inset-x-0 top-[26px] z-50 flex justify-center',
-        'mobile-m:top-auto mobile-m:bottom-[26px]',
-      )}
+      className={`
+        fixed inset-x-0 top-[26px] z-50 flex justify-center
+        mobile-m:top-auto mobile-m:bottom-[26px]
+      `}
     >
       <div
-        className={cns(
-          'relative flex items-stretch gap-[8px] font-face-regular uppercase',
-          'text-[11px] leading-none tracking-[0.12em] mobile-m:text-[10px]',
-        )}
+        className={`
+          relative flex items-stretch gap-[8px] font-face-regular text-[11px]
+          leading-none tracking-[0.12em] uppercase
+          mobile-m:text-[10px]
+        `}
       >
         <HudNavFrame>
           {onLanding ? <HudNavStageCells /> : <HudNavCells path={path} />}

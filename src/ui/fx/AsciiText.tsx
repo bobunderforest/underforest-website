@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { whenPageSettled } from 'utils/browser/idle'
-import { cns } from 'utils/formatters/classnames'
 
 const vertexShader = `
 varying vec2 vUv;
@@ -591,11 +590,5 @@ export function ASCIIText({
     ditherNoiseScale,
   ])
 
-  return (
-    <div
-      ref={placeholderRef}
-      className={cns('ascii-text-placeholder', className)}
-      aria-hidden={'true'}
-    />
-  )
+  return <div ref={placeholderRef} className={className} aria-hidden={'true'} />
 }

@@ -2,7 +2,6 @@ import { ChannelLink } from 'ui/common/cyber-kit/ChannelLink'
 import { DisketteIcon } from 'ui/common/cyber-kit/DisketteIcon'
 import { resumeFileHref } from 'ui/features/experience-data/experience-data'
 import type { Domain } from 'ui/features/experience-data/types'
-import { cns } from 'utils/formatters/classnames'
 import { FieldLabelHeading } from './FieldLabel'
 
 const resumeVariants: { variant: Domain; label: string }[] = [
@@ -14,10 +13,10 @@ export const ResumeLinks = ({ className }: { className?: string }) => (
   <div className={className}>
     <FieldLabelHeading muted>resume</FieldLabelHeading>
     <div
-      className={cns(
-        'flex max-w-column-width flex-wrap items-center gap-[8px]',
-        'mobile-m:gap-[6px]',
-      )}
+      className={`
+        flex max-w-column-width flex-wrap items-center gap-[8px]
+        mobile-m:gap-[6px]
+      `}
     >
       {resumeVariants.map(({ variant, label }) => (
         <ChannelLink

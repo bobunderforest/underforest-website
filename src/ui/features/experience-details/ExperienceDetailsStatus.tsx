@@ -16,7 +16,10 @@ export const ExperienceDetailsStatus = ({
       size={'hint'}
       tone={'accent'}
       uppercase
-      className={'mb-2 flex items-center gap-[6px] last:mb-0'}
+      className={`
+        mb-2 flex items-center gap-[6px]
+        last:mb-0
+      `}
     >
       <span aria-hidden>⊘</span>
       {EXPERIENCE_STATUS_LABEL[status.kind]}

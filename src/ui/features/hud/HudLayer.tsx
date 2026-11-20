@@ -28,18 +28,20 @@ export const HudLayer = () => {
   return (
     <div
       aria-hidden
-      className={
-        'pointer-events-none fixed inset-0 z-40 p-[20px] mobile-m:p-[12px]'
-      }
+      className={`
+        pointer-events-none fixed inset-0 z-40 p-[20px]
+        mobile-m:p-[12px]
+      `}
     >
       <HudReticles scrollY={scrollY} />
 
       <HudPanel
         title={'motion'}
         align={'right'}
-        className={
-          'group pointer-events-auto right-[26px] bottom-[26px] tablet-s:hidden'
-        }
+        className={`
+          group pointer-events-auto right-[26px] bottom-[26px]
+          tablet-s:hidden
+        `}
       >
         <HudVelocityGraph
           scrollVelocity={scrollVelocity}
@@ -47,9 +49,11 @@ export const HudLayer = () => {
           frameRate={frameRate}
         />
         <div
-          className={
-            'absolute inset-0 mt-[5px] grid grid-cols-2 justify-between gap-1 bg-base p-2 opacity-0 group-hover:opacity-100'
-          }
+          className={`
+            absolute inset-0 mt-[5px] grid grid-cols-2 justify-between gap-1
+            bg-base p-2 opacity-0
+            group-hover:opacity-100
+          `}
         >
           <HudLegend swatch={'scroll'}>
             scr <motion.span>{scrollRate}</motion.span>

@@ -18,16 +18,18 @@ export const ProjectTitleBlock = ({
     <div className={'flex flex-col items-start'}>
       <div
         ref={titleRef}
-        className={
-          'relative w-fit max-w-full border border-edge bg-text px-4 pt-3 pb-2.5 tablet-s:px-3'
-        }
+        className={`
+          relative w-fit max-w-full border border-edge bg-text px-4 pt-3 pb-2.5
+          tablet-s:px-3
+        `}
       >
         <ContourField animate={locked} />
         <DataCaptureBorder blinkKey={locked ? entry.id : undefined} />
         <h3
-          className={
-            'relative font-face-title text-display leading-[0.8] font-bold [hyphens:none] whitespace-pre-line text-black uppercase'
-          }
+          className={`
+            relative font-face-title text-display leading-[0.8] font-bold
+            [hyphens:none] whitespace-pre-line text-black uppercase
+          `}
         >
           {entry.title}
         </h3>

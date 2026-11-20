@@ -18,9 +18,10 @@ const PanelTab = ({ title, align }: { title: string; align: Align }) => (
     )}
   >
     <span
-      className={
-        'bg-accent px-[5px] py-[1px] text-[9px] leading-[1.4] tracking-[0.18em] text-base'
-      }
+      className={`
+        bg-accent px-[5px] py-[1px] text-[9px] leading-[1.4] tracking-[0.18em]
+        text-base
+      `}
     >
       {title}
     </span>
@@ -35,7 +36,15 @@ export const HudPanel = ({
   className,
   children,
 }: PanelProps) => (
-  <div className={cns('absolute w-[186px] mobile-m:hidden', className)}>
+  <div
+    className={cns(
+      `
+        absolute w-[186px]
+        mobile-m:hidden
+      `,
+      className,
+    )}
+  >
     {/* <PanelTab title={title} align={align} /> */}
 
     <div className={'hud-frame'}>

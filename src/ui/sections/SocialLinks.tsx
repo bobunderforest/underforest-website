@@ -11,9 +11,10 @@ export const SocialLinks = () => (
   <div>
     <FieldLabelHeading muted>socials</FieldLabelHeading>
     <div
-      className={
-        'flex max-w-column-width flex-wrap items-center gap-[8px] mobile-m:gap-[6px]'
-      }
+      className={`
+        flex max-w-column-width flex-wrap items-center gap-[8px]
+        mobile-m:gap-[6px]
+      `}
     >
       {socialLinks.map((social) => (
         <ChannelLink key={social.href} {...social} />

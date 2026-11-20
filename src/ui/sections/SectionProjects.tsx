@@ -18,9 +18,10 @@ export const SectionProjects = () => {
       <SectionContent isPadded>
         <SectionTitle kicker={'selected'}>projects</SectionTitle>
         <div
-          className={
-            'grid grid-cols-2 gap-grid-gap-regular mobile-m:grid-cols-1'
-          }
+          className={`
+            grid grid-cols-2 gap-grid-gap-regular
+            mobile-m:grid-cols-1
+          `}
         >
           <div className={'flex flex-col'}>
             {leftProjects.map((entry, index) => (
@@ -35,7 +36,12 @@ export const SectionProjects = () => {
               />
             ))}
           </div>
-          <div className={'flex flex-col pt-[28.125%] mobile-m:pt-0'}>
+          <div
+            className={`
+              flex flex-col pt-[28.125%]
+              mobile-m:pt-0
+            `}
+          >
             {rightProjects.map((entry, index) => (
               <ProjectPreview
                 key={entry.id}
@@ -59,9 +65,12 @@ export const SectionProjects = () => {
               {'sketches · small demos'}
             </FieldLabelHeading>
             <div
-              className={
-                'grid grid-cols-3 gap-grid-gap-regular tablet-s:grid-cols-3 mobile-m:grid-cols-2 mobile-s:grid-cols-1'
-              }
+              className={`
+                grid grid-cols-3 gap-grid-gap-regular
+                tablet-s:grid-cols-3
+                mobile-m:grid-cols-2
+                mobile-s:grid-cols-1
+              `}
             >
               {sketches.map((entry, index) => (
                 <SketchPreview key={entry.id} entry={entry} index={index} />

@@ -23,11 +23,18 @@ export const CrtDitherOverlay = ({
       className,
     )}
   >
-    <div className={'absolute inset-0 opacity-28 light:opacity-12'} style={DITHER_TEXTURE} />
     <div
-      className={
-        'absolute inset-0 bg-[radial-gradient(ellipse_at_center,color-mix(in_srgb,var(--color-system)_4%,transparent)_0%,transparent_76%)]'
-      }
+      className={`
+        absolute inset-0 opacity-28
+        light:opacity-12
+      `}
+      style={DITHER_TEXTURE}
+    />
+    <div
+      className={`
+        absolute inset-0
+        bg-[radial-gradient(ellipse_at_center,color-mix(in_srgb,var(--color-system)_4%,transparent)_0%,transparent_76%)]
+      `}
     />
   </div>
 )

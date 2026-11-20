@@ -26,9 +26,10 @@ const SkillItem = ({ skill }: { skill: Skill }) => (
 const SkillAreaColumn = ({ area }: { area: SkillArea }) => (
   <div>
     <div
-      className={
-        'mb-[8px] flex items-baseline justify-between gap-3 border-b border-edge pb-[6px]'
-      }
+      className={`
+        mb-[8px] flex items-baseline justify-between gap-3 border-b border-edge
+        pb-[6px]
+      `}
     >
       <Text
         tag={'h3'}
@@ -50,9 +51,11 @@ const SkillAreaColumn = ({ area }: { area: SkillArea }) => (
 
 export const SkillAreaGrid = () => (
   <div
-    className={
-      'grid max-w-[740px] grid-cols-3 gap-x-[26px] gap-y-[22px] tablet-s:grid-cols-2 mobile-m:grid-cols-1'
-    }
+    className={`
+      grid max-w-[740px] grid-cols-3 gap-x-[26px] gap-y-[22px]
+      tablet-s:grid-cols-2
+      mobile-m:grid-cols-1
+    `}
   >
     {SKILL_AREAS.map((area) => (
       <SkillAreaColumn key={area.name} area={area} />

@@ -82,7 +82,10 @@ export const ExperienceEntry = ({
         data-lit={lit}
         data-expanded={detailsExpanded}
         className={cns(
-          'group relative isolate w-experience-column-width tablet-s:w-full',
+          `
+            group relative isolate w-experience-column-width
+            tablet-s:w-full
+          `,
           clickable && 'cursor-pointer',
         )}
         onMouseEnter={() => setHovered(true)}
@@ -117,9 +120,10 @@ export const ExperienceEntry = ({
         {clickable && (
           <span
             aria-hidden
-            className={
-              'absolute -top-[20px] -right-[26px] -bottom-[20px] -left-[26px] -z-[1]'
-            }
+            className={`
+              absolute -top-[20px] -right-[26px] -bottom-[20px] -left-[26px]
+              -z-[1]
+            `}
           />
         )}
         <div className={'relative z-[1]'}>

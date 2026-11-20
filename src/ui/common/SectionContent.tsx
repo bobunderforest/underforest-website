@@ -17,8 +17,7 @@ export const SectionContent = ({
     <div id={id} className={cns('w-full', classNameWrap)}>
       <div
         className={cns(
-          'relative px-content-padding',
-          'mx-auto w-content-width',
+          'relative mx-auto w-content-width px-content-padding',
           isPadded && 'py-section-padding',
           className,
         )}

@@ -67,7 +67,10 @@ export const ProjectStoryText = ({ body }: { body: string | string[] }) => {
           tag={'p'}
           tone={'primary'}
           size={'lead'}
-          className={'mb-[0.75em] last:mb-0'}
+          className={`
+            mb-[0.75em]
+            last:mb-0
+          `}
         >
           {renderProjectStoryText(paragraph)}
         </Text>

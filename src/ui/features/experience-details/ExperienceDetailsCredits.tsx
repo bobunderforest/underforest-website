@@ -44,17 +44,20 @@ export const ExperienceDetailsCredits = ({
             tag={'span'}
             tone={'dimmed'}
             uppercase
-            className={
-              'transition-colors duration-200 group-hover/credit:text-system'
-            }
+            className={`
+              transition-colors duration-200
+              group-hover/credit:text-system
+            `}
           >
             {credit.role}
           </Text>
           <span
             aria-hidden
-            className={
-              'border-b border-dotted border-muted/45 transition-colors duration-200 group-hover/credit:border-system/75'
-            }
+            className={`
+              border-b border-dotted border-muted/45 transition-colors
+              duration-200
+              group-hover/credit:border-system/75
+            `}
           />
           <ExperienceCreditName credit={credit} />
         </Text>

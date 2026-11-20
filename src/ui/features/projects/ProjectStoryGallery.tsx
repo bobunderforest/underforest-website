@@ -27,7 +27,12 @@ export const ProjectStoryGallery = ({ items }: { items: GalleryItem[] }) => {
   )
 
   return (
-    <div className={'grid grid-cols-4 gap-2 mobile-m:grid-cols-2'}>
+    <div
+      className={`
+        grid grid-cols-4 gap-2
+        mobile-m:grid-cols-2
+      `}
+    >
       {items.map((item, index) => (
         <div
           key={item.src}

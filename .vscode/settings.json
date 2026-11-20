@@ -15,5 +15,11 @@
     "*.css": "tailwindcss"
   },
   "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
-  "tailwindCSS.experimental.classRegex": [["cns\\(([^)]*)\\)", "'([^']*)'"]]
+  "tailwindCSS.experimental.classRegex": [
+    ["cns\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]"]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["typescript", "typescriptreact", "astro"]
 }

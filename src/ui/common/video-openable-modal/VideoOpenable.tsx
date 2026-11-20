@@ -98,7 +98,7 @@ export const VideoOpenable = ({
         preload={'none'}
         onSeeked={clearRestore}
         className={cns(
-          'absolute top-0 left-0 h-full w-full object-cover',
+          'absolute top-0 left-0 size-full object-cover',
           VIDEO_COMPOSITOR_GUARD_CLASS,
         )}
       />
@@ -109,7 +109,7 @@ export const VideoOpenable = ({
         <CanvasFrame
           canvas={restoreCanvas}
           fit={'cover'}
-          className={'absolute top-0 left-0 h-full w-full'}
+          className={'absolute top-0 left-0 size-full'}
         />
       )}
     </div>

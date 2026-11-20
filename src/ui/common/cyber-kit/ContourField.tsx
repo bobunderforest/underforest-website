@@ -162,7 +162,11 @@ export const ContourField = ({
     className={cns(
       'pointer-events-none absolute inset-0',
       PALETTE_GROUNDS[palette],
-      inverted && 'invert light:invert-0',
+      inverted &&
+        `
+          invert
+          light:invert-0
+        `,
       className,
     )}
   >

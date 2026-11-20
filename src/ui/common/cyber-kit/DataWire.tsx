@@ -84,9 +84,10 @@ export const DataWire = ({
   return (
     <motion.svg
       aria-hidden
-      className={
-        'pointer-events-none fixed inset-0 z-[52] size-full overflow-visible tablet-s:hidden'
-      }
+      className={`
+        pointer-events-none fixed inset-0 z-[52] size-full overflow-visible
+        tablet-s:hidden
+      `}
     >
       <motion.path
         d={path}

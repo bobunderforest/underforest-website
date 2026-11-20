@@ -29,9 +29,10 @@ const PreviewVideo = ({ src }: { src: string }) => {
       loop
       playsInline
       preload={'none'}
-      className={
-        'absolute inset-0 size-full object-cover brightness-75 contrast-110 grayscale-[0.2]'
-      }
+      className={`
+        absolute inset-0 size-full object-cover brightness-75 contrast-110
+        grayscale-[0.2]
+      `}
     />
   )
 }
@@ -79,7 +80,12 @@ export const ProjectPreviewMedia = ({
   return (
     <div
       className={cns(
-        'pointer-events-none absolute inset-0 scale-100 transition-transform duration-500 group-hover:scale-[1.1] group-focus-visible:scale-[1.1]',
+        `
+          pointer-events-none absolute inset-0 scale-100 transition-transform
+          duration-500
+          group-hover:scale-[1.1]
+          group-focus-visible:scale-[1.1]
+        `,
         className,
       )}
     >
@@ -91,9 +97,10 @@ export const ProjectPreviewMedia = ({
           aria-hidden
           loading={'lazy'}
           decoding={'async'}
-          className={
-            'absolute inset-0 size-full object-cover brightness-75 contrast-110 grayscale-[0.2]'
-          }
+          className={`
+            absolute inset-0 size-full object-cover brightness-75 contrast-110
+            grayscale-[0.2]
+          `}
         />
       )}
       {cover?.kind === ProjectBackground.Kaleidoscope && (
@@ -126,9 +133,13 @@ export const ProjectPreview = ({ entry, className }: Props) => {
         onFocus={() => setIsTargeted(true)}
         onBlur={() => setIsTargeted(false)}
         onClick={(event) => handleProjectPreviewClick(event, entry.id)}
-        className={
-          'relative flex aspect-video overflow-hidden border border-edge bg-surface transition-colors duration-200 outline-none hover:border-accent focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent'
-        }
+        className={`
+          relative flex aspect-video overflow-hidden border border-edge
+          bg-surface transition-colors duration-200 outline-none
+          hover:border-accent
+          focus-visible:border-accent focus-visible:outline-2
+          focus-visible:outline-offset-4 focus-visible:outline-accent
+        `}
       >
         <ProjectPreviewMedia entry={entry} />
         <ProjectPreviewOverlay />
@@ -151,7 +162,7 @@ export const ProjectPreview = ({ entry, className }: Props) => {
               size={'hint'}
               face={'title'}
               uppercase
-              className={'text-shadow-s text-right'}
+              className={'text-right'}
             >
               {years}
             </Text>
@@ -164,9 +175,10 @@ export const ProjectPreview = ({ entry, className }: Props) => {
               face={'title'}
               tone={'primary'}
               uppercase
-              className={
-                'mb-3 max-w-[12ch] text-title-3 leading-[0.95] font-bold tracking-[0.06em]'
-              }
+              className={`
+                mb-3 max-w-[12ch] text-title-3 leading-[0.95] font-bold
+                tracking-[0.06em]
+              `}
             >
               {entry.title}
             </Text>
@@ -175,9 +187,10 @@ export const ProjectPreview = ({ entry, className }: Props) => {
                 tag={'p'}
                 size={'hint'}
                 tone={'soft'}
-                className={
-                  'max-w-prose-measure transition-opacity duration-200 group-focus-visible:opacity-100'
-                }
+                className={`
+                  max-w-prose-measure transition-opacity duration-200
+                  group-focus-visible:opacity-100
+                `}
               >
                 {previewText}
               </Text>
@@ -190,9 +203,13 @@ export const ProjectPreview = ({ entry, className }: Props) => {
           face={'title'}
           tone={'primary'}
           uppercase
-          className={
-            'absolute right-6 bottom-6 translate-x-2 opacity-0 transition duration-200 group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100'
-          }
+          className={`
+            absolute right-6 bottom-6 translate-x-2 opacity-0 transition
+            duration-200
+            group-focus-within:translate-x-0 group-focus-within:opacity-100
+            group-hover:translate-x-0 group-hover:opacity-100
+            motion-reduce:translate-x-0 motion-reduce:opacity-100
+          `}
         >
           open ↗
         </Text>
@@ -202,9 +219,11 @@ export const ProjectPreview = ({ entry, className }: Props) => {
         blinkKey={isTargeted ? entry.id : undefined}
         offset={4}
         size={12}
-        className={
-          'z-10 group-focus-within:border-accent group-hover:border-accent'
-        }
+        className={`
+          z-10
+          group-focus-within:border-accent
+          group-hover:border-accent
+        `}
       />
     </article>
   )

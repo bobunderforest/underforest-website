@@ -70,9 +70,10 @@ const CornerReticle = () => (
     <span className={'absolute top-0 left-0 h-[46px] w-px bg-muted/55'} />
 
     <span
-      className={
-        'absolute top-[15px] left-0 h-px w-[21px] origin-left -rotate-45 bg-accent/35'
-      }
+      className={`
+        absolute top-[15px] left-0 h-px w-[21px] origin-left -rotate-45
+        bg-accent/35
+      `}
     />
 
     {/* <span
@@ -98,9 +99,10 @@ const CornerReticle = () => (
     ))}
 
     <span
-      className={
-        'absolute top-[26px] left-[26px] font-face-title text-[10px] leading-none text-muted/70'
-      }
+      className={`
+        absolute top-[26px] left-[26px] font-face-title text-[10px] leading-none
+        text-muted/70
+      `}
     >
       +
     </span>
@@ -134,9 +136,20 @@ export const HudReticles = ({ scrollY }: { scrollY: MotionValue<number> }) => {
   })
 
   return (
-    <div className={'absolute inset-[14px] mobile-m:inset-[8px]'}>
+    <div
+      className={`
+        absolute inset-[14px]
+        mobile-m:inset-[8px]
+      `}
+    >
       {CORNER_PLACEMENTS.map((placement) => (
-        <span key={placement} className={`absolute size-[46px] ${placement}`}>
+        <span
+          key={placement}
+          className={`
+            absolute size-[46px]
+            ${placement}
+          `}
+        >
           <CornerReticle />
         </span>
       ))}

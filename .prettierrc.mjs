@@ -7,10 +7,8 @@ export default {
   tabWidth: 2,
   trailingComma: 'all',
   useTabs: false,
-  endOfLine: 'auto',
-  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
-  tailwindFunctions: ['cns'],
-  tailwindStylesheet: './src/styles/global.css',
+  endOfLine: 'lf',
+  plugins: ['prettier-plugin-astro'],
   overrides: [
     {
       files: '*.astro',

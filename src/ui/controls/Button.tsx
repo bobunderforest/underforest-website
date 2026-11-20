@@ -136,17 +136,34 @@ export const Button = ({
   )
 
   const faceClassName = cns(
-    'group relative grid grid-cols-[auto_1fr_auto] items-center gap-[10px] select-none',
+    `
+      group relative grid grid-cols-[auto_1fr_auto] items-center gap-[10px]
+      select-none
+    `,
     compact
       ? 'px-[12px] py-[9px]'
       : large
-        ? 'min-h-[72px] px-[32px] py-[20px] mobile-m:min-h-[60px] mobile-m:px-[22px] mobile-m:py-[15px]'
-        : 'px-[24px] py-[15px] mobile-m:px-[18px] mobile-m:py-[12px]',
+        ? `
+          min-h-[72px] px-[32px] py-[20px]
+          mobile-m:min-h-[60px] mobile-m:px-[22px] mobile-m:py-[15px]
+        `
+        : `
+          px-[24px] py-[15px]
+          mobile-m:px-[18px] mobile-m:py-[12px]
+        `,
     wide && 'w-full',
     quiet
-      ? 'border border-transparent text-system/75 hover:bg-system/[0.07] hover:text-system focus-visible:bg-system/[0.07] focus-visible:text-system'
+      ? `
+        border border-transparent text-system/75
+        hover:bg-system/[0.07] hover:text-system
+        focus-visible:bg-system/[0.07] focus-visible:text-system
+      `
       : ['border', accentStyle.face],
-    field && 'hover:bg-transparent focus-visible:bg-transparent',
+    field &&
+      `
+        hover:bg-transparent
+        focus-visible:bg-transparent
+      `,
     dither && 'isolate',
     !disabled && [
       'cursor-pointer',
@@ -162,8 +179,7 @@ export const Button = ({
       {...hover.handlers}
       onClick={hover.engage}
       className={cns(
-        'inline-flex align-middle',
-        'bg-base/50 backdrop-blur-md',
+        'inline-flex bg-base/50 align-middle backdrop-blur-md',
         wide && 'w-full',
         disabled && 'cursor-not-allowed',
         className,

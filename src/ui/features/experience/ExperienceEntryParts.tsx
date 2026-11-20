@@ -3,7 +3,6 @@ import { Link } from 'ui/common/typography/Link'
 import { Text } from 'ui/common/typography/Text'
 import { webEmploymentLabel } from 'ui/features/experience-data/experience-data'
 import type { ExperienceEntry } from 'ui/features/experience-data/types'
-import { cns } from 'utils/formatters/classnames'
 import { formatDateDuration, formatDateRange } from 'utils/formatters/dates'
 import {
   ExperienceAnchor,
@@ -21,7 +20,10 @@ export const ExperienceTitleLink = ({
   <Link
     href={href}
     isExternal
-    className={'text-accent link-dash group-data-[lit=true]:decoration-current'}
+    className={`
+      text-accent link-dash
+      group-data-[lit=true]:decoration-current
+    `}
   >
     {children}
   </Link>
@@ -58,7 +60,12 @@ export const ExperienceMeta = ({ entry }: { entry: ExperienceEntry }) => {
         {formatDateRange(entry.from, entry.to, 'short')}
       </span>
       {duration && (
-        <span className={'text-muted/70 normal-case mobile-m:block'}>
+        <span
+          className={`
+            text-muted/70 normal-case
+            mobile-m:block
+          `}
+        >
           <span className={'mobile-m:hidden'}>{' ('}</span>
           {duration}
           <span className={'mobile-m:hidden'}>{')'}</span>
@@ -89,20 +96,23 @@ export const ExperienceSummary = ({ lines }: { lines: string[] }) => (
   <Text
     tag={'ul'}
     tone={'secondary'}
-    className={cns(
-      'max-w-prose-measure transition-colors duration-300 group-data-[active=true]:text-text',
-      'mobile-m:text-text',
-    )}
+    className={`
+      max-w-prose-measure transition-colors duration-300
+      group-data-[active=true]:text-text
+      mobile-m:text-text
+    `}
   >
     {lines.map((line) => (
       <li
         key={line}
-        className={cns(
-          'relative py-[3px] pl-[22px]',
-          'before:absolute before:top-0 before:bottom-0 before:left-[3px] before:w-px before:bg-edge',
-          'last:before:bottom-auto last:before:h-[13px]',
-          'after:absolute after:top-[13px] after:left-[3px] after:h-px after:w-[13px] after:bg-edge',
-        )}
+        className={`
+          relative py-[3px] pl-[22px]
+          before:absolute before:top-0 before:bottom-0 before:left-[3px]
+          before:w-px before:bg-edge
+          after:absolute after:top-[13px] after:left-[3px] after:h-px
+          after:w-[13px] after:bg-edge
+          last:before:bottom-auto last:before:h-[13px]
+        `}
       >
         {line}
       </li>

@@ -61,33 +61,50 @@ const ProjectStoryTrackItem = ({
     <li
       ref={ref}
       className={cns(
-        'relative grid py-3 pl-[26px] last:pb-0 mobile-m:pl-0',
+        `
+          relative grid py-3 pl-[26px]
+          last:pb-0
+          mobile-m:pl-0
+        `,
         isFinalBeat && 'mobile-m:hidden',
       )}
     >
       <span
         aria-hidden
         style={trackExtentStyle}
-        className={cns(trackExtentClassName, 'w-px bg-edge mobile-m:hidden')}
+        className={cns(
+          trackExtentClassName,
+          `
+            w-px bg-edge
+            mobile-m:hidden
+          `,
+        )}
       />
       <motion.span
         aria-hidden
         style={{ ...trackExtentStyle, scaleY: itemProgress }}
         className={cns(
           trackExtentClassName,
-          'w-px origin-top bg-accent/70 mobile-m:hidden',
+          `
+            w-px origin-top bg-accent/70
+            mobile-m:hidden
+          `,
         )}
       />
       <motion.span
         aria-hidden
         style={{ opacity: markerOpacity, y: markerY }}
-        className={'absolute top-0 left-0 size-[7px] bg-accent mobile-m:hidden'}
+        className={`
+          absolute top-0 left-0 size-[7px] bg-accent
+          mobile-m:hidden
+        `}
       />
       <FieldLabel tone={'system'} gap={'tight'} className={'relative'}>
         <span
-          className={
-            'absolute top-[9px] left-[-23px] h-px w-[14px] bg-edge mobile-m:hidden'
-          }
+          className={`
+            absolute top-[9px] left-[-23px] h-px w-[14px] bg-edge
+            mobile-m:hidden
+          `}
         />
         <span className={'tabular-nums'}>{padIndex(index)}</span>
         {block.caption && (

@@ -1,6 +1,13 @@
 import { useKeyPress } from 'utils/hooks/useKeyPress'
 import { useModalActions } from 'modules/modal/modalStore'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useEffectEvent,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { calcCoverOffset, type CoverOffset } from 'utils/math/calc-cover'
 import { cns } from 'utils/formatters/classnames'
 import { useTouchDevice } from 'utils/hooks/useTouchDevice'
@@ -57,8 +64,7 @@ export const ModalImage = ({
   const canPrev = activeIndex > 0
   const canNext = activeIndex < images.length - 1
 
-  // Open: zoom-crop from the source rect into the fullscreen
-  useEffect(() => {
+  const zoomInFromSourceRect = useEffectEvent(() => {
     let raf = 0
     let timer = 0
 
@@ -79,7 +85,9 @@ export const ModalImage = ({
       cancelAnimationFrame(raf)
       window.clearTimeout(timer)
     }
-  }, [])
+  })
+
+  useEffect(() => zoomInFromSourceRect(), [])
 
   // Close: zoom-crop from the fullscreen to source rect
   const handleClose = useCallback(() => {
@@ -124,11 +132,14 @@ export const ModalImage = ({
   if (phase === 'entering' && !zoom) return null
 
   return (
-    <div className={'fixed top-0 left-0 z-[999] h-full w-full'}>
+    <div className={'fixed top-0 left-0 z-[999] size-full'}>
       {/* Background */}
       <div
         className={cns(
-          'absolute top-0 left-0 h-full w-full bg-black transition-opacity duration-200 ease-in-out-sine',
+          `
+            absolute top-0 left-0 size-full bg-black transition-opacity
+            duration-200 ease-in-out-sine
+          `,
           phase === 'open' ? 'opacity-100' : 'opacity-0',
         )}
       />
@@ -137,7 +148,7 @@ export const ModalImage = ({
       {phase === 'open' && (
         <div
           onClick={handleClose}
-          className={'absolute top-0 left-0 h-full w-full cursor-zoom-out'}
+          className={'absolute top-0 left-0 size-full cursor-zoom-out'}
         >
           <Swiper
             onSwiper={(s) => (swiperRef.current = s)}
@@ -147,7 +158,7 @@ export const ModalImage = ({
             centeredSlides
             spaceBetween={40}
             resizeObserver
-            className={'h-full w-full'}
+            className={'size-full'}
             onActiveIndexChange={(s) => {
               setActiveIndex(s.activeIndex)
               paging?.setIndex(s.activeIndex)
@@ -155,11 +166,7 @@ export const ModalImage = ({
           >
             {images.map((url, i) => (
               <SwiperSlide key={i}>
-                <img
-                  src={url}
-                  className={'h-full w-full object-contain'}
-                  alt=""
-                />
+                <img src={url} className={'size-full object-contain'} alt="" />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -170,9 +177,10 @@ export const ModalImage = ({
       {zoom && (
         <div
           onClick={handleClose}
-          className={
-            'absolute top-0 left-0 h-full w-full cursor-zoom-out overflow-hidden transition-all duration-250 ease-in-out-sine'
-          }
+          className={`
+            absolute top-0 left-0 size-full cursor-zoom-out overflow-hidden
+            transition-all duration-250 ease-in-out-sine
+          `}
           style={
             zoom.cropped
               ? {
@@ -185,9 +193,10 @@ export const ModalImage = ({
           }
         >
           <div
-            className={
-              'absolute top-0 left-0 h-full w-full bg-contain bg-center bg-no-repeat transition-all duration-250 ease-in-out-sine'
-            }
+            className={`
+              absolute top-0 left-0 size-full bg-contain bg-center bg-no-repeat
+              transition-all duration-250 ease-in-out-sine
+            `}
             style={
               zoom.cropped
                 ? {
@@ -201,7 +210,7 @@ export const ModalImage = ({
           >
             <img
               src={zoom.url}
-              className={'absolute top-0 left-0 h-full w-full object-contain'}
+              className={'absolute top-0 left-0 size-full object-contain'}
               alt=""
             />
           </div>
@@ -219,7 +228,12 @@ export const ModalImage = ({
               handlePrev()
             }}
             className={cns(
-              'absolute top-0 left-0 z-1 flex h-full w-[15%] cursor-pointer items-center justify-start pl-[40px] text-white transition-opacity mobile-m:pl-[15px]',
+              `
+                absolute top-0 left-0 z-1 flex h-full w-[15%] cursor-pointer
+                items-center justify-start pl-[40px] text-white
+                transition-opacity
+                mobile-m:pl-[15px]
+              `,
               !canPrev && 'pointer-events-none opacity-0',
             )}
           >
@@ -234,7 +248,11 @@ export const ModalImage = ({
               handleNext()
             }}
             className={cns(
-              'absolute top-0 right-0 z-1 flex h-full w-[15%] cursor-pointer items-center justify-end pr-[40px] text-white transition-opacity mobile-m:pr-[15px]',
+              `
+                absolute top-0 right-0 z-1 flex h-full w-[15%] cursor-pointer
+                items-center justify-end pr-[40px] text-white transition-opacity
+                mobile-m:pr-[15px]
+              `,
               !canNext && 'pointer-events-none opacity-0',
             )}
           >

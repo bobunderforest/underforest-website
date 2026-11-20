@@ -6,9 +6,10 @@ const ExperienceDetailsSkillTag = ({ skill }: { skill: string }) => (
     tag={'li'}
     size={'hint'}
     tone={'system'}
-    className={
-      'border border-system/55 bg-system/[0.07] px-[7px] py-[3px] whitespace-nowrap'
-    }
+    className={`
+      border border-system/55 bg-system/[0.07] px-[7px] py-[3px]
+      whitespace-nowrap
+    `}
   >
     {skill}
   </Text>

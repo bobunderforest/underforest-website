@@ -24,9 +24,11 @@ const ProjectStoryMedia = ({
 
   return (
     <div
-      className={
-        'w-full max-w-[750px] desktop-s:max-w-[650px] tablet-s:max-w-[450px]'
-      }
+      className={`
+        w-full max-w-[750px]
+        desktop-s:max-w-[650px]
+        tablet-s:max-w-[450px]
+      `}
     >
       <div
         style={{

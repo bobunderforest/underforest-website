@@ -18,7 +18,6 @@ import { limitLenisWheelInput } from 'utils/anim/lenis'
 import { ease } from 'utils/anim/easings'
 import { motionEase } from 'utils/anim/motion-ease'
 import { subscribeScrollLockChange } from 'utils/browser/scroll-util'
-import { cns } from 'utils/formatters/classnames'
 import { useElementSize } from 'utils/hooks/useElementSize'
 import { useMounted } from 'utils/hooks/useMounted'
 import { useResizeObserver } from 'utils/hooks/useResizeObserver'
@@ -124,9 +123,10 @@ const ExperienceDetailsToggle = ({
     uppercase
     aria-expanded={expanded}
     aria-controls={panelId}
-    className={
-      'flex w-full cursor-pointer items-center justify-between border-t border-accent/25 pt-3 text-left'
-    }
+    className={`
+      flex w-full cursor-pointer items-center justify-between border-t
+      border-accent/25 pt-3 text-left
+    `}
     onClick={onClick}
   >
     <span className={'flex min-w-0 items-center gap-1.5'}>
@@ -263,10 +263,11 @@ export const ExperienceDetails = ({
         ref={panelRef}
         data-inner
         onClick={(e) => e.stopPropagation()}
-        className={cns(
-          'pointer-events-auto fixed top-1/2 right-content-outer-padded z-[51]',
-          'w-experience-column-width cursor-default tablet-s:hidden',
-        )}
+        className={`
+          pointer-events-auto fixed top-1/2 right-content-outer-padded z-[51]
+          w-experience-column-width cursor-default
+          tablet-s:hidden
+        `}
         initial={{ opacity: 1, x: 0, y: '-50%' }}
         animate={{ opacity: 1, x: 0, y: '-50%' }}
         exit={{
@@ -303,9 +304,10 @@ export const ExperienceDetails = ({
               blockComment
               readout={<span aria-hidden>▚</span>}
               gap={'none'}
-              className={
-                'w-full shrink-0 justify-between border-b border-accent/25 px-3 py-[6px]'
-              }
+              className={`
+                w-full shrink-0 justify-between border-b border-accent/25 px-3
+                py-[6px]
+              `}
             >
               detail feed
             </FieldLabel>
@@ -357,7 +359,13 @@ export const ExperienceDetailsDisclosure = ({
   }
 
   return (
-    <div data-inner className={'hidden pt-4 tablet-s:block'}>
+    <div
+      data-inner
+      className={`
+        hidden pt-4
+        tablet-s:block
+      `}
+    >
       <ExperienceDetailsToggle
         expanded={expanded}
         panelId={panelId}

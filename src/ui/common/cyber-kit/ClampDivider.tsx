@@ -18,9 +18,10 @@ export const ClampDivider = ({ className }: { className?: string }) => (
       className={'absolute inset-x-0 top-0 h-[2px] -translate-y-1/2 bg-edge'}
     />
     <div
-      className={
-        'relative mx-auto flex w-content-width -translate-y-1/2 items-center justify-between px-content-padding'
-      }
+      className={`
+        relative mx-auto flex w-content-width -translate-y-1/2 items-center
+        justify-between px-content-padding
+      `}
     >
       {CLAMP_CLASSES.map((clampClassName, i) => (
         <Clamp key={i} className={clampClassName} />

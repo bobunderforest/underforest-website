@@ -50,7 +50,10 @@ const ExperienceTrackProgress = ({
     <div
       aria-hidden
       style={{ top, height }}
-      className={'pointer-events-none absolute left-0 w-[6px] mobile-m:hidden'}
+      className={`
+        pointer-events-none absolute left-0 w-[6px]
+        mobile-m:hidden
+      `}
     >
       <span className={'absolute inset-y-0 left-0 w-px bg-edge'} />
       <motion.span

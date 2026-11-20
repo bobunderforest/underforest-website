@@ -71,7 +71,10 @@ export const Text = ({
   const Tag = tag as React.ElementType
 
   const finalClass = cns(
-    'text-pretty whitespace-pre-wrap [&_a]:text-accent [&_a]:link-dash',
+    `
+      text-pretty whitespace-pre-wrap
+      [&_a]:text-accent [&_a]:link-dash
+    `,
     face === 'regular' && 'font-face-regular',
     face === 'title' && 'font-face-title',
     weight === 'normal' && 'font-normal',
@@ -82,7 +85,11 @@ export const Text = ({
     size === 'lead' && 'text-lead leading-[1.5]',
     size === 'regular' && 'text-regular leading-[1.6]',
     size === 'hint' && 'text-hint leading-[1.5]',
-    size === 'note' && 'text-[11px] leading-none mobile-m:text-[10px]',
+    size === 'note' &&
+      `
+        text-[11px] leading-none
+        mobile-m:text-[10px]
+      `,
     face === 'title' && 'tracking-[0.12em]',
     face === 'regular' && uppercase && 'tracking-[0.12em]',
     uppercase && 'uppercase',

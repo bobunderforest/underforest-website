@@ -97,9 +97,12 @@ const Trackbar = ({
       size={'hint'}
       tone={'secondary'}
       onClick={(e) => e.stopPropagation()}
-      className={
-        'pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center gap-4 bg-gradient-to-t from-black/80 to-transparent px-[40px] pt-12 pb-0 tabular-nums mobile-m:gap-3 mobile-m:px-[16px]'
-      }
+      className={`
+        pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center
+        gap-4 bg-gradient-to-t from-black/80 to-transparent px-[40px] pt-12 pb-0
+        tabular-nums
+        mobile-m:gap-3 mobile-m:px-[16px]
+      `}
     >
       <Text tag={'span'} size={'hint'} tone={'primary'}>
         {formatClock(current)}
@@ -127,9 +130,10 @@ const Trackbar = ({
             style={{ width: `${progress}%` }}
           />
           <div
-            className={
-              'absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 border border-accent bg-base'
-            }
+            className={`
+              absolute top-1/2 size-[7px] -translate-1/2 border border-accent
+              bg-base
+            `}
             style={{ left: `${progress}%` }}
           />
         </div>
@@ -256,11 +260,14 @@ export const ModalVideo = ({
   return (
     <div
       onClick={handleClose}
-      className={'fixed top-0 left-0 z-[999] h-full w-full cursor-zoom-out'}
+      className={'fixed top-0 left-0 z-[999] size-full cursor-zoom-out'}
     >
       <div
         className={cns(
-          'absolute top-0 left-0 h-full w-full bg-black transition-opacity duration-300 ease-in-out-sine',
+          `
+            absolute top-0 left-0 size-full bg-black transition-opacity
+            duration-300 ease-in-out-sine
+          `,
           phase === 'open' ? 'opacity-100' : 'opacity-0',
         )}
       />
@@ -299,7 +306,7 @@ export const ModalVideo = ({
           onSeeked={playVideo}
           onPlaying={revealWhenPainted}
           className={cns(
-            'pointer-events-none absolute top-0 left-0 h-full w-full object-contain',
+            `pointer-events-none absolute top-0 left-0 size-full object-contain`,
             VIDEO_COMPOSITOR_GUARD_CLASS,
           )}
         />
@@ -308,9 +315,9 @@ export const ModalVideo = ({
             src={still}
             alt={''}
             aria-hidden
-            className={
-              'pointer-events-none absolute top-0 left-0 h-full w-full object-contain'
-            }
+            className={`
+              pointer-events-none absolute top-0 left-0 size-full object-contain
+            `}
           />
         )}
       </div>

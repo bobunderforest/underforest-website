@@ -40,9 +40,13 @@ export const SectionSplash = () => {
           waveXAmplitude={0.1}
           waveYAmplitude={0.0}
           waveZAmplitude={0.0}
-          className={
-            'aspect-[900/320] w-full light:invert desktop-m:aspect-[900/280] mobile-m:aspect-[9/4] mobile-s:aspect-[2/1]'
-          }
+          className={`
+            aspect-[900/320] w-full
+            light:invert
+            desktop-m:aspect-[900/280]
+            mobile-m:aspect-[9/4]
+            mobile-s:aspect-[2/1]
+          `}
         />
       </div>
       <div

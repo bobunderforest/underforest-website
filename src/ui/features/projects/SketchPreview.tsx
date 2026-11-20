@@ -39,7 +39,12 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
       onFocus={() => setIsTargeted(true)}
       onBlur={() => setIsTargeted(false)}
       className={cns(
-        'group relative flex min-w-0 flex-col border border-edge bg-surface transition-colors duration-200 focus-within:border-accent hover:border-accent',
+        `
+          group relative flex min-w-0 flex-col border border-edge bg-surface
+          transition-colors duration-200
+          focus-within:border-accent
+          hover:border-accent
+        `,
         className,
       )}
     >
@@ -47,9 +52,11 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
         href={entry.href}
         isExternal
         aria-label={`Run ${title} demo`}
-        className={
-          'relative block aspect-[4/3] overflow-hidden outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent'
-        }
+        className={`
+          relative block aspect-[4/3] overflow-hidden outline-none
+          focus-visible:outline-2 focus-visible:outline-offset-4
+          focus-visible:outline-accent
+        `}
       >
         <ProjectPreviewMedia entry={entry} />
         <ProjectPreviewOverlay />
@@ -59,7 +66,7 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
             size={'hint'}
             face={'title'}
             uppercase
-            className={'text-shadow-s absolute top-3 right-3 text-right'}
+            className={'absolute top-3 right-3 text-right'}
           >
             {years}
           </Text>
@@ -69,18 +76,25 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
             face={'title'}
             tone={'primary'}
             uppercase
-            className={
-              'absolute right-3 bottom-3 translate-x-2 opacity-0 transition duration-200 group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100'
-            }
+            className={`
+              absolute right-3 bottom-3 translate-x-2 opacity-0 transition
+              duration-200
+              group-focus-within:translate-x-0 group-focus-within:opacity-100
+              group-hover:translate-x-0 group-hover:opacity-100
+              motion-reduce:translate-x-0 motion-reduce:opacity-100
+            `}
           >
             open ↗
           </Text>
         </div>
       </Link>
       <div
-        className={
-          'flex flex-1 flex-col gap-2 border-t border-edge px-3 py-2.5 transition-colors duration-200 group-focus-within:border-accent group-hover:border-accent'
-        }
+        className={`
+          flex flex-1 flex-col gap-2 border-t border-edge px-3 py-2.5
+          transition-colors duration-200
+          group-focus-within:border-accent
+          group-hover:border-accent
+        `}
       >
         <div className={'flex items-start justify-between gap-3'}>
           <Text
@@ -98,9 +112,12 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
               href={githubHref}
               isExternal
               aria-label={`${title} source on GitHub`}
-              className={
-                'shrink-0 text-muted transition-colors duration-200 outline-none hover:text-accent focus-visible:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
-              }
+              className={`
+                shrink-0 text-muted transition-colors duration-200 outline-none
+                hover:text-accent
+                focus-visible:text-accent focus-visible:outline-2
+                focus-visible:outline-offset-2 focus-visible:outline-accent
+              `}
             >
               <GitHubIcon />
             </Link>
@@ -117,9 +134,11 @@ export const SketchPreview = ({ entry, index, className }: Props) => {
         blinkKey={isTargeted ? entry.id : undefined}
         offset={4}
         size={8}
-        className={
-          'z-10 opacity-0 transition-opacity duration-200 group-focus-within:border-accent group-focus-within:opacity-100 group-hover:border-accent group-hover:opacity-100'
-        }
+        className={`
+          z-10 opacity-0 transition-opacity duration-200
+          group-focus-within:border-accent group-focus-within:opacity-100
+          group-hover:border-accent group-hover:opacity-100
+        `}
       />
     </article>
   )
